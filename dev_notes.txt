@@ -1,0 +1,601 @@
+writing QuestData[id][QuestDataIndex.QUEST_GIVER] is the same as writing QuestData[6404][6] when id = 6404 and QuestDataIndex.QUEST_GIVER = 6. one uses variables, the other number literals
+
+function QuestMap:GetQuestCoords(id)
+    if not id or not QuestData[i] then
+        return 0, 0
+    else
+        local quest = QuestData[i]
+        return quest[QuestDataIndex.X_LIBGPS], quest[QuestDataIndex.Y_LIBGPS]
+    end
+end
+
+--- Crazy Data Converter
+
+-----------------------------------------
+--           Debug Logger              --
+-----------------------------------------
+
+local function EmitMessage(text)
+    if(text == "")
+    then
+        text = "[Empty String]"
+    end
+
+    print(text)
+end
+
+local function EmitTable(t, indent, tableHistory)
+    indent          = indent or "."
+    tableHistory    = tableHistory or {}
+
+    for k, v in pairs(t)
+    do
+        local vType = type(v)
+
+        EmitMessage(indent.."("..vType.."): "..tostring(k).." = "..tostring(v))
+
+        if(vType == "table")
+        then
+            if(tableHistory[v])
+            then
+                EmitMessage(indent.."Avoiding cycle on table...")
+            else
+                tableHistory[v] = true
+                EmitTable(v, indent.."  ", tableHistory)
+            end
+        end
+    end
+end
+
+function Debug(...)
+    for i = 1, select("#", ...) do
+        local value = select(i, ...)
+        if(type(value) == "table")
+        then
+            EmitTable(value)
+        else
+            EmitMessage(tostring (value))
+        end
+    end
+end
+
+-- Function to check for empty table
+function isEmpty(t)
+    if next(t) == nil then
+        return true
+    else
+        return false
+    end
+end
+
+-- Mods
+local QSTM = QuestMap:GetQuestTable()
+local DEST = Destinations.QuestDataStore
+
+dest_quest_data_index = {
+	QUEST_X =		1,
+	QUEST_Y =		2,
+	QUESTNPC =		3,
+	QUESTTYPE = 	4,
+	QUESTREPEAT =	5,
+	QUESTID =		6,
+	QUESTLINE =		7,	-- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
+	QUESTNUMBER =	8,	-- Quest Number In QuestLine (10000 = not assigned/not verified)
+	QUESTSERIES =	9,	-- None = 0,	Cadwell's Almanac = 1,	Undaunted = 2, AD = 3, DC = 4, EP = 5.
+}
+
+quest_data_index = {
+    QUEST_NAME  =    1, -- Number index of quest name i.e. 6404 for "The Dragonguard"
+    QUEST_GIVER =    2, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"
+    QUEST_TYPE  =    3, -- MAIN_STORY, DUNGEON
+    QUEST_REPEAT =    4, -- QUEST_REPEAT_DAILY, QUEST_REPEAT_NOT_REPEATABLE = 0, QUEST_REPEAT_REPEATABLE 
+    GAME_API    =    5, -- 100003 means unverified, 100030 means quest data collected from API 100030
+    QUEST_LINE   =    6,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
+    QUEST_NUMBER =    7,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
+    QUEST_SERIES =    8,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
+}
+
+quest_map_pin_index = {
+    X_LOCATION  =    1, -- GetMapPlayerPosition() << -10 = Undefined >>
+    Y_LOCATION  =    2, -- GetMapPlayerPosition() << -10 = Undefined >>
+    X_LIBGPS    =    3, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+    Y_LIBGPS    =    4, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+    QUEST_ID    =    5, -- Number index of quest name i.e. 6404 for "The Dragonguard"
+}
+
+-- Default table
+quest_data_index_default = {
+    [quest_data_index.QUEST_NAME]   = "",
+    [quest_data_index.QUEST_GIVER]  = "",
+    [quest_data_index.QUEST_TYPE]   = -1, -- Undefined
+    [quest_data_index.QUEST_REPEAT]  = -1, -- Undefined
+    [quest_data_index.GAME_API]     = 100003, -- 100003 means unverified
+    [quest_data_index.QUEST_LINE]    = 10000, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
+    [quest_data_index.QUEST_NUMBER]  = 10000, -- Quest Number In QuestLine (10000 = not assigned/not verified)
+    [quest_data_index.QUEST_SERIES]  = 0, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5
+}
+
+quest_map_pin_index_default = {
+    [quest_map_pin_index.X_LOCATION] = -10, -- GetMapPlayerPosition() << -10 = Undefined >>
+    [quest_map_pin_index.Y_LOCATION] = -10, -- GetMapPlayerPosition() << -10 = Undefined >>
+    [quest_map_pin_index.X_LIBGPS]   = -10, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+    [quest_map_pin_index.Y_LIBGPS]   = -10, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+    [quest_map_pin_index.QUEST_ID]   = -1, -- -1 Unknown, Quest ID i.e. 6404 for "The Dragonguard"
+}
+
+DEST = {
+	["abamath_base_0"] = {						-- Abamath Ruins (Malabal Tor)
+		{0.8614,	0.5356,	500000,	0,	0,	4156,	10001,	10000,	0},
+	},
+	["aetherianarchivebottom_base_0"] = {		-- Aetherian Archive Bottom (Craglorn)
+		{0.6957,	0.7082,	56248,	0,	1,	5102,	15033,	10004,	0},
+		{0.7420,	0.7420,	56248,	0,	1,	5102,	15033,	10004,	0},
+	},
+	["aldunz_base_0"] = {						-- Aldunz (Alik’r Desert)
+		{0.5615,	0.4775,	500003,	0,	0,	4656,	10001,	10000,	0},
+	},
+}
+
+QSTM = {
+    ["shadowfen/arxcorinium_base"] = {
+        {
+            id = 4202,
+            x = 0.589,
+            y = 0.411,
+        },
+        {
+            id = 4202,
+            x = 0.592,
+            y = 0.405,
+        },
+        {
+            id = 4202,
+            x = 0.588,
+            y = 0.409,
+        },
+    },
+    ["darkbrotherhood/anvilcity_base"] = {
+        { id = 5540, xpos = 0.3223772054, ypos = 0.5798740042, },
+        { id = 5544, xpos = 0.3281764055, ypos = 0.5805760035, },
+        { id = 5546, xpos = 0.3291472058, ypos = 0.5666816070, },
+    },
+}
+
+result_table_locations = {}
+
+function rebuild_questmap_info()
+    for map_name, map_tables in pairs(QSTM) do
+        --Debug(map_name)
+        for pin_index, pin_info in pairs(map_tables) do
+            local temp_table = {}
+            if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
+
+            if pin_info.x ~= nil then 
+                temp_table[quest_map_pin_index.X_LOCATION] = pin_info.x 
+            else 
+                temp_table[quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.X_LOCATION] 
+            end
+            
+            if pin_info.y ~= nil then 
+                temp_table[quest_map_pin_index.Y_LOCATION] = pin_info.y 
+            else 
+                temp_table[quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.Y_LOCATION] 
+            end
+
+            if pin_info.xpos ~= nil then 
+                temp_table[quest_map_pin_index.X_LIBGPS] = pin_info.xpos 
+            else 
+                temp_table[quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.X_LIBGPS] 
+            end
+
+            if pin_info.ypos ~= nil then 
+                temp_table[quest_map_pin_index.Y_LIBGPS] = pin_info.ypos 
+            else 
+                temp_table[quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.Y_LIBGPS] 
+            end
+
+            if pin_info.id ~= nil then 
+                temp_table[quest_map_pin_index.QUEST_ID] = pin_info.id
+            else 
+                temp_table[quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[quest_map_pin_index.QUEST_ID] 
+            end
+
+            -- Debug(temp_table)
+            table.insert(result_table_locations[map_name], temp_table)
+            -- Debug("end")
+        end
+    end
+end
+
+function rebuild_dest_map_info()
+    for map_name, map_tables in pairs(DEST) do
+        --Debug(map_name)
+        for pin_index, pin_info in pairs(map_tables) do
+            --Debug(pin_info)
+            local temp_table = {}
+            if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
+
+            if pin_info[dest_quest_data_index.QUEST_X] ~= nil then 
+                temp_table[quest_map_pin_index.X_LOCATION] = pin_info[dest_quest_data_index.QUEST_X]
+            else 
+                temp_table[quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.X_LOCATION] 
+            end
+            
+            if pin_info[dest_quest_data_index.QUEST_Y] ~= nil then 
+                temp_table[quest_map_pin_index.Y_LOCATION] = pin_info[dest_quest_data_index.QUEST_Y]
+            else 
+                temp_table[quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.Y_LOCATION] 
+            end
+
+            temp_table[quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.X_LIBGPS] 
+            temp_table[quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.Y_LIBGPS] 
+
+            if pin_info[dest_quest_data_index.QUESTID] ~= nil then 
+                temp_table[quest_map_pin_index.QUEST_ID] = pin_info[dest_quest_data_index.QUESTID]
+            else 
+                temp_table[quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[quest_map_pin_index.QUEST_ID] 
+            end
+
+            --Debug("end")
+            --Debug(temp_table)
+            table.insert(result_table_locations[map_name], temp_table)
+            --Debug("end")
+        end
+    end
+end
+
+result_table_quest_info = {}
+
+function build_dest_quest_info()
+    for map_name, map_tables in pairs(DEST) do
+        Debug(map_name)
+        for data_index, quest_info in pairs(map_tables) do
+            Debug(quest_info)
+            local temp_table = {}
+            if result_table_quest_info[quest_info[dest_quest_data_index.QUESTID]] == nil then result_table_quest_info[quest_info[dest_quest_data_index.QUESTID]] = {} end
+
+            if quest_info[dest_quest_data_index.QUESTID] ~= nil then -- 1
+                temp_table[quest_data_index.QUEST_NAME] = quest_info[dest_quest_data_index.QUESTID]
+            else 
+                temp_table[quest_data_index.QUEST_NAME] = quest_data_index_default[quest_data_index.QUEST_NAME]
+            end
+
+            if quest_info[dest_quest_data_index.QUESTNPC] ~= nil then -- 2
+                temp_table[quest_data_index.QUEST_GIVER] = quest_info[dest_quest_data_index.QUESTNPC]
+            else 
+                temp_table[quest_data_index.QUEST_GIVER] = quest_data_index_default[quest_data_index.QUEST_GIVER]
+            end
+            
+            if quest_info[dest_quest_data_index.QUESTTYPE] ~= nil then -- 3
+                temp_table[quest_data_index.QUEST_TYPE] = quest_info[dest_quest_data_index.QUESTTYPE]
+            else 
+                temp_table[quest_data_index.QUEST_TYPE] = quest_data_index_default[quest_data_index.QUEST_TYPE]
+            end
+            
+            if quest_info[dest_quest_data_index.QUESTREPEAT] ~= nil then -- 4
+                temp_table[quest_data_index.QUEST_REPEAT] = quest_info[dest_quest_data_index.QUESTREPEAT]
+            else 
+                temp_table[quest_data_index.QUEST_REPEAT] = quest_data_index_default[quest_data_index.QUEST_REPEAT]
+            end
+
+            temp_table[quest_data_index.GAME_API] = quest_data_index_default[quest_data_index.GAME_API] -- 5
+
+            if quest_info[dest_quest_data_index.QUESTLINE] ~= nil then -- 6
+                temp_table[quest_data_index.QUEST_LINE] = quest_info[dest_quest_data_index.QUESTLINE]
+            else 
+                temp_table[quest_data_index.QUEST_LINE] = quest_data_index_default[quest_data_index.QUEST_LINE]
+            end
+
+            if quest_info[dest_quest_data_index.QUESTNUMBER] ~= nil then -- 7
+                temp_table[quest_data_index.QUEST_NUMBER] = quest_info[dest_quest_data_index.QUESTNUMBER]
+            else 
+                temp_table[quest_data_index.QUEST_NUMBER] = quest_data_index_default[quest_data_index.QUEST_NUMBER]
+            end
+
+            if quest_info[dest_quest_data_index.QUESTSERIES] ~= nil then -- 8
+                temp_table[quest_data_index.QUEST_SERIES] = quest_info[dest_quest_data_index.QUESTSERIES]
+            else 
+                temp_table[quest_data_index.QUEST_SERIES] = quest_data_index_default[quest_data_index.QUEST_SERIES]
+            end
+
+            if isEmpty(result_table_quest_info[quest_info[dest_quest_data_index.QUESTID]]) then
+                result_table_quest_info[quest_info[dest_quest_data_index.QUESTID]] = temp_table
+            end
+        end
+    end
+end
+    
+function build_questmap_quest_info()
+    for map_name, map_tables in pairs(QSTM) do
+        Debug(map_name)
+        for data_index, quest_info in pairs(map_tables) do
+            Debug(quest_info)
+            local temp_table = {}
+            if result_table_quest_info[quest_info.id] == nil then result_table_quest_info[quest_info.id] = {} end
+            
+            temp_table[quest_data_index.QUEST_NAME] = quest_data_index_default[quest_data_index.QUEST_NAME] -- 1
+
+            temp_table[quest_data_index.QUEST_GIVER] = quest_data_index_default[quest_data_index.QUEST_GIVER] -- 2
+
+            temp_table[quest_data_index.QUEST_TYPE] = quest_data_index_default[quest_data_index.QUEST_TYPE] -- 3
+
+            temp_table[quest_data_index.QUEST_REPEAT] = quest_data_index_default[quest_data_index.QUEST_REPEAT] -- 4
+
+            temp_table[quest_data_index.GAME_API] = quest_data_index_default[quest_data_index.GAME_API] -- 5
+
+            temp_table[quest_data_index.QUEST_LINE] = quest_data_index_default[quest_data_index.QUEST_LINE] -- 6
+
+            temp_table[quest_data_index.QUEST_NUMBER] = quest_data_index_default[quest_data_index.QUEST_NUMBER] -- 7
+
+            temp_table[quest_data_index.QUEST_SERIES] = quest_data_index_default[quest_data_index.QUEST_SERIES] -- 8
+
+            if isEmpty(result_table_quest_info[quest_info.id]) then
+                result_table_quest_info[quest_info.id] = temp_table
+            end
+        end
+    end
+end
+
+rebuild_questmap_info()
+rebuild_dest_map_info()
+build_dest_quest_info()
+build_questmap_quest_info()
+Debug("Printing Location Table")
+Debug(result_table_locations)
+Debug("Printing Quest Info Table")
+Debug(result_table_quest_info)
+
+
+result_table_locations = {}
+
+local function rebuild_questmap_info()
+    for map_name, map_tables in pairs(QSTM) do
+        for pin_index, pin_info in pairs(map_tables) do
+            local temp_table = {}
+            if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
+
+            if pin_info.x ~= nil then 
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = pin_info.x 
+            else 
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LOCATION] 
+            end
+            
+            if pin_info.y ~= nil then 
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = pin_info.y 
+            else 
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LOCATION] 
+            end
+
+            if pin_info.xpos ~= nil then 
+                temp_table[lib.quest_map_pin_index.X_LIBGPS] = pin_info.xpos 
+            else 
+                temp_table[lib.quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LIBGPS] 
+            end
+
+            if pin_info.ypos ~= nil then 
+                temp_table[lib.quest_map_pin_index.Y_LIBGPS] = pin_info.ypos 
+            else 
+                temp_table[lib.quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LIBGPS] 
+            end
+
+            if pin_info.id ~= nil then 
+                temp_table[lib.quest_map_pin_index.QUEST_ID] = pin_info.id
+            else 
+                temp_table[lib.quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[lib.quest_map_pin_index.QUEST_ID] 
+            end
+
+            table.insert(result_table_locations[map_name], temp_table)
+        end
+    end
+end
+
+local function rebuild_dest_map_info()
+    for map_name, map_tables in pairs(DEST) do
+        for pin_index, pin_info in pairs(map_tables) do
+            local temp_table = {}
+            if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
+
+            if pin_info[lib.dest_quest_data_index.QUEST_X] ~= nil then 
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = pin_info[lib.dest_quest_data_index.QUEST_X]
+            else 
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LOCATION] 
+            end
+            
+            if pin_info[lib.dest_quest_data_index.QUEST_Y] ~= nil then 
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = pin_info[lib.dest_quest_data_index.QUEST_Y]
+            else 
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LOCATION] 
+            end
+
+            temp_table[lib.quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LIBGPS] 
+            temp_table[lib.quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LIBGPS] 
+
+            if pin_info[lib.dest_quest_data_index.QUESTID] ~= nil then 
+                temp_table[lib.quest_map_pin_index.QUEST_ID] = pin_info[lib.dest_quest_data_index.QUESTID]
+            else 
+                temp_table[lib.quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[lib.quest_map_pin_index.QUEST_ID] 
+            end
+
+            table.insert(result_table_locations[map_name], temp_table)
+        end
+    end
+end
+
+result_table_quest_info = {}
+
+local function build_dest_quest_info()
+    for map_name, map_tables in pairs(DEST) do
+        for data_index, quest_info in pairs(map_tables) do
+            local temp_table = {}
+            if result_table_quest_info[quest_info[lib.dest_quest_data_index.QUESTID]] == nil then result_table_quest_info[quest_info[lib.dest_quest_data_index.QUESTID]] = {} end
+
+            if quest_info[lib.dest_quest_data_index.QUESTID] ~= nil then -- 1
+                temp_table[lib.quest_data_index.QUEST_NAME] = quest_info[lib.dest_quest_data_index.QUESTID]
+            else 
+                temp_table[lib.quest_data_index.QUEST_NAME] = quest_data_index_default[lib.quest_data_index.QUEST_NAME]
+            end
+
+            if quest_info[lib.dest_quest_data_index.QUESTNPC] ~= nil then -- 2
+                temp_table[lib.quest_data_index.QUEST_GIVER] = quest_info[lib.dest_quest_data_index.QUESTNPC]
+            else 
+                temp_table[lib.quest_data_index.QUEST_GIVER] = quest_data_index_default[lib.quest_data_index.QUEST_GIVER]
+            end
+            
+            if quest_info[lib.dest_quest_data_index.QUESTTYPE] ~= nil then -- 3
+                temp_table[lib.quest_data_index.QUEST_TYPE] = quest_info[lib.dest_quest_data_index.QUESTTYPE]
+            else 
+                temp_table[lib.quest_data_index.QUEST_TYPE] = quest_data_index_default[lib.quest_data_index.QUEST_TYPE]
+            end
+            
+            if quest_info[lib.dest_quest_data_index.QUESTREPEAT] ~= nil then -- 4
+                temp_table[lib.quest_data_index.QUEST_REPEAT] = quest_info[lib.dest_quest_data_index.QUESTREPEAT]
+            else 
+                temp_table[lib.quest_data_index.QUEST_REPEAT] = quest_data_index_default[lib.quest_data_index.QUEST_REPEAT]
+            end
+
+            temp_table[lib.quest_data_index.GAME_API] = quest_data_index_default[lib.quest_data_index.GAME_API] -- 5
+
+            if quest_info[lib.dest_quest_data_index.QUESTLINE] ~= nil then -- 6
+                temp_table[lib.quest_data_index.QUEST_LINE] = quest_info[lib.dest_quest_data_index.QUESTLINE]
+            else 
+                temp_table[lib.quest_data_index.QUEST_LINE] = quest_data_index_default[lib.quest_data_index.QUEST_LINE]
+            end
+
+            if quest_info[lib.dest_quest_data_index.QUESTNUMBER] ~= nil then -- 7
+                temp_table[lib.quest_data_index.QUEST_NUMBER] = quest_info[lib.dest_quest_data_index.QUESTNUMBER]
+            else 
+                temp_table[lib.quest_data_index.QUEST_NUMBER] = quest_data_index_default[lib.quest_data_index.QUEST_NUMBER]
+            end
+
+            if quest_info[lib.dest_quest_data_index.QUESTSERIES] ~= nil then -- 8
+                temp_table[lib.quest_data_index.QUEST_SERIES] = quest_info[lib.dest_quest_data_index.QUESTSERIES]
+            else 
+                temp_table[lib.quest_data_index.QUEST_SERIES] = quest_data_index_default[lib.quest_data_index.QUEST_SERIES]
+            end
+
+            if isEmpty(result_table_quest_info[quest_info[lib.dest_quest_data_index.QUESTID]]) then
+                result_table_quest_info[quest_info[lib.dest_quest_data_index.QUESTID]] = temp_table
+            end
+        end
+    end
+end
+    
+local function build_questmap_quest_info()
+    for map_name, map_tables in pairs(QSTM) do
+        for data_index, quest_info in pairs(map_tables) do
+            local temp_table = {}
+            if result_table_quest_info[quest_info.id] == nil then result_table_quest_info[quest_info.id] = {} end
+            
+            temp_table[lib.quest_data_index.QUEST_NAME] = quest_data_index_default[lib.quest_data_index.QUEST_NAME] -- 1
+
+            temp_table[lib.quest_data_index.QUEST_GIVER] = quest_data_index_default[lib.quest_data_index.QUEST_GIVER] -- 2
+
+            temp_table[lib.quest_data_index.QUEST_TYPE] = quest_data_index_default[lib.quest_data_index.QUEST_TYPE] -- 3
+
+            temp_table[lib.quest_data_index.QUEST_REPEAT] = quest_data_index_default[lib.quest_data_index.QUEST_REPEAT] -- 4
+
+            temp_table[lib.quest_data_index.GAME_API] = quest_data_index_default[lib.quest_data_index.GAME_API] -- 5
+
+            temp_table[lib.quest_data_index.QUEST_LINE] = quest_data_index_default[lib.quest_data_index.QUEST_LINE] -- 6
+
+            temp_table[lib.quest_data_index.QUEST_NUMBER] = quest_data_index_default[lib.quest_data_index.QUEST_NUMBER] -- 7
+
+            temp_table[lib.quest_data_index.QUEST_SERIES] = quest_data_index_default[lib.quest_data_index.QUEST_SERIES] -- 8
+
+            if isEmpty(result_table_quest_info[quest_info.id]) then
+                result_table_quest_info[quest_info.id] = temp_table
+            end
+        end
+    end
+end
+
+local function generate_quest_names()
+    -- rebuild_questmap_info()
+    -- rebuild_dest_map_info()
+    -- build_dest_quest_info()
+    -- build_questmap_quest_info()
+    
+    local result_table_en = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_en[quest_id] == nil then
+            result_table_en[quest_id] = {}
+            if lib.quest_names["en"][quest_id] == nil then
+                result_table_en[quest_id] = "Unknown Quest Name"
+            else
+                result_table_en[quest_id] = lib.quest_names["en"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["en"] = result_table_en
+
+    local result_table_de = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_de[quest_id] == nil then
+            result_table_de[quest_id] = {}
+            if lib.quest_names["de"][quest_id] == nil then
+                result_table_de[quest_id] = "Unknown Quest Name"
+            else
+                result_table_de[quest_id] = lib.quest_names["de"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["de"] = result_table_de
+
+    local result_table_es = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_es[quest_id] == nil then
+            result_table_es[quest_id] = {}
+            if lib.quest_names["es"][quest_id] == nil then
+                result_table_es[quest_id] = "Unknown Quest Name"
+            else
+                result_table_es[quest_id] = lib.quest_names["es"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["es"] = result_table_es
+    
+    local result_table_fr = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_fr[quest_id] == nil then
+            result_table_fr[quest_id] = {}
+            if lib.quest_names["fr"][quest_id] == nil then
+                result_table_fr[quest_id] = "Unknown Quest Name"
+            else
+                result_table_fr[quest_id] = lib.quest_names["fr"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["fr"] = result_table_fr
+
+    local result_table_jp = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_jp[quest_id] == nil then
+            result_table_jp[quest_id] = {}
+            if lib.quest_names["jp"][quest_id] == nil then
+                result_table_jp[quest_id] = "Unknown Quest Name"
+            else
+                result_table_jp[quest_id] = lib.quest_names["jp"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["jp"] = result_table_jp
+
+    local result_table_ru = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_ru[quest_id] == nil then
+            result_table_ru[quest_id] = {}
+            if lib.quest_names["ru"][quest_id] == nil then
+                result_table_ru[quest_id] = "Unknown Quest Name"
+            else
+                result_table_ru[quest_id] = lib.quest_names["ru"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["ru"] = result_table_ru
+
+end
+
+    LibQuestInfo_SavedVariables["data"] = result_table_quest_info
+    LibQuestInfo_SavedVariables["loc"] = result_table_locations
+    
+
