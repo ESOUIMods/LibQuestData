@@ -1,0 +1,37 @@
+; This Add-on is not created by, affiliated with or sponsored by ZeniMax
+; Media Inc. or its affiliates. The Elder Scrolls® and related logos are
+; registered trademarks or trademarks of ZeniMax Media Inc. in the United
+; States and/or other countries. All rights reserved.
+;
+; You can read the full terms at:
+; https://account.elderscrollsonline.com/add-on-terms
+
+## Title: LibQuestInfo
+## Version: 1.0
+## AddOnVersion: 1
+## Author: Sharlikran
+## APIVersion: 100030 100031
+## Description: Provides Quest Information
+## SavedVariables: LibQuestInfo_SavedVariables
+## IsLibrary: true
+## OptionalDependsOn: QuestMap Destinations
+
+Init.lua
+data/LibQuestInfo_QuestData.lua
+data/LibQuestInfo_QuestLocations.lua
+
+quest_givers/LibQuestInfo_Questgivers_de.lua
+quest_givers/LibQuestInfo_Questgivers_en.lua
+quest_givers/LibQuestInfo_Questgivers_es.lua
+quest_givers/LibQuestInfo_Questgivers_fr.lua
+quest_givers/LibQuestInfo_Questgivers_jp.lua
+quest_givers/LibQuestInfo_Questgivers_ru.lua
+
+quest_names/LibQuestInfo_QuestNames_de.lua
+quest_names/LibQuestInfo_QuestNames_en.lua
+quest_names/LibQuestInfo_QuestNames_es.lua
+quest_names/LibQuestInfo_QuestNames_fr.lua
+quest_names/LibQuestInfo_QuestNames_jp.lua
+quest_names/LibQuestInfo_QuestNames_ru.lua
+
+LibQuestInfo.lua
