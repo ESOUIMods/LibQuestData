@@ -1,3 +1,13 @@
+--[[
+    -- burialgrounds_base_0
+    ["craglorn/shadaburialgrounds_base_0"] =
+    -- tormented_spire_0
+    ["stonefalls/tormented_spire_base_0"] =
+    -- thefivefingerdance_base_0
+    ["reapersmarch/thefivefingerdance_0"] =
+
+]]--
+
 local lib = _G["LibQuestInfo"]
 
 lib.quest_locations = {
