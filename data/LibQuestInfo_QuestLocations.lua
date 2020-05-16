@@ -1,7 +1,7 @@
 local lib = _G["LibQuestInfo"]
 
 lib.quest_locations = {
-    ["malabaltor/velynharbor_base"] =
+    ["malabaltor/velynharbor_base_0"] =
     {
         [1] =
         {
@@ -92,7 +92,7 @@ lib.quest_locations = {
             [5] = 4193,
         },
     },
-    ["mzithumz_base_0"] =
+    ["deshaan/mzithumz_base_0"] = -- keep
     {
         [1] =
         {
@@ -103,7 +103,7 @@ lib.quest_locations = {
             [5] = 3721,
         },
     },
-    ["atanazruins_base_0"] =
+    ["shadowfen/atanazruins_base_0"] = -- keep
     {
         [1] =
         {
@@ -114,7 +114,7 @@ lib.quest_locations = {
             [5] = 4556,
         },
     },
-    ["therift/brokenhelm_base"] =
+    ["therift/brokenhelm_base_0"] =
     {
         [1] =
         {
@@ -125,7 +125,7 @@ lib.quest_locations = {
             [5] = 5008,
         },
     },
-    ["wrothgar/wrothgar_base"] =
+    ["wrothgar/wrothgar_base_0"] =
     {
         [1] =
         {
@@ -352,7 +352,7 @@ lib.quest_locations = {
             [5] = 5499,
         },
     },
-    ["sandblownmine_base_0"] =
+    ["alikr/sandblownmine_base_0"] = -- keep
     {
         [1] =
         {
@@ -363,7 +363,7 @@ lib.quest_locations = {
             [5] = 4638,
         },
     },
-    ["crosswych_base_0"] =
+    ["glenumbra/crosswych_base_0"] = -- keep
     {
         [1] =
         {
@@ -406,7 +406,7 @@ lib.quest_locations = {
             [5] = 3337,
         },
     },
-    ["baandaritradingpost_base_0"] =
+    ["malabaltor/baandaritradingpost_base_0"] = -- keep
     {
         [1] =
         {
@@ -433,7 +433,7 @@ lib.quest_locations = {
             [5] = 3997,
         },
     },
-    ["alikr/lostcity_base"] =
+    ["alikr/lostcity_base_0"] =
     {
         [1] =
         {
@@ -460,7 +460,7 @@ lib.quest_locations = {
             [5] = 3970,
         },
     },
-    ["blackhearthavenarea1_base_0"] =
+    ["bangkorai/blackhearthavenarea1_base_0"] = -- keep
     {
         [1] =
         {
@@ -471,7 +471,7 @@ lib.quest_locations = {
             [5] = 4589,
         },
     },
-    ["west_hut_portal_cave_base_0"] =
+    ["glenumbra/west_hut_portal_cave_base_0"] = -- keep
     {
         [1] =
         {
@@ -482,7 +482,7 @@ lib.quest_locations = {
             [5] = 3235,
         },
     },
-    ["burialgrounds_base_0"] =
+    ["craglorn/shadaburialgrounds_base_0"] = -- keep
     {
         [1] =
         {
@@ -493,7 +493,7 @@ lib.quest_locations = {
             [5] = 5118,
         },
     },
-    ["glenumbra_base_0"] =
+    ["glenumbra/glenumbra_base_0"] = -- keep
     {
         [1] =
         {
@@ -1376,7 +1376,7 @@ lib.quest_locations = {
             [5] = 3337,
         },
     },
-    ["sadrithmora_base_0"] =
+    ["vvardenfell/sadrithmora_base_0"] = -- keep
     {
         [1] =
         {
@@ -1387,7 +1387,7 @@ lib.quest_locations = {
             [5] = 5836,
         },
     },
-    ["coldharbor/coldharbour_base"] =
+    ["coldharbor/coldharbour_base_0"] =
     {
         [1] =
         {
@@ -1830,7 +1830,7 @@ lib.quest_locations = {
             [5] = 4374,
         },
     },
-    ["tormented_spire_0"] =
+    ["stonefalls/tormented_spire_base_0"] = -- keep
     {
         [1] =
         {
@@ -1849,7 +1849,7 @@ lib.quest_locations = {
             [5] = 3868,
         },
     },
-    ["eastmarch/mzulft_base"] =
+    ["eastmarch/mzulft_base_0"] =
     {
         [1] =
         {
@@ -1860,7 +1860,7 @@ lib.quest_locations = {
             [5] = 4105,
         },
     },
-    ["greenshade_base_0"] =
+    ["greenshade/greenshade_base_0"] = -- keep
     {
         [1] =
         {
@@ -2367,7 +2367,7 @@ lib.quest_locations = {
             [5] = 4735,
         },
     },
-    ["thievesguild/sharktoothgrotto2_base"] =
+    ["thievesguild/sharktoothgrotto2_base_0"] =
     {
         [1] =
         {
@@ -2378,7 +2378,7 @@ lib.quest_locations = {
             [5] = 5552,
         },
     },
-    ["coldharbor/wailingmaw_base"] =
+    ["coldharbor/wailingmaw_base_0"] =
     {
         [1] =
         {
@@ -2413,7 +2413,7 @@ lib.quest_locations = {
             [5] = 4747,
         },
     },
-    ["wailingmaw_base_0"] =
+    ["coldharbor/wailingmaw_base_0"] = -- keep
     {
         [1] =
         {
@@ -2424,7 +2424,7 @@ lib.quest_locations = {
             [5] = 4747,
         },
     },
-    ["rkindaleftint01_base_0"] =
+    ["wrothgar/rkindaleftint01_base_0"] = -- keep
     {
         [1] =
         {
@@ -2435,7 +2435,7 @@ lib.quest_locations = {
             [5] = 5321,
         },
     },
-    ["trl_so_map01_base_0"] =
+    ["craglorn/trl_so_map01_base_0"] = -- keep
     {
         [1] =
         {
@@ -2454,7 +2454,7 @@ lib.quest_locations = {
             [5] = 5171,
         },
     },
-    ["WGTPalaceSewers_Base_0"] =
+    ["cyrodiil/wgtpalacesewers_base_0"] = -- keep
     {
         [1] =
         {
@@ -2465,7 +2465,7 @@ lib.quest_locations = {
             [5] = 5342,
         },
     },
-    ["clockwork/brassfortress_base"] =
+    ["clockwork/brassfortress_base_0"] =
     {
         [1] =
         {
@@ -2572,7 +2572,7 @@ lib.quest_locations = {
             [5] = 6080,
         },
     },
-    ["direfrostkeep_base_0"] =
+    ["eastmarch/direfrostkeep_base_0"] = -- keep
     {
         [1] =
         {
@@ -2583,7 +2583,7 @@ lib.quest_locations = {
             [5] = 4346,
         },
     },
-    ["eastmarch/eastmarch_base"] =
+    ["eastmarch/eastmarch_base_0"] =
     {
         [1] =
         {
@@ -3026,7 +3026,7 @@ lib.quest_locations = {
             [5] = 4069,
         },
     },
-    ["wrothgaroutlawrefuge_base_0"] =
+    ["wrothgar/wrothgaroutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -3037,7 +3037,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["bangkorai/evermore_base"] =
+    ["bangkorai/evermore_base_0"] =
     {
         [1] =
         {
@@ -3128,7 +3128,7 @@ lib.quest_locations = {
             [5] = 4981,
         },
     },
-    ["thefivefingerdance_base_0"] =
+    ["reapersmarch/thefivefingerdance_0"] = -- keep
     {
         [1] =
         {
@@ -3139,7 +3139,7 @@ lib.quest_locations = {
             [5] = 4499,
         },
     },
-    ["lightlessoubliette_base_0"] =
+    ["coldharbor/lightlessoubliette_base_0"] = -- keep
     {
         [1] =
         {
@@ -3150,7 +3150,7 @@ lib.quest_locations = {
             [5] = 4602,
         },
     },
-    ["imperialcity_base_0"] =
+    ["cyrodiil/imperialcity_base_0"] = -- keep
     {
         [1] =
         {
@@ -3297,7 +3297,7 @@ lib.quest_locations = {
             [5] = 5513,
         },
     },
-    ["therift/northwindmine_base"] =
+    ["therift/northwindmine_base_0"] =
     {
         [1] =
         {
@@ -3316,7 +3316,7 @@ lib.quest_locations = {
             [5] = 4176,
         },
     },
-    ["bisnensel_base_0"] =
+    ["bangkorai/bisnensel_base_0"] = -- keep
     {
         [1] =
         {
@@ -3327,7 +3327,7 @@ lib.quest_locations = {
             [5] = 1804,
         },
     },
-    ["tribulationcrypt_base_0"] =
+    ["rivenspire/tribulationcrypt_base_0"] = -- keep
     {
         [1] =
         {
@@ -3338,7 +3338,7 @@ lib.quest_locations = {
             [5] = 4834,
         },
     },
-    ["smugglerkingtunnel_base_0"] =
+    ["alikr/smugglerkingtunnel_base_0"] = -- keep
     {
         [1] =
         {
@@ -3349,7 +3349,7 @@ lib.quest_locations = {
             [5] = 2997,
         },
     },
-    ["helracitadelentry_base_0"] =
+    ["craglorn/helracitadelentry_base_0"] = -- keep
     {
         [1] =
         {
@@ -3360,7 +3360,7 @@ lib.quest_locations = {
             [5] = 5087,
         },
     },
-    ["craglornoutlawrefuge_base_0"] =
+    ["craglorn/craglornoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -3371,7 +3371,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["stormhaven/koeglinvillage_base"] =
+    ["stormhaven/koeglinvillage_base_0"] =
     {
         [1] =
         {
@@ -3518,7 +3518,7 @@ lib.quest_locations = {
             [5] = 2556,
         },
     },
-    ["reapersmarch/thevilemansefirstfloor_base"] =
+    ["reapersmarch/thevilemansefirstfloor_base_0"] =
     {
         [1] =
         {
@@ -3545,7 +3545,7 @@ lib.quest_locations = {
             [5] = 4738,
         },
     },
-    ["greenshade/narilnagaia_base"] =
+    ["greenshade/narilnagaia_base_0"] =
     {
         [1] =
         {
@@ -3556,7 +3556,7 @@ lib.quest_locations = {
             [5] = 4846,
         },
     },
-    ["northhighrockgate_base_0"] =
+    ["cyrodiil/northhighrockgate_base_0"] = -- keep
     {
         [1] =
         {
@@ -3591,7 +3591,7 @@ lib.quest_locations = {
             [5] = 4872,
         },
     },
-    ["eastmarch/thebastardstomb_base"] =
+    ["eastmarch/thebastardstomb_base_0"] =
     {
         [1] =
         {
@@ -3602,7 +3602,7 @@ lib.quest_locations = {
             [5] = 4585,
         },
     },
-    ["cathbedraud_base_0"] =
+    ["glenumbra/cathbedraud_base_0"] = -- keep
     {
         [1] =
         {
@@ -3613,7 +3613,7 @@ lib.quest_locations = {
             [5] = 3379,
         },
     },
-    ["badmanscave_base_0"] =
+    ["glenumbra/badmanscave_base_0"] = -- keep
     {
         [1] =
         {
@@ -3624,7 +3624,7 @@ lib.quest_locations = {
             [5] = 4088,
         },
     },
-    ["wayrestsewers_base_0"] =
+    ["stormhaven/wayrestsewers_base_0"] = -- keep
     {
         [1] =
         {
@@ -3643,7 +3643,7 @@ lib.quest_locations = {
             [5] = 4246,
         },
     },
-    ["WGTLibraryMain_Base_0"] =
+    ["cyrodiil/wgtlibrarymain_base_0"] = -- keep
     {
         [1] =
         {
@@ -3654,7 +3654,7 @@ lib.quest_locations = {
             [5] = 5342,
         },
     },
-    ["fortgreenwall_base_0"] =
+    ["therift/fortgreenwall_base_0"] = -- keep
     {
         [1] =
         {
@@ -3665,7 +3665,7 @@ lib.quest_locations = {
             [5] = 5005,
         },
     },
-    ["mobarmine_base_0"] =
+    ["grahtwood/mobarmine_base_0"] = -- keep
     {
         [1] =
         {
@@ -3676,7 +3676,7 @@ lib.quest_locations = {
             [5] = 4966,
         },
     },
-    ["ilessantower_base_0"] =
+    ["glenumbra/ilessantower_base_0"] = -- keep
     {
         [1] =
         {
@@ -3687,7 +3687,7 @@ lib.quest_locations = {
             [5] = 4529,
         },
     },
-    ["RiftOutlaw_base_0"] =
+    ["therift/riftoutlaw_base_0"] = -- keep
     {
         [1] =
         {
@@ -3698,7 +3698,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["riverholdcity_base_0"] =
+    ["elsweyr/riverholdcity_base_0"] = -- keep
     {
         [1] =
         {
@@ -3733,7 +3733,7 @@ lib.quest_locations = {
             [5] = 6319,
         },
     },
-    ["thievesguild/hewsbane_base"] =
+    ["thievesguild/hewsbane_base_0"] =
     {
         [1] =
         {
@@ -4163,7 +4163,7 @@ lib.quest_locations = {
             [5] = 3863,
         },
     },
-    ["artaeum_base_0"] =
+    ["summerset/artaeum_base_0"] = -- keep
     {
         [1] =
         {
@@ -4182,7 +4182,7 @@ lib.quest_locations = {
             [5] = 6185,
         },
     },
-    ["thegrave_base_0"] =
+    ["glenumbra/thegrave_base_0"] = -- keep
     {
         [1] =
         {
@@ -4193,7 +4193,7 @@ lib.quest_locations = {
             [5] = 4454,
         },
     },
-    ["dranilkirisland_base_0"] =
+    ["clockwork/dranilkirisland_base_0"] = -- keep
     {
         [1] =
         {
@@ -4204,7 +4204,7 @@ lib.quest_locations = {
             [5] = 6050,
         },
     },
-    ["guildmaps/eyevea_base"] =
+    ["guildmaps/eyevea_base_0"] =
     {
         [1] =
         {
@@ -4223,7 +4223,7 @@ lib.quest_locations = {
             [5] = 4971,
         },
     },
-    ["lillandrill_base_0"] =
+    ["summerset/lillandrill_base_0"] = -- keep
     {
         [1] =
         {
@@ -4234,7 +4234,7 @@ lib.quest_locations = {
             [5] = 6129,
         },
     },
-    ["thibautscairn_base_0"] =
+    ["reapersmarch/thibautscairn_base_0"] = -- keep
     {
         [1] =
         {
@@ -4245,7 +4245,7 @@ lib.quest_locations = {
             [5] = 4812,
         },
     },
-    ["summerset/dreamingcave01_base"] =
+    ["summerset/dreamingcave01_base_0"] =
     {
         [1] =
         {
@@ -4272,7 +4272,7 @@ lib.quest_locations = {
             [5] = 6153,
         },
     },
-    ["reapersmarch/khajrawlith_base"] =
+    ["reapersmarch/khajrawlith_base_0"] =
     {
         [1] =
         {
@@ -4291,7 +4291,7 @@ lib.quest_locations = {
             [5] = 4689,
         },
     },
-    ["ccunderground02_base_0"] =
+    ["clockwork/ccunderground02_base_0"] = -- keep
     {
         [1] =
         {
@@ -4302,7 +4302,7 @@ lib.quest_locations = {
             [5] = 6047,
         },
     },
-    ["stormhaven_base_0"] =
+    ["stormhaven/stormhaven_base_0"] = -- keep
     {
         [1] =
         {
@@ -5057,7 +5057,7 @@ lib.quest_locations = {
             [5] = 2504,
         },
     },
-    ["santaki_base_0"] =
+    ["alikr/santaki_base_0"] = -- keep
     {
         [1] =
         {
@@ -5068,7 +5068,7 @@ lib.quest_locations = {
             [5] = 4656,
         },
     },
-    ["stormhaven/bonesnapruins_base"] =
+    ["stormhaven/bonesnapruins_base_0"] =
     {
         [1] =
         {
@@ -5103,7 +5103,7 @@ lib.quest_locations = {
             [5] = 3784,
         },
     },
-    ["alikr/kozanset_base"] =
+    ["alikr/kozanset_base_0"] =
     {
         [1] =
         {
@@ -5114,7 +5114,7 @@ lib.quest_locations = {
             [5] = 2364,
         },
     },
-    ["Imperialsewers_aldmeri1_base_0"] =
+    ["cyrodiil/imperialsewers_aldmeri1_base_0"] = -- keep
     {
         [1] =
         {
@@ -5165,7 +5165,7 @@ lib.quest_locations = {
             [5] = 5513,
         },
     },
-    ["deshaan/narsis_base"] =
+    ["deshaan/narsis_base_0"] =
     {
         [1] =
         {
@@ -5320,7 +5320,7 @@ lib.quest_locations = {
             [5] = 3610,
         },
     },
-    ["divadschagrinmine_base_0"] =
+    ["alikr/divadschagrinmine_base_0"] = -- keep
     {
         [1] =
         {
@@ -5331,7 +5331,7 @@ lib.quest_locations = {
             [5] = 4622,
         },
     },
-    ["khajrawlith_base_0"] =
+    ["reapersmarch/khajrawlith_base_0"] = -- keep
     {
         [1] =
         {
@@ -5342,7 +5342,7 @@ lib.quest_locations = {
             [5] = 4689,
         },
     },
-    ["eastmarch/icehammersvault_base"] =
+    ["eastmarch/icehammersvault_base_0"] =
     {
         [1] =
         {
@@ -5353,7 +5353,7 @@ lib.quest_locations = {
             [5] = 4583,
         },
     },
-    ["therift/shorsstone_base"] =
+    ["therift/shorsstone_base_0"] =
     {
         [1] =
         {
@@ -5460,7 +5460,7 @@ lib.quest_locations = {
             [5] = 4307,
         },
     },
-    ["minesofkhuras_base_0"] =
+    ["glenumbra/minesofkhuras_base_0"] = -- keep
     {
         [1] =
         {
@@ -5471,7 +5471,7 @@ lib.quest_locations = {
             [5] = 4531,
         },
     },
-    ["thievesguild/abahslanding_base"] =
+    ["thievesguild/abahslanding_base_0"] =
     {
         [1] =
         {
@@ -5602,7 +5602,7 @@ lib.quest_locations = {
             [5] = 5552,
         },
     },
-    ["bearclawmine_base_0"] =
+    ["stormhaven/bearclawmine_base_0"] = -- keep
     {
         [1] =
         {
@@ -5613,7 +5613,7 @@ lib.quest_locations = {
             [5] = 1615,
         },
     },
-    ["trolhettasummit_base_0"] =
+    ["therift/trolhettasummit_base_0"] = -- keep
     {
         [1] =
         {
@@ -5624,7 +5624,7 @@ lib.quest_locations = {
             [5] = 4189,
         },
     },
-    ["westelsweyrgate_base_0"] =
+    ["cyrodiil/westelsweyrgate_base_0"] = -- keep
     {
         [1] =
         {
@@ -5659,7 +5659,7 @@ lib.quest_locations = {
             [5] = 4880,
         },
     },
-    ["clockwork/clockwork_base"] =
+    ["clockwork/clockwork_base_0"] =
     {
         [1] =
         {
@@ -5710,7 +5710,7 @@ lib.quest_locations = {
             [5] = 6049,
         },
     },
-    ["bleakrock_base_0"] =
+    ["stonefalls/bleakrock_base_0"] = -- keep
     {
         [1] =
         {
@@ -5857,7 +5857,7 @@ lib.quest_locations = {
             [5] = 4016,
         },
     },
-    ["obsidianscar_base_0"] =
+    ["rivenspire/obsidianscar_base_0"] = -- keep
     {
         [1] =
         {
@@ -5868,7 +5868,7 @@ lib.quest_locations = {
             [5] = 3436,
         },
     },
-    ["thelibrarydusk_base_0"] =
+    ["coldharbor/thelibrarydusk_base_0"] = -- keep
     {
         [1] =
         {
@@ -5879,7 +5879,7 @@ lib.quest_locations = {
             [5] = 4352,
         },
     },
-    ["wrothgar/scarpkeeplower_base"] =
+    ["wrothgar/scarpkeeplower_base_0"] =
     {
         [1] =
         {
@@ -5898,7 +5898,7 @@ lib.quest_locations = {
             [5] = 5474,
         },
     },
-    ["vulkwasten_base_0"] =
+    ["malabaltor/vulkwasten_base_0"] = -- keep
     {
         [1] =
         {
@@ -5957,7 +5957,7 @@ lib.quest_locations = {
             [5] = 3973,
         },
     },
-    ["glenumbra/dresankeep_base"] =
+    ["glenumbra/dresankeep_base_0"] =
     {
         [1] =
         {
@@ -5968,7 +5968,7 @@ lib.quest_locations = {
             [5] = 3437,
         },
     },
-    ["the_aldmiri_harborage_map_base_0"] =
+    ["auridon/the_aldmiri_harborage_map_base_0"] = -- keep
     {
         [1] =
         {
@@ -5987,7 +5987,7 @@ lib.quest_locations = {
             [5] = 4998,
         },
     },
-    ["therift/nimalten_base"] =
+    ["therift/nimalten_base_0"] =
     {
         [1] =
         {
@@ -6038,7 +6038,7 @@ lib.quest_locations = {
             [5] = 4153,
         },
     },
-    ["exilesBarrow_map_base_0"] =
+    ["wrothgar/exilesbarrow_map_base_0"] = -- keep
     {
         [1] =
         {
@@ -6049,7 +6049,7 @@ lib.quest_locations = {
             [5] = 5445,
         },
     },
-    ["sanguinesdemesne_base_0"] =
+    ["shadowfen/sanguinesdemesne_base_0"] = -- keep
     {
         [1] =
         {
@@ -6068,7 +6068,7 @@ lib.quest_locations = {
             [5] = 4259,
         },
     },
-    ["therift/blessedcrucible1_base"] =
+    ["therift/blessedcrucible1_base_0"] =
     {
         [1] =
         {
@@ -6079,7 +6079,7 @@ lib.quest_locations = {
             [5] = 4469,
         },
     },
-    ["bangkorai/cryptoftheexiles_base"] =
+    ["bangkorai/cryptoftheexiles_base_0"] =
     {
         [1] =
         {
@@ -6090,7 +6090,7 @@ lib.quest_locations = {
             [5] = 4864,
         },
     },
-    ["mzulft_base_0"] =
+    ["eastmarch/mzulft_base_0"] = -- keep
     {
         [1] =
         {
@@ -6101,7 +6101,7 @@ lib.quest_locations = {
             [5] = 4105,
         },
     },
-    ["shadowfenoutlawrefuge_base_0"] =
+    ["shadowfen/shadowfenoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -6112,7 +6112,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["garlasagea_base_0"] =
+    ["darkbrotherhood/garlasagea_base_0"] = -- keep
     {
         [1] =
         {
@@ -6123,7 +6123,7 @@ lib.quest_locations = {
             [5] = 5548,
         },
     },
-    ["northwindmine_base_0"] =
+    ["therift/northwindmine_base_0"] = -- keep
     {
         [1] =
         {
@@ -6134,7 +6134,7 @@ lib.quest_locations = {
             [5] = 4176,
         },
     },
-    ["mehrunesspite_base_0"] =
+    ["auridon/mehrunesspite_base_0"] = -- keep
     {
         [1] =
         {
@@ -6145,7 +6145,7 @@ lib.quest_locations = {
             [5] = 4532,
         },
     },
-    ["khenarthisroost_base_0"] =
+    ["auridon/khenarthisroost_base_0"] = -- keep
     {
         [1] =
         {
@@ -6260,7 +6260,7 @@ lib.quest_locations = {
             [5] = 4664,
         },
     },
-    ["dhalmora_base_0"] =
+    ["stonefalls/dhalmora_base_0"] = -- keep
     {
         [1] =
         {
@@ -6287,7 +6287,7 @@ lib.quest_locations = {
             [5] = 4024,
         },
     },
-    ["libraryofdusk_base_0"] =
+    ["coldharbor/libraryofdusk_base_0"] = -- keep
     {
         [1] =
         {
@@ -6298,7 +6298,7 @@ lib.quest_locations = {
             [5] = 4352,
         },
     },
-    ["rkhardahrk_0"] =
+    ["craglorn/rkhardahrk_0"] = -- keep
     {
         [1] =
         {
@@ -6309,7 +6309,7 @@ lib.quest_locations = {
             [5] = 5111,
         },
     },
-    ["jaggerjaw_base_0"] =
+    ["bangkorai/jaggerjaw_base_0"] = -- keep
     {
         [1] =
         {
@@ -6320,7 +6320,7 @@ lib.quest_locations = {
             [5] = 4925,
         },
     },
-    ["barrowtrench_base_0"] =
+    ["greenshade/barrowtrench_base_0"] = -- keep
     {
         [1] =
         {
@@ -6331,7 +6331,7 @@ lib.quest_locations = {
             [5] = 4849,
         },
     },
-    ["ebonmeretower_base_0"] =
+    ["therift/ebonmeretower_base_0"] = -- keep
     {
         [1] =
         {
@@ -6342,7 +6342,7 @@ lib.quest_locations = {
             [5] = 5011,
         },
     },
-    ["watchershold_base_0"] =
+    ["wrothgar/watchershold_base_0"] = -- keep
     {
         [1] =
         {
@@ -6353,7 +6353,7 @@ lib.quest_locations = {
             [5] = 5317,
         },
     },
-    ["rivenspire/erokii_base"] =
+    ["rivenspire/erokii_base_0"] =
     {
         [1] =
         {
@@ -6380,7 +6380,7 @@ lib.quest_locations = {
             [5] = 4840,
         },
     },
-    ["clockwork/basilica_01"] =
+    ["clockwork/basilica_01_base_0"] =
     {
         [1] =
         {
@@ -6415,7 +6415,7 @@ lib.quest_locations = {
             [5] = 6046,
         },
     },
-    ["sentinel_base_0"] =
+    ["alikr/sentinel_base_0"] = -- keep
     {
         [1] =
         {
@@ -6578,7 +6578,7 @@ lib.quest_locations = {
             [5] = 3566,
         },
     },
-    ["elsweyr/stitches_base"] =
+    ["elsweyr/stitches_base_0"] =
     {
         [1] =
         {
@@ -6589,7 +6589,7 @@ lib.quest_locations = {
             [5] = 6366,
         },
     },
-    ["auridon/vulkhelguard_base"] =
+    ["auridon/vulkhelguard_base_0"] =
     {
         [1] =
         {
@@ -7264,7 +7264,7 @@ lib.quest_locations = {
             [5] = 5450,
         },
     },
-    ["alcairecastle_base_0"] =
+    ["stormhaven/alcairecastle_base_0"] = -- keep
     {
         [1] =
         {
@@ -7307,7 +7307,7 @@ lib.quest_locations = {
             [5] = 2552,
         },
     },
-    ["rivenspire/cryptofhearts_base"] =
+    ["rivenspire/cryptofhearts_base_0"] =
     {
         [1] =
         {
@@ -7334,7 +7334,7 @@ lib.quest_locations = {
             [5] = 5113,
         },
     },
-    ["southernelsweyr_base_0"] =
+    ["southernelsweyr/southernelsweyr_base_0"] = -- keep
     {
         [1] =
         {
@@ -7353,7 +7353,7 @@ lib.quest_locations = {
             [5] = 6407,
         },
     },
-    ["eyevea_base_0"] =
+    ["guildmaps/eyevea_base_0"] = -- keep
     {
         [1] =
         {
@@ -7364,7 +7364,7 @@ lib.quest_locations = {
             [5] = 4971,
         },
     },
-    ["alikr/divadschagrinmine_base"] =
+    ["alikr/divadschagrinmine_base_0"] =
     {
         [1] =
         {
@@ -7375,7 +7375,7 @@ lib.quest_locations = {
             [5] = 4622,
         },
     },
-    ["shroudedpass_base_0"] =
+    ["rivenspire/shroudedpass_base_0"] = -- keep
     {
         [1] =
         {
@@ -7386,7 +7386,7 @@ lib.quest_locations = {
             [5] = 4884,
         },
     },
-    ["crowswood_base_0"] =
+    ["stonefalls/crowswood_base_0"] = -- keep
     {
         [1] =
         {
@@ -7405,7 +7405,7 @@ lib.quest_locations = {
             [5] = 3902,
         },
     },
-    ["kvatchcity_base_0"] =
+    ["darkbrotherhood/kvatchcity_base_0"] = -- keep
     {
         [1] =
         {
@@ -7432,7 +7432,7 @@ lib.quest_locations = {
             [5] = 5605,
         },
     },
-    ["therift/riften_base"] =
+    ["therift/riften_base_0"] =
     {
         [1] =
         {
@@ -7531,7 +7531,7 @@ lib.quest_locations = {
             [5] = 3927,
         },
     },
-    ["goldcoast_base_0"] =
+    ["darkbrotherhood/goldcoast_base_0"] = -- keep
     {
         [1] =
         {
@@ -7758,7 +7758,7 @@ lib.quest_locations = {
             [5] = 5606,
         },
     },
-    ["grahtwood/reliquaryofstars_base"] =
+    ["grahtwood/reliquaryofstars_base_0"] =
     {
         [1] =
         {
@@ -7785,7 +7785,7 @@ lib.quest_locations = {
             [5] = 4385,
         },
     },
-    ["stormhaven/wayrestsewers_base"] =
+    ["stormhaven/wayrestsewers_base_0"] =
     {
         [1] =
         {
@@ -7804,7 +7804,7 @@ lib.quest_locations = {
             [5] = 4246,
         },
     },
-    ["coldharbor/greatshackle1_base"] =
+    ["coldharbor/greatshackle1_base_0"] =
     {
         [1] =
         {
@@ -7823,7 +7823,7 @@ lib.quest_locations = {
             [5] = 4730,
         },
     },
-    ["aldunz_base_0"] =
+    ["alikr/aldunz_base_0"] = -- keep
     {
         [1] =
         {
@@ -7834,7 +7834,7 @@ lib.quest_locations = {
             [5] = 4656,
         },
     },
-    ["koeglinvillage_base_0"] =
+    ["stormhaven/koeglinvillage_base_0"] = -- keep
     {
         [1] =
         {
@@ -7877,7 +7877,7 @@ lib.quest_locations = {
             [5] = 2558,
         },
     },
-    ["altencorimont_base_0"] =
+    ["shadowfen/altencorimont_base_0"] = -- keep
     {
         [1] =
         {
@@ -7928,7 +7928,7 @@ lib.quest_locations = {
             [5] = 4152,
         },
     },
-    ["eastmarch/windhelm_base"] =
+    ["eastmarch/windhelm_base_0"] =
     {
         [1] =
         {
@@ -8003,7 +8003,7 @@ lib.quest_locations = {
             [5] = 4060,
         },
     },
-    ["grahtwood_base_0"] =
+    ["grahtwood/grahtwood_base_0"] = -- keep
     {
         [1] =
         {
@@ -8638,7 +8638,7 @@ lib.quest_locations = {
             [5] = 4396,
         },
     },
-    ["rivenspire/tribulationcrypt_base"] =
+    ["rivenspire/tribulationcrypt_base_0"] =
     {
         [1] =
         {
@@ -8657,7 +8657,7 @@ lib.quest_locations = {
             [5] = 4834,
         },
     },
-    ["Imperialsewer_daggerfall1_base_0"] =
+    ["cyrodiil/imperialsewer_daggerfall1_base_0"] = -- keep
     {
         [1] =
         {
@@ -8708,7 +8708,7 @@ lib.quest_locations = {
             [5] = 5513,
         },
     },
-    ["templeofsul_base_0"] =
+    ["shadowfen/templeofsul_base_0"] = -- keep
     {
         [1] =
         {
@@ -8727,7 +8727,7 @@ lib.quest_locations = {
             [5] = 3910,
         },
     },
-    ["greenshade/barrowtrench_base"] =
+    ["greenshade/barrowtrench_base_0"] =
     {
         [1] =
         {
@@ -8738,7 +8738,7 @@ lib.quest_locations = {
             [5] = 4849,
         },
     },
-    ["MarbrukOutlawsRefuge_base_0"] =
+    ["greenshade/marbrukoutlawsrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -8749,7 +8749,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["firsthold_base_0"] =
+    ["auridon/firsthold_base_0"] = -- keep
     {
         [1] =
         {
@@ -8776,7 +8776,7 @@ lib.quest_locations = {
             [5] = 4552,
         },
     },
-    ["greenshade/serpentsgrotto_base"] =
+    ["greenshade/serpentsgrotto_base_0"] =
     {
         [1] =
         {
@@ -8787,7 +8787,7 @@ lib.quest_locations = {
             [5] = 4681,
         },
     },
-    ["blessedcrucible1_base_0"] =
+    ["therift/blessedcrucible1_base_0"] = -- keep
     {
         [1] =
         {
@@ -8806,7 +8806,7 @@ lib.quest_locations = {
             [5] = 4469,
         },
     },
-    ["clockwork_base_0"] =
+    ["clockwork/clockwork_base_0"] = -- keep
     {
         [1] =
         {
@@ -8825,7 +8825,7 @@ lib.quest_locations = {
             [5] = 6060,
         },
     },
-    ["stonefalls/crowswood_base"] =
+    ["stonefalls/crowswood_base_0"] =
     {
         [1] =
         {
@@ -8868,7 +8868,7 @@ lib.quest_locations = {
             [5] = 3902,
         },
     },
-    ["stonefalls_base_0"] =
+    ["stonefalls/stonefalls_base_0"] = -- keep
     {
         [1] =
         {
@@ -9911,7 +9911,7 @@ lib.quest_locations = {
             [5] = 3915,
         },
     },
-    ["summerset/lillandrill_base"] =
+    ["summerset/lillandrill_base_0"] =
     {
         [1] =
         {
@@ -9930,7 +9930,7 @@ lib.quest_locations = {
             [5] = 6111,
         },
     },
-    ["eldenrootfightersguildown_base_0"] =
+    ["grahtwood/eldenrootfightersguildown_base_0"] = -- keep
     {
         [1] =
         {
@@ -9941,7 +9941,7 @@ lib.quest_locations = {
             [5] = 5793,
         },
     },
-    ["deshaan/kwamacolony_base"] =
+    ["deshaan/kwamacolony_base_0"] =
     {
         [1] =
         {
@@ -9960,7 +9960,7 @@ lib.quest_locations = {
             [5] = 4494,
         },
     },
-    ["rivenspire/hildunessecretrefuge_base"] =
+    ["rivenspire/hildunessecretrefuge_base_0"] =
     {
         [1] =
         {
@@ -9971,7 +9971,7 @@ lib.quest_locations = {
             [5] = 4839,
         },
     },
-    ["gurzagsmine_base_0"] =
+    ["greenshade/gurzagsmine_base_0"] = -- keep
     {
         [1] =
         {
@@ -9982,7 +9982,7 @@ lib.quest_locations = {
             [5] = 4770,
         },
     },
-    ["kennelrun_base_0"] =
+    ["wrothgar/kennelrun_base_0"] = -- keep
     {
         [1] =
         {
@@ -9993,7 +9993,7 @@ lib.quest_locations = {
             [5] = 5320,
         },
     },
-    ["orsinium_base_0"] =
+    ["wrothgar/orsinium_base_0"] = -- keep
     {
         [1] =
         {
@@ -10220,7 +10220,7 @@ lib.quest_locations = {
             [5] = 5474,
         },
     },
-    ["oldsordscave_base_0"] =
+    ["eastmarch/oldsordscave_base_0"] = -- keep
     {
         [1] =
         {
@@ -10231,7 +10231,7 @@ lib.quest_locations = {
             [5] = 4584,
         },
     },
-    ["stormhaven/wayrest_base"] =
+    ["stormhaven/wayrest_base_0"] =
     {
         [1] =
         {
@@ -10442,7 +10442,7 @@ lib.quest_locations = {
             [5] = 5935,
         },
     },
-    ["anvilcity_base_0"] =
+    ["darkbrotherhood/anvilcity_base_0"] = -- keep
     {
         [1] =
         {
@@ -10501,7 +10501,7 @@ lib.quest_locations = {
             [5] = 5538,
         },
     },
-    ["glenumbra/thegrave_base"] =
+    ["glenumbra/thegrave_base_0"] =
     {
         [1] =
         {
@@ -10552,7 +10552,7 @@ lib.quest_locations = {
             [5] = 4454,
         },
     },
-    ["rivenspire/rivenspire_base"] =
+    ["rivenspire/rivenspire_base_0"] =
     {
         [1] =
         {
@@ -10915,7 +10915,7 @@ lib.quest_locations = {
             [5] = 3286,
         },
     },
-    ["malabaltoroutlawrefuge_base_0"] =
+    ["malabaltor/malabaltoroutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -10926,7 +10926,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["bangkorai/murciensclaim_base"] =
+    ["bangkorai/murciensclaim_base_0"] =
     {
         [1] =
         {
@@ -10937,7 +10937,7 @@ lib.quest_locations = {
             [5] = 4852,
         },
     },
-    ["eastmarch_base_0"] =
+    ["eastmarch/eastmarch_base_0"] = -- keep
     {
         [1] =
         {
@@ -11532,7 +11532,7 @@ lib.quest_locations = {
             [5] = 4117,
         },
     },
-    ["hallinsstand_base_0"] =
+    ["bangkorai/hallinsstand_base_0"] = -- keep
     {
         [1] =
         {
@@ -11567,7 +11567,7 @@ lib.quest_locations = {
             [5] = 2016,
         },
     },
-    ["shadowfen/shadowfen_base"] =
+    ["shadowfen/shadowfen_base_0"] =
     {
         [1] =
         {
@@ -12346,7 +12346,7 @@ lib.quest_locations = {
             [5] = 3909,
         },
     },
-    ["the_daggerfall_harborage_0"] =
+    ["glenumbra/the_daggerfall_harborage_0"] = -- keep
     {
         [1] =
         {
@@ -12365,7 +12365,7 @@ lib.quest_locations = {
             [5] = 4998,
         },
     },
-    ["dune_base_0"] =
+    ["reapersmarch/dune_base_0"] = -- keep
     {
         [1] =
         {
@@ -12400,7 +12400,7 @@ lib.quest_locations = {
             [5] = 4719,
         },
     },
-    ["southernelsweyr/senchal_base"] =
+    ["southernelsweyr/senchal_base_0"] =
     {
         [1] =
         {
@@ -12411,7 +12411,7 @@ lib.quest_locations = {
             [5] = 6401,
         },
     },
-    ["clockworkoutlawsrefuge_base_0"] =
+    ["clockwork/clockworkoutlawsrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -12430,7 +12430,7 @@ lib.quest_locations = {
             [5] = 6060,
         },
     },
-    ["cryptoftheexiles_base_0"] =
+    ["bangkorai/cryptoftheexiles_base_0"] = -- keep
     {
         [1] =
         {
@@ -12441,7 +12441,7 @@ lib.quest_locations = {
             [5] = 4864,
         },
     },
-    ["summerset/artaeum_base"] =
+    ["summerset/artaeum_base_0"] =
     {
         [1] =
         {
@@ -12460,7 +12460,7 @@ lib.quest_locations = {
             [5] = 6127,
         },
     },
-    ["coldharbor/lightlessoubliette_base"] =
+    ["coldharbor/lightlessoubliette_base_0"] =
     {
         [1] =
         {
@@ -12503,7 +12503,7 @@ lib.quest_locations = {
             [5] = 4602,
         },
     },
-    ["hallofthedead_base_0"] =
+    ["eastmarch/hallofthedead_base_0"] = -- keep
     {
         [1] =
         {
@@ -12522,7 +12522,7 @@ lib.quest_locations = {
             [5] = 4322,
         },
     },
-    ["glenumbra/crosswych_base"] =
+    ["glenumbra/crosswych_base_0"] =
     {
         [1] =
         {
@@ -12645,7 +12645,7 @@ lib.quest_locations = {
             [5] = 5935,
         },
     },
-    ["rivenspire/orcsfingerruins_base"] =
+    ["rivenspire/orcsfingerruins_base_0"] =
     {
         [1] =
         {
@@ -12664,7 +12664,7 @@ lib.quest_locations = {
             [5] = 4930,
         },
     },
-    ["summerset/etonnir_01"] =
+    ["summerset/etonnir_01_base_0"] =
     {
         [1] =
         {
@@ -12675,7 +12675,7 @@ lib.quest_locations = {
             [5] = 6137,
         },
     },
-    ["deshaan/mzithumz_base"] =
+    ["deshaan/mzithumz_base_0"] =
     {
         [1] =
         {
@@ -12710,7 +12710,7 @@ lib.quest_locations = {
             [5] = 3721,
         },
     },
-    ["reliquaryofstars_base_0"] =
+    ["grahtwood/reliquaryofstars_base_0"] = -- keep
     {
         [1] =
         {
@@ -12729,7 +12729,7 @@ lib.quest_locations = {
             [5] = 4386,
         },
     },
-    ["glenumbra/cryptwatchfort_base"] =
+    ["glenumbra/cryptwatchfort_base_0"] =
     {
         [1] =
         {
@@ -12740,7 +12740,7 @@ lib.quest_locations = {
             [5] = 4533,
         },
     },
-    ["orcsfingerruins_base_0"] =
+    ["rivenspire/orcsfingerruins_base_0"] = -- keep
     {
         [1] =
         {
@@ -12751,7 +12751,7 @@ lib.quest_locations = {
             [5] = 4930,
         },
     },
-    ["ebonheart_base_0"] =
+    ["stonefalls/ebonheart_base_0"] = -- keep
     {
         [1] =
         {
@@ -12826,7 +12826,7 @@ lib.quest_locations = {
             [5] = 3858,
         },
     },
-    ["crimsoncove_base_0"] =
+    ["malabaltor/crimsoncove_base_0"] = -- keep
     {
         [1] =
         {
@@ -12837,7 +12837,7 @@ lib.quest_locations = {
             [5] = 4378,
         },
     },
-    ["shadowfen/brokentuskcave_base"] =
+    ["shadowfen/brokentuskcave_base_0"] =
     {
         [1] =
         {
@@ -12864,7 +12864,7 @@ lib.quest_locations = {
             [5] = 4557,
         },
     },
-    ["cyrodiil/westelsweyrgate_base"] =
+    ["cyrodiil/westelsweyrgate_base_0"] =
     {
         [1] =
         {
@@ -12907,7 +12907,7 @@ lib.quest_locations = {
             [5] = 4704,
         },
     },
-    ["tombofanahbi_base_0"] =
+    ["grahtwood/tombofanahbi_base_0"] = -- keep
     {
         [1] =
         {
@@ -12918,7 +12918,7 @@ lib.quest_locations = {
             [5] = 3918,
         },
     },
-    ["shadowfen/whiteroseprison_base"] =
+    ["shadowfen/whiteroseprison_base_0"] =
     {
         [1] =
         {
@@ -12945,7 +12945,7 @@ lib.quest_locations = {
             [5] = 3847,
         },
     },
-    ["auridon/toothmaulgully_base"] =
+    ["auridon/toothmaulgully_base_0"] =
     {
         [1] =
         {
@@ -13012,7 +13012,7 @@ lib.quest_locations = {
             [5] = 4450,
         },
     },
-    ["bthanual_base_0"] =
+    ["deshaan/bthanual_base_0"] = -- keep
     {
         [1] =
         {
@@ -13023,7 +13023,7 @@ lib.quest_locations = {
             [5] = 3874,
         },
     },
-    ["reapersmarch/selenesweb_base"] =
+    ["reapersmarch/selenesweb_base_0"] =
     {
         [1] =
         {
@@ -13042,7 +13042,7 @@ lib.quest_locations = {
             [5] = 4733,
         },
     },
-    ["narsis_base_0"] =
+    ["deshaan/narsis_base_0"] = -- keep
     {
         [1] =
         {
@@ -13109,7 +13109,7 @@ lib.quest_locations = {
             [5] = 3610,
         },
     },
-    ["shadowfen_base_0"] =
+    ["shadowfen/shadowfen_base_0"] = -- keep
     {
         [1] =
         {
@@ -13872,7 +13872,7 @@ lib.quest_locations = {
             [5] = 4556,
         },
     },
-    ["bangkorai/razakswheel_base"] =
+    ["bangkorai/razakswheel_base_0"] =
     {
         [1] =
         {
@@ -13883,7 +13883,7 @@ lib.quest_locations = {
             [5] = 3850,
         },
     },
-    ["erokii_base_0"] =
+    ["rivenspire/erokii_base_0"] = -- keep
     {
         [1] =
         {
@@ -13894,7 +13894,7 @@ lib.quest_locations = {
             [5] = 4840,
         },
     },
-    ["sharktoothgrotto2_base_0"] =
+    ["thievesguild/sharktoothgrotto2_base_0"] = -- keep
     {
         [1] =
         {
@@ -13905,7 +13905,7 @@ lib.quest_locations = {
             [5] = 5552,
         },
     },
-    ["bangkorai/bangkorai_base"] =
+    ["bangkorai/bangkorai_base_0"] =
     {
         [1] =
         {
@@ -14252,7 +14252,7 @@ lib.quest_locations = {
             [5] = 4898,
         },
     },
-    ["razakswheel_base_0"] =
+    ["bangkorai/razakswheel_base_0"] = -- keep
     {
         [1] =
         {
@@ -14263,7 +14263,7 @@ lib.quest_locations = {
             [5] = 3850,
         },
     },
-    ["glenumbra/glenumbra_base"] =
+    ["glenumbra/glenumbra_base_0"] =
     {
         [1] =
         {
@@ -15282,7 +15282,7 @@ lib.quest_locations = {
             [5] = 3509,
         },
     },
-    ["abahslanding_base_0"] =
+    ["thievesguild/abahslanding_base_0"] = -- keep
     {
         [1] =
         {
@@ -15805,7 +15805,7 @@ lib.quest_locations = {
             [5] = 5552,
         },
     },
-    ["Maw_of_Lorkaj_Base_0"] =
+    ["reapersmarch/maw_of_lorkaj_base_0"] = -- keep
     {
         [1] =
         {
@@ -15816,7 +15816,7 @@ lib.quest_locations = {
             [5] = 5352,
         },
     },
-    ["stonefalls/orkeyshollow_base"] =
+    ["stonefalls/orkeyshollow_base_0"] =
     {
         [1] =
         {
@@ -15835,7 +15835,7 @@ lib.quest_locations = {
             [5] = 3996,
         },
     },
-    ["malabaltor/crimsoncove_base"] =
+    ["malabaltor/crimsoncove_base_0"] =
     {
         [1] =
         {
@@ -15854,7 +15854,7 @@ lib.quest_locations = {
             [5] = 4378,
         },
     },
-    ["bangkorai_base_0"] =
+    ["bangkorai/bangkorai_base_0"] = -- keep
     {
         [1] =
         {
@@ -16377,7 +16377,7 @@ lib.quest_locations = {
             [5] = 4863,
         },
     },
-    ["shorsstonemine_base_0"] =
+    ["therift/shorsstonemine_base_0"] = -- keep
     {
         [1] =
         {
@@ -16396,7 +16396,7 @@ lib.quest_locations = {
             [5] = 3920,
         },
     },
-    ["wrothgar/zthenganaz_base"] =
+    ["wrothgar/zthenganaz_base_0"] =
     {
         [1] =
         {
@@ -16407,7 +16407,7 @@ lib.quest_locations = {
             [5] = 5316,
         },
     },
-    ["eldenrootmagesguilddown_base_0"] =
+    ["grahtwood/eldenrootmagesguilddown_base_0"] = -- keep
     {
         [1] =
         {
@@ -16426,7 +16426,7 @@ lib.quest_locations = {
             [5] = 5816,
         },
     },
-    ["glenumbra/ilessantower_base"] =
+    ["glenumbra/ilessantower_base_0"] =
     {
         [1] =
         {
@@ -16437,7 +16437,7 @@ lib.quest_locations = {
             [5] = 4529,
         },
     },
-    ["balfoyen_base_0"] =
+    ["stonefalls/balfoyen_base_0"] = -- keep
     {
         [1] =
         {
@@ -16528,7 +16528,7 @@ lib.quest_locations = {
             [5] = 4023,
         },
     },
-    ["eastmarchrefuge_base_0"] =
+    ["eastmarch/eastmarchrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -16539,7 +16539,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["cyrodiil/ava_whole"] =
+    ["cyrodiil/ava_whole_0"] =
     {
         [1] =
         {
@@ -17286,7 +17286,7 @@ lib.quest_locations = {
             [5] = 4666,
         },
     },
-    ["northpoint_base_0"] =
+    ["rivenspire/northpoint_base_0"] = -- keep
     {
         [1] =
         {
@@ -17321,7 +17321,7 @@ lib.quest_locations = {
             [5] = 4916,
         },
     },
-    ["shadowfen/loriasel_base"] =
+    ["shadowfen/loriasel_base_0"] =
     {
         [1] =
         {
@@ -17404,7 +17404,7 @@ lib.quest_locations = {
             [5] = 3911,
         },
     },
-    ["coldharbor/hollowcity_base"] =
+    ["coldharbor/hollowcity_base_0"] =
     {
         [1] =
         {
@@ -17511,7 +17511,7 @@ lib.quest_locations = {
             [5] = 4610,
         },
     },
-    ["darkbrotherhood/dbsanctuary_base"] =
+    ["darkbrotherhood/dbsanctuary_base_0"] =
     {
         [1] =
         {
@@ -17586,7 +17586,7 @@ lib.quest_locations = {
             [5] = 5659,
         },
     },
-    ["glenumbra/betnihk_base"] =
+    ["glenumbra/betnihk_base_0"] =
     {
         [1] =
         {
@@ -17901,7 +17901,7 @@ lib.quest_locations = {
             [5] = 4468,
         },
     },
-    ["alikr/sentinel_base"] =
+    ["alikr/sentinel_base_0"] =
     {
         [1] =
         {
@@ -17976,7 +17976,7 @@ lib.quest_locations = {
             [5] = 2408,
         },
     },
-    ["reapersmarch/thibautscairn_base"] =
+    ["reapersmarch/thibautscairn_base_0"] =
     {
         [1] =
         {
@@ -18003,7 +18003,7 @@ lib.quest_locations = {
             [5] = 4812,
         },
     },
-    ["badmansstart_base_0"] =
+    ["glenumbra/badmansstart_base_0"] = -- keep
     {
         [1] =
         {
@@ -18014,7 +18014,7 @@ lib.quest_locations = {
             [5] = 4080,
         },
     },
-    ["murciensclaim_base_0"] =
+    ["bangkorai/murciensclaim_base_0"] = -- keep
     {
         [1] =
         {
@@ -18025,7 +18025,7 @@ lib.quest_locations = {
             [5] = 4852,
         },
     },
-    ["summerset/alinor_base"] =
+    ["summerset/alinor_base_0"] =
     {
         [1] =
         {
@@ -18068,7 +18068,7 @@ lib.quest_locations = {
             [5] = 6084,
         },
     },
-    ["MournholdOutlawsRefuge_base_0"] =
+    ["deshaan/mournholdoutlawsrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -18079,7 +18079,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["haven_base_0"] =
+    ["grahtwood/haven_base_0"] = -- keep
     {
         [1] =
         {
@@ -18122,7 +18122,7 @@ lib.quest_locations = {
             [5] = 4396,
         },
     },
-    ["southhighrockgate_base_0"] =
+    ["cyrodiil/southhighrockgate_base_0"] = -- keep
     {
         [1] =
         {
@@ -18133,7 +18133,7 @@ lib.quest_locations = {
             [5] = 4725,
         },
     },
-    ["shadowfen/gandranen_base"] =
+    ["shadowfen/gandranen_base_0"] =
     {
         [1] =
         {
@@ -18168,7 +18168,7 @@ lib.quest_locations = {
             [5] = 4560,
         },
     },
-    ["shadowfen/sanguinesdemesne_base"] =
+    ["shadowfen/sanguinesdemesne_base_0"] =
     {
         [1] =
         {
@@ -18219,7 +18219,7 @@ lib.quest_locations = {
             [5] = 4259,
         },
     },
-    ["rivenspire/flyleafcatacombs_base"] =
+    ["rivenspire/flyleafcatacombs_base_0"] =
     {
         [1] =
         {
@@ -18238,7 +18238,7 @@ lib.quest_locations = {
             [5] = 657,
         },
     },
-    ["stonefalls/fungalgrotto_base"] =
+    ["stonefalls/fungalgrotto_base_0"] =
     {
         [1] =
         {
@@ -18281,7 +18281,7 @@ lib.quest_locations = {
             [5] = 4303,
         },
     },
-    ["glenumbra/badmanscave_base"] =
+    ["glenumbra/badmanscave_base_0"] =
     {
         [1] =
         {
@@ -18372,7 +18372,7 @@ lib.quest_locations = {
             [5] = 4080,
         },
     },
-    ["stonetoothfortress_base_0"] =
+    ["glenumbra/stonetoothfortress_base_0"] = -- keep
     {
         [1] =
         {
@@ -18423,7 +18423,7 @@ lib.quest_locations = {
             [5] = 4523,
         },
     },
-    ["farangelsdelve_base_0"] =
+    ["stormhaven/farangelsdelve_base_0"] = -- keep
     {
         [1] =
         {
@@ -18434,7 +18434,7 @@ lib.quest_locations = {
             [5] = 4516,
         },
     },
-    ["sunkenroad_base_0"] =
+    ["bangkorai/sunkenroad_base_0"] = -- keep
     {
         [1] =
         {
@@ -18453,7 +18453,7 @@ lib.quest_locations = {
             [5] = 4911,
         },
     },
-    ["brokentuskcave_base_0"] =
+    ["shadowfen/brokentuskcave_base_0"] = -- keep
     {
         [1] =
         {
@@ -18464,7 +18464,7 @@ lib.quest_locations = {
             [5] = 4557,
         },
     },
-    ["therift/pinepeakcaverns_base"] =
+    ["therift/pinepeakcaverns_base_0"] =
     {
         [1] =
         {
@@ -18483,7 +18483,7 @@ lib.quest_locations = {
             [5] = 3980,
         },
     },
-    ["eidolonshollow2_base_0"] =
+    ["deshaan/eidolonshollow2_base_0"] = -- keep
     {
         [1] =
         {
@@ -18502,7 +18502,7 @@ lib.quest_locations = {
             [5] = 3810,
         },
     },
-    ["fungalgrotto_base_0"] =
+    ["stonefalls/fungalgrotto_base_0"] = -- keep
     {
         [1] =
         {
@@ -18521,7 +18521,7 @@ lib.quest_locations = {
             [5] = 3993,
         },
     },
-    ["elsweyr/elsweyr_base"] =
+    ["elsweyr/elsweyr_base_0"] =
     {
         [1] =
         {
@@ -18596,7 +18596,7 @@ lib.quest_locations = {
             [5] = 6300,
         },
     },
-    ["daggerfall_base_0"] =
+    ["glenumbra/daggerfall_base_0"] = -- keep
     {
         [1] =
         {
@@ -18815,7 +18815,7 @@ lib.quest_locations = {
             [5] = 4780,
         },
     },
-    ["alikr/alikr_base"] =
+    ["alikr/alikr_base_0"] =
     {
         [1] =
         {
@@ -19186,7 +19186,7 @@ lib.quest_locations = {
             [5] = 2364,
         },
     },
-    ["southmorrowgate_base_0"] =
+    ["cyrodiil/southmorrowgate_base_0"] = -- keep
     {
         [1] =
         {
@@ -19229,7 +19229,7 @@ lib.quest_locations = {
             [5] = 4876,
         },
     },
-    ["greatshackle1_base_0"] =
+    ["coldharbor/greatshackle1_base_0"] = -- keep
     {
         [1] =
         {
@@ -19240,7 +19240,7 @@ lib.quest_locations = {
             [5] = 4730,
         },
     },
-    ["velynharbor_base_0"] =
+    ["malabaltor/velynharbor_base_0"] = -- keep
     {
         [1] =
         {
@@ -19315,7 +19315,7 @@ lib.quest_locations = {
             [5] = 4194,
         },
     },
-    ["shadacitydistrict_base_0"] =
+    ["craglorn/shadacitydistrict_base_0"] = -- keep
     {
         [1] =
         {
@@ -19326,7 +19326,7 @@ lib.quest_locations = {
             [5] = 5106,
         },
     },
-    ["stormhaven/alcairecastle_base"] =
+    ["stormhaven/alcairecastle_base_0"] =
     {
         [1] =
         {
@@ -19425,7 +19425,7 @@ lib.quest_locations = {
             [5] = 2576,
         },
     },
-    ["porthunding_base_0"] =
+    ["glenumbra/porthunding_base_0"] = -- keep
     {
         [1] =
         {
@@ -19476,7 +19476,7 @@ lib.quest_locations = {
             [5] = 4514,
         },
     },
-    ["redfurtradingpost_base_0"] =
+    ["grahtwood/redfurtradingpost_base_0"] = -- keep
     {
         [1] =
         {
@@ -19495,7 +19495,7 @@ lib.quest_locations = {
             [5] = 4786,
         },
     },
-    ["rivenspire/crestshademine_base"] =
+    ["rivenspire/crestshademine_base_0"] =
     {
         [1] =
         {
@@ -19514,7 +19514,7 @@ lib.quest_locations = {
             [5] = 4944,
         },
     },
-    ["craglorn/belkarth_base"] =
+    ["craglorn/belkarth_base_0"] =
     {
         [1] =
         {
@@ -19533,7 +19533,7 @@ lib.quest_locations = {
             [5] = 5130,
         },
     },
-    ["glenumbra/minesofkhuras_base"] =
+    ["glenumbra/minesofkhuras_base_0"] =
     {
         [1] =
         {
@@ -19544,7 +19544,7 @@ lib.quest_locations = {
             [5] = 4531,
         },
     },
-    ["wrothgar/rkindaleftoutside_base"] =
+    ["wrothgar/rkindaleftoutside_base_0"] =
     {
         [1] =
         {
@@ -19555,7 +19555,7 @@ lib.quest_locations = {
             [5] = 5328,
         },
     },
-    ["deadmansdrop_base_0"] =
+    ["malabaltor/deadmansdrop_base_0"] = -- keep
     {
         [1] =
         {
@@ -19566,7 +19566,7 @@ lib.quest_locations = {
             [5] = 4500,
         },
     },
-    ["stonefalls/balfoyen_base"] =
+    ["stonefalls/balfoyen_base_0"] =
     {
         [1] =
         {
@@ -19809,7 +19809,7 @@ lib.quest_locations = {
             [5] = 4022,
         },
     },
-    ["guildmaps/fortvirakruin_base"] =
+    ["guildmaps/fortvirakruin_base_0"] =
     {
         [1] =
         {
@@ -19876,7 +19876,7 @@ lib.quest_locations = {
             [5] = 3633,
         },
     },
-    ["stonefallsoutlawrefuge_base_0"] =
+    ["stonefalls/stonefallsoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -19887,7 +19887,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["mudtreemine_base_0"] =
+    ["shadowfen/mudtreemine_base_0"] = -- keep
     {
         [1] =
         {
@@ -19906,7 +19906,7 @@ lib.quest_locations = {
             [5] = 3982,
         },
     },
-    ["alinor_base_0"] =
+    ["summerset/alinor_base_0"] = -- keep
     {
         [1] =
         {
@@ -19925,7 +19925,7 @@ lib.quest_locations = {
             [5] = 6151,
         },
     },
-    ["depravedgrotto_base_0"] =
+    ["coldharbor/depravedgrotto_base_0"] = -- keep
     {
         [1] =
         {
@@ -19936,7 +19936,7 @@ lib.quest_locations = {
             [5] = 4743,
         },
     },
-    ["reapersmarch_base_0"] =
+    ["reapersmarch/reapersmarch_base_0"] = -- keep
     {
         [1] =
         {
@@ -20659,7 +20659,7 @@ lib.quest_locations = {
             [5] = 4720,
         },
     },
-    ["glenumbra/porthunding_base"] =
+    ["glenumbra/porthunding_base_0"] =
     {
         [1] =
         {
@@ -20798,7 +20798,7 @@ lib.quest_locations = {
             [5] = 4476,
         },
     },
-    ["deshaan_base_0"] =
+    ["deshaan/deshaan_base_0"] = -- keep
     {
         [1] =
         {
@@ -21817,7 +21817,7 @@ lib.quest_locations = {
             [5] = 4493,
         },
     },
-    ["alikr/salasen_base"] =
+    ["alikr/salasen_base_0"] =
     {
         [1] =
         {
@@ -21836,7 +21836,7 @@ lib.quest_locations = {
             [5] = 3305,
         },
     },
-    ["deshaan/forgottencrypts_base"] =
+    ["deshaan/forgottencrypts_base_0"] =
     {
         [1] =
         {
@@ -21887,7 +21887,7 @@ lib.quest_locations = {
             [5] = 4494,
         },
     },
-    ["stitches_base_0"] =
+    ["elsweyr/stitches_base_0"] = -- keep
     {
         [1] =
         {
@@ -21898,7 +21898,7 @@ lib.quest_locations = {
             [5] = 6308,
         },
     },
-    ["wrothgar/bonerock_caverns"] =
+    ["wrothgar/bonerock_caverns_base_0"] =
     {
         [1] =
         {
@@ -21909,7 +21909,7 @@ lib.quest_locations = {
             [5] = 5453,
         },
     },
-    ["spindleclutch_base_0"] =
+    ["glenumbra/spindleclutch_base_0"] = -- keep
     {
         [1] =
         {
@@ -21928,7 +21928,7 @@ lib.quest_locations = {
             [5] = 4555,
         },
     },
-    ["grahtwoodoutlawrefuge_base_0"] =
+    ["grahtwood/grahtwoodoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -21939,7 +21939,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["vetcirtyash01_base_0"] =
+    ["greenshade/vetcirtyash01_base_0"] = -- keep
     {
         [1] =
         {
@@ -21950,7 +21950,7 @@ lib.quest_locations = {
             [5] = 5120,
         },
     },
-    ["thebastardstomb_base_0"] =
+    ["eastmarch/thebastardstomb_base_0"] = -- keep
     {
         [1] =
         {
@@ -21961,7 +21961,7 @@ lib.quest_locations = {
             [5] = 4585,
         },
     },
-    ["taarengrav_base_0"] =
+    ["therift/taarengrav_base_0"] = -- keep
     {
         [1] =
         {
@@ -21972,7 +21972,7 @@ lib.quest_locations = {
             [5] = 4185,
         },
     },
-    ["bangkorai/hallofheroes_base"] =
+    ["bangkorai/hallofheroes_base_0"] =
     {
         [1] =
         {
@@ -21999,7 +21999,7 @@ lib.quest_locations = {
             [5] = 4960,
         },
     },
-    ["eldenrootservices_base_0"] =
+    ["grahtwood/eldenrootservices_base_0"] = -- keep
     {
         [1] =
         {
@@ -22026,7 +22026,7 @@ lib.quest_locations = {
             [5] = 5276,
         },
     },
-    ["reapersmarch/planeofjodecave_base"] =
+    ["reapersmarch/planeofjodecave_base_0"] =
     {
         [1] =
         {
@@ -22037,7 +22037,7 @@ lib.quest_locations = {
             [5] = 4720,
         },
     },
-    ["glenumbra/aldcroft_base"] =
+    ["glenumbra/aldcroft_base_0"] =
     {
         [1] =
         {
@@ -22288,7 +22288,7 @@ lib.quest_locations = {
             [5] = 3013,
         },
     },
-    ["shroudhearth_base_0"] =
+    ["therift/shroudhearth_base_0"] = -- keep
     {
         [1] =
         {
@@ -22299,7 +22299,7 @@ lib.quest_locations = {
             [5] = 5007,
         },
     },
-    ["delsclaim_base_0"] =
+    ["auridon/delsclaim_base_0"] = -- keep
     {
         [1] =
         {
@@ -22310,7 +22310,7 @@ lib.quest_locations = {
             [5] = 4524,
         },
     },
-    ["grahtwood/mobarmine_base"] =
+    ["grahtwood/mobarmine_base_0"] =
     {
         [1] =
         {
@@ -22321,7 +22321,7 @@ lib.quest_locations = {
             [5] = 4966,
         },
     },
-    ["rawlkha_base_0"] =
+    ["reapersmarch/rawlkha_base_0"] = -- keep
     {
         [1] =
         {
@@ -22388,7 +22388,7 @@ lib.quest_locations = {
             [5] = 4712,
         },
     },
-    ["reapersmarchoutlawrefuge_base_0"] =
+    ["reapersmarch/reapersmarchoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -22399,7 +22399,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["auridon/mehrunesspite_base"] =
+    ["auridon/mehrunesspite_base_0"] =
     {
         [1] =
         {
@@ -22410,7 +22410,7 @@ lib.quest_locations = {
             [5] = 4532,
         },
     },
-    ["etonnir_01_base_0"] =
+    ["summerset/etonnir_01_base_0"] = -- keep
     {
         [1] =
         {
@@ -22421,7 +22421,7 @@ lib.quest_locations = {
             [5] = 6137,
         },
     },
-    ["forgottencrypts_base_0"] =
+    ["deshaan/forgottencrypts_base_0"] = -- keep
     {
         [1] =
         {
@@ -22440,7 +22440,7 @@ lib.quest_locations = {
             [5] = 4151,
         },
     },
-    ["kwamacolony_base_0"] =
+    ["deshaan/kwamacolony_base_0"] = -- keep
     {
         [1] =
         {
@@ -22451,7 +22451,7 @@ lib.quest_locations = {
             [5] = 4494,
         },
     },
-    ["therift/ebonmeretower_base"] =
+    ["therift/ebonmeretower_base_0"] =
     {
         [1] =
         {
@@ -22462,7 +22462,7 @@ lib.quest_locations = {
             [5] = 5011,
         },
     },
-    ["hoarfrost_base_0"] =
+    ["rivenspire/hoarfrost_base_0"] = -- keep
     {
         [1] =
         {
@@ -22505,7 +22505,7 @@ lib.quest_locations = {
             [5] = 4844,
         },
     },
-    ["reapersmarch/fortsphinxmoth_base"] =
+    ["reapersmarch/fortsphinxmoth_base_0"] =
     {
         [1] =
         {
@@ -22532,7 +22532,7 @@ lib.quest_locations = {
             [5] = 4717,
         },
     },
-    ["vulkhelguard_base_0"] =
+    ["auridon/vulkhelguard_base_0"] = -- keep
     {
         [1] =
         {
@@ -22807,7 +22807,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["stormhaven/portdunwatch_base"] =
+    ["stormhaven/portdunwatch_base_0"] =
     {
         [1] =
         {
@@ -22842,7 +22842,7 @@ lib.quest_locations = {
             [5] = 4565,
         },
     },
-    ["rubblebutte_base_0"] =
+    ["bangkorai/rubblebutte_base_0"] = -- keep
     {
         [1] =
         {
@@ -22853,7 +22853,7 @@ lib.quest_locations = {
             [5] = 4887,
         },
     },
-    ["grahtwood/caveofbrokensails_base"] =
+    ["grahtwood/caveofbrokensails_base_0"] =
     {
         [1] =
         {
@@ -22864,7 +22864,7 @@ lib.quest_locations = {
             [5] = 4445,
         },
     },
-    ["bangkoraioutlawrefuge_base_0"] =
+    ["bangkorai/bangkoraioutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -22875,7 +22875,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["woodhearth_base_0"] =
+    ["greenshade/woodhearth_base_0"] = -- keep
     {
         [1] =
         {
@@ -22926,7 +22926,7 @@ lib.quest_locations = {
             [5] = 4574,
         },
     },
-    ["greenshade/rulanyilsfall_base"] =
+    ["greenshade/rulanyilsfall_base_0"] =
     {
         [1] =
         {
@@ -22953,7 +22953,7 @@ lib.quest_locations = {
             [5] = 4463,
         },
     },
-    ["wrothgar/arenaslobbyexterior_base"] =
+    ["wrothgar/arenaslobbyexterior_base_0"] =
     {
         [1] =
         {
@@ -22964,7 +22964,7 @@ lib.quest_locations = {
             [5] = 5448,
         },
     },
-    ["cryptwatchfort_base_0"] =
+    ["glenumbra/cryptwatchfort_base_0"] = -- keep
     {
         [1] =
         {
@@ -22975,7 +22975,7 @@ lib.quest_locations = {
             [5] = 4533,
         },
     },
-    ["eldenrootthroneroom_base_0"] =
+    ["grahtwood/eldenrootthroneroom_base_0"] = -- keep
     {
         [1] =
         {
@@ -23002,7 +23002,7 @@ lib.quest_locations = {
             [5] = 4922,
         },
     },
-    ["malabaltor/vulkwasten_base"] =
+    ["malabaltor/vulkwasten_base_0"] =
     {
         [1] =
         {
@@ -23133,7 +23133,7 @@ lib.quest_locations = {
             [5] = 3973,
         },
     },
-    ["fortsphinxmoth_base_0"] =
+    ["reapersmarch/fortsphinxmoth_base_0"] = -- keep
     {
         [1] =
         {
@@ -23144,7 +23144,7 @@ lib.quest_locations = {
             [5] = 4717,
         },
     },
-    ["wayrest_base_0"] =
+    ["stormhaven/wayrest_base_0"] = -- keep
     {
         [1] =
         {
@@ -23331,7 +23331,7 @@ lib.quest_locations = {
             [5] = 1384,
         },
     },
-    ["deshaan/bthanual_base"] =
+    ["deshaan/bthanual_base_0"] =
     {
         [1] =
         {
@@ -23366,7 +23366,7 @@ lib.quest_locations = {
             [5] = 3874,
         },
     },
-    ["hewsbane_base_0"] =
+    ["thievesguild/hewsbane_base_0"] = -- keep
     {
         [1] =
         {
@@ -23801,7 +23801,7 @@ lib.quest_locations = {
             [5] = 5552,
         },
     },
-    ["kunasdelve_base_0"] =
+    ["reapersmarch/kunasdelve_base_0"] = -- keep
     {
         [1] =
         {
@@ -23820,7 +23820,7 @@ lib.quest_locations = {
             [5] = 4749,
         },
     },
-    ["greenshade/woodhearth_base"] =
+    ["greenshade/woodhearth_base_0"] =
     {
         [1] =
         {
@@ -23895,7 +23895,7 @@ lib.quest_locations = {
             [5] = 4794,
         },
     },
-    ["flyleafcatacombs_base_0"] =
+    ["rivenspire/flyleafcatacombs_base_0"] = -- keep
     {
         [1] =
         {
@@ -23906,7 +23906,7 @@ lib.quest_locations = {
             [5] = 657,
         },
     },
-    ["auridon/firsthold_base"] =
+    ["auridon/firsthold_base_0"] =
     {
         [1] =
         {
@@ -23933,7 +23933,7 @@ lib.quest_locations = {
             [5] = 4261,
         },
     },
-    ["rootsunder_base_0"] =
+    ["grahtwood/rootsunder_base_0"] = -- keep
     {
         [1] =
         {
@@ -23944,7 +23944,7 @@ lib.quest_locations = {
             [5] = 4406,
         },
     },
-    ["therift/fortgreenwall_base"] =
+    ["therift/fortgreenwall_base_0"] =
     {
         [1] =
         {
@@ -23955,7 +23955,7 @@ lib.quest_locations = {
             [5] = 5005,
         },
     },
-    ["auridon/bewan_base"] =
+    ["auridon/bewan_base_0"] =
     {
         [1] =
         {
@@ -23966,7 +23966,7 @@ lib.quest_locations = {
             [5] = 4526,
         },
     },
-    ["eldenhollow_base_0"] =
+    ["grahtwood/eldenhollow_base_0"] = -- keep
     {
         [1] =
         {
@@ -23985,7 +23985,7 @@ lib.quest_locations = {
             [5] = 4336,
         },
     },
-    ["hollowcity_base_0"] =
+    ["coldharbor/hollowcity_base_0"] = -- keep
     {
         [1] =
         {
@@ -24140,7 +24140,7 @@ lib.quest_locations = {
             [5] = 4730,
         },
     },
-    ["glenumbra/cathbedraud_base"] =
+    ["glenumbra/cathbedraud_base_0"] =
     {
         [1] =
         {
@@ -24167,7 +24167,7 @@ lib.quest_locations = {
             [5] = 3379,
         },
     },
-    ["reapersmarch/dune_base"] =
+    ["reapersmarch/dune_base_0"] =
     {
         [1] =
         {
@@ -24242,7 +24242,7 @@ lib.quest_locations = {
             [5] = 4802,
         },
     },
-    ["stormhold_base_0"] =
+    ["shadowfen/stormhold_base_0"] = -- keep
     {
         [1] =
         {
@@ -24437,7 +24437,7 @@ lib.quest_locations = {
             [5] = 4836,
         },
     },
-    ["davonswatch_base_0"] =
+    ["stonefalls/davonswatch_base_0"] = -- keep
     {
         [1] =
         {
@@ -24832,7 +24832,7 @@ lib.quest_locations = {
             [5] = 3902,
         },
     },
-    ["deshaan/eidolonshollow2_base"] =
+    ["deshaan/eidolonshollow2_base_0"] =
     {
         [1] =
         {
@@ -24899,7 +24899,7 @@ lib.quest_locations = {
             [5] = 3831,
         },
     },
-    ["fortvirakruin_base_0"] =
+    ["guildmaps/fortvirakruin_base_0"] = -- keep
     {
         [1] =
         {
@@ -24910,7 +24910,7 @@ lib.quest_locations = {
             [5] = 3633,
         },
     },
-    ["bleakrockvillage_base_0"] =
+    ["bleakrock/bleakrockvillage_base_0"] = -- keep
     {
         [1] =
         {
@@ -24961,7 +24961,7 @@ lib.quest_locations = {
             [5] = 3990,
         },
     },
-    ["alikr/volenfell_base"] =
+    ["alikr/volenfell_base_0"] =
     {
         [1] =
         {
@@ -24972,7 +24972,7 @@ lib.quest_locations = {
             [5] = 4432,
         },
     },
-    ["grahtwood/grahtwood_base"] =
+    ["grahtwood/grahtwood_base_0"] =
     {
         [1] =
         {
@@ -25503,7 +25503,7 @@ lib.quest_locations = {
             [5] = 4895,
         },
     },
-    ["vaultsofmadness1_base_0"] =
+    ["coldharbor/vaultsofmadness1_base_0"] = -- keep
     {
         [1] =
         {
@@ -25514,7 +25514,7 @@ lib.quest_locations = {
             [5] = 4822,
         },
     },
-    ["cryptofhearts_base_0"] =
+    ["rivenspire/cryptofhearts_base_0"] = -- keep
     {
         [1] =
         {
@@ -25525,7 +25525,7 @@ lib.quest_locations = {
             [5] = 4379,
         },
     },
-    ["alikr/bergama_base"] =
+    ["alikr/bergama_base_0"] =
     {
         [1] =
         {
@@ -25592,7 +25592,7 @@ lib.quest_locations = {
             [5] = 731,
         },
     },
-    ["malabaltor/tempestisland_base"] =
+    ["malabaltor/tempestisland_base_0"] =
     {
         [1] =
         {
@@ -25611,7 +25611,7 @@ lib.quest_locations = {
             [5] = 4538,
         },
     },
-    ["bangkorai/bisnensel_base"] =
+    ["bangkorai/bisnensel_base_0"] =
     {
         [1] =
         {
@@ -25630,7 +25630,7 @@ lib.quest_locations = {
             [5] = 1804,
         },
     },
-    ["wailingprison1_base_0"] =
+    ["coldharbor/wailingprison1_base_0"] = -- keep
     {
         [1] =
         {
@@ -25641,7 +25641,7 @@ lib.quest_locations = {
             [5] = 4296,
         },
     },
-    ["lostknifecave_base_0"] =
+    ["eastmarch/lostknifecave_base_0"] = -- keep
     {
         [1] =
         {
@@ -25652,7 +25652,7 @@ lib.quest_locations = {
             [5] = 4128,
         },
     },
-    ["caveoftrophies_base_0"] =
+    ["coldharbor/caveoftrophies_base_0"] = -- keep
     {
         [1] =
         {
@@ -25663,7 +25663,7 @@ lib.quest_locations = {
             [5] = 4746,
         },
     },
-    ["norvulkruins_base_0"] =
+    ["stormhaven/norvulkruins_base_0"] = -- keep
     {
         [1] =
         {
@@ -25674,7 +25674,7 @@ lib.quest_locations = {
             [5] = 4519,
         },
     },
-    ["grahtwood/burrootkwamamine_base"] =
+    ["grahtwood/burrootkwamamine_base_0"] =
     {
         [1] =
         {
@@ -25685,7 +25685,7 @@ lib.quest_locations = {
             [5] = 4968,
         },
     },
-    ["senchal_base_0"] =
+    ["southernelsweyr/senchal_base_0"] = -- keep
     {
         [1] =
         {
@@ -25704,7 +25704,7 @@ lib.quest_locations = {
             [5] = 6407,
         },
     },
-    ["bewan_base_0"] =
+    ["auridon/bewan_base_0"] = -- keep
     {
         [1] =
         {
@@ -25715,7 +25715,7 @@ lib.quest_locations = {
             [5] = 4526,
         },
     },
-    ["hildunessecretrefuge_base_0"] =
+    ["rivenspire/hildunessecretrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -25726,7 +25726,7 @@ lib.quest_locations = {
             [5] = 4839,
         },
     },
-    ["belkarth_base_0"] =
+    ["craglorn/belkarth_base_0"] = -- keep
     {
         [1] =
         {
@@ -25841,7 +25841,7 @@ lib.quest_locations = {
             [5] = 5130,
         },
     },
-    ["grahtwood/rootsunder_base"] =
+    ["grahtwood/rootsunder_base_0"] =
     {
         [1] =
         {
@@ -25860,7 +25860,7 @@ lib.quest_locations = {
             [5] = 4406,
         },
     },
-    ["obsidiangorge_base_0"] =
+    ["deshaan/obsidiangorge_base_0"] = -- keep
     {
         [1] =
         {
@@ -25887,7 +25887,7 @@ lib.quest_locations = {
             [5] = 3797,
         },
     },
-    ["cyrodiil/northhighrockgate_base"] =
+    ["cyrodiil/northhighrockgate_base_0"] =
     {
         [1] =
         {
@@ -25922,7 +25922,7 @@ lib.quest_locations = {
             [5] = 4870,
         },
     },
-    ["rimmen_base_0"] =
+    ["elsweyr/rimmen_base_0"] = -- keep
     {
         [1] =
         {
@@ -26013,7 +26013,7 @@ lib.quest_locations = {
             [5] = 6361,
         },
     },
-    ["clockwork/dranilkirisland_base"] =
+    ["clockwork/dranilkirisland_base_0"] =
     {
         [1] =
         {
@@ -26024,7 +26024,7 @@ lib.quest_locations = {
             [5] = 6050,
         },
     },
-    ["vivecthroneroom01_base_0"] =
+    ["vvardenfell/vivecthroneroom01_base_0"] = -- keep
     {
         [1] =
         {
@@ -26035,7 +26035,7 @@ lib.quest_locations = {
             [5] = 5880,
         },
     },
-    ["sunhold_base_0"] =
+    ["summerset/sunhold_base_0"] = -- keep
     {
         [1] =
         {
@@ -26046,7 +26046,7 @@ lib.quest_locations = {
             [5] = 6150,
         },
     },
-    ["desolatecave_base_0"] =
+    ["deshaan/desolatecave_base_0"] = -- keep
     {
         [1] =
         {
@@ -26057,7 +26057,7 @@ lib.quest_locations = {
             [5] = 4493,
         },
     },
-    ["darkbrotherhood/anvilcity_base"] =
+    ["darkbrotherhood/anvilcity_base_0"] =
     {
         [1] =
         {
@@ -26084,7 +26084,7 @@ lib.quest_locations = {
             [5] = 5546,
         },
     },
-    ["deshaan/tribunaltemple_base"] =
+    ["deshaan/tribunaltemple_base_0"] =
     {
         [1] =
         {
@@ -26119,7 +26119,7 @@ lib.quest_locations = {
             [5] = 3966,
         },
     },
-    ["rivenspire/hoarfrost_base"] =
+    ["rivenspire/hoarfrost_base_0"] =
     {
         [1] =
         {
@@ -26202,7 +26202,7 @@ lib.quest_locations = {
             [5] = 5022,
         },
     },
-    ["thievesguild/safehouse_base"] =
+    ["thievesguild/safehouse_base_0"] =
     {
         [1] =
         {
@@ -26413,7 +26413,7 @@ lib.quest_locations = {
             [5] = 5556,
         },
     },
-    ["auridon_base_0"] =
+    ["auridon/auridon_base_0"] =
     {
         [1] =
         {
@@ -27448,7 +27448,7 @@ lib.quest_locations = {
             [5] = 4345,
         },
     },
-    ["coldharbour_base_0"] =
+    ["coldharbor/coldharbour_base_0"] =
     {
         [1] =
         {
@@ -27803,7 +27803,7 @@ lib.quest_locations = {
             [5] = 4730,
         },
     },
-    ["grahtwood/eldenhollow_base"] =
+    ["grahtwood/eldenhollow_base_0"] =
     {
         [1] =
         {
@@ -27846,7 +27846,7 @@ lib.quest_locations = {
             [5] = 4336,
         },
     },
-    ["bergama_base_0"] =
+    ["alikr/bergama_base_0"] = -- keep
     {
         [1] =
         {
@@ -27897,7 +27897,7 @@ lib.quest_locations = {
             [5] = 2344,
         },
     },
-    ["bonesnapruinssecret_base_0"] =
+    ["stormhaven/bonesnapruinssecret_base_0"] = -- keep
     {
         [1] =
         {
@@ -27916,7 +27916,7 @@ lib.quest_locations = {
             [5] = 3784,
         },
     },
-    ["thaliasretreat_base_0"] =
+    ["craglorn/thaliasretreat_base_0"] = -- keep
     {
         [1] =
         {
@@ -27927,7 +27927,7 @@ lib.quest_locations = {
             [5] = 5112,
         },
     },
-    ["kingshavenext_base_0"] =
+    ["summerset/kingshavenext_base_0"] = -- keep
     {
         [1] =
         {
@@ -27938,7 +27938,7 @@ lib.quest_locations = {
             [5] = 6138,
         },
     },
-    ["craglorn_base_0"] =
+    ["craglorn/craglorn_base_0"] = -- keep
     {
         [1] =
         {
@@ -28293,7 +28293,7 @@ lib.quest_locations = {
             [5] = 5102,
         },
     },
-    ["eldenrootgroundfloor_base_0"] =
+    ["grahtwood/eldenrootgroundfloor_base_0"] = --keep
     {
         [1] =
         {
@@ -28456,7 +28456,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["elsweyr_base_0"] =
+    ["elsweyr/elsweyr_base_0"] = -- keep
     {
         [1] =
         {
@@ -28587,7 +28587,7 @@ lib.quest_locations = {
             [5] = 6371,
         },
     },
-    ["glenumbraoutlawrefuge_base_0"] =
+    ["glenumbra/glenumbraoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -28598,7 +28598,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["goblinminesend_base_0"] =
+    ["glenumbra/goblinminesend_base_0"] = -- keep
     {
         [1] =
         {
@@ -28609,7 +28609,7 @@ lib.quest_locations = {
             [5] = 4372,
         },
     },
-    ["goldcoastrefuge_base_0"] =
+    ["darkbrotherhood/goldcoastrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -28620,7 +28620,7 @@ lib.quest_locations = {
             [5] = 5538,
         },
     },
-    ["blackvineruins_base_0"] =
+    ["malabaltor/blackvineruins_base_0"] = -- keep
     {
         [1] =
         {
@@ -28631,7 +28631,7 @@ lib.quest_locations = {
             [5] = 4503,
         },
     },
-    ["hallofheroes_base_0"] =
+    ["bangkorai/hallofheroes_base_0"] = -- keep
     {
         [1] =
         {
@@ -28650,7 +28650,7 @@ lib.quest_locations = {
             [5] = 4780,
         },
     },
-    ["skywatch_base_0"] =
+    ["auridon/skywatch_base_0"] = -- keep
     {
         [1] =
         {
@@ -28757,7 +28757,7 @@ lib.quest_locations = {
             [5] = 4365,
         },
     },
-    ["dreamingcave03_base_0"] =
+    ["summerset/dreamingcave03_base_0"] = -- keep
     {
         [1] =
         {
@@ -28768,7 +28768,7 @@ lib.quest_locations = {
             [5] = 6109,
         },
     },
-    ["planeofjodehubhillbos_base_0"] =
+    ["reapersmarch/planeofjodehubhillbos_base_0"] = -- keep
     {
         [1] =
         {
@@ -28787,7 +28787,7 @@ lib.quest_locations = {
             [5] = 4720,
         },
     },
-    ["toothmaulgully_base_0"] =
+    ["auridon/toothmaulgully_base_0"] = -- keep
     {
         [1] =
         {
@@ -28806,7 +28806,7 @@ lib.quest_locations = {
             [5] = 4441,
         },
     },
-    ["imperialprisondunint01_base_0"] =
+    ["cyrodiil/imperialprisondunint01_base_0"] = -- keep
     {
         [1] =
         {
@@ -28825,7 +28825,7 @@ lib.quest_locations = {
             [5] = 5136,
         },
     },
-    ["coldperchcavern_base_0"] =
+    ["wrothgar/coldperchcavern_base_0"] = -- keep
     {
         [1] =
         {
@@ -28836,7 +28836,7 @@ lib.quest_locations = {
             [5] = 5319,
         },
     },
-    ["Imperialsewers_ebon1_base_0"] =
+    ["cyrodiil/imperialsewers_ebon1_base_0"] = -- keep
     {
         [1] =
         {
@@ -28887,7 +28887,7 @@ lib.quest_locations = {
             [5] = 5513,
         },
     },
-    ["westernskryim_base_0"] =
+    ["skyrim/westernskryim_base_0"] = -- keep
     {
         [1] =
         {
@@ -28898,7 +28898,7 @@ lib.quest_locations = {
             [5] = 6473,
         },
     },
-    ["tempestisland_base_0"] =
+    ["malabaltor/tempestisland_base_0"] = -- keep
     {
         [1] =
         {
@@ -28909,7 +28909,7 @@ lib.quest_locations = {
             [5] = 4538,
         },
     },
-    ["lostcity_base_0"] =
+    ["alikr/lostcity_base_0"] = -- keep
     {
         [1] =
         {
@@ -28928,7 +28928,7 @@ lib.quest_locations = {
             [5] = 3964,
         },
     },
-    ["dreamingcave02_base_0"] =
+    ["summerset/dreamingcave02_base_0"] = -- keep
     {
         [1] =
         {
@@ -28939,7 +28939,7 @@ lib.quest_locations = {
             [5] = 6185,
         },
     },
-    ["malsorrastomb_base_0"] =
+    ["coldharbor/malsorrastomb_base_0"] = -- keep
     {
         [1] =
         {
@@ -28950,7 +28950,7 @@ lib.quest_locations = {
             [5] = 4814,
         },
     },
-    ["elsweyr/riverholdcity_base"] =
+    ["elsweyr/riverholdcity_base_0"] =
     {
         [1] =
         {
@@ -28993,7 +28993,7 @@ lib.quest_locations = {
             [5] = 6311,
         },
     },
-    ["Senchalpalace01_base_0"] =
+    ["southernelsweyr/senchalpalace01_base_0"] = -- keep
     {
         [1] =
         {
@@ -29004,7 +29004,7 @@ lib.quest_locations = {
             [5] = 6407,
         },
     },
-    ["bangkorai/jaggerjaw_base"] =
+    ["bangkorai/jaggerjaw_base_0"] =
     {
         [1] =
         {
@@ -29015,7 +29015,7 @@ lib.quest_locations = {
             [5] = 4925,
         },
     },
-    ["marbruk_base_0"] =
+    ["greenshade/marbruk_base_0"] = -- keep
     {
         [1] =
         {
@@ -29090,7 +29090,7 @@ lib.quest_locations = {
             [5] = 4735,
         },
     },
-    ["arxcorinium_base_0"] =
+    ["shadowfen/arxcorinium_base_0"] = -- keep
     {
         [1] =
         {
@@ -29101,7 +29101,7 @@ lib.quest_locations = {
             [5] = 4202,
         },
     },
-    ["shadowfen/atanazruins_base"] =
+    ["shadowfen/atanazruins_base_0"] =
     {
         [1] =
         {
@@ -29136,7 +29136,7 @@ lib.quest_locations = {
             [5] = 4556,
         },
     },
-    ["eastmarch/lostknifecave_base"] =
+    ["eastmarch/lostknifecave_base_0"] =
     {
         [1] =
         {
@@ -29163,7 +29163,7 @@ lib.quest_locations = {
             [5] = 4128,
         },
     },
-    ["selenesweb_base_0"] =
+    ["reapersmarch/selenesweb_base_0"] = -- keep
     {
         [1] =
         {
@@ -29174,7 +29174,7 @@ lib.quest_locations = {
             [5] = 4733,
         },
     },
-    ["alkiroutlawrefuge_base_0"] =
+    ["alikr/alkiroutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -29185,7 +29185,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["malabaltor_base_0"] =
+    ["malabaltor/malabaltor_base_0"] = -- keep
     {
         [1] =
         {
@@ -29684,7 +29684,7 @@ lib.quest_locations = {
             [5] = 4229,
         },
     },
-    ["therift/shroudhearth_base"] =
+    ["therift/shroudhearth_base_0"] =
     {
         [1] =
         {
@@ -29703,7 +29703,7 @@ lib.quest_locations = {
             [5] = 5007,
         },
     },
-    ["northmorrowgate_base_0"] =
+    ["cyrodiil/northmorrowgate_base_0"] = -- keep
     {
         [1] =
         {
@@ -29730,7 +29730,7 @@ lib.quest_locations = {
             [5] = 4724,
         },
     },
-    ["shadowfen/stormhold_base"] =
+    ["shadowfen/stormhold_base_0"] =
     {
         [1] =
         {
@@ -29957,7 +29957,7 @@ lib.quest_locations = {
             [5] = 4554,
         },
     },
-    ["dresankeep_base_0"] =
+    ["glenumbra/dresankeep_base_0"] = -- keep
     {
         [1] =
         {
@@ -29968,7 +29968,7 @@ lib.quest_locations = {
             [5] = 3437,
         },
     },
-    ["mtharnaz_base_0"] =
+    ["craglorn/mtharnaz_base_0"] = -- keep
     {
         [1] =
         {
@@ -29979,7 +29979,7 @@ lib.quest_locations = {
             [5] = 5110,
         },
     },
-    ["auridonoutlawrefuge_base_0"] =
+    ["auridon/auridonoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -29990,7 +29990,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["summerset_base_0"] =
+    ["summerset/summerset_base_0"] = -- keep
     {
         [1] =
         {
@@ -30057,7 +30057,7 @@ lib.quest_locations = {
             [5] = 6177,
         },
     },
-    ["rivenspire/shornhelm_base"] =
+    ["rivenspire/shornhelm_base_0"] =
     {
         [1] =
         {
@@ -30172,7 +30172,7 @@ lib.quest_locations = {
             [5] = 4965,
         },
     },
-    ["therift/thelionsden_base"] =
+    ["therift/thelionsden_base_0"] =
     {
         [1] =
         {
@@ -30207,7 +30207,7 @@ lib.quest_locations = {
             [5] = 4332,
         },
     },
-    ["basilica_01_base_0"] =
+    ["clockwork/basilica_01_base_0"] = -- keep
     {
         [1] =
         {
@@ -30218,7 +30218,7 @@ lib.quest_locations = {
             [5] = 6048,
         },
     },
-    ["ava_whole_0"] =
+    ["cyrodiil/ava_whole_0"] = -- keep
     {
         [1] =
         {
@@ -31085,7 +31085,7 @@ lib.quest_locations = {
             [5] = 4876,
         },
     },
-    ["RivenspireOutlaw_Base_0"] =
+    ["rivenspire/rivenspireoutlaw_base_0"] = -- keep
     {
         [1] =
         {
@@ -31096,7 +31096,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["deshaan/obsidiangorge_base"] =
+    ["deshaan/obsidiangorge_base_0"] =
     {
         [1] =
         {
@@ -31115,7 +31115,7 @@ lib.quest_locations = {
             [5] = 3705,
         },
     },
-    ["grahtwood/brackenleaf_base"] =
+    ["grahtwood/brackenleaf_base_0"] =
     {
         [1] =
         {
@@ -31158,7 +31158,7 @@ lib.quest_locations = {
             [5] = 4946,
         },
     },
-    ["malabaltor/blackvineruins_base"] =
+    ["malabaltor/blackvineruins_base_0"] =
     {
         [1] =
         {
@@ -31185,7 +31185,7 @@ lib.quest_locations = {
             [5] = 4503,
         },
     },
-    ["aldcroft_base_0"] =
+    ["glenumbra/aldcroft_base_0"] = -- keep
     {
         [1] =
         {
@@ -31252,7 +31252,7 @@ lib.quest_locations = {
             [5] = 4435,
         },
     },
-    ["greenshade/greenshade_base"] =
+    ["greenshade/greenshade_base_0"] =
     {
         [1] =
         {
@@ -31663,7 +31663,7 @@ lib.quest_locations = {
             [5] = 4790,
         },
     },
-    ["nimalten_base_0"] =
+    ["therift/nimalten_base_0"] = -- keep
     {
         [1] =
         {
@@ -31714,7 +31714,7 @@ lib.quest_locations = {
             [5] = 3923,
         },
     },
-    ["mistral_base_0"] =
+    ["auridon/mistral_base_0"] = -- keep
     {
         [1] =
         {
@@ -31733,7 +31733,7 @@ lib.quest_locations = {
             [5] = 4624,
         },
     },
-    ["portdunwatch_base_0"] =
+    ["stormhaven/portdunwatch_base_0"] = -- keep
     {
         [1] =
         {
@@ -31744,7 +31744,7 @@ lib.quest_locations = {
             [5] = 4565,
         },
     },
-    ["stonefalls/hozzinsfolley_base"] =
+    ["stonefalls/hozzinsfolley_base_0"] =
     {
         [1] =
         {
@@ -31763,7 +31763,7 @@ lib.quest_locations = {
             [5] = 4016,
         },
     },
-    ["stonefalls/davonswatch_base"] =
+    ["stonefalls/davonswatch_base_0"] =
     {
         [1] =
         {
@@ -32318,7 +32318,7 @@ lib.quest_locations = {
             [5] = 4493,
         },
     },
-    ["auridon/thebanishedcells_base"] =
+    ["auridon/thebanishedcells_base_0"] =
     {
         [1] =
         {
@@ -32385,7 +32385,7 @@ lib.quest_locations = {
             [5] = 4597,
         },
     },
-    ["glenumbra/strosmkai_base"] =
+    ["glenumbra/strosmkai_base_0"] =
     {
         [1] =
         {
@@ -32916,7 +32916,7 @@ lib.quest_locations = {
             [5] = 4344,
         },
     },
-    ["mournhold_base_0"] =
+    ["deshaan/mournhold_base_0"] = -- keep
     {
         [1] =
         {
@@ -33311,7 +33311,7 @@ lib.quest_locations = {
             [5] = 3893,
         },
     },
-    ["darkbrotherhood/kvatchcity_base"] =
+    ["darkbrotherhood/kvatchcity_base_0"] =
     {
         [1] =
         {
@@ -33322,7 +33322,7 @@ lib.quest_locations = {
             [5] = 5541,
         },
     },
-    ["stonefalls/stonefalls_base"] =
+    ["stonefalls/stonefalls_base_0"] =
     {
         [1] =
         {
@@ -34381,7 +34381,7 @@ lib.quest_locations = {
             [5] = 5450,
         },
     },
-    ["grahtwood/eldenrootgroundfloor_base"] =
+    ["grahtwood/eldenrootgroundfloor_base_0"] =
     {
         [1] =
         {
@@ -34432,7 +34432,7 @@ lib.quest_locations = {
             [5] = 4943,
         },
     },
-    ["dbsanctuary_base_0"] =
+    ["darkbrotherhood/dbsanctuary_base_0"] = -- keep
     {
         [1] =
         {
@@ -34555,7 +34555,7 @@ lib.quest_locations = {
             [5] = 5542,
         },
     },
-    ["oldorsiniummap01_base_0"] =
+    ["wrothgar/oldorsiniummap01_base_0"] = -- keep
     {
         [1] =
         {
@@ -34566,7 +34566,7 @@ lib.quest_locations = {
             [5] = 5520,
         },
     },
-    ["orrery_base_0"] =
+    ["grahtwood/orrery_base_0"] = -- keep
     {
         [1] =
         {
@@ -34577,7 +34577,7 @@ lib.quest_locations = {
             [5] = 4735,
         },
     },
-    ["pinepeakcaverns_base_0"] =
+    ["therift/pinepeakcaverns_base_0"] = -- keep
     {
         [1] =
         {
@@ -34588,7 +34588,7 @@ lib.quest_locations = {
             [5] = 3980,
         },
     },
-    ["riften_base_0"] =
+    ["therift/riften_base_0"] = -- keep
     {
         [1] =
         {
@@ -34735,7 +34735,7 @@ lib.quest_locations = {
             [5] = 4254,
         },
     },
-    ["coldharbor/villageofthelost_base"] =
+    ["coldharbor/villageofthelost_base_0"] =
     {
         [1] =
         {
@@ -34770,7 +34770,7 @@ lib.quest_locations = {
             [5] = 4541,
         },
     },
-    ["reapersmarch/reapersmarch_base"] =
+    ["reapersmarch/reapersmarch_base_0"] =
     {
         [1] =
         {
@@ -35405,7 +35405,7 @@ lib.quest_locations = {
             [5] = 4668,
         },
     },
-    ["rivenspire_base_0"] =
+    ["rivenspire/rivenspire_base_0"] = -- keep
     {
         [1] =
         {
@@ -35944,7 +35944,7 @@ lib.quest_locations = {
             [5] = 4916,
         },
     },
-    ["kozanset_base_0"] =
+    ["alikr/kozanset_base_0"] = -- keep
     {
         [1] =
         {
@@ -35963,7 +35963,7 @@ lib.quest_locations = {
             [5] = 2356,
         },
     },
-    ["cyrodiil/southhighrockgate_base"] =
+    ["cyrodiil/southhighrockgate_base_0"] =
     {
         [1] =
         {
@@ -36390,7 +36390,7 @@ lib.quest_locations = {
             [5] = 5226,
         },
     },
-    ["shadowfen/arxcorinium_base"] =
+    ["shadowfen/arxcorinium_base_0"] =
     {
         [1] =
         {
@@ -36417,7 +36417,7 @@ lib.quest_locations = {
             [5] = 4202,
         },
     },
-    ["auridon/khenarthisroost_base"] =
+    ["auridon/khenarthisroost_base_0"] =
     {
         [1] =
         {
@@ -37052,7 +37052,7 @@ lib.quest_locations = {
             [5] = 4625,
         },
     },
-    ["rkindaleftoutside_base_0"] =
+    ["wrothgar/rkindaleftoutside_base_0"] = -- keep
     {
         [1] =
         {
@@ -37063,7 +37063,7 @@ lib.quest_locations = {
             [5] = 5328,
         },
     },
-    ["rulanyilsfall_base_0"] =
+    ["greenshade/rulanyilsfall_base_0"] = -- keep
     {
         [1] =
         {
@@ -37082,7 +37082,7 @@ lib.quest_locations = {
             [5] = 4463,
         },
     },
-    ["alikr/sandblownmine_base"] =
+    ["alikr/sandblownmine_base_0"] =
     {
         [1] =
         {
@@ -37093,7 +37093,7 @@ lib.quest_locations = {
             [5] = 4638,
         },
     },
-    ["deshaan/mournhold_base"] =
+    ["deshaan/mournhold_base_0"] =
     {
         [1] =
         {
@@ -37280,7 +37280,7 @@ lib.quest_locations = {
             [5] = 5033,
         },
     },
-    ["fortamol_base_0"] =
+    ["eastmarch/fortamol_base_0"] = --keep
     {
         [1] =
         {
@@ -37363,7 +37363,7 @@ lib.quest_locations = {
             [5] = 4166,
         },
     },
-    ["alikr_base_0"] =
+    ["alikr/alikr_base_0"] = -- keep
     {
         [1] =
         {
@@ -37926,7 +37926,7 @@ lib.quest_locations = {
             [5] = 4432,
         },
     },
-    ["salasen_base_0"] =
+    ["alikr/salasen_base_0"] = -- keep
     {
         [1] =
         {
@@ -37937,7 +37937,7 @@ lib.quest_locations = {
             [5] = 3305,
         },
     },
-    ["alikr/coldrockdiggings_base"] =
+    ["alikr/coldrockdiggings_base_0"] =
     {
         [1] =
         {
@@ -37948,7 +37948,7 @@ lib.quest_locations = {
             [5] = 4631,
         },
     },
-    ["stormholdguildhall_map_0"] =
+    ["shadowfen/stormholdguildhall_map_0"] = -- keep
     {
         [1] =
         {
@@ -37999,7 +37999,7 @@ lib.quest_locations = {
             [5] = 3686,
         },
     },
-    ["crestshademine_base_0"] =
+    ["rivenspire/crestshademine_base_0"] = -- keep
     {
         [1] =
         {
@@ -38010,7 +38010,7 @@ lib.quest_locations = {
             [5] = 4944,
         },
     },
-    ["wrothgar/orsinium_base"] =
+    ["wrothgar/orsinium_base_0"] =
     {
         [1] =
         {
@@ -38205,7 +38205,7 @@ lib.quest_locations = {
             [5] = 5523,
         },
     },
-    ["summerset/summerset_base"] =
+    ["summerset/summerset_base_0"] =
     {
         [1] =
         {
@@ -38264,7 +38264,7 @@ lib.quest_locations = {
             [5] = 6177,
         },
     },
-    ["crimsoncove02_base_0"] =
+    ["malabaltor/crimsoncove02_base_0"] = -- keep
     {
         [1] =
         {
@@ -38275,7 +38275,7 @@ lib.quest_locations = {
             [5] = 4373,
         },
     },
-    ["serpentsgrotto_base_0"] =
+    ["greenshade/serpentsgrotto_base_0"] = -- keep
     {
         [1] =
         {
@@ -38286,7 +38286,7 @@ lib.quest_locations = {
             [5] = 4681,
         },
     },
-    ["clockwork/clockworkoutlawsrefuge_base"] =
+    ["clockwork/clockworkoutlawsrefuge_base_0"] =
     {
         [1] =
         {
@@ -38313,7 +38313,7 @@ lib.quest_locations = {
             [5] = 6061,
         },
     },
-    ["therift/taarengrav_base"] =
+    ["therift/taarengrav_base_0"] =
     {
         [1] =
         {
@@ -38356,7 +38356,7 @@ lib.quest_locations = {
             [5] = 4185,
         },
     },
-    ["glenumbra/spindleclutch_base"] =
+    ["glenumbra/spindleclutch_base_0"] =
     {
         [1] =
         {
@@ -38463,7 +38463,7 @@ lib.quest_locations = {
             [5] = 4555,
         },
     },
-    ["bangkorai/blackhearthavenarea4_base"] =
+    ["bangkorai/blackhearthavenarea4_base_0"] =
     {
         [1] =
         {
@@ -38474,7 +38474,7 @@ lib.quest_locations = {
             [5] = 4589,
         },
     },
-    ["malabaltor/malabaltor_base"] =
+    ["malabaltor/malabaltor_base_0"] =
     {
         [1] =
         {
@@ -39037,7 +39037,7 @@ lib.quest_locations = {
             [5] = 4337,
         },
     },
-    ["icehammersvault_base_0"] =
+    ["eastmarch/icehammersvault_base_0"] = -- keep
     {
         [1] =
         {
@@ -39048,7 +39048,7 @@ lib.quest_locations = {
             [5] = 4583,
         },
     },
-    ["deshaan/darkshadecaverns_base"] =
+    ["deshaan/darkshadecaverns_base_0"] =
     {
         [1] =
         {
@@ -39099,7 +39099,7 @@ lib.quest_locations = {
             [5] = 4641,
         },
     },
-    ["bleakrock/bleakrockvillage_base"] =
+    ["bleakrock/bleakrockvillage_base_0"] =
     {
         [1] =
         {
@@ -39230,7 +39230,7 @@ lib.quest_locations = {
             [5] = 3999,
         },
     },
-    ["taldeiccrypts_base_0"] =
+    ["deshaan/taldeiccrypts_base_0"] = -- keep
     {
         [1] =
         {
@@ -39241,7 +39241,7 @@ lib.quest_locations = {
             [5] = 3702,
         },
     },
-    ["therift/trolhettacave_base"] =
+    ["therift/trolhettacave_base_0"] =
     {
         [1] =
         {
@@ -39252,7 +39252,7 @@ lib.quest_locations = {
             [5] = 4189,
         },
     },
-    ["auridon/auridon_base"] =
+    ["auridon/auridon_base_0"] =
     {
         [1] =
         {
@@ -40167,7 +40167,7 @@ lib.quest_locations = {
             [5] = 4260,
         },
     },
-    ["rivenspire/obsidianscar_base"] =
+    ["rivenspire/obsidianscar_base_0"] =
     {
         [1] =
         {
@@ -40202,7 +40202,7 @@ lib.quest_locations = {
             [5] = 3436,
         },
     },
-    ["kragenmoor_base_0"] =
+    ["stonefalls/kragenmoor_base_0"] = -- keep
     {
         [1] =
         {
@@ -40261,7 +40261,7 @@ lib.quest_locations = {
             [5] = 3697,
         },
     },
-    ["grahtwood/eldenrootthroneroom_base"] =
+    ["grahtwood/eldenrootthroneroom_base_0"] =
     {
         [1] =
         {
@@ -40288,7 +40288,7 @@ lib.quest_locations = {
             [5] = 4922,
         },
     },
-    ["vilemansehouse02_base_0"] =
+    ["reapersmarch/vilemansehouse02_base_0"] = -- keep
     {
         [1] =
         {
@@ -40299,7 +40299,7 @@ lib.quest_locations = {
             [5] = 4737,
         },
     },
-    ["scarpkeeplower_base_0"] =
+    ["wrothgar/scarpkeeplower_base_0"] = -- keep
     {
         [1] =
         {
@@ -40318,7 +40318,7 @@ lib.quest_locations = {
             [5] = 5474,
         },
     },
-    ["evermore_base_0"] =
+    ["bangkorai/evermore_base_0"] = -- keep
     {
         [1] =
         {
@@ -40449,7 +40449,7 @@ lib.quest_locations = {
             [5] = 1799,
         },
     },
-    ["shorecave_base_0"] =
+    ["alikr/shorecave_base_0"] = -- keep
     {
         [1] =
         {
@@ -40460,7 +40460,7 @@ lib.quest_locations = {
             [5] = 2146,
         },
     },
-    ["shornhelm_base_0"] =
+    ["rivenspire/shornhelm_base_0"] = -- keep
     {
         [1] =
         {
@@ -40639,7 +40639,7 @@ lib.quest_locations = {
             [5] = 4902,
         },
     },
-    ["abamath_base_0"] =
+    ["malabaltor/abamath_base_0"] = -- keep
     {
         [1] =
         {
@@ -40650,7 +40650,7 @@ lib.quest_locations = {
             [5] = 4156,
         },
     },
-    ["triplecirclemine_base_0"] =
+    ["deshaan/triplecirclemine_base_0"] = -- keep
     {
         [1] =
         {
@@ -40661,7 +40661,7 @@ lib.quest_locations = {
             [5] = 4495,
         },
     },
-    ["grahtwood/orrery_base"] =
+    ["grahtwood/orrery_base_0"] =
     {
         [1] =
         {
@@ -40672,7 +40672,7 @@ lib.quest_locations = {
             [5] = 4735,
         },
     },
-    ["craglorn_dragonstar_base_0"] =
+    ["craglorn/craglorn_dragonstar_base_0"] = -- keep
     {
         [1] =
         {
@@ -40699,7 +40699,7 @@ lib.quest_locations = {
             [5] = 5194,
         },
     },
-    ["elsweyr/rimmen_base"] =
+    ["elsweyr/rimmen_base_0"] =
     {
         [1] =
         {
@@ -40790,7 +40790,7 @@ lib.quest_locations = {
             [5] = 6357,
         },
     },
-    ["rivenspire/northpoint_base"] =
+    ["rivenspire/northpoint_base_0"] =
     {
         [1] =
         {
@@ -40849,7 +40849,7 @@ lib.quest_locations = {
             [5] = 4916,
         },
     },
-    ["the_ebonheart_harborage_base_0"] =
+    ["stonefalls/the_ebonheart_harborage_base_0"] = -- keep
     {
         [1] =
         {
@@ -40868,7 +40868,7 @@ lib.quest_locations = {
             [5] = 4998,
         },
     },
-    ["eldenrootcrafting_base_0"] =
+    ["grahtwood/eldenrootcrafting_base_0"] = -- keep
     {
         [1] =
         {
@@ -40879,7 +40879,7 @@ lib.quest_locations = {
             [5] = 4922,
         },
     },
-    ["whiteroseprison_base_0"] =
+    ["shadowfen/whiteroseprison_base_0"] = -- keep
     {
         [1] =
         {
@@ -40890,7 +40890,7 @@ lib.quest_locations = {
             [5] = 3847,
         },
     },
-    ["eastmarch/hallofthedead_base"] =
+    ["eastmarch/hallofthedead_base_0"] =
     {
         [1] =
         {
@@ -40944,7 +40944,7 @@ lib.quest_locations = {
             [5] = 4738,
         },
     },
-    ["coldrockdiggings_base_0"] =
+    ["alikr/coldrockdiggings_base_0"] = -- keep
     {
         [1] =
         {
@@ -40955,7 +40955,7 @@ lib.quest_locations = {
             [5] = 4631,
         },
     },
-    ["stormhavenoutlawrefuge_base_0"] =
+    ["stormhaven/stormhavenoutlawrefuge_base_0"] = -- keep
     {
         [1] =
         {
@@ -40966,7 +40966,7 @@ lib.quest_locations = {
             [5] = 5531,
         },
     },
-    ["glenumbra/daggerfall_base"] =
+    ["glenumbra/daggerfall_base_0"] =
     {
         [1] =
         {
@@ -41505,7 +41505,7 @@ lib.quest_locations = {
             [5] = 5450,
         },
     },
-    ["deshaan/taldeiccrypts_base"] =
+    ["deshaan/taldeiccrypts_base_0"] =
     {
         [1] =
         {
@@ -41532,7 +41532,7 @@ lib.quest_locations = {
             [5] = 3702,
         },
     },
-    ["shadaburialgrounds_base_0"] =
+    ["craglorn/shadaburialgrounds_base_0"] = -- keep
     {
         [1] =
         {
@@ -41543,7 +41543,7 @@ lib.quest_locations = {
             [5] = 5118,
         },
     },
-    ["betnihk_base_0"] =
+    ["glenumbra/betnihk_base_0"] = -- keep
     {
         [1] =
         {
@@ -41626,7 +41626,7 @@ lib.quest_locations = {
             [5] = 4523,
         },
     },
-    ["dreamingcave01_base_0"] =
+    ["summerset/dreamingcave01_base_0"] = -- keep
     {
         [1] =
         {
@@ -41637,7 +41637,7 @@ lib.quest_locations = {
             [5] = 6153,
         },
     },
-    ["glenumbra/stonetoothfortress_base"] =
+    ["glenumbra/stonetoothfortress_base_0"] =
     {
         [1] =
         {
@@ -41712,7 +41712,7 @@ lib.quest_locations = {
             [5] = 4478,
         },
     },
-    ["deshaan/deshaan_base"] =
+    ["deshaan/deshaan_base_0"] =
     {
         [1] =
         {
@@ -42523,7 +42523,7 @@ lib.quest_locations = {
             [5] = 3820,
         },
     },
-    ["bangkorai/sunkenroad_base"] =
+    ["bangkorai/sunkenroad_base_0"] =
     {
         [1] =
         {
@@ -42550,7 +42550,7 @@ lib.quest_locations = {
             [5] = 4979,
         },
     },
-    ["loriasel_base_0"] =
+    ["shadowfen/loriasel_base_0"] = -- keep
     {
         [1] =
         {
@@ -42577,7 +42577,7 @@ lib.quest_locations = {
             [5] = 3911,
         },
     },
-    ["clockwork/ccunderground02_base"] =
+    ["clockwork/ccunderground02_base_0"] =
     {
         [1] =
         {
@@ -42588,7 +42588,7 @@ lib.quest_locations = {
             [5] = 6047,
         },
     },
-    ["reapersmarch/arenthia_base"] =
+    ["reapersmarch/arenthia_base_0"] =
     {
         [1] =
         {
@@ -42655,7 +42655,7 @@ lib.quest_locations = {
             [5] = 4653,
         },
     },
-    ["morkul_base_0"] =
+    ["wrothgar/morkul_base_0"] = -- keep
     {
         [1] =
         {
@@ -42730,7 +42730,7 @@ lib.quest_locations = {
             [5] = 5441,
         },
     },
-    ["stormhaven/norvulkruins_base"] =
+    ["stormhaven/norvulkruins_base_0"] =
     {
         [1] =
         {
@@ -42741,7 +42741,7 @@ lib.quest_locations = {
             [5] = 4519,
         },
     },
-    ["greenshade/marbruk_base"] =
+    ["greenshade/marbruk_base_0"] =
     {
         [1] =
         {
@@ -42784,7 +42784,7 @@ lib.quest_locations = {
             [5] = 4573,
         },
     },
-    ["grahtwood/vindeathcave_base"] =
+    ["grahtwood/vindeathcave_base_0"] =
     {
         [1] =
         {
@@ -42795,7 +42795,7 @@ lib.quest_locations = {
             [5] = 4950,
         },
     },
-    ["eastelsweyrgate_base_0"] =
+    ["cyrodiil/eastelsweyrgate_base_0"] = -- keep
     {
         [1] =
         {
@@ -42806,7 +42806,7 @@ lib.quest_locations = {
             [5] = 4704,
         },
     },
-    ["thelionsden_base_0"] =
+    ["therift/thelionsden_base_0"] = -- keep
     {
         [1] =
         {
@@ -42825,7 +42825,7 @@ lib.quest_locations = {
             [5] = 4332,
         },
     },
-    ["shadamaincity_base_0"] =
+    ["craglorn/shadamaincity_base_0"] = -- keep
     {
         [1] =
         {
@@ -42844,7 +42844,7 @@ lib.quest_locations = {
             [5] = 5106,
         },
     },
-    ["coldharbor/vaultsofmadness1_base"] =
+    ["coldharbor/vaultsofmadness1_base_0"] =
     {
         [1] =
         {
@@ -42863,7 +42863,7 @@ lib.quest_locations = {
             [5] = 4822,
         },
     },
-    ["citydistrict_base_0"] =
+    ["craglorn/shadacitydistrict_base_0"] = -- keep
     {
         [1] =
         {
@@ -42874,7 +42874,7 @@ lib.quest_locations = {
             [5] = 5106,
         },
     },
-    ["rivenspire/shroudedpass_base"] =
+    ["rivenspire/shroudedpass_base_0"] =
     {
         [1] =
         {
@@ -42893,7 +42893,7 @@ lib.quest_locations = {
             [5] = 4884,
         },
     },
-    ["therift_base_0"] =
+    ["therift/therift_base_0"] = -- keep
     {
         [1] =
         {
@@ -43712,7 +43712,7 @@ lib.quest_locations = {
             [5] = 4173,
         },
     },
-    ["stormhaven/bearclawmine_base"] =
+    ["stormhaven/bearclawmine_base_0"] =
     {
         [1] =
         {
@@ -43723,7 +43723,7 @@ lib.quest_locations = {
             [5] = 1615,
         },
     },
-    ["alikr/imperviousvault_base"] =
+    ["alikr/imperviousvault_base_0"] =
     {
         [1] =
         {
@@ -43750,18 +43750,7 @@ lib.quest_locations = {
             [5] = 3566,
         },
     },
-    ["ruinsofabamath_base_0"] =
-    {
-        [1] =
-        {
-            [1] = 0.8729000000,
-            [2] = 0.5362000000,
-            [3] = -10,
-            [4] = -10,
-            [5] = 4156,
-        },
-    },
-    ["stonefalls/bleakrock_base"] =
+    ["stonefalls/bleakrock_base_0"] =
     {
         [1] =
         {
@@ -44252,7 +44241,7 @@ lib.quest_locations = {
             [5] = 4016,
         },
     },
-    ["malabaltor/baandaritradingpost_base"] =
+    ["malabaltor/baandaritradingpost_base_0"] =
     {
         [1] =
         {
@@ -44335,7 +44324,7 @@ lib.quest_locations = {
             [5] = 4196,
         },
     },
-    ["stonefalls/kragenmoor_base"] =
+    ["stonefalls/kragenmoor_base_0"] =
     {
         [1] =
         {
@@ -44466,7 +44455,7 @@ lib.quest_locations = {
             [5] = 3695,
         },
     },
-    ["strosmkai_base_0"] =
+    ["glenumbra/strosmkai_base_0"] = -- keep
     {
         [1] =
         {
@@ -44629,7 +44618,7 @@ lib.quest_locations = {
             [5] = 4381,
         },
     },
-    ["reapersmarch/rawlkha_base"] =
+    ["reapersmarch/rawlkha_base_0"] =
     {
         [1] =
         {
@@ -44768,7 +44757,7 @@ lib.quest_locations = {
             [5] = 4775,
         },
     },
-    ["hrotacave_base_0"] =
+    ["darkbrotherhood/hrotacave_base_0"] = -- keep
     {
         [1] =
         {
@@ -44779,7 +44768,7 @@ lib.quest_locations = {
             [5] = 5547,
         },
     },
-    ["tomboftheapostates_base_0"] =
+    ["malabaltor/tomboftheapostates_base_0"] = -- keep
     {
         [1] =
         {
@@ -44790,7 +44779,7 @@ lib.quest_locations = {
             [5] = 4497,
         },
     },
-    ["grahtwood/haven_base"] =
+    ["grahtwood/haven_base_0"] =
     {
         [1] =
         {
@@ -44849,7 +44838,7 @@ lib.quest_locations = {
             [5] = 4953,
         },
     },
-    ["bangkorai/rubblebutte_base"] =
+    ["bangkorai/rubblebutte_base_0"] =
     {
         [1] =
         {
@@ -44860,7 +44849,7 @@ lib.quest_locations = {
             [5] = 4887,
         },
     },
-    ["auridon/mistral_base"] =
+    ["auridon/mistral_base_0"] =
     {
         [1] =
         {
@@ -44943,7 +44932,7 @@ lib.quest_locations = {
             [5] = 4624,
         },
     },
-    ["therift/shorsstonemine_base"] =
+    ["therift/shorsstonemine_base_0"] =
     {
         [1] =
         {
@@ -44970,7 +44959,7 @@ lib.quest_locations = {
             [5] = 3921,
         },
     },
-    ["cyrodiil/southmorrowgate_base"] =
+    ["cyrodiil/southmorrowgate_base_0"] =
     {
         [1] =
         {
@@ -44997,7 +44986,7 @@ lib.quest_locations = {
             [5] = 4869,
         },
     },
-    ["trolhettacave_base_0"] =
+    ["therift/trolhettacave_base_0"] = -- keep
     {
         [1] =
         {
@@ -45008,7 +44997,7 @@ lib.quest_locations = {
             [5] = 4189,
         },
     },
-    ["stormhaven/stormhaven_base"] =
+    ["stormhaven/stormhaven_base_0"] =
     {
         [1] =
         {
@@ -45867,7 +45856,7 @@ lib.quest_locations = {
             [5] = 4401,
         },
     },
-    ["wrothgar/exilesbarrow_map"] =
+    ["wrothgar/exilesbarrow_map_base_0"] =
     {
         [1] =
         {
@@ -45878,7 +45867,7 @@ lib.quest_locations = {
             [5] = 5445,
         },
     },
-    ["gandranen_base_0"] =
+    ["shadowfen/gandranen_base_0"] = -- keep
     {
         [1] =
         {
@@ -45889,7 +45878,7 @@ lib.quest_locations = {
             [5] = 4560,
         },
     },
-    ["shorsstone_base_0"] =
+    ["therift/shorsstone_base_0"] = -- keep
     {
         [1] =
         {
@@ -45972,7 +45961,7 @@ lib.quest_locations = {
             [5] = 4964,
         },
     },
-    ["wrothgar/morkul_base"] =
+    ["wrothgar/morkul_base_0"] =
     {
         [1] =
         {
@@ -46047,7 +46036,7 @@ lib.quest_locations = {
             [5] = 5504,
         },
     },
-    ["rawlkhatemple_base_0"] =
+    ["reapersmarch/rawlkhatemple_base_0"] = -- keep
     {
         [1] =
         {
@@ -46058,7 +46047,7 @@ lib.quest_locations = {
             [5] = 4709,
         },
     },
-    ["reapersmarch/kunasdelve_base"] =
+    ["reapersmarch/kunasdelve_base_0"] =
     {
         [1] =
         {
@@ -46093,7 +46082,7 @@ lib.quest_locations = {
             [5] = 4749,
         },
     },
-    ["safehouse_base_0"] =
+    ["thievesguild/safehouse_base_0"] = -- keep
     {
         [1] =
         {
@@ -46336,7 +46325,7 @@ lib.quest_locations = {
             [5] = 5556,
         },
     },
-    ["aetherianarchivebottom_base_0"] =
+    ["craglorn/aetherianarchivebottom_base_0"] = -- keep
     {
         [1] =
         {
@@ -46355,7 +46344,7 @@ lib.quest_locations = {
             [5] = 5102,
         },
     },
-    ["brokenhelm_base_0"] =
+    ["therift/brokenhelm_base_0"] = -- keep
     {
         [1] =
         {
@@ -46366,7 +46355,7 @@ lib.quest_locations = {
             [5] = 5008,
         },
     },
-    ["vivechoj01a_base_0"] =
+    ["vvardenfell/vivechoj01a_base_0"] = -- keep
     {
         [1] =
         {
@@ -46377,7 +46366,7 @@ lib.quest_locations = {
             [5] = 5916,
         },
     },
-    ["summerset/dreamingcave02_base"] =
+    ["summerset/dreamingcave02_base_0"] =
     {
         [1] =
         {
@@ -46452,7 +46441,7 @@ lib.quest_locations = {
             [5] = 6199,
         },
     },
-    ["trollstoothpick_base_0"] =
+    ["bangkorai/trollstoothpick_base_0"] = -- keep
     {
         [1] =
         {
@@ -46463,7 +46452,7 @@ lib.quest_locations = {
             [5] = 4863,
         },
     },
-    ["villageofthelost_base_0"] =
+    ["coldharbor/villageofthelost_base_0"] = -- keep
     {
         [1] =
         {
@@ -46482,7 +46471,7 @@ lib.quest_locations = {
             [5] = 4543,
         },
     },
-    ["greenshade/gurzagsmine_base"] =
+    ["greenshade/gurzagsmine_base_0"] =
     {
         [1] =
         {
@@ -46509,7 +46498,7 @@ lib.quest_locations = {
             [5] = 4770,
         },
     },
-    ["shimmerene_base_0"] =
+    ["summerset/shimmerene_base_0"] = -- keep
     {
         [1] =
         {
@@ -46528,7 +46517,7 @@ lib.quest_locations = {
             [5] = 6170,
         },
     },
-    ["cyrodiil/northmorrowgate_base"] =
+    ["cyrodiil/northmorrowgate_base_0"] =
     {
         [1] =
         {
@@ -46939,7 +46928,7 @@ lib.quest_locations = {
             [5] = 2927,
         },
     },
-    ["volenfell_base_0"] =
+    ["alikr/volenfell_base_0"] = -- keep
     {
         [1] =
         {
@@ -46958,7 +46947,7 @@ lib.quest_locations = {
             [5] = 4432,
         },
     },
-    ["reapersmarch/rawlkhatemple_base"] =
+    ["reapersmarch/rawlkhatemple_base_0"] =
     {
         [1] =
         {
@@ -46993,7 +46982,7 @@ lib.quest_locations = {
             [5] = 4709,
         },
     },
-    ["WGTGreenEmporerWay_Base_0"] =
+    ["cyrodiil/wgtgreenemporerway_base_0"] = -- keep
     {
         [1] =
         {
@@ -47004,7 +46993,7 @@ lib.quest_locations = {
             [5] = 5342,
         },
     },
-    ["bangkorai/hallinsstand_base"] =
+    ["bangkorai/hallinsstand_base_0"] =
     {
         [1] =
         {
@@ -47063,7 +47052,7 @@ lib.quest_locations = {
             [5] = 2016,
         },
     },
-    ["wrothgar/coldperchcavern_base"] =
+    ["wrothgar/coldperchcavern_base_0"] =
     {
         [1] =
         {
@@ -47074,7 +47063,7 @@ lib.quest_locations = {
             [5] = 5319,
         },
     },
-    ["bangkorai/trollstoothpick_base"] =
+    ["bangkorai/trollstoothpick_base_0"] =
     {
         [1] =
         {
@@ -47085,7 +47074,7 @@ lib.quest_locations = {
             [5] = 4863,
         },
     },
-    ["wrothgar_base_0"] =
+    ["wrothgar/wrothgar_base_0"] = -- keep
     {
         [1] =
         {
@@ -47680,7 +47669,7 @@ lib.quest_locations = {
             [5] = 5448,
         },
     },
-    ["greenshade/cityofashmain_base"] =
+    ["greenshade/cityofashmain_base_0"] =
     {
         [1] =
         {
@@ -47723,7 +47712,7 @@ lib.quest_locations = {
             [5] = 4778,
         },
     },
-    ["windhelm_base_0"] =
+    ["eastmarch/windhelm_base_0"] = -- keep
     {
         [1] =
         {
@@ -47878,7 +47867,7 @@ lib.quest_locations = {
             [5] = 4058,
         },
     },
-    ["stormhaven/farangelsdelve_base"] =
+    ["stormhaven/farangelsdelve_base_0"] =
     {
         [1] =
         {
@@ -47889,7 +47878,7 @@ lib.quest_locations = {
             [5] = 4516,
         },
     },
-    ["brassfortress_base_0"] =
+    ["clockwork/brassfortress_base_0"] = -- keep
     {
         [1] =
         {
@@ -47908,7 +47897,7 @@ lib.quest_locations = {
             [5] = 6060,
         },
     },
-    ["coldharbor/depravedgrotto_base"] =
+    ["coldharbor/depravedgrotto_base_0"] =
     {
         [1] =
         {
@@ -47919,7 +47908,7 @@ lib.quest_locations = {
             [5] = 4743,
         },
     },
-    ["thebanishedcells_base_0"] =
+    ["auridon/thebanishedcells_base_0"] = -- keep
     {
         [1] =
         {
@@ -47946,7 +47935,7 @@ lib.quest_locations = {
             [5] = 4738,
         },
     },
-    ["summerset/dreamingcave03_base"] =
+    ["summerset/dreamingcave03_base_0"] =
     {
         [1] =
         {
@@ -47992,7 +47981,7 @@ lib.quest_locations = {
             [5] = 5321,
         },
     },
-    ["deepcragden_base_0"] =
+    ["deshaan/deepcragden_base_0"] = -- keep
     {
         [1] =
         {
@@ -48003,7 +47992,7 @@ lib.quest_locations = {
             [5] = 3657,
         },
     },
-    ["stormhaven/bonesnapruinssecret_base"] =
+    ["stormhaven/bonesnapruinssecret_base_0"] =
     {
         [1] =
         {
@@ -48038,7 +48027,7 @@ lib.quest_locations = {
             [5] = 3784,
         },
     },
-    ["deshaan/deepcragden_base"] =
+    ["deshaan/deepcragden_base_0"] =
     {
         [1] =
         {
@@ -48057,7 +48046,7 @@ lib.quest_locations = {
             [5] = 3657,
         },
     },
-    ["stonefalls/dhalmora_base"] =
+    ["stonefalls/dhalmora_base_0"] =
     {
         [1] =
         {
@@ -48172,7 +48161,7 @@ lib.quest_locations = {
             [5] = 4831,
         },
     },
-    ["imperviousvault_base_0"] =
+    ["alikr/imperviousvault_base_0"] = -- keep
     {
         [1] =
         {
@@ -48183,7 +48172,7 @@ lib.quest_locations = {
             [5] = 3566,
         },
     },
-    ["darkshadecaverns_base_0"] =
+    ["deshaan/darkshadecaverns_base_0"] = -- keep
     {
         [1] =
         {
@@ -48202,7 +48191,7 @@ lib.quest_locations = {
             [5] = 4145,
         },
     },
-    ["shadowfen/altencorimont_base"] =
+    ["shadowfen/altencorimont_base_0"] =
     {
         [1] =
         {
@@ -48341,7 +48330,7 @@ lib.quest_locations = {
             [5] = 3674,
         },
     },
-    ["eastmarch/oldsordscave_base"] =
+    ["eastmarch/oldsordscave_base_0"] =
     {
         [1] =
         {
@@ -48360,7 +48349,7 @@ lib.quest_locations = {
             [5] = 4584,
         },
     },
-    ["narilnagaia_base_0"] =
+    ["greenshade/narilnagaia_base_0"] = -- keep
     {
         [1] =
         {
@@ -48371,7 +48360,7 @@ lib.quest_locations = {
             [5] = 4846,
         },
     },
-    ["wrothgar/watchershold_base"] =
+    ["wrothgar/watchershold_base_0"] =
     {
         [1] =
         {
@@ -48382,7 +48371,7 @@ lib.quest_locations = {
             [5] = 5317,
         },
     },
-    ["cityofashmain_base_0"] =
+    ["greenshade/cityofashmain_base_0"] = -- keep
     {
         [1] =
         {
@@ -48393,7 +48382,7 @@ lib.quest_locations = {
             [5] = 4778,
         },
     },
-    ["grahtwood/redfurtradingpost_base"] =
+    ["grahtwood/redfurtradingpost_base_0"] =
     {
         [1] =
         {
@@ -48420,7 +48409,7 @@ lib.quest_locations = {
             [5] = 4893,
         },
     },
-    ["auridon/skywatch_base"] =
+    ["auridon/skywatch_base_0"] =
     {
         [1] =
         {
@@ -48727,7 +48716,7 @@ lib.quest_locations = {
             [5] = 4411,
         },
     },
-    ["eastmarch/fortamol_base"] =
+    ["eastmarch/fortamol_base_0"] =
     {
         [1] =
         {
@@ -48834,7 +48823,7 @@ lib.quest_locations = {
             [5] = 4126,
         },
     },
-    ["arenthia_base_0"] =
+    ["reapersmarch/arenthia_base_0"] = -- keep
     {
         [1] =
         {
@@ -48869,7 +48858,7 @@ lib.quest_locations = {
             [5] = 4689,
         },
     },
-    ["arenaslobbyexterior_base_0"] =
+    ["wrothgar/arenaslobbyexterior_base_0"] = -- keep
     {
         [1] =
         {
@@ -48880,7 +48869,7 @@ lib.quest_locations = {
             [5] = 5448,
         },
     },
-    ["wrothgar/kennelrun_base"] =
+    ["wrothgar/kennelrun_base_0"] =
     {
         [1] =
         {
@@ -48891,7 +48880,7 @@ lib.quest_locations = {
             [5] = 5320,
         },
     },
-    ["cyrodiil/eastelsweyrgate_base"] =
+    ["cyrodiil/eastelsweyrgate_base_0"] =
     {
         [1] =
         {
@@ -49318,7 +49307,7 @@ lib.quest_locations = {
             [5] = 2611,
         },
     },
-    ["therift/therift_base"] =
+    ["therift/therift_base_0"] =
     {
         [1] =
         {
