@@ -4,6 +4,15 @@ lib.quest_givers = {}
 lib.quest_names = {}
 lib.client_lang = GetCVar("language.2")
 
+lib.name_to_questid_table = {}
+lib.name_to_questid_table["de"] = {}
+lib.name_to_questid_table["en"] = {}
+lib.name_to_questid_table["es"] = {}
+lib.name_to_questid_table["fr"] = {}
+lib.name_to_questid_table["jp"] = {}
+lib.name_to_questid_table["ru"] = {}
+-- note only the "lib.client_lang" will contain data be default
+
 lib.quest_data_index = {
     QUEST_NAME  =    1, -- Number index of quest name i.e. 6404 for "The Dragonguard"
     QUEST_GIVER =    2, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"
