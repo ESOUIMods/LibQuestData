@@ -74,8 +74,72 @@ function lib:get_quest_name(id, lang)
     return lib.quest_names[lib.client_lang][id]
 end
 
+--[[
+
+Get a table of quest IDs when given a quest name
+
+Use: Drawing a pin with a different color if the player has started the
+quest and has not finished it yet. Loop over the table
+
+example:
+for _, id in ipairs(ids) do
+    started_quests[id] = true
+end
+--]]
+
+function lib:get_questids_table(name, lang)
+    local lang = lang or lib.client_lang
+    if type(name) == "string" then
+        return lib.name_to_questid_table[lang][name]
+    end
+end
+
+-------------------------------------------------
+----- Generate QuestID Table By Language     ----
+-------------------------------------------------
+
+--[[
+Build ID table is indexed by the quest name, only default language
+is built by default. Author must build other languages as needed.
+--]]
+
+function lib:build_questid_table(lang)
+    local lang = lang or lib.client_lang
+    local built_table = {}
+
+    local function contains_id(quent_ids, id_to_find)
+        local found_id = false
+        for questname, quest_ids in pairs(quent_ids) do
+            -- print(questname)
+            for _, quest_id in pairs(quest_ids) do
+                -- print(quest_id)
+                if quest_id == id_to_find then
+                    found_id = true
+                end
+            end
+        end
+        return found_id
+    end
+
+    for var1, var2 in pairs(lib.quest_names[lang]) do
+        -- print(var2)
+        -- print(var2)
+        if built_table[var2] == nil then built_table[var2] = {} end
+        if contains_id(built_table, var1) then
+            -- print("Var 1 is in ids")
+        else
+            -- print("Var 1 is not in ids")
+            table.insert(built_table[var2], var1)
+        end
+    end
+
+    lib.name_to_questid_table[lang] = built_table
+
+end
+
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
+    lib:build_questid_table(lib.client_lang) -- build name lookup table once
 
     EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED)
 end
