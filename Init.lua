@@ -11,17 +11,24 @@ lib.name_to_questid_table["es"] = {}
 lib.name_to_questid_table["fr"] = {}
 lib.name_to_questid_table["jp"] = {}
 lib.name_to_questid_table["ru"] = {}
+if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
+
+if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
+if LibQuestInfo_SavedVariables.questInfo == nil then LibQuestInfo_SavedVariables.questInfo = {} end
+if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
+if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 1 end
+
 -- note only the "lib.client_lang" will contain data be default
 
 lib.quest_data_index = {
-    QUEST_NAME  =    1, -- Number index of quest name i.e. 6404 for "The Dragonguard"
-    QUEST_GIVER =    2, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"
-    QUEST_TYPE  =    3, -- MAIN_STORY, DUNGEON
-    QUEST_REPEAT =    4, -- QUEST_REPEAT_DAILY, QUEST_REPEAT_NOT_REPEATABLE = 0, QUEST_REPEAT_REPEATABLE
-    GAME_API    =    5, -- 100003 means unverified, 100030 means quest data collected from API 100030
-    QUEST_LINE   =    6,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
-    QUEST_NUMBER =    7,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
-    QUEST_SERIES =    8,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
+    QUEST_NAME      =    1, -- Number index of quest name i.e. 6404 for "The Dragonguard"
+    QUEST_GIVER     =    2, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"
+    QUEST_TYPE      =    3, -- MAIN_STORY, DUNGEON
+    QUEST_REPEAT    =    4, -- QUEST_REPEAT_DAILY, QUEST_REPEAT_NOT_REPEATABLE = 0, QUEST_REPEAT_REPEATABLE
+    GAME_API        =    5, -- 100003 means unverified, 100030 means quest data collected from API 100030
+    QUEST_LINE      =    6,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
+    QUEST_NUMBER    =    7,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
+    QUEST_SERIES    =    8,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
 }
 
 lib.quest_map_pin_index = {

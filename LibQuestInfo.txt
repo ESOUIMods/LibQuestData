@@ -7,12 +7,13 @@
 ; https://account.elderscrollsonline.com/add-on-terms
 
 ## Title: LibQuestInfo
-## Version: 1.0
-## AddOnVersion: 1
+## Version: 1.1
+## AddOnVersion: 11
 ## Author: Sharlikran
 ## APIVersion: 100030 100031
 ## Description: Provides Quest Information
 ## SavedVariables: LibQuestInfo_SavedVariables
+## DependsOn: LibGPS LibMapPins-1.0
 ## IsLibrary: true
 
 Init.lua
@@ -34,3 +35,4 @@ quest_names/LibQuestInfo_QuestNames_jp.lua
 quest_names/LibQuestInfo_QuestNames_ru.lua
 
 LibQuestInfo.lua
+LibQuestInfo_Scan.lua
