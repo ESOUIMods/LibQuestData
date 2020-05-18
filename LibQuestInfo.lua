@@ -11,7 +11,6 @@ local lib = _G["LibQuestInfo"]
 
 lib.displayName = libName
 lib.idName = libName
-if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
 
 -- Libraries
 local LMP = LibMapPins
@@ -68,6 +67,14 @@ end
 -------------------------------------------------
 ----- General Quest Info                     ----
 -------------------------------------------------
+
+function lib:get_quest_list(zone)
+    if type(zone) == "string" and lib.quest_locations[zone] ~= nil then
+        return lib.quest_locations[zone]
+    else
+        return {}
+    end
+end
 
 function lib:get_quest_name(id, lang)
     lang = lang or lib.client_lang
@@ -139,7 +146,16 @@ end
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
+    if LibQuestInfo_SavedVariables.version ~= 2 then
+        -- d("ding not 2")
+        LibQuestInfo_SavedVariables = {}
+        LibQuestInfo_SavedVariables.version = 2
+        LibQuestInfo_SavedVariables.quests = {}
+        LibQuestInfo_SavedVariables.questInfo = {}
+        LibQuestInfo_SavedVariables.subZones = {}
+    end
     lib:build_questid_table(lib.client_lang) -- build name lookup table once
+    -- d("I am here")
 
     EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED)
 end
