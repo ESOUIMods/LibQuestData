@@ -9,13 +9,16 @@ https://sharlikran.github.io/
 
 (.*) = "(.*)" = "(.*), ",
 "\2", = \{\3\,},
-    
+
 ^"(.*)", = \{(.*)\},
     \["\1"] = \{\2 },
 --]]
 local lib = _G["LibQuestInfo"]
 
 lib.quest_names["jp"] = {
+    [2956] = "Capture Ash Farm",
+    [3267] = "The Fall of Faolchu",
+    [4552] = "Chasing Shadows",
     [105] = "A Family Divided",
     [465] = "血しぶきの盾",
     [467] = "ヒューズ卿の運命",

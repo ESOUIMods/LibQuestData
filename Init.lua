@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestInfo", 12
+local libName, libVersion = "LibQuestInfo", 13
 lib = {}
 lib.quest_givers = {}
 lib.quest_names = {}
@@ -11,6 +11,15 @@ lib.name_to_questid_table["es"] = {}
 lib.name_to_questid_table["fr"] = {}
 lib.name_to_questid_table["jp"] = {}
 lib.name_to_questid_table["ru"] = {}
+
+lib.name_to_npcid_table = {}
+lib.name_to_npcid_table["de"] = {}
+lib.name_to_npcid_table["en"] = {}
+lib.name_to_npcid_table["es"] = {}
+lib.name_to_npcid_table["fr"] = {}
+lib.name_to_npcid_table["jp"] = {}
+lib.name_to_npcid_table["ru"] = {}
+
 if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
 
 if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end

@@ -9,13 +9,16 @@ https://sharlikran.github.io/
 
 (.*) = "(.*)" = "(.*), ",
 "\2", = \{\3\,},
-    
+
 ^"(.*)", = \{(.*)\},
     \["\1"] = \{\2 },
 --]]
 local lib = _G["LibQuestInfo"]
 
 lib.quest_names["ru"] = {
+    [2956] = "Capture Ash Farm",
+    [3267] = "The Fall of Faolchu",
+    [4552] = "Chasing Shadows",
     [105] = "Unknown Quest Name",
     [465] = "Щит, обрызганный кровью",
     [467] = "Судьба сэра Хью",
