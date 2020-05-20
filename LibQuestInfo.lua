@@ -78,7 +78,7 @@ end
 
 function lib:get_quest_name(id, lang)
     lang = lang or lib.client_lang
-    return lib.quest_names[lib.client_lang][id]
+    return lib.quest_names[lib.client_lang][id] or "Unknown Name"
 end
 
 --[[
@@ -101,6 +101,13 @@ function lib:get_questids_table(name, lang)
     end
 end
 
+function lib:get_npcids_table(name, lang)
+    local lang = lang or lib.client_lang
+    if type(name) == "string" then
+        return lib.name_to_npcid_table[lang][name]
+    end
+end
+
 -------------------------------------------------
 ----- Generate QuestID Table By Language     ----
 -------------------------------------------------
@@ -110,23 +117,23 @@ Build ID table is indexed by the quest name, only default language
 is built by default. Author must build other languages as needed.
 --]]
 
+local function contains_id(quent_ids, id_to_find)
+    local found_id = false
+    for questname, quest_ids in pairs(quent_ids) do
+        -- print(questname)
+        for _, quest_id in pairs(quest_ids) do
+            -- print(quest_id)
+            if quest_id == id_to_find then
+                found_id = true
+            end
+        end
+    end
+    return found_id
+end
+
 function lib:build_questid_table(lang)
     local lang = lang or lib.client_lang
     local built_table = {}
-
-    local function contains_id(quent_ids, id_to_find)
-        local found_id = false
-        for questname, quest_ids in pairs(quent_ids) do
-            -- print(questname)
-            for _, quest_id in pairs(quest_ids) do
-                -- print(quest_id)
-                if quest_id == id_to_find then
-                    found_id = true
-                end
-            end
-        end
-        return found_id
-    end
 
     for var1, var2 in pairs(lib.quest_names[lang]) do
         -- print(var2)
@@ -144,6 +151,26 @@ function lib:build_questid_table(lang)
 
 end
 
+function lib:build_npcid_table(lang)
+    local lang = lang or lib.client_lang
+    local built_table = {}
+
+    for var1, var2 in pairs(lib.quest_givers[lang]) do
+        -- print(var2)
+        -- print(var2)
+        if built_table[var2] == nil then built_table[var2] = {} end
+        if contains_id(built_table, var1) then
+            -- print("Var 1 is in ids")
+        else
+            -- print("Var 1 is not in ids")
+            table.insert(built_table[var2], var1)
+        end
+    end
+
+    lib.name_to_npcid_table[lang] = built_table
+
+end
+
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
     if LibQuestInfo_SavedVariables.version ~= 2 then
@@ -155,6 +182,7 @@ local function OnPlayerActivated(eventCode)
         LibQuestInfo_SavedVariables.subZones = {}
     end
     lib:build_questid_table(lib.client_lang) -- build name lookup table once
+    lib:build_npcid_table(lib.client_lang) -- build name lookup table once
     -- d("I am here")
 
     EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED)
