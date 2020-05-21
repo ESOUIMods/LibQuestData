@@ -9,6 +9,17 @@ function QuestMap:GetQuestCoords(id)
     end
 end
 
+-- loop for findint next NPC ID
+        local count
+        local temp_table = {}
+        for i=100000, 200000 do
+            if lib.quest_givers[lib.client_lang][i] == nil then
+                count = i
+                break
+            end
+        end
+
+
 --- Crazy Data Converter
 
 
