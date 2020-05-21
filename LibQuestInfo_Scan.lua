@@ -155,10 +155,17 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         end
     end
 
-    if not isCompleted  then
+    if quest_to_update == nil then
         return
     end
-    if quest_to_update == nil then
+
+    if questID >= 1 then
+        if quest_to_update.questID == -1 then
+            quest_to_update.questID = questID
+        end
+    end
+
+    if not isCompleted  then
         return
     end
 
@@ -171,10 +178,6 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     if quest_to_update["quest_type"] == nil then quest_to_update["quest_type"] = -1 end
     if quest_to_update["repeat_type"] == nil then quest_to_update["repeat_type"] = -1 end
     if quest_to_update["questID"] == nil then quest_to_update["questID"] = -1 end
-
-    if quest_to_update.questID == -1 then
-        quest_to_update.questID = questID
-    end
 
     if isCompleted then
         if not LibQuestInfo_SavedVariables.questInfo then LibQuestInfo_SavedVariables.questInfo = {} end
