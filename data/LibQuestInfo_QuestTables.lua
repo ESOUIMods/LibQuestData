@@ -9,8 +9,9 @@ This is a list of special objects like notes and
 signs so we don't want to change the giver name
 
 5949 - For Glory Sign
+6420 - A Job Offer Sign
 --]]
-lib.quest_giver_is_object = { 5949, }
+lib.quest_giver_is_object = { 5949, 6420, }
 
 --[[ List of what the numbers mean
 This is a list of special NPCs that run around

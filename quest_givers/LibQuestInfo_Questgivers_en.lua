@@ -1126,6 +1126,8 @@ lib.quest_givers["en"] = {
     [100031] = "Vivienne Muric",
     [100032] = "Nafarion's Note", -- His Final gift
     [100033] = "Sai Sahan",
+    [100034] = "Guybert Flaubert",
+    [100035] = "A Job Offer!",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",
