@@ -1125,6 +1125,7 @@ lib.quest_givers["en"] = {
     [100030] = "Watchwoman Mandalime",
     [100031] = "Vivienne Muric",
     [100032] = "Nafarion's Note", -- His Final gift
+    [100033] = "Sai Sahan",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",

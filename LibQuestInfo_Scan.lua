@@ -315,7 +315,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     ]]--
     the_quest_info = {
         [lib.quest_data_index.QUEST_NAME] = quest_to_update.questID,
-        [lib.quest_data_index.QUEST_GIVER]  = quest_to_update.giver_name,
+        [lib.quest_data_index.QUEST_GIVER]  = giver_name_result,
         [lib.quest_data_index.QUEST_TYPE]  = quest_to_update.quest_type,
         [lib.quest_data_index.QUEST_REPEAT]   = quest_to_update.repeat_type,
         [lib.quest_data_index.GAME_API]   = 100030,
