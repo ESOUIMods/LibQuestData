@@ -1,7 +1,9 @@
 local libName, libVersion = "LibQuestInfo", 15
 lib = {}
+internal = {}
 lib.quest_givers = {}
 lib.quest_names = {}
+lib.objective_names = {}
 lib.client_lang = GetCVar("language.2")
 
 lib.name_to_questid_table = {}
@@ -20,12 +22,26 @@ lib.name_to_npcid_table["fr"] = {}
 lib.name_to_npcid_table["jp"] = {}
 lib.name_to_npcid_table["ru"] = {}
 
+lib.name_to_objectiveid_table = {}
+lib.name_to_objectiveid_table["de"] = {}
+lib.name_to_objectiveid_table["en"] = {}
+lib.name_to_objectiveid_table["es"] = {}
+lib.name_to_objectiveid_table["fr"] = {}
+lib.name_to_objectiveid_table["jp"] = {}
+lib.name_to_objectiveid_table["ru"] = {}
+
 if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
 
-if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
-if LibQuestInfo_SavedVariables.questInfo == nil then LibQuestInfo_SavedVariables.questInfo = {} end
-if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
 if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 1 end
+if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
+if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
+if LibQuestInfo_SavedVariables.quest_info == nil then LibQuestInfo_SavedVariables.quest_info = {} end
+if LibQuestInfo_SavedVariables.location_info == nil then LibQuestInfo_SavedVariables.location_info = {} end
+if LibQuestInfo_SavedVariables.quest_names == nil then LibQuestInfo_SavedVariables.quest_names = {} end
+if LibQuestInfo_SavedVariables.objective_info == nil then LibQuestInfo_SavedVariables.objective_info = {} end
+if LibQuestInfo_SavedVariables.reward_info == nil then LibQuestInfo_SavedVariables.reward_info = {} end
+if LibQuestInfo_SavedVariables.map_info == nil then LibQuestInfo_SavedVariables.map_info = {} end
+if LibQuestInfo_SavedVariables.giver_names == nil then LibQuestInfo_SavedVariables.giver_names = {} end
 
 -- note only the "lib.client_lang" will contain data be default
 

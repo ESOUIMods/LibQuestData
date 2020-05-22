@@ -19,6 +19,8 @@
 Init.lua
 data/LibQuestInfo_QuestData.lua
 data/LibQuestInfo_QuestLocations.lua
+data/LibQuestInfo_ObjectiveNames.lua
+data/LibQuestInfo_QuestTables.lua
 
 quest_givers/LibQuestInfo_Questgivers_de.lua
 quest_givers/LibQuestInfo_Questgivers_en.lua

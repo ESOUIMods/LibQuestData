@@ -37,15 +37,35 @@ local quest_map_pin_index_default = {
 }
 
 -- Function to check for empty table
-local function is_empty(t)
-    if next(t) == nil then
+function internal:is_empty_or_nil(t)
+    if type(t) == "table" then
+        if next(t) == nil then
+            return true
+        else
+            return false
+        end
+    elseif type(t) == "string" then
+        if t == nil then
+            return true
+        elseif t == "" then
+            return true
+        else
+            return false
+        end
+    elseif type(t) == "nil" then
+        return true
+    end
+end
+
+function internal:is_nil(t)
+    if t == nil then
         return true
     else
         return false
     end
 end
 
-local function is_in(search_value, search_table)
+function internal:is_in(search_value, search_table)
     for k, v in pairs(search_table) do
         if search_value == v then return true end
         if type(search_value) == "string" then
@@ -53,15 +73,6 @@ local function is_in(search_value, search_table)
         end
     end
     return false
-end
-
--------------------------------------------------
------ Destinations Specific                  ----
--------------------------------------------------
-
-function lib:get_quest_giver(id, lang)
-    lang = lang or lib.client_lang
-    return lib.quest_givers[lib.client_lang][id]
 end
 
 -------------------------------------------------
@@ -76,11 +87,28 @@ function lib:get_quest_list(zone)
     end
 end
 
+-------------------------------------------------
+----- Lookup By ID: returns name             ----
+-------------------------------------------------
+
+function lib:get_quest_giver(id, lang)
+    lang = lang or lib.client_lang
+    return lib.quest_givers[lib.client_lang][id]
+end
+
 function lib:get_quest_name(id, lang)
     lang = lang or lib.client_lang
     return lib.quest_names[lib.client_lang][id] or "Unknown Name"
 end
 
+function lib:get_objective_name(id, lang)
+    lang = lang or lib.client_lang
+    return lib.objective_names[lib.client_lang][id]
+end
+
+-------------------------------------------------
+----- Lookup By Name: returns table of IDs   ----
+-------------------------------------------------
 --[[
 
 Get a table of quest IDs when given a quest name
@@ -108,6 +136,12 @@ function lib:get_npcids_table(name, lang)
     end
 end
 
+function lib:get_objids_table(name, lang)
+    local lang = lang or lib.client_lang
+    if type(name) == "string" then
+        return lib.name_to_objectiveid_table[lang][name]
+    end
+end
 -------------------------------------------------
 ----- Generate QuestID Table By Language     ----
 -------------------------------------------------
@@ -151,6 +185,26 @@ function lib:build_questid_table(lang)
 
 end
 
+function lib:build_objectiveid_table(lang)
+    local lang = lang or lib.client_lang
+    local built_table = {}
+
+    for var1, var2 in pairs(lib.objective_names[lang]) do
+        -- print(var2)
+        -- print(var2)
+        if built_table[var2] == nil then built_table[var2] = {} end
+        if contains_id(built_table, var1) then
+            -- print("Var 1 is in ids")
+        else
+            -- print("Var 1 is not in ids")
+            table.insert(built_table[var2], var1)
+        end
+    end
+
+    lib.name_to_objectiveid_table[lang] = built_table
+
+end
+
 function lib:build_npcid_table(lang)
     local lang = lang or lib.client_lang
     local built_table = {}
@@ -173,16 +227,24 @@ end
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
-    if LibQuestInfo_SavedVariables.version ~= 2 then
+    if LibQuestInfo_SavedVariables.version ~= 3 then
         -- d("ding not 2")
         LibQuestInfo_SavedVariables = {}
-        LibQuestInfo_SavedVariables.version = 2
+        LibQuestInfo_SavedVariables.version = 3
         LibQuestInfo_SavedVariables.quests = {}
-        LibQuestInfo_SavedVariables.questInfo = {}
         LibQuestInfo_SavedVariables.subZones = {}
+
+        LibQuestInfo_SavedVariables.quest_info = {}
+        LibQuestInfo_SavedVariables.location_info = {}
+        LibQuestInfo_SavedVariables.quest_names = {}
+        LibQuestInfo_SavedVariables.objective_info = {}
+        LibQuestInfo_SavedVariables.reward_info = {}
+        LibQuestInfo_SavedVariables.map_info = {}
+        LibQuestInfo_SavedVariables.giver_names = {}
     end
     lib:build_questid_table(lib.client_lang) -- build name lookup table once
-    lib:build_npcid_table(lib.client_lang) -- build name lookup table once
+    lib:build_npcid_table(lib.client_lang) -- build npc names lookup table once
+    lib:build_objectiveid_table(lib.client_lang) -- build objective names lookup table once
     -- d("I am here")
 
     EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED)
