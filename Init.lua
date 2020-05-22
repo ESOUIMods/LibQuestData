@@ -32,7 +32,7 @@ lib.name_to_objectiveid_table["ru"] = {}
 
 if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
 
-if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 1 end
+if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 3 end
 if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
 if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
 if LibQuestInfo_SavedVariables.quest_info == nil then LibQuestInfo_SavedVariables.quest_info = {} end
