@@ -33,13 +33,17 @@ local function get_sv_quest_info(zone)
 end
 
 local function get_measurement_sv(zone)
-    --d(zone)
+    d("Begin get_measurement_sv")
+    d(zone)
     -- if type(zone) == "string"
     if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.map_info[zone]) then
-        --d("get_measurement_sv it was nil")
+        d("get_measurement_sv was nil!!!!!!!!!!")
+        d("End get_measurement_sv")
         return {}
     else
-        --d("get_measurement_sv was not nil")
+        d("get_measurement_sv was not nil---------")
+        d(LibQuestInfo_SavedVariables.map_info[zone])
+        d("End get_measurement_sv")
         return LibQuestInfo_SavedVariables.map_info[zone]
     end
 end
@@ -100,6 +104,21 @@ local function get_quest_list_sv(zone)
     end
 end
 
+function get_measurement_info(zone)
+    d("Begin get_measurement_info")
+    d(zone)
+    if internal:is_empty_or_nil(lib.map_info_data[zone]) then
+        d("get_measurement_info it was nil")
+        d("End get_measurement_info")
+        return {}
+    else
+        d("get_measurement_info was not nil")
+        d(lib.map_info_data[zone])
+        d("End get_measurement_info")
+        return lib.map_info_data[zone]
+    end
+end
+
 -- Event handler function for EVENT_QUEST_ADDED
 local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     --d("OnQuestAdded")
@@ -149,12 +168,24 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         ["scaleX"]   = measurement.scaleX,
     }
 
-    if internal:is_empty_or_nil(get_measurement_sv(measurement.id)) then
-        --d("it is empty")
-        LibQuestInfo_SavedVariables.map_info[measurement.id] = measurement_info
+    d("Begin Measurement collection")
+    d("the id: "..measurement.id)
+    if internal:is_empty_or_nil(get_measurement_info(measurement.id)) then
+        d("the main database is nil")
+        -- meaing I don't have it so look in the SavedVariables file
+        if internal:is_empty_or_nil(get_measurement_sv(measurement.id)) then
+            d("is_empty_or_nil returned empty or nil!!!!!!!!!!")
+            -- meaing I don't have it in the SavedVariables file, save it
+            LibQuestInfo_SavedVariables.map_info[measurement.id] = measurement_info
+        else
+            d("is_empty_or_nil returned did not return empty or nil--------")
+            -- meaing I have it in the SavedVariables file, don't save it
+        end
     else
-        --d("it is not empty")
+        d("the main database is not nil")
+        --meaing I have it I don't need this information
     end
+    d("End Measurement collection")
 
     quest_found = false
     local QuestScout_zonelist = get_sv_quest_info(zone)

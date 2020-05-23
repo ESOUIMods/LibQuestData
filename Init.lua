@@ -1,10 +1,12 @@
-local libName, libVersion = "LibQuestInfo", 17
+local libName, libVersion = "LibQuestInfo", 18
 lib = {}
 internal = {}
 lib.quest_givers = {}
 lib.quest_names = {}
 lib.objective_names = {}
 lib.client_lang = GetCVar("language.2")
+lib.libName = libName
+lib.libVersion = libVersion
 
 lib.name_to_questid_table = {}
 lib.name_to_questid_table["de"] = {}
@@ -33,6 +35,7 @@ lib.name_to_objectiveid_table["ru"] = {}
 if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
 
 if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 3 end
+if LibQuestInfo_SavedVariables.libVersion == nil then LibQuestInfo_SavedVariables.libVersion = LibQuestInfo_SavedVariables.libVersion or lib.libVersion end
 if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
 if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
 if LibQuestInfo_SavedVariables.quest_info == nil then LibQuestInfo_SavedVariables.quest_info = {} end

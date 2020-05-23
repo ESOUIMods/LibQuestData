@@ -1,6 +1,15 @@
 local lib = _G["LibQuestInfo"]
 
 lib.map_info_data = { 
+        ["Art/maps/vvardenfell/viviccity_base_0.dds"] = 
+        {
+            ["offsetX"] = 0.7591916190,
+            ["zoneId"] = 849,
+            ["mapIndex"] = 30,
+            ["scaleX"] = 0.0317432081,
+            ["offsetY"] = 0.3652051895,
+            ["scaleY"] = 0.0317431988,
+        },
         ["Art/maps/clockwork/clockwork_base_0.dds"] = 
         {
             ["scaleX"] = 0.1997304233,
@@ -73,5 +82,13 @@ lib.map_info_data = {
             ["offsetY"] = 0.9924867971,
             ["scaleY"] = 0.0713483342,
         },
+        ["Art/maps/darkbrotherhood/anvilcity_base_0.dds"] = 
+        {
+            ["scaleY"] = 0.0226215822,
+            ["scaleX"] = 0.0226215972,
+            ["offsetX"] = 0.3170179895,
+            ["offsetY"] = 0.5643207561,
+            ["mapIndex"] = 29,
+            ["zoneId"] = 981,
+        },
 }
-
