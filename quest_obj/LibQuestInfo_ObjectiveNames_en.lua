@@ -31,6 +31,6 @@ lib.objective_names["en"] = {
     [4692] = "Laughing Moons Plantation",
     [4620] = "Shattered Shoals",
     [4693] = "Speckled Shell Plantation",
-    [6045] = "Everwound Wellspring",
     [4624] = "Mistral",
+    [4621] = "Cat's Eye Quay",
 }
