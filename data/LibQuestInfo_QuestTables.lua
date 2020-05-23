@@ -10,8 +10,9 @@ signs so we don't want to change the giver name
 
 5949 - For Glory Sign
 6420 - A Job Offer Sign
+6066 - The Precursor
 --]]
-lib.quest_giver_is_object = { 5949, 6420, }
+lib.quest_giver_is_object = { 5949, 6420, 6066, }
 
 --[[ List of what the numbers mean
 This is a list of special NPCs that run around

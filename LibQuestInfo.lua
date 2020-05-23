@@ -229,9 +229,21 @@ end
 local function OnPlayerActivated(eventCode)
     if LibQuestInfo_SavedVariables.version ~= 3 then
         -- d("ding not 2")
+        local temp = nil
+        if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quests) then
+            --d("it is nil do nothing")
+        else
+            --d("it is not nil copy stuff")
+            temp = LibQuestInfo_SavedVariables.quests
+        end
+
         LibQuestInfo_SavedVariables = {}
         LibQuestInfo_SavedVariables.version = 3
-        LibQuestInfo_SavedVariables.quests = {}
+        if temp == nil then
+            LibQuestInfo_SavedVariables.quests = {}
+        else
+            LibQuestInfo_SavedVariables.quests = temp
+        end
         LibQuestInfo_SavedVariables.subZones = {}
 
         LibQuestInfo_SavedVariables.quest_info = {}
