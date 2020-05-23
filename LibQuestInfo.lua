@@ -227,7 +227,7 @@ end
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
-    if LibQuestInfo_SavedVariables.version ~= 3 then
+    if LibQuestInfo_SavedVariables.version ~= 4 then
         -- d("ding not 2")
         local temp = nil
         if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quests) then
@@ -238,7 +238,8 @@ local function OnPlayerActivated(eventCode)
         end
 
         LibQuestInfo_SavedVariables = {}
-        LibQuestInfo_SavedVariables.version = 3
+        LibQuestInfo_SavedVariables.version = 4
+        LibQuestInfo_SavedVariables.libVersion = lib.libVersion
         if temp == nil then
             LibQuestInfo_SavedVariables.quests = {}
         else
