@@ -1141,6 +1141,7 @@ lib.quest_givers["en"] = {
     [100046] = "Inactive Brassilisk",
     [100047] = "CCHW-04",
     [100048] = "Olorime",
+    [100049] = "Daynillo Rethul",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",
