@@ -24,4 +24,5 @@ local lib = _G["LibQuestInfo"]
 
 lib.objective_names["en"] = {
     [4255] = "Vulkhel Guard",
+    [6045] = "Everwound Wellspring",
 }

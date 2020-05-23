@@ -410,7 +410,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             --d(sv_quest_entry)
             if sv_quest_entry[lib.quest_map_pin_index.QUEST_ID] == quest_to_update.questID then
                 --d("found that the entry 5 was equal to the ID of this quest in the SV file")
-                -- meaing it is in the saved vars file don't duplicate it
+                -- meaning it is in the saved vars file don't duplicate it
                 save_quest_location = false
                 break
             end
@@ -492,7 +492,7 @@ local function OnPlayerActivated(eventCode)
     end
     lastZone = zone
 
-    SLASH_COMMANDS["/qmslist"] = show_quests
+    SLASH_COMMANDS["/lqilist"] = function() show_quests() end
 
 end
 EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED, OnPlayerActivated) -- Verified

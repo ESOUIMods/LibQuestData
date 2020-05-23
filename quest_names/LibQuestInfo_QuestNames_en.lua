@@ -23,6 +23,9 @@ For renumbering new rebuilt tables
 local lib = _G["LibQuestInfo"]
 
 lib.quest_names["en"] = {
+    [6042] = "A Bitter Pill",
+    [6374] = "Love and Guar",
+    [6365] = "The Jewel of Baan Dar",
     [6438] = "An Answer in Blood",
     [6425] = "Fletching Fetching",
     [6152] = "Pilgrimage's End",
