@@ -13,7 +13,8 @@
 ## APIVersion: 100030 100031
 ## Description: Provides Quest Information
 ## SavedVariables: LibQuestInfo_SavedVariables
-## DependsOn: LibGPS LibMapPins-1.0
+## DependsOn: LibGPS>=37 LibMapPins-1.0>=10021
+## OptionalDependsOn: LibMapPing>=1200 LibDebugLogger>=196 LibChatMessage>=100
 ## IsLibrary: true
 
 Init.lua
