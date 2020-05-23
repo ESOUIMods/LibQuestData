@@ -21,25 +21,31 @@ local function IsSameZone(zoneAndSubzone1, zoneAndSubzone2)
 end
 
 local function get_sv_quest_info(zone)
-    -- d(zone)
-    if type(zone) == "string" and LibQuestInfo_SavedVariables.quests[zone] ~= nil then
-        return LibQuestInfo_SavedVariables.quests[zone]
-    else
+    --d(zone)
+    -- if type(zone) ~= "string"
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quests[zone]) then
+        --d("get_sv_quest_info it was nil")
         return {}
+    else
+        --d("get_sv_quest_info was not nil")
+        return LibQuestInfo_SavedVariables.quests[zone]
     end
 end
 
 local function get_measurement_sv(zone)
-    -- d(zone)
-    if type(zone) == "string" and LibQuestInfo_SavedVariables.map_info[zone] ~= nil then
-        return LibQuestInfo_SavedVariables.map_info[zone]
-    else
+    --d(zone)
+    -- if type(zone) == "string"
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.map_info[zone]) then
+        --d("get_measurement_sv it was nil")
         return {}
+    else
+        --d("get_measurement_sv was not nil")
+        return LibQuestInfo_SavedVariables.map_info[zone]
     end
 end
 
 local function get_giver_sv(name)
-    -- d(name)
+    --d(name)
     local obj_name = nil
     for count, value in pairs(LibQuestInfo_SavedVariables.giver_names) do
         if value == name then
@@ -50,7 +56,7 @@ local function get_giver_sv(name)
 end
 
 local function get_objective_sv(name)
-    -- d(name)
+    --d(name)
     local obj_name = nil
     for count, value in pairs(LibQuestInfo_SavedVariables.objective_info) do
         if value == name then
@@ -61,16 +67,32 @@ local function get_objective_sv(name)
 end
 
 local function get_questname_sv(name)
-    -- d(name)
-    if type(name) == "string" and LibQuestInfo_SavedVariables.quest_names[name] ~= nil then
-        return LibQuestInfo_SavedVariables.quest_names[name]
-    else
+    --d(name)
+    --[[Note to self:
+    Originally I saved it with a ket for the name and realized
+    it's faster to copy paste with an ID number.
+
+    Since this is the save game information I don't have a
+    lookup table for this nor should I make one. Converting
+    the quest name to a quest ID is pointless. Just ensure
+    I look at the tbale for quest names, return an empty
+    table without an error
+
+    Needs different way to handle this or leave it since
+    the assignment overwrites the value each time regardless.
+    ]]--
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quest_names[quest_id]) then
+        --d("get_questname_sv it was nil")
         return {}
+    else
+        --d("get_questname_sv was not nil")
+        --d(LibQuestInfo_SavedVariables.quest_names[quest_id])
+        return LibQuestInfo_SavedVariables.quest_names[quest_id]
     end
 end
 
 local function get_quest_list_sv(zone)
-    -- d(zone)
+    --d(zone)
     if type(zone) == "string" and LibQuestInfo_SavedVariables.location_info[zone] ~= nil then
         return LibQuestInfo_SavedVariables.location_info[zone]
     else
@@ -80,7 +102,7 @@ end
 
 -- Event handler function for EVENT_QUEST_ADDED
 local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
-    -- d("OnQuestAdded")
+    --d("OnQuestAdded")
     if quest_shared then
         quest_shared = false
         return
@@ -128,10 +150,10 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     }
 
     if internal:is_empty_or_nil(get_measurement_sv(measurement.id)) then
-        -- d("it is empty")
+        --d("it is empty")
         LibQuestInfo_SavedVariables.map_info[measurement.id] = measurement_info
     else
-        -- d("it is not empty")
+        --d("it is not empty")
     end
 
     quest_found = false
@@ -142,9 +164,9 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         end
     end
     if quest_found then
-        -- d("quest found")
+        --d("quest found")
     else
-        -- d("quest not found")
+        --d("quest not found")
         table.insert(LibQuestInfo_SavedVariables.quests[zone], quest)
     end
 end
@@ -152,7 +174,7 @@ EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_ADDED, OnQuestAdded) -- V
 
 -- Event handler function for EVENT_CHATTER_END
 local function OnChatterEnd(eventCode)
-    -- d("OnChatterEnd")
+    --d("OnChatterEnd")
     questGiverName = nil
     reward = nil
     -- Stop listening for the quest added event because it would only be for shared quests
@@ -162,7 +184,7 @@ local function OnChatterEnd(eventCode)
 end
 
 local function OnQuestSharred(eventCode, questID)
-    -- d("OnQuestSharred")
+    --d("OnQuestSharred")
     quest_shared = true
 end
 EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_SHARED, OnQuestSharred) -- Verified
@@ -170,7 +192,7 @@ EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_SHARED, OnQuestSharred) -
 -- Event handler function for EVENT_QUEST_OFFERED
 -- Note runs when you click writ board
 local function OnQuestOffered(eventCode)
-    -- d("OnQuestOffered")
+    --d("OnQuestOffered")
     -- Get the name of the NPC or intractable object
     -- (This could also be done in OnQuestAdded directly, but it's saver here because we are sure the dialogue is open)
     questGiverName = GetUnitName("interact")
@@ -183,7 +205,7 @@ EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_OFFERED, OnQuestOffered) 
 
 -- Event handler function for EVENT_QUEST_COMPLETE_DIALOG
 local function OnQuestCompleteDialog(eventCode, journalIndex)
-    -- d("OnQuestCompleteDialog")
+    --d("OnQuestCompleteDialog")
     local numRewards = GetJournalQuestNumRewards(journalIndex)
     if numRewards <= 0 then return end
     reward = {}
@@ -196,8 +218,8 @@ EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestC
 
 -- Event handler function for EVENT_QUEST_REMOVED
 local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
-    -- d(questName)
-    -- d("OnQuestRemoved")
+    --d(questName)
+    --d("OnQuestRemoved")
     local quest_to_update = nil
     local the_zone
     local the_entry
@@ -293,6 +315,8 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     --[[ set quest name ]]--
     --d(quest_to_update.questID)
+    --d("Name Please")
+    --d(lib:get_quest_name(quest_to_update.questID))
     if lib:get_quest_name(quest_to_update.questID) == "Unknown Name" then
         --d("quest name is Unknown Name - So not found")
         if internal:is_empty_or_nil(get_questname_sv(quest_to_update.name)) then
@@ -416,7 +440,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             end
         end
     else
-        -- d("save_quest_location was false don't check SV file")
+        --d("save_quest_location was false don't check SV file")
     end
 
     --[[ Save the qest location

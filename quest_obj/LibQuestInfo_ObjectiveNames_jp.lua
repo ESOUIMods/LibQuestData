@@ -22,7 +22,15 @@ For renumbering new rebuilt tables
 --]]
 local lib = _G["LibQuestInfo"]
 
-lib.objective_names["en"] = {
+lib.objective_names["jp"] = {
     [4255] = "Vulkhel Guard",
     [6045] = "Everwound Wellspring",
+    [4664] = "Hazak's Hollow",
+    [4625] = "Temple of the Mourning Springs",
+    [4673] = "Windcatcher Plantation",
+    [4692] = "Laughing Moons Plantation",
+    [4620] = "Shattered Shoals",
+    [4693] = "Speckled Shell Plantation",
+    [6045] = "Everwound Wellspring",
+    [4624] = "Mistral",
 }
