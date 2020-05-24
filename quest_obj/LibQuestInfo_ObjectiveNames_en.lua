@@ -33,4 +33,7 @@ lib.objective_names["en"] = {
     [4693] = "Speckled Shell Plantation",
     [4624] = "Mistral",
     [4621] = "Cat's Eye Quay",
+    [4208] = "Silsailen",
+    [4361] = "Castle Rilis",
+    [4219] = "South Beacon",
 }
