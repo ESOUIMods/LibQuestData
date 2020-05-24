@@ -228,7 +228,7 @@ end
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
     if LibQuestInfo_SavedVariables.version ~= 4 then
-        -- d("ding not 2")
+        -- d("ding not 4")
         local temp = nil
         if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quests) then
             --d("it is nil do nothing")

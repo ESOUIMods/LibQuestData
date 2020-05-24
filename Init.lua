@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestInfo", 18
+local libName, libVersion = "LibQuestInfo", 181
 lib = {}
 internal = {}
 lib.quest_givers = {}
@@ -34,7 +34,7 @@ lib.name_to_objectiveid_table["ru"] = {}
 
 if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
 
-if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 3 end
+if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 1 end
 if LibQuestInfo_SavedVariables.libVersion == nil then LibQuestInfo_SavedVariables.libVersion = LibQuestInfo_SavedVariables.libVersion or lib.libVersion end
 if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
 if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
