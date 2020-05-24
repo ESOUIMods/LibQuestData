@@ -1142,6 +1142,10 @@ lib.quest_givers["en"] = {
     [100047] = "CCHW-04",
     [100048] = "Olorime",
     [100049] = "Daynillo Rethul",
+    [100050] = "Notice",
+    [100051] = "Housing Brochure",
+    [100052] = "Homes For Sale!",
+    [100053] = "Stromgruf the Steady",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",

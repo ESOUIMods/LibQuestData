@@ -1,6 +1,15 @@
 local lib = _G["LibQuestInfo"]
 
 lib.map_info_data = {
+        ["Art/maps/vvardenfell/vvardenfell_base_0.dds"] =
+        {
+            ["scaleY"] = 0.1799815959,
+            ["mapIndex"] = 30,
+            ["scaleX"] = 0.1799816179,
+            ["offsetX"] = 0.6811404012,
+            ["zoneId"] = 849,
+            ["offsetY"] = 0.2212419979,
+        },
         ["Art/maps/auridon/skywatch_base_0.dds"] =
         {
             ["scaleX"] = 0.0271876046,

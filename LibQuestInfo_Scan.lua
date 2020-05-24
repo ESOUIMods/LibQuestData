@@ -20,6 +20,16 @@ local function IsSameZone(zoneAndSubzone1, zoneAndSubzone2)
     return (zoneAndSubzone1:match("(.*)/") == zoneAndSubzone2:match("(.*)/"))
 end
 
+local function get_giver_when_object(id)
+    if internal:is_empty_or_nil(lib.questid_giver_lookup[id]) then
+        --d("If giver is an object, one was not found")
+        return {}
+    else
+        --d("Giver is an object, found one")
+        return lib.questid_giver_lookup[id]
+    end
+end
+
 local function get_sv_quest_info(zone)
     --d(zone)
     -- if type(zone) ~= "string"
@@ -32,31 +42,35 @@ local function get_sv_quest_info(zone)
     end
 end
 
-local function get_measurement_sv(zone)
-    --d("Begin get_measurement_sv")
-    --d(zone)
-    -- if type(zone) == "string"
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.map_info[zone]) then
-        --d("get_measurement_sv was nil!!!!!!!!!!")
-        --d("End get_measurement_sv")
-        return {}
+local function is_giver_in_sv(id)
+    --d(id)
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["giver_names"][id]) then
+        --d("The Quest ID and name set to an NPC or Unknown, was not found in the SV table")
+        return false
     else
-        --d("get_measurement_sv was not nil---------")
-        --d(LibQuestInfo_SavedVariables.map_info[zone])
-        --d("End get_measurement_sv")
-        return LibQuestInfo_SavedVariables.map_info[zone]
+        --d("The Quest ID and name is already in the SV table")
+        return true
     end
 end
 
-local function get_giver_sv(name)
-    --d(name)
-    local obj_name = nil
-    for count, value in pairs(LibQuestInfo_SavedVariables.giver_names) do
-        if value == name then
-            obj_name = value
-        end
+local function is_objective_in_sv(id)
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["objective_info"][id]) then
+        --d("The objective was not found in the SV table")
+        return false
+    else
+        --d("The objective is already in the SV table")
+        return true
     end
-    return obj_name
+end
+
+local function is_map_info_in_sv(zone)
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["map_info"][zone]) then
+        --d("The Quest ID and name set to an NPC or Unknown, was not found in the SV table")
+        return false
+    else
+        --d("The Quest ID and name is already in the SV table")
+        return true
+    end
 end
 
 local function get_objective_sv(name)
@@ -70,28 +84,28 @@ local function get_objective_sv(name)
     return obj_name
 end
 
-local function get_questname_sv(name)
-    --d(name)
+local function is_questname_in_sv(id)
+    --d(id)
     --[[Note to self:
-    Originally I saved it with a ket for the name and realized
+    Originally I saved it with a key for the name and realized
     it's faster to copy paste with an ID number.
 
     Since this is the save game information I don't have a
     lookup table for this nor should I make one. Converting
     the quest name to a quest ID is pointless. Just ensure
-    I look at the tbale for quest names, return an empty
+    I look at the table for quest names, return an empty
     table without an error
 
     Needs different way to handle this or leave it since
     the assignment overwrites the value each time regardless.
     ]]--
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quest_names[quest_id]) then
-        --d("get_questname_sv it was nil")
-        return {}
+    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["quest_names"][id]) then
+        --d("is_questname_in_sv it was nil")
+        return false
     else
-        --d("get_questname_sv was not nil")
-        --d(LibQuestInfo_SavedVariables.quest_names[quest_id])
-        return LibQuestInfo_SavedVariables.quest_names[quest_id]
+        --d("is_questname_in_sv was not nil")
+        --d(LibQuestInfo_SavedVariables["quest_names"][id])
+        return true
     end
 end
 
@@ -172,22 +186,22 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     --d("the id: "..measurement.id)
     if internal:is_empty_or_nil(get_measurement_info(measurement.id)) then
         --d("the main database is nil")
-        -- meaing I don't have it so look in the SavedVariables file
-        if internal:is_empty_or_nil(get_measurement_sv(measurement.id)) then
-            --d("is_empty_or_nil returned empty or nil!!!!!!!!!!")
-            -- meaing I don't have it in the SavedVariables file, save it
-            LibQuestInfo_SavedVariables.map_info[measurement.id] = measurement_info
+        -- meaning I don't have it so look in the SavedVariables file
+        if is_map_info_in_sv(measurement.id) then
+            --d("returned true so the map name was found!!!!!!!!!!")
+            -- meaning I have it in the SavedVariables file, don't save it
         else
-            --d("is_empty_or_nil returned did not return empty or nil--------")
-            -- meaing I have it in the SavedVariables file, don't save it
+            --d("returned false so the map name was not found--------")
+            -- meaning I don't have it in the SavedVariables file, save it
+            LibQuestInfo_SavedVariables.map_info[measurement.id] = measurement_info
         end
     else
         --d("the main database is not nil")
-        --meaing I have it I don't need this information
+        --meaning I have it I don't need this information
     end
     --d("End Measurement collection")
 
-    quest_found = false
+    local quest_found = false
     local QuestScout_zonelist = get_sv_quest_info(zone)
     for num_entry, quest_from_table in pairs(QuestScout_zonelist) do
         if quest_from_table.name == questName then
@@ -227,7 +241,7 @@ local function OnQuestOffered(eventCode)
     -- Get the name of the NPC or intractable object
     -- (This could also be done in OnQuestAdded directly, but it's saver here because we are sure the dialogue is open)
     questGiverName = GetUnitName("interact")
-    -- Now that the quest has ben offered we can start listening for the quest added event
+    -- Now that the quest has been offered we can start listening for the quest added event
     -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
     -- EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_ADDED, OnQuestAdded)
     EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_CHATTER_END, OnChatterEnd) -- Verified
@@ -249,8 +263,8 @@ EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestC
 
 -- Event handler function for EVENT_QUEST_REMOVED
 local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
-    --d(questName)
     --d("OnQuestRemoved")
+    --d(questName)
     local quest_to_update = nil
     local the_zone
     local the_entry
@@ -286,56 +300,73 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     local temp_obj = lib:get_objids_table(quest_to_update.objective)
     --d(temp_obj)
     if temp_obj == nil then
-        --d("objective lookup table is nil")
-        -- meaning not found look in saved vars
-        if internal:is_nil(LibQuestInfo_SavedVariables.objective_info[quest_to_update.questID]) then
-            --d("objective from saved vars is nil")
-            -- meaing it's not there add it
-            if internal:is_empty_or_nil(quest_to_update.objective) then
-                --d("hey that's a rip off it was empty or nil")
+        if internal:is_empty_or_nil(quest_to_update.objective) then
+            --d("hey that's a rip off it was empty or nil")
+        else
+            --d("it wasn't empty or nil so lets see what it is")
+            if is_objective_in_sv(quest_to_update.questID) then
+                --d("The objective is in the SV file")
             else
-                --d("it wasn't empty or nil so lets see what it is")
+                --d("The objective is not in the SV file")
                 LibQuestInfo_SavedVariables.objective_info[quest_to_update.questID] = quest_to_update.objective
             end
-        else
-            --d("objective from saved vars is not nil")
-            -- meaning it's there don't add it
         end
-
-        -----------------------------------------
     else
         --d("objective lookup table is not nil")
         -- meaning we found it don't add it
     end
 
-    --[[ set quest giver name ]]--
+    --[[ set quest giver to it's ID number using the name of the NPC ]]--
     giver_name_result = lib:get_npcids_table(quest_to_update.giver)
     --d("quest giver table was")
     --d(giver_name_result)
     --d(quest_to_update.giver)
     if giver_name_result == nil then
+        --[[ Check if Quest Giver is an Object, Sign, Note ]]--
+        local temp_giver = get_giver_when_object(quest_to_update.questID)
+        if internal:is_empty_or_nil(temp_giver) then
+            --d("The temp_giver was nil")
+            -- meaning no giver object found
+        else
+            --d("The temp_giver was not nil")
+            -- meaning there was a giver object found
+            quest_to_update.giver = temp_giver
+        end
+        --[[ Check if Quest Giver is simply nil or empty, unassigned ]]--
         if internal:is_empty_or_nil(quest_to_update.giver) then
-            --d("hey for some reason the giver is nil or an empty string")
-            -- meaning set it to something I can look into
+            --d("Quest giver was nil, it is an empty table now from previous function")
+            -- meaning set it to Unknown Target
             quest_to_update.giver = "Unknown Target"
             --d(quest_to_update.giver)
         else
             --d("not empty or nil so continue")
         end
+        --[[
+        At this point we know:
+        1: The quest giver was not in the main database
+        2: It was/wasn't a sign of note, object
+        3: The quest_to_update.giver was/wasn't nil and set to Unknown
+
+        Result: The Quest Giver has been set to the object if it was a sign
+        or post, or to Unknown if quest_to_update.giver was nil. Otherwise
+        nothing happened to quest_to_update.giver because it's a valid
+        NPC name but not in the main database yet.
+
+        Next Step: Simply save the valid NPC name or Unknown using the QuestID
+        as a key. Then I can make a custom Quest Giver ID for it.
+        ]]--
         --d("quest giver lookup table is nil look in sv now")
-        giver_name_result = get_giver_sv(quest_to_update.giver)
         --d(giver_name_result)
-        if internal:is_nil(giver_name_result) then
-            --d("giver from saved vars is nil save it and set the result to the npc name string")
-            LibQuestInfo_SavedVariables.giver_names[quest_to_update.questID] = quest_to_update.giver
-            giver_name_result = quest_to_update.giver
+        if is_giver_in_sv(quest_to_update.questID) then
+            --d("The giver was in the SV file")
+            -- meaning don't save it because the NPC name was not in
+            -- the Lua file but was in the save vars and I need an
+            -- arbitrary value, use the string for now
         else
-            --d("giver from saved vars is not nil")
-            -- meaning don't save it because it's there but
-            -- the NPC name was not Lua file but was in the save vars
-            -- and I need an arbitrary value, use the string for now
-            giver_name_result = quest_to_update.giver
+            --d("The giver was not in the SV file")
+            LibQuestInfo_SavedVariables.giver_names[quest_to_update.questID] = quest_to_update.giver
         end
+        giver_name_result = quest_to_update.giver
     else
         --d("quest giver lookup table is not nil")
         -- meaning we found it don't add it but I need the number
@@ -346,15 +377,15 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     --[[ set quest name ]]--
     --d(quest_to_update.questID)
-    --d("Name Please")
+    --d("Quest Name Please")
     --d(lib:get_quest_name(quest_to_update.questID))
     if lib:get_quest_name(quest_to_update.questID) == "Unknown Name" then
         --d("quest name is Unknown Name - So not found")
-        if internal:is_empty_or_nil(get_questname_sv(quest_to_update.name)) then
-            --d("quest name empty")
-            LibQuestInfo_SavedVariables.quest_names[quest_to_update.questID] = quest_to_update.name
+        if is_questname_in_sv(quest_to_update.questID) then
+            --d("returned true so it was in the sv")
         else
-            --d("quest name not empty")
+            --d("returned false so it was not in the sv")
+            LibQuestInfo_SavedVariables["quest_names"][quest_to_update.questID] = quest_to_update.name
         end
     else
         -- get_questname_sv
@@ -383,18 +414,17 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     if temp_quest_info == nil then
         --d("quest information is nill")
         -- meaning I need to create it and save it, no compare
-        LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] = the_quest_info
+        LibQuestInfo_SavedVariables["quest_info"][quest_to_update.questID] = the_quest_info
     else
         --d("quest information is not nill")
         -- meaning I need to compare things and save if different
-        local compared_quest_info = {}
         if temp_quest_info[lib.quest_data_index.QUEST_NAME] ~= quest_to_update.questID then
             temp_quest_info [lib.quest_data_index.QUEST_NAME] = quest_to_update.questID
             quest_info_changed = true
         end
         if internal:is_in(quest_to_update.questID, lib.quest_giver_is_object) then
             --d("Hey that quest ID in in this special table")
-            -- meaning keepl the value and don't touch it
+            -- meaning keep the value and don't touch it
         else
             -- meaning you can compare it
             --d("Hey that quest ID was not in this special table")
@@ -449,7 +479,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 break
             else
                 --d("It is not -10 so it should recent")
-                -- meaing do not save it
+                -- meaning do not save it
                 save_quest_location = false
                 break
             end
