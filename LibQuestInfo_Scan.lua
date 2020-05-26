@@ -5,7 +5,7 @@ local questGiverName = nil
 local reward
 local lastZone
 -- Init saved variables table
-local GPS = LibGPS2
+local GPS = LibGPS3
 local LMP = LibMapPins
 local quest_shared
 local quest_found
@@ -153,7 +153,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     if LibQuestInfo_SavedVariables.quests[zone] == nil then LibQuestInfo_SavedVariables.quests[zone] = {} end
     local normalizedX, normalizedY = GetMapPlayerPosition("player")
     local gpsx, gpsy, zoneMapIndex = GPS:LocalToGlobal(normalizedX, normalizedY)
-    local measurement = GPS:GetCurrentMapMeasurements()
+    local measurement = GPS:GetCurrentMapMeasurement()
     if journalIndex then
         quest_type = GetJournalQuestType(journalIndex)
         repeat_type = GetJournalQuestRepeatType(journalIndex)
@@ -271,6 +271,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     local giver_name_result
     local quest_info_changed = false
     local save_quest_location = true
+    local my_pos_x, my_pos_y = GetMapPlayerPosition("player")
 
     for zone, zone_quests in pairs(LibQuestInfo_SavedVariables.quests) do
         for num_entry, quest_from_table in pairs(zone_quests) do
@@ -465,30 +466,64 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         [lib.quest_map_pin_index.QUEST_ID]   = quest_to_update.questID,
     }
 
-    -- check LibQuestInfo_QuestLocations.lua file
+    --[[
+    At this point save_quest_location is false and will not be set to false in this
+    loop. It will only be true if there is the potentiol it is a secondary location
+    for the same quest.
+
+    Not sure I want to do this twice but later on in another loop I will look at the
+    LibGPS value to also determine whether or not to save the information.
+
+    Neeed to think this over but for now I am hoping the second loop will allow me to
+    decide that if the information is about to be saved and it passed the first two
+    verifications, only then can it be checked against -10.
+
+    Also it might be better to build a table of the quests in the zone with the same
+    questID and then check against that instead. Probably more efficent but I want to
+    get this done for Greymore's Rough draft.
+
+    If I make a table I want to make the table from the main database first, then the SV
+    and then determine that there are pins that already exist so don't save the
+    information.
+    ]]--
     regular_quest_list = lib:get_quest_list(the_zone)
+    --d(quest_to_update.questID)
     for num_entry, quest_entry_table in ipairs(regular_quest_list) do
         --d(num_entry)
         --d(quest_entry_table)
         if quest_entry_table[lib.quest_map_pin_index.QUEST_ID] == quest_to_update.questID then
             --d("Found an entry with the same quest ID so check LibGPS")
-            if quest_entry_table[lib.quest_map_pin_index.X_LIBGPS] == -10 then
-                --d("It is -10 so it should not be accurate")
-                --meaning save it
-                save_quest_location = true
-                break
+            -- my_pos_x, my_pos_y
+            local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry_table[lib.quest_map_pin_index.X_LOCATION], quest_entry_table[lib.quest_map_pin_index.Y_LOCATION], my_pos_x, my_pos_y))
+            --d(distance)
+            if distance <= 10 then
+                --d("The quest from the main database was close to me")
+                --d("However is it -10?")
+                if quest_entry_table[lib.quest_map_pin_index.X_LIBGPS] == -10 then
+                    --d("-10 so save it anyway")
+                    save_quest_location = true
+                else
+                    --d("It was close and not -10 so do not save it")
+                    save_quest_location = false
+                end
             else
-                --d("It is not -10 so it should recent")
-                -- meaning do not save it
-                save_quest_location = false
-                break
+                --d("The quest from the main database was not close to me")
+                --d("Could be set to true for saving to the SV file")
+                -- meaning it should not be where I am standing
+                -- consider saving the location
+                -- question, how to avoid duplicates though
             end
         end
     end
+    --d("done first pass")
 
-    -- if we are going to save it check saved vars first
+    --[[So save_quest_location is true by default in case it is a new
+    quest that doesn't exist in the main database. If we are going to
+    save it check saved vars first
+    ]]--
+    --d("save_quest_location: "..tostring(save_quest_location))
+    -- the api changed so save the location regardless
     if save_quest_location then
-        -- the api changed so save the location regardless
         saved_vars_quest_list = get_quest_list_sv(the_zone)
         for num_entry, sv_quest_entry in ipairs(saved_vars_quest_list) do
             --d(num_entry)
@@ -496,13 +531,24 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             if sv_quest_entry[lib.quest_map_pin_index.QUEST_ID] == quest_to_update.questID then
                 --d("found that the entry 5 was equal to the ID of this quest in the SV file")
                 -- meaning it is in the saved vars file don't duplicate it
-                save_quest_location = false
-                break
+                local distance = zo_round(GPS:GetLocalDistanceInMeters(sv_quest_entry[lib.quest_map_pin_index.X_LOCATION], sv_quest_entry[lib.quest_map_pin_index.Y_LOCATION], quest_to_update.x, quest_to_update.y))
+                --d(distance)
+                if distance <= 10 then
+                    --d("The quest to be saved is close to one already in the SV file")
+                    --meaning do not save it, one is there close to the one to be saved
+                    save_quest_location = false
+                    --break
+                else
+                    --d("The quest to be saved is not close one in the SV file")
+                    -- meaning it should not be where I am standing
+                    -- consider saving the location
+                    -- question, how to avoid duplicates though
+                    --save_quest_location = true
+                end
             end
         end
-    else
-        --d("save_quest_location was false don't check SV file")
     end
+    --d("done second pass")
 
     --[[ Save the qest location
     Somehow the quest was in the constants file and the LibGPS was -10
@@ -510,11 +556,14 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     looking in the saved vars file for LibQuestInfo we did not see an
     entry for this quest in the zone so it needs to be saved.
     ]]--
+    --save_quest_location = false
     if save_quest_location then
         --d("save_quest_location is true saving")
         --d(the_zone)
         if LibQuestInfo_SavedVariables.location_info[the_zone] == nil then LibQuestInfo_SavedVariables.location_info[the_zone] = {} end
         table.insert(LibQuestInfo_SavedVariables.location_info[the_zone], the_quest_loc_info)
+    else
+        --d("save_quest_location was false not saving")
     end
 
     --d(the_zone)
@@ -522,6 +571,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     table.remove(LibQuestInfo_SavedVariables.quests[the_zone], the_entry)
 
+    --d("Done")
     if not isCompleted  then
         return
     end
