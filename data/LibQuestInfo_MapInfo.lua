@@ -1,6 +1,114 @@
 local lib = _G["LibQuestInfo"]
 
 lib.map_info_data = {
+        ["Art/maps/clockwork/UI_Map_AsylumSanctorum001_Base_0.dds"] =
+        {
+            ["offsetY"] = 1.0273191941,
+            ["scaleY"] = 0.0019028049,
+            ["mapIndex"] = 31,
+            ["offsetX"] = 0.2284819994,
+            ["zoneId"] = 1000,
+            ["scaleX"] = 0.0019028036,
+        },
+        ["Art/maps/clockwork/ccunderground02_base_0.dds"] =
+        {
+            ["offsetY"] = 1.0341743852,
+            ["scaleY"] = 0.0059356521,
+            ["mapIndex"] = 31,
+            ["offsetX"] = 0.2545259949,
+            ["zoneId"] = 983,
+            ["scaleX"] = 0.0059355960,
+        },
+        ["Art/maps/clockwork/basilica_01_base_0.dds"] =
+        {
+            ["offsetY"] = 1.0123091687,
+            ["scaleY"] = 0.0134971847,
+            ["mapIndex"] = 31,
+            ["zoneId"] = 981,
+            ["offsetX"] = 0.2502099950,
+            ["scaleX"] = 0.0134971968,
+        },
+        ["Art/maps/summerset/alinor_base_0.dds"] =
+        {
+            ["offsetX"] = 0.0603572636,
+            ["scaleX"] = 0.0273227971,
+            ["offsetY"] = 0.7509039168,
+            ["scaleY"] = 0.0273227951,
+            ["zoneId"] = 849,
+            ["mapIndex"] = 32,
+        },
+        ["Art/maps/vvardenfell/vivecstdelyn02a_base_0.dds"] =
+        {
+            ["offsetX"] = 0.7723784007,
+            ["scaleX"] = 0.0021132001,
+            ["offsetY"] = 0.3785171924,
+            ["scaleY"] = 0.0021619999,
+            ["zoneId"] = 849,
+            ["mapIndex"] = 30,
+        },
+        ["Art/maps/vvardenfell/vivecsdelyn03a_base_0.dds"] =
+        {
+            ["offsetX"] = 0.7720300095,
+            ["scaleX"] = 0.0012828001,
+            ["offsetY"] = 0.3789020088,
+            ["scaleY"] = 0.0012924001,
+            ["zoneId"] = 849,
+            ["mapIndex"] = 30,
+        },
+        ["Art/maps/vvardenfell/vivechoj01a_base_0.dds"] =
+        {
+            ["offsetX"] = 0.7741543865,
+            ["scaleX"] = 0.0003635999,
+            ["offsetY"] = 0.3826347954,
+            ["scaleY"] = 0.0003540000,
+            ["zoneId"] = 849,
+            ["mapIndex"] = 30,
+        },
+        ["Art/maps/skyrim/blackreach_base_0.dds"] =
+        {
+            ["offsetY"] = 1.5004115984,
+            ["scaleX"] = 0.0805579867,
+            ["offsetX"] = 0.6251539711,
+            ["scaleY"] = 0.0805579256,
+            ["zoneId"] = 1160,
+            ["mapIndex"] = 39,
+        },
+        ["Art/maps/skyrim/darkmoongrottorefuge_base_0.dds"] =
+        {
+            ["offsetY"] = 1.5346188366,
+            ["scaleX"] = 0.0110336001,
+            ["offsetX"] = 0.6387767940,
+            ["scaleY"] = 0.0113108036,
+            ["zoneId"] = 1161,
+            ["mapIndex"] = 39,
+        },
+        ["Art/maps/skyrim/solitudecity_base_0.dds"] =
+        {
+            ["offsetX"] = 0.4237683882,
+            ["offsetY"] = 0.2057344009,
+            ["scaleY"] = 0.0183852007,
+            ["zoneId"] = 1160,
+            ["scaleX"] = 0.0183851955,
+            ["mapIndex"] = 38,
+        },
+        ["Art/maps/skyrim/westernskryim_base_0.dds"] =
+        {
+            ["offsetX"] = 0.3421924078,
+            ["offsetY"] = 0.1524699992,
+            ["scaleY"] = 0.1586711999,
+            ["zoneId"] = 1160,
+            ["scaleX"] = 0.1586711542,
+            ["mapIndex"] = 38,
+        },
+        ["Art/maps/stonefalls/bleakrock_base_0.dds"] =
+        {
+            ["zoneId"] = 280,
+            ["mapIndex"] = 22,
+            ["scaleY"] = 0.0189359958,
+            ["offsetX"] = 0.6726179888,
+            ["offsetY"] = 0.2550136062,
+            ["scaleX"] = 0.0189360247,
+        },
         ["Art/maps/vvardenfell/vvardenfell_base_0.dds"] =
         {
             ["scaleY"] = 0.1799815959,

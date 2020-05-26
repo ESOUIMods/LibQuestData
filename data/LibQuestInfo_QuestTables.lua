@@ -22,11 +22,15 @@ quest giver.
 5949 - For Glory Sign
 6176 - Nafarion's Note, His Final Gift
 6130 - Housing Brochure, Room To Spare
+6514 - The Antiquarian Circle
+6537 - Bloated Fish, Potent Poison
 --]]
 lib.questid_giver_lookup = {
     [5949] = 100050,
     [6176] = 100032,
     [6130] = 100051,
+    [6514] = 200002,
+    [6537] = 200035,
 }
 
 --[[ List of what the numbers mean
