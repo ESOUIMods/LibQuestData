@@ -1193,6 +1193,11 @@ lib.quest_givers["en"] = {
     [200039] = "Ghamborz's Mining Samples",
     [200040] = "Reeh-La's Mining Samples",
     [200041] = "Kelbarn's Mining Samples",
+    [200042] = "Numani-Rasi",
+    [200043] = "Huntmaster Sorim-Nakar",
+    [200044] = "Brondold",
+    [200045] = "Urgarlag Chief-bane",
+    [200046] = "Aerolf",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",

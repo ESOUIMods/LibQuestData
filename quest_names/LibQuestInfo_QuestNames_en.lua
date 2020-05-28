@@ -23,6 +23,13 @@ For renumbering new rebuilt tables
 local lib = _G["LibQuestInfo"]
 
 lib.quest_names["en"] = {
+    [6509] = "Lost Along the Shore",
+    [6513] = "The Pale Man",
+    [6512] = "Halt the Harrowstorms",
+    [5928] = "Relics of Ebernanit",
+    [6527] = "Problem Growth",
+    [6524] = "Spiritual Release",
+    [5911] = "Ash-Eater Hunt",
     [6496] = "The Fate of the Frozen",
     [6498] = "Spellbound",
     [6467] = "The Gathering Storm",
@@ -40,7 +47,7 @@ lib.quest_names["en"] = {
     [6517] = "Moonlight Kidnapping",
     [6535] = "Reeh-La's Mining Samples",
     [6492] = "Soldiers of Fortune and Glory",
-    [6528] = "Halt the Harrowstorms",
+    --[6528] = "Halt the Harrowstorms",
     [6459] = "Long Journey Home",
     [6460] = "Of Ice and Death",
     [6461] = "Hounds of Hircine",

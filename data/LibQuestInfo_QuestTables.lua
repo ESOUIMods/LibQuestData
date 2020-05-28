@@ -24,6 +24,9 @@ quest giver.
 6130 - Housing Brochure, Room To Spare
 6514 - The Antiquarian Circle
 6537 - Bloated Fish, Potent Poison
+6510 - The Maelmoth Mysterium, Peculiar Bottle
+6492 - Soldiers of Fortune and Glory, Notice
+6467 - The Gathering Storm, 
 --]]
 lib.questid_giver_lookup = {
     [5949] = 100050,
@@ -31,6 +34,9 @@ lib.questid_giver_lookup = {
     [6130] = 100051,
     [6514] = 200002,
     [6537] = 200035,
+    [6510] = 200044,
+    [6492] = 100050,
+    [6467] = 200045,
 }
 
 --[[ List of what the numbers mean
@@ -47,6 +53,9 @@ lib.quest_locations
 lib.quest_giver_moves = { 5450, }
 
 --[[ List of what the numbers mean
+This may not be needed since I can check the distance
+of the X,Y coordinates.
+
 This is a list of special Quests that have two locations
 or two ways to get the quest. Allow for duplicates in
 the zone
