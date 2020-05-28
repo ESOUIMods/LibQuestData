@@ -47,4 +47,7 @@ lib.objective_names["en"] = {
     [6461] = "Dark Moon Grotto",
     [6484] = "Mor Khazgur",
     [6473] = "Dragon Bridge",
+    [6189] = "March of Sacrifices",
+    [5301] = "Dungeon: Tempest Island",
+    [5275] = "Dungeon: Darkshade Caverns I",
 }

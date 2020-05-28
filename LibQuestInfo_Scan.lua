@@ -318,21 +318,27 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     end
 
     --[[ set quest giver to it's ID number using the name of the NPC ]]--
-    giver_name_result = lib:get_npcids_table(quest_to_update.giver)
+    local temp_giver = get_giver_when_object(quest_to_update.questID)
+    --d("temp_giver was:")
+    --d(temp_giver)
+    if internal:is_empty_or_nil(temp_giver) then
+        --d("The temp_giver was nil")
+        -- meaning no giver object found
+    else
+        --d("The temp_giver was not nil")
+        -- meaning there was a giver object found
+        quest_to_update.giver = lib:get_quest_giver(temp_giver)
+        --d(temp_giver)
+        --d(quest_to_update.giver)
+        --d(lib.quest_givers["en"][quest_to_update.giver])
+    end
     --d("quest giver table was")
-    --d(giver_name_result)
+    --quest_to_update.giver = "The Fish Object"
     --d(quest_to_update.giver)
+    giver_name_result = lib:get_npcids_table(quest_to_update.giver)
+    --d(giver_name_result)
     if giver_name_result == nil then
         --[[ Check if Quest Giver is an Object, Sign, Note ]]--
-        local temp_giver = get_giver_when_object(quest_to_update.questID)
-        if internal:is_empty_or_nil(temp_giver) then
-            --d("The temp_giver was nil")
-            -- meaning no giver object found
-        else
-            --d("The temp_giver was not nil")
-            -- meaning there was a giver object found
-            quest_to_update.giver = temp_giver
-        end
         --[[ Check if Quest Giver is simply nil or empty, unassigned ]]--
         if internal:is_empty_or_nil(quest_to_update.giver) then
             --d("Quest giver was nil, it is an empty table now from previous function")
@@ -372,6 +378,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         --d("quest giver lookup table is not nil")
         -- meaning we found it don't add it but I need the number
         giver_name_result = lib:get_npcids_table(quest_to_update.giver)[1]
+        --d(giver_name_result)
     end
     --d("end result was")
     --d(giver_name_result)
@@ -380,7 +387,8 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --d(quest_to_update.questID)
     --d("Quest Name Please")
     --d(lib:get_quest_name(quest_to_update.questID))
-    if lib:get_quest_name(quest_to_update.questID) == "Unknown Name" then
+    local temp_quest_name = lib:get_quest_name(quest_to_update.questID)
+    if temp_quest_name == "Unknown Name" then
         --d("quest name is Unknown Name - So not found")
         if is_questname_in_sv(quest_to_update.questID) then
             --d("returned true so it was in the sv")
@@ -392,6 +400,17 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         -- get_questname_sv
         --d("quest name is not Unknown Name - So it was found")
         --d(lib:get_quest_name(quest_to_update.questID))
+        -- is the quest name different from a previous version of the game
+        if temp_quest_name ~= questName then
+            if is_questname_in_sv(quest_to_update.questID) then
+                --d("returned true so it was in the sv")
+            else
+                --d("returned false so it was not in the sv")
+                LibQuestInfo_SavedVariables["quest_names"][quest_to_update.questID] = quest_to_update.name
+            end
+        else
+            --seems to be the same so don't save it
+        end
     end
 
     --[[ Add Quest Information
@@ -405,7 +424,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         [lib.quest_data_index.QUEST_GIVER]  = giver_name_result,
         [lib.quest_data_index.QUEST_TYPE]  = quest_to_update.quest_type,
         [lib.quest_data_index.QUEST_REPEAT]   = quest_to_update.repeat_type,
-        [lib.quest_data_index.GAME_API]   = 100030,
+        [lib.quest_data_index.GAME_API]   = GetAPIVersion(),
         [lib.quest_data_index.QUEST_LINE]   = 10000,
         [lib.quest_data_index.QUEST_NUMBER]   = 10000,
         [lib.quest_data_index.QUEST_SERIES]   = 0,
@@ -442,8 +461,8 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             temp_quest_info [lib.quest_data_index.QUEST_REPEAT] = quest_to_update.repeat_type
             quest_info_changed = true
         end
-        if temp_quest_info[lib.quest_data_index.GAME_API] ~= 100030 then
-            temp_quest_info [lib.quest_data_index.GAME_API] = 100030
+        if temp_quest_info[lib.quest_data_index.GAME_API] < 100030 then
+            temp_quest_info [lib.quest_data_index.GAME_API] = GetAPIVersion()
             quest_info_changed = true
         end
         -- QUEST_LINE is set manually
@@ -496,7 +515,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             -- my_pos_x, my_pos_y
             local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry_table[lib.quest_map_pin_index.X_LOCATION], quest_entry_table[lib.quest_map_pin_index.Y_LOCATION], my_pos_x, my_pos_y))
             --d(distance)
-            if distance <= 10 then
+            if distance <= 25 then
                 --d("The quest from the main database was close to me")
                 --d("However is it -10?")
                 if quest_entry_table[lib.quest_map_pin_index.X_LIBGPS] == -10 then
@@ -533,7 +552,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 -- meaning it is in the saved vars file don't duplicate it
                 local distance = zo_round(GPS:GetLocalDistanceInMeters(sv_quest_entry[lib.quest_map_pin_index.X_LOCATION], sv_quest_entry[lib.quest_map_pin_index.Y_LOCATION], quest_to_update.x, quest_to_update.y))
                 --d(distance)
-                if distance <= 10 then
+                if distance <= 25 then
                     --d("The quest to be saved is close to one already in the SV file")
                     --meaning do not save it, one is there close to the one to be saved
                     save_quest_location = false
