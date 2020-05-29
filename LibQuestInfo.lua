@@ -87,6 +87,13 @@ function lib:get_quest_list(zone)
     end
 end
 
+function lib:get_quest_type(id)
+    if type(id) == "number" then
+        local s = lib.quest_skill_point[id] or false
+        local c = lib.quest_cadwell[id] or false
+        return s, c
+    end
+end
 -------------------------------------------------
 ----- Lookup By ID: returns name             ----
 -------------------------------------------------

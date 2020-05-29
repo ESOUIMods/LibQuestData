@@ -1,6 +1,24 @@
 local lib = _G["LibQuestInfo"]
 
 lib.map_info_data = {
+        ["Art/maps/skyrim/skrtut_deepwoodbarrow_base_0.dds"] =
+        {
+            ["offsetY"] = 0.2337955941,
+            ["scaleX"] = 0.0005567702,
+            ["offsetX"] = 0.3795872142,
+            ["mapIndex"] = 38,
+            ["zoneId"] = 1185,
+            ["scaleY"] = 0.0005568010,
+        },
+        ["Art/maps/skyrim/skrtut_deepwoodvale_base_0.dds"] =
+        {
+            ["mapIndex"] = 38,
+            ["scaleX"] = 0.0007507881,
+            ["zoneId"] = 1185,
+            ["offsetY"] = 0.2328667923,
+            ["offsetX"] = 0.3797828058,
+            ["scaleY"] = 0.0007508203,
+        },
         ["Art/maps/clockwork/UI_Map_AsylumSanctorum001_Base_0.dds"] =
         {
             ["offsetY"] = 1.0273191941,
