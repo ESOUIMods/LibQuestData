@@ -1880,6 +1880,7 @@ lib.quest_names["en"] = {
     [6448] = "The Herbalist's Product",
     [6449] = "Take Your Lumps",
     [6454] = "The Coven Conspiracy",
+    [6455] = "Bound in Blood",
     [6459] = "Long Journey Home",
     [6460] = "Of Ice and Death",
     [6461] = "Hounds of Hircine",

@@ -735,6 +735,17 @@ lib.quest_locations = {
                 [5] = 6493,
             },
     },
+    ["skyrim/skrtut_deepwoodbarrow_base_0"] =
+    {
+        [1] =
+        {
+            [1] = 0.3354884982,
+            [2] = 0.6142241359,
+            [3] = 0.3797740042,
+            [4] = 0.2341375947,
+            [5] = 6455,
+        },
+    },
     ["elsweyr/starhaventraininghalls_base_0"] =
     {
         [1] =
