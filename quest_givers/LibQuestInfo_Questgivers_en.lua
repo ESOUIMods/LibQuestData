@@ -1198,6 +1198,7 @@ lib.quest_givers["en"] = {
     [200044] = "Brondold",
     [200045] = "Urgarlag Chief-bane",
     [200046] = "Aerolf",
+    [200047] = "Captain Hingrid",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",

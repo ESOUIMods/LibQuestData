@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestInfo", 183
+local libName, libVersion = "LibQuestInfo", 184
 lib = {}
 internal = {}
 lib.quest_givers = {}

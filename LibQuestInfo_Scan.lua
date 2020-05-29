@@ -73,17 +73,6 @@ local function is_map_info_in_sv(zone)
     end
 end
 
-local function get_objective_sv(name)
-    --d(name)
-    local obj_name = nil
-    for count, value in pairs(LibQuestInfo_SavedVariables.objective_info) do
-        if value == name then
-            obj_name = value
-        end
-    end
-    return obj_name
-end
-
 local function is_questname_in_sv(id)
     --d(id)
     --[[Note to self:
@@ -271,7 +260,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     local giver_name_result
     local quest_info_changed = false
     local save_quest_location = true
-    local my_pos_x, my_pos_y = GetMapPlayerPosition("player")
+    --local my_pos_x, my_pos_y = GetMapPlayerPosition("player")
 
     for zone, zone_quests in pairs(LibQuestInfo_SavedVariables.quests) do
         for num_entry, quest_from_table in pairs(zone_quests) do
@@ -295,7 +284,6 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     end
 
     --[[ set objective ]]--
-    -- local objective_name = get_objective_sv(quest_to_update.objective)
     --d("objective")
     --d(quest_to_update.objective)
     local temp_obj = lib:get_objids_table(quest_to_update.objective)
@@ -318,6 +306,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     end
 
     --[[ set quest giver to it's ID number using the name of the NPC ]]--
+    --[[ Check if Quest Giver is an Object, Sign, Note ]]--
     local temp_giver = get_giver_when_object(quest_to_update.questID)
     --d("temp_giver was:")
     --d(temp_giver)
@@ -338,7 +327,6 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     giver_name_result = lib:get_npcids_table(quest_to_update.giver)
     --d(giver_name_result)
     if giver_name_result == nil then
-        --[[ Check if Quest Giver is an Object, Sign, Note ]]--
         --[[ Check if Quest Giver is simply nil or empty, unassigned ]]--
         if internal:is_empty_or_nil(quest_to_update.giver) then
             --d("Quest giver was nil, it is an empty table now from previous function")
@@ -512,11 +500,11 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         --d(quest_entry_table)
         if quest_entry_table[lib.quest_map_pin_index.QUEST_ID] == quest_to_update.questID then
             --d("Found an entry with the same quest ID so check LibGPS")
-            -- my_pos_x, my_pos_y
-            local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry_table[lib.quest_map_pin_index.X_LOCATION], quest_entry_table[lib.quest_map_pin_index.Y_LOCATION], my_pos_x, my_pos_y))
+            -- my_pos_x, my_pos_y : not this may not be important because I know where I was standing
+            local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry_table[lib.quest_map_pin_index.X_LOCATION], quest_entry_table[lib.quest_map_pin_index.Y_LOCATION], quest_to_update.x, quest_to_update.y))
             --d(distance)
             if distance <= 25 then
-                --d("The quest from the main database was close to me")
+                --d("The quest from the main database was close to the quest to update")
                 --d("However is it -10?")
                 if quest_entry_table[lib.quest_map_pin_index.X_LIBGPS] == -10 then
                     --d("-10 so save it anyway")
@@ -526,7 +514,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                     save_quest_location = false
                 end
             else
-                --d("The quest from the main database was not close to me")
+                --d("The quest from the main database was NOT close to the quest to update")
                 --d("Could be set to true for saving to the SV file")
                 -- meaning it should not be where I am standing
                 -- consider saving the location
