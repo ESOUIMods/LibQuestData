@@ -262,10 +262,10 @@ local function OnPlayerActivated(eventCode)
         LibQuestInfo_SavedVariables.map_info = {}
         LibQuestInfo_SavedVariables.giver_names = {}
     end
+    LibQuestInfo_SavedVariables.libVersion = lib.libVersion
     lib:build_questid_table(lib.client_lang) -- build name lookup table once
     lib:build_npcid_table(lib.client_lang) -- build npc names lookup table once
     lib:build_objectiveid_table(lib.client_lang) -- build objective names lookup table once
-    -- d("I am here")
 
     EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED)
 end

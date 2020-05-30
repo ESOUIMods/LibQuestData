@@ -50,4 +50,5 @@ lib.objective_names["en"] = {
     [6189] = "March of Sacrifices",
     [5301] = "Dungeon: Tempest Island",
     [5275] = "Dungeon: Darkshade Caverns I",
+    [6497] = "Nchuthnkarst",
 }
