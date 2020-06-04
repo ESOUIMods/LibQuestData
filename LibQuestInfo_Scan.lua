@@ -100,8 +100,8 @@ end
 
 local function get_quest_list_sv(zone)
     --d(zone)
-    if type(zone) == "string" and LibQuestInfo_SavedVariables.location_info[zone] ~= nil then
-        return LibQuestInfo_SavedVariables.location_info[zone]
+    if type(zone) == "string" and LibQuestInfo_SavedVariables["location_info"][zone] ~= nil then
+        return LibQuestInfo_SavedVariables["location_info"][zone]
     else
         return {}
     end
@@ -140,8 +140,9 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
 
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     if LibQuestInfo_SavedVariables.quests[zone] == nil then LibQuestInfo_SavedVariables.quests[zone] = {} end
-    local normalizedX, normalizedY = GetMapPlayerPosition("player")
-    local gpsx, gpsy, zoneMapIndex = GPS:LocalToGlobal(normalizedX, normalizedY)
+    local local_x, local_y = GetMapPlayerPosition("player")
+    local global_x, global_y, zoneMapIndex = GPS:LocalToGlobal(local_x, local_y)
+    local zone_id, world_x, world_y, world_z = GetUnitWorldPosition("player")
     local measurement = GPS:GetCurrentMapMeasurement()
     if journalIndex then
         quest_type = GetJournalQuestType(journalIndex)
@@ -151,24 +152,27 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         ["quest_type"]  = quest_type,
         ["repeat_type"] = repeat_type,
         ["name"]        = questName,
-        ["x"]           = normalizedX,
-        ["y"]           = normalizedY,
-        ["gpsx"]        = gpsx,
-        ["gpsy"]        = gpsy,
+        ["x"]           = local_x,
+        ["y"]           = local_y,
+        ["gpsx"]        = global_x,
+        ["gpsy"]        = global_y,
         ["giver"]       = questGiverName,
         ["questID"]     = quest_id, -- assign this and get the ID when the quest is removed
         ["api"]         = GetAPIVersion(),
         ["lang"]        = GetCVar("language.2"),
         ["objective"]   = objectiveName,
+        ["world_x"]        = world_x,
+        ["world_y"]        = world_y,
+        ["world_z"]        = world_z,
     }
 
     local measurement_info = {
-        ["mapIndex"] = measurement.mapIndex,
-        ["offsetX"]  = measurement.offsetX,
-        ["offsetY"]  = measurement.offsetY,
-        ["scaleY"]   = measurement.scaleY,
-        ["zoneId"]   = measurement.zoneId,
-        ["scaleX"]   = measurement.scaleX,
+        ["map_index"] = measurement.mapIndex, -- previously mapIndex
+        ["zone_id"]   = measurement.zoneId, -- previously zoneId
+        ["offset_x"]  = measurement.offsetX, -- previously offsetX
+        ["offset_y"]  = measurement.offsetY, -- previously offsetY
+        ["scale_x"]   = measurement.scaleX, -- previously scaleX
+        ["scale_y"]   = measurement.scaleY, -- previously scaleY
     }
 
     --d("Begin Measurement collection")
@@ -190,9 +194,9 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     end
     --d("End Measurement collection")
 
-    local quest_found = false
-    local QuestScout_zonelist = get_sv_quest_info(zone)
-    for num_entry, quest_from_table in pairs(QuestScout_zonelist) do
+    quest_found = false
+    local quests_in_zone = get_sv_quest_info(zone)
+    for num_entry, quest_from_table in pairs(quests_in_zone) do
         if quest_from_table.name == questName then
             quest_found = true
         end
@@ -250,6 +254,23 @@ local function OnQuestCompleteDialog(eventCode, journalIndex)
 end
 EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestCompleteDialog) -- Verified
 
+local function has_undefined_data(info)
+    local undefined = false
+    if info[lib.quest_map_pin_index.global_x] == -10 then
+        --d("global_x was -10 so undefined")
+        undefined = true
+    end
+    if info[lib.quest_map_pin_index.world_x] == -10 then
+        --d("world_x was -10 so undefined")
+        undefined = true
+    end
+    if not info[lib.quest_map_pin_index.world_x] then
+        --d("world_x did not exist so undefined")
+        undefined = true
+    end
+    return undefined
+end
+
 -- Event handler function for EVENT_QUEST_REMOVED
 local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
     --d("OnQuestRemoved")
@@ -286,6 +307,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --[[ set objective ]]--
     --d("objective")
     --d(quest_to_update.objective)
+    LibQuestInfo_SavedVariables["objective_info"] = LibQuestInfo_SavedVariables["objective_info"] or {}
     local temp_obj = lib:get_objids_table(quest_to_update.objective)
     --d(temp_obj)
     if temp_obj == nil then
@@ -297,7 +319,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 --d("The objective is in the SV file")
             else
                 --d("The objective is not in the SV file")
-                LibQuestInfo_SavedVariables.objective_info[quest_to_update.questID] = quest_to_update.objective
+                LibQuestInfo_SavedVariables["objective_info"][quest_to_update.questID] = quest_to_update.objective
             end
         end
     else
@@ -307,6 +329,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     --[[ set quest giver to it's ID number using the name of the NPC ]]--
     --[[ Check if Quest Giver is an Object, Sign, Note ]]--
+    LibQuestInfo_SavedVariables["giver_names"] = LibQuestInfo_SavedVariables["giver_names"] or {}
     local temp_giver = get_giver_when_object(quest_to_update.questID)
     --d("temp_giver was:")
     --d(temp_giver)
@@ -375,6 +398,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --d(quest_to_update.questID)
     --d("Quest Name Please")
     --d(lib:get_quest_name(quest_to_update.questID))
+    LibQuestInfo_SavedVariables["quest_names"] = LibQuestInfo_SavedVariables["quest_names"] or {}
     local temp_quest_name = lib:get_quest_name(quest_to_update.questID)
     if temp_quest_name == "Unknown Name" then
         --d("quest name is Unknown Name - So not found")
@@ -408,16 +432,16 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             anyway.
     ]]--
     the_quest_info = {
-        [lib.quest_data_index.QUEST_NAME] = quest_to_update.questID,
-        [lib.quest_data_index.QUEST_GIVER]  = giver_name_result,
-        [lib.quest_data_index.QUEST_TYPE]  = quest_to_update.quest_type,
-        [lib.quest_data_index.QUEST_REPEAT]   = quest_to_update.repeat_type,
-        [lib.quest_data_index.GAME_API]   = GetAPIVersion(),
-        [lib.quest_data_index.QUEST_LINE]   = 10000,
-        [lib.quest_data_index.QUEST_NUMBER]   = 10000,
-        [lib.quest_data_index.QUEST_SERIES]   = 0,
+        [lib.quest_data_index.quest_name] = quest_to_update.questID,
+        [lib.quest_data_index.quest_type]  = quest_to_update.quest_type,
+        [lib.quest_data_index.quest_repeat]   = quest_to_update.repeat_type,
+        [lib.quest_data_index.game_api]   = GetAPIVersion(),
+        [lib.quest_data_index.quest_line]   = 10000,
+        [lib.quest_data_index.quest_number]   = 10000,
+        [lib.quest_data_index.quest_series]   = 0,
     }
 
+    LibQuestInfo_SavedVariables["quest_info"] = LibQuestInfo_SavedVariables["quest_info"] or {}
     local temp_quest_info = lib.quest_data[quest_to_update.questID]
     if temp_quest_info == nil then
         --d("quest information is nill")
@@ -426,36 +450,28 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     else
         --d("quest information is not nill")
         -- meaning I need to compare things and save if different
-        if temp_quest_info[lib.quest_data_index.QUEST_NAME] ~= quest_to_update.questID then
-            temp_quest_info [lib.quest_data_index.QUEST_NAME] = quest_to_update.questID
+        if temp_quest_info[lib.quest_data_index.quest_name] ~= quest_to_update.questID then
+            temp_quest_info [lib.quest_data_index.quest_name] = quest_to_update.questID
             quest_info_changed = true
         end
-        if internal:is_in(quest_to_update.questID, lib.quest_giver_is_object) then
-            --d("Hey that quest ID in in this special table")
-            -- meaning keep the value and don't touch it
-        else
-            -- meaning you can compare it
-            --d("Hey that quest ID was not in this special table")
-            if temp_quest_info[lib.quest_data_index.QUEST_GIVER] ~= giver_name_result then
-                temp_quest_info [lib.quest_data_index.QUEST_GIVER] = giver_name_result
-                quest_info_changed = true
-            end
-        end
-        if temp_quest_info[lib.quest_data_index.QUEST_TYPE] ~= quest_to_update.quest_type then
-            temp_quest_info [lib.quest_data_index.QUEST_TYPE] = quest_to_update.quest_type
+
+        -- quest_giver_is_object lib.quest_data_index.quest_giver, depreciated
+
+        if temp_quest_info[lib.quest_data_index.quest_type] ~= quest_to_update.quest_type then
+            temp_quest_info [lib.quest_data_index.quest_type] = quest_to_update.quest_type
             quest_info_changed = true
         end
-        if temp_quest_info[lib.quest_data_index.QUEST_REPEAT] ~= quest_to_update.repeat_type then
-            temp_quest_info [lib.quest_data_index.QUEST_REPEAT] = quest_to_update.repeat_type
+        if temp_quest_info[lib.quest_data_index.quest_repeat] ~= quest_to_update.repeat_type then
+            temp_quest_info [lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type
             quest_info_changed = true
         end
-        if temp_quest_info[lib.quest_data_index.GAME_API] < 100030 then
-            temp_quest_info [lib.quest_data_index.GAME_API] = GetAPIVersion()
+        if temp_quest_info[lib.quest_data_index.game_api] < 100030 then
+            temp_quest_info [lib.quest_data_index.game_api] = GetAPIVersion()
             quest_info_changed = true
         end
-        -- QUEST_LINE is set manually
-        -- QUEST_NUMBER is set manually
-        -- QUEST_SERIES is set manually
+        -- quest_line is set manually
+        -- quest_number is set manually
+        -- quest_series is set manually
         --d(temp_quest_info)
         if quest_info_changed then
             --d("save the table")
@@ -466,11 +482,15 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     end
 
     the_quest_loc_info = {
-        [lib.quest_map_pin_index.X_LOCATION] = quest_to_update.x,
-        [lib.quest_map_pin_index.Y_LOCATION]  = quest_to_update.y,
-        [lib.quest_map_pin_index.X_LIBGPS]  = quest_to_update.gpsx,
-        [lib.quest_map_pin_index.Y_LIBGPS]   = quest_to_update.gpsy,
-        [lib.quest_map_pin_index.QUEST_ID]   = quest_to_update.questID,
+        [lib.quest_map_pin_index.local_x] = quest_to_update.x,
+        [lib.quest_map_pin_index.local_y]  = quest_to_update.y,
+        [lib.quest_map_pin_index.global_x]  = quest_to_update.gpsx,
+        [lib.quest_map_pin_index.global_y]   = quest_to_update.gpsy,
+        [lib.quest_map_pin_index.quest_id]   = quest_to_update.questID,
+        [lib.quest_map_pin_index.world_x]   = quest_to_update.world_x or -10,
+        [lib.quest_map_pin_index.world_y]   = quest_to_update.world_y or -10,
+        [lib.quest_map_pin_index.world_z]   = quest_to_update.world_z or -10,
+        [lib.quest_map_pin_index.quest_giver] = giver_name_result,
     }
 
     --[[
@@ -498,21 +518,27 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     for num_entry, quest_entry_table in ipairs(regular_quest_list) do
         --d(num_entry)
         --d(quest_entry_table)
-        if quest_entry_table[lib.quest_map_pin_index.QUEST_ID] == quest_to_update.questID then
+        if quest_entry_table[lib.quest_map_pin_index.quest_id] == quest_to_update.questID then
             --d("Found an entry with the same quest ID so check LibGPS")
             -- my_pos_x, my_pos_y : not this may not be important because I know where I was standing
-            local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry_table[lib.quest_map_pin_index.X_LOCATION], quest_entry_table[lib.quest_map_pin_index.Y_LOCATION], quest_to_update.x, quest_to_update.y))
+            local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry_table[lib.quest_map_pin_index.local_x], quest_entry_table[lib.quest_map_pin_index.local_y], quest_to_update.x, quest_to_update.y))
             --d(distance)
+            --d(quest_entry_table)
             if distance <= 25 then
                 --d("The quest from the main database was close to the quest to update")
                 --d("However is it -10?")
-                if quest_entry_table[lib.quest_map_pin_index.X_LIBGPS] == -10 then
-                    --d("-10 so save it anyway")
+                if has_undefined_data(quest_entry_table) then
+                    --d("quest_entry_table had undefined data")
                     save_quest_location = true
                 else
-                    --d("It was close and not -10 so do not save it")
+                    --d("quest_entry_table was defined properly")
                     save_quest_location = false
                 end
+            -- not having 3D Pin data means save it regardless
+            elseif has_undefined_data(quest_entry_table) then
+                --d("The quest from the main database was NOT close to the quest to update")
+                --d("quest_entry_table had undefined data")
+                save_quest_location = true
             else
                 --d("The quest from the main database was NOT close to the quest to update")
                 --d("Could be set to true for saving to the SV file")
@@ -530,15 +556,16 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     ]]--
     --d("save_quest_location: "..tostring(save_quest_location))
     -- the api changed so save the location regardless
+    LibQuestInfo_SavedVariables["location_info"] = LibQuestInfo_SavedVariables["location_info"] or {}
     if save_quest_location then
         saved_vars_quest_list = get_quest_list_sv(the_zone)
         for num_entry, sv_quest_entry in ipairs(saved_vars_quest_list) do
             --d(num_entry)
             --d(sv_quest_entry)
-            if sv_quest_entry[lib.quest_map_pin_index.QUEST_ID] == quest_to_update.questID then
+            if sv_quest_entry[lib.quest_map_pin_index.quest_id] == quest_to_update.questID then
                 --d("found that the entry 5 was equal to the ID of this quest in the SV file")
                 -- meaning it is in the saved vars file don't duplicate it
-                local distance = zo_round(GPS:GetLocalDistanceInMeters(sv_quest_entry[lib.quest_map_pin_index.X_LOCATION], sv_quest_entry[lib.quest_map_pin_index.Y_LOCATION], quest_to_update.x, quest_to_update.y))
+                local distance = zo_round(GPS:GetLocalDistanceInMeters(sv_quest_entry[lib.quest_map_pin_index.local_x], sv_quest_entry[lib.quest_map_pin_index.local_y], quest_to_update.x, quest_to_update.y))
                 --d(distance)
                 if distance <= 25 then
                     --d("The quest to be saved is close to one already in the SV file")
@@ -551,6 +578,10 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                     -- consider saving the location
                     -- question, how to avoid duplicates though
                     --save_quest_location = true
+                end
+                if has_undefined_data(sv_quest_entry) then
+                    table.remove(LibQuestInfo_SavedVariables["location_info"][the_zone], num_entry)
+                    save_quest_location = true
                 end
             end
         end
@@ -567,8 +598,8 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     if save_quest_location then
         --d("save_quest_location is true saving")
         --d(the_zone)
-        if LibQuestInfo_SavedVariables.location_info[the_zone] == nil then LibQuestInfo_SavedVariables.location_info[the_zone] = {} end
-        table.insert(LibQuestInfo_SavedVariables.location_info[the_zone], the_quest_loc_info)
+        if LibQuestInfo_SavedVariables["location_info"][the_zone] == nil then LibQuestInfo_SavedVariables["location_info"][the_zone] = {} end
+        table.insert(LibQuestInfo_SavedVariables["location_info"][the_zone], the_quest_loc_info)
     else
         --d("save_quest_location was false not saving")
     end
@@ -616,18 +647,14 @@ local function OnPlayerActivated(eventCode)
         if LibQuestInfo_SavedVariables.subZones[zone] == nil then LibQuestInfo_SavedVariables.subZones[zone] = {} end
         if LibQuestInfo_SavedVariables.subZones[zone][lastZone] == nil then
             -- Save entrance position
-            local x, y = GetMapPlayerPosition("player")
-            local gpsx, gpsy, gpsm = GPS:LocalToGlobal(x, y)
+            local local_x, local_y = GetMapPlayerPosition("player")
+            local global_x, global_y = GPS:LocalToGlobal(x, y)
             local measurement = GPS:GetCurrentMapMeasurements()
             LibQuestInfo_SavedVariables.subZones[zone][lastZone] = {
-                -- previously this was reversed ?? GetMapPlayerPosition
-                -- won't reverse that ??
-                -- ["y"] = x,
-                -- ["x"] = y,
-                ["x"] = x,
-                ["y"] = y,
-                ["gpsx"] = gpsx,
-                ["gpsy"] = gpsy,
+                ["local_x"] = local_x, -- previously x
+                ["local_y"] = local_y, -- previously y
+                ["global_x"] = global_x, -- previously gpsx
+                ["global_y"] = global_y, -- previously gpsy
                 ["measurement"] = measurement,
             }
         end
