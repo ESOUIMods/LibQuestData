@@ -1,6 +1,6 @@
 ﻿--[[
 
-LibQuestInfo
+LibQuestData
 by Sharlikran
 https://sharlikran.github.io/
 
@@ -9,11 +9,11 @@ https://sharlikran.github.io/
 
 (.*) = "(.*)" = "(.*), ",
 "\2", = \{\3\,},
-    
+
 ^"(.*)", = \{(.*)\},
     \["\1"] = \{\2 },
 --]]
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
 lib.quest_givers["ru"] = {
 	   [601] = "Леон Мильель^M",

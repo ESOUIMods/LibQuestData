@@ -1,4 +1,4 @@
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
 -- Local variables
 local questGiverName = nil
@@ -33,18 +33,18 @@ end
 local function get_sv_quest_info(zone)
     --d(zone)
     -- if type(zone) ~= "string"
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quests[zone]) then
+    if internal:is_empty_or_nil(LibQuestData_SavedVariables.quests[zone]) then
         --d("get_sv_quest_info it was nil")
         return {}
     else
         --d("get_sv_quest_info was not nil")
-        return LibQuestInfo_SavedVariables.quests[zone]
+        return LibQuestData_SavedVariables.quests[zone]
     end
 end
 
 local function is_giver_in_sv(id)
     --d(id)
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["giver_names"][id]) then
+    if internal:is_empty_or_nil(LibQuestData_SavedVariables["giver_names"][id]) then
         --d("The Quest ID and name set to an NPC or Unknown, was not found in the SV table")
         return false
     else
@@ -54,7 +54,7 @@ local function is_giver_in_sv(id)
 end
 
 local function is_objective_in_sv(id)
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["objective_info"][id]) then
+    if internal:is_empty_or_nil(LibQuestData_SavedVariables["objective_info"][id]) then
         --d("The objective was not found in the SV table")
         return false
     else
@@ -64,7 +64,7 @@ local function is_objective_in_sv(id)
 end
 
 local function is_map_info_in_sv(zone)
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["map_info"][zone]) then
+    if internal:is_empty_or_nil(LibQuestData_SavedVariables["map_info"][zone]) then
         --d("The Quest ID and name set to an NPC or Unknown, was not found in the SV table")
         return false
     else
@@ -88,20 +88,20 @@ local function is_questname_in_sv(id)
     Needs different way to handle this or leave it since
     the assignment overwrites the value each time regardless.
     ]]--
-    if internal:is_empty_or_nil(LibQuestInfo_SavedVariables["quest_names"][id]) then
+    if internal:is_empty_or_nil(LibQuestData_SavedVariables["quest_names"][id]) then
         --d("is_questname_in_sv it was nil")
         return false
     else
         --d("is_questname_in_sv was not nil")
-        --d(LibQuestInfo_SavedVariables["quest_names"][id])
+        --d(LibQuestData_SavedVariables["quest_names"][id])
         return true
     end
 end
 
 local function get_quest_list_sv(zone)
     --d(zone)
-    if type(zone) == "string" and LibQuestInfo_SavedVariables["location_info"][zone] ~= nil then
-        return LibQuestInfo_SavedVariables["location_info"][zone]
+    if type(zone) == "string" and LibQuestData_SavedVariables["location_info"][zone] ~= nil then
+        return LibQuestData_SavedVariables["location_info"][zone]
     else
         return {}
     end
@@ -139,7 +139,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     -- Add quest to saved variables table in correct zone element
 
     local zone = LMP:GetZoneAndSubzone(true, false, true)
-    if LibQuestInfo_SavedVariables.quests[zone] == nil then LibQuestInfo_SavedVariables.quests[zone] = {} end
+    if LibQuestData_SavedVariables.quests[zone] == nil then LibQuestData_SavedVariables.quests[zone] = {} end
     local local_x, local_y = GetMapPlayerPosition("player")
     local global_x, global_y, zoneMapIndex = GPS:LocalToGlobal(local_x, local_y)
     local zone_id, world_x, world_y, world_z = GetUnitWorldPosition("player")
@@ -186,7 +186,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         else
             --d("returned false so the map name was not found--------")
             -- meaning I don't have it in the SavedVariables file, save it
-            LibQuestInfo_SavedVariables.map_info[measurement.id] = measurement_info
+            LibQuestData_SavedVariables.map_info[measurement.id] = measurement_info
         end
     else
         --d("the main database is not nil")
@@ -205,7 +205,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         --d("quest found")
     else
         --d("quest not found")
-        table.insert(LibQuestInfo_SavedVariables.quests[zone], quest)
+        table.insert(LibQuestData_SavedVariables.quests[zone], quest)
     end
 end
 EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_ADDED, OnQuestAdded) -- Verified
@@ -318,14 +318,14 @@ local function update_older_quest_info(source_data)
     local result_table = {}
     for num_entry, quest_entry in ipairs(source_data) do
         if #quest_entry <= 5 then
-            --d("info is old we might need it so update it")
+            --d("info is in the old format add new information")
             quest_entry[lib.quest_map_pin_index.world_x]     =    -10 -- WorldX 3D Location << -10 = Undefined >>
             quest_entry[lib.quest_map_pin_index.world_y]     =    -10 -- WorldY 3D Location << -10 = Undefined >>
             quest_entry[lib.quest_map_pin_index.world_z]     =    -10 -- WorldZ 3D Location << -10 = Undefined >>
             quest_entry[lib.quest_map_pin_index.quest_giver] =    -1 -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
             table.insert(result_table, quest_entry)
         else
-            --d("info is not old we want it")
+            --d("info is in the new format we do nto need to add new information")
             table.insert(result_table, quest_entry)
         end
     end
@@ -363,7 +363,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     local save_quest_location = true
     --local my_pos_x, my_pos_y = GetMapPlayerPosition("player")
 
-    for zone, zone_quests in pairs(LibQuestInfo_SavedVariables.quests) do
+    for zone, zone_quests in pairs(LibQuestData_SavedVariables.quests) do
         for num_entry, quest_from_table in pairs(zone_quests) do
             if quest_from_table.name == questName then
                 the_zone = zone
@@ -387,7 +387,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --[[ set objective ]]--
     --d("objective")
     --d(quest_to_update.objective)
-    LibQuestInfo_SavedVariables["objective_info"] = LibQuestInfo_SavedVariables["objective_info"] or {}
+    LibQuestData_SavedVariables["objective_info"] = LibQuestData_SavedVariables["objective_info"] or {}
     local temp_obj = lib:get_objids_table(quest_to_update.objective)
     --d(temp_obj)
     if temp_obj == nil then
@@ -399,7 +399,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 --d("The objective is in the SV file")
             else
                 --d("The objective is not in the SV file")
-                LibQuestInfo_SavedVariables["objective_info"][quest_to_update.questID] = quest_to_update.objective
+                LibQuestData_SavedVariables["objective_info"][quest_to_update.questID] = quest_to_update.objective
             end
         end
     else
@@ -409,7 +409,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     --[[ set quest giver to it's ID number using the name of the NPC ]]--
     --[[ Check if Quest Giver is an Object, Sign, Note ]]--
-    LibQuestInfo_SavedVariables["giver_names"] = LibQuestInfo_SavedVariables["giver_names"] or {}
+    LibQuestData_SavedVariables["giver_names"] = LibQuestData_SavedVariables["giver_names"] or {}
     local temp_giver = get_giver_when_object(quest_to_update.questID)
     --d("temp_giver was:")
     --d(temp_giver)
@@ -462,7 +462,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             -- arbitrary value, use the string for now
         else
             --d("The giver was not in the SV file")
-            LibQuestInfo_SavedVariables.giver_names[quest_to_update.questID] = quest_to_update.giver
+            LibQuestData_SavedVariables.giver_names[quest_to_update.questID] = quest_to_update.giver
         end
         giver_name_result = quest_to_update.giver
     else
@@ -478,7 +478,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --d(quest_to_update.questID)
     --d("Quest Name Please")
     --d(lib:get_quest_name(quest_to_update.questID))
-    LibQuestInfo_SavedVariables["quest_names"] = LibQuestInfo_SavedVariables["quest_names"] or {}
+    LibQuestData_SavedVariables["quest_names"] = LibQuestData_SavedVariables["quest_names"] or {}
     local temp_quest_name = lib:get_quest_name(quest_to_update.questID)
     if temp_quest_name == "Unknown Name" then
         --d("quest name is Unknown Name - So not found")
@@ -486,7 +486,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
             --d("returned true so it was in the sv")
         else
             --d("returned false so it was not in the sv")
-            LibQuestInfo_SavedVariables["quest_names"][quest_to_update.questID] = quest_to_update.name
+            LibQuestData_SavedVariables["quest_names"][quest_to_update.questID] = quest_to_update.name
         end
     else
         -- get_questname_sv
@@ -498,7 +498,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 --d("returned true so it was in the sv")
             else
                 --d("returned false so it was not in the sv")
-                LibQuestInfo_SavedVariables["quest_names"][quest_to_update.questID] = quest_to_update.name
+                LibQuestData_SavedVariables["quest_names"][quest_to_update.questID] = quest_to_update.name
             end
         else
             --seems to be the same so don't save it
@@ -521,12 +521,12 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         [lib.quest_data_index.quest_series]   = 0,
     }
 
-    LibQuestInfo_SavedVariables["quest_info"] = LibQuestInfo_SavedVariables["quest_info"] or {}
+    LibQuestData_SavedVariables["quest_info"] = LibQuestData_SavedVariables["quest_info"] or {}
     local temp_quest_info = lib.quest_data[quest_to_update.questID]
     if temp_quest_info == nil then
         --d("quest information is nil")
         -- meaning I need to create it and save it, no compare
-        LibQuestInfo_SavedVariables["quest_info"][quest_to_update.questID] = the_quest_info
+        LibQuestData_SavedVariables["quest_info"][quest_to_update.questID] = the_quest_info
     else
         --d("quest information is not nill")
         -- meaning I need to compare things and save if different
@@ -554,7 +554,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         -- quest_series is set manually
         --d(temp_quest_info)
         --[[ Check Saved Vars format ]]--
-        if LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] ~= nil and #LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] > 7 then
+        if LibQuestData_SavedVariables.quest_info[quest_to_update.questID] ~= nil and #LibQuestData_SavedVariables.quest_info[quest_to_update.questID] > 7 then
             --d("old format")
             --[[
             Not technically a change but the SavedVariables data is the old format
@@ -567,7 +567,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
         if quest_info_changed then
             --d("save the table")
-            LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] = temp_quest_info
+            LibQuestData_SavedVariables.quest_info[quest_to_update.questID] = temp_quest_info
         else
             --d("do not save the table")
         end
@@ -650,9 +650,9 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     ]]--
     --d("save_quest_location: "..tostring(save_quest_location))
     -- the api changed so save the location regardless
-    LibQuestInfo_SavedVariables["location_info"] = LibQuestInfo_SavedVariables["location_info"] or {}
+    LibQuestData_SavedVariables["location_info"] = LibQuestData_SavedVariables["location_info"] or {}
     -- clear all old entries
-    LibQuestInfo_SavedVariables["location_info"][the_zone] = update_older_quest_info(LibQuestInfo_SavedVariables["location_info"][the_zone])
+    LibQuestData_SavedVariables["location_info"][the_zone] = update_older_quest_info(LibQuestData_SavedVariables["location_info"][the_zone])
     -- now look for duplicates
     if save_quest_location then
         saved_vars_quest_list = get_quest_list_sv(the_zone)
@@ -664,6 +664,12 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 -- meaning it is in the saved vars file don't duplicate it
                 local distance = zo_round(GPS:GetLocalDistanceInMeters(sv_quest_entry[lib.quest_map_pin_index.local_x], sv_quest_entry[lib.quest_map_pin_index.local_y], quest_to_update.x, quest_to_update.y))
                 --d("Distance: "..distance)
+                if internal:is_in(quest_to_update.questID, lib.quest_giver_moves) then
+                    --d("We found a quest giver that moves")
+                    save_quest_location = false
+                else
+                    --d("We did not find a quest giver that moves")
+                end
                 if distance <= 25 then
                     --d("The quest to be saved is close to one already in the SV file")
                     save_quest_location = false
@@ -672,7 +678,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 end
                 if has_undefined_data(sv_quest_entry) then
                     --d("sv_quest_entry had undefined data")
-                    remove_older_quest_info(LibQuestInfo_SavedVariables["location_info"][the_zone], the_quest_loc_info)
+                    remove_older_quest_info(LibQuestData_SavedVariables["location_info"][the_zone], the_quest_loc_info)
                     save_quest_location = true
                 else
                     --d("sv_quest_entry was defined properly")
@@ -685,15 +691,15 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --[[ Save the qest location
     Somehow the quest was in the constants file and the LibGPS was -10
     so I determined I needed to save the updated location. Then after
-    looking in the saved vars file for LibQuestInfo we did not see an
+    looking in the saved vars file for LibQuestData we did not see an
     entry for this quest in the zone so it needs to be saved.
     ]]--
     --save_quest_location = false
-    if save_quest_location and not internal:is_in(quest_to_update.questID, lib.quest_giver_moves) then
+    if save_quest_location then
         --d("save_quest_location is true saving")
         --d(the_zone)
-        if LibQuestInfo_SavedVariables["location_info"][the_zone] == nil then LibQuestInfo_SavedVariables["location_info"][the_zone] = {} end
-        table.insert(LibQuestInfo_SavedVariables["location_info"][the_zone], the_quest_loc_info)
+        if LibQuestData_SavedVariables["location_info"][the_zone] == nil then LibQuestData_SavedVariables["location_info"][the_zone] = {} end
+        table.insert(LibQuestData_SavedVariables["location_info"][the_zone], the_quest_loc_info)
     else
         --d("save_quest_location was false not saving")
     end
@@ -701,7 +707,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --d(the_zone)
     --d(the_entry)
 
-    table.remove(LibQuestInfo_SavedVariables.quests[the_zone], the_entry)
+    table.remove(LibQuestData_SavedVariables.quests[the_zone], the_entry)
 
     --d("Done")
     if not isCompleted  then
@@ -709,9 +715,9 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     end
 
     if isCompleted then
-        if not LibQuestInfo_SavedVariables.reward_info then LibQuestInfo_SavedVariables.reward_info = {} end
-        if not LibQuestInfo_SavedVariables.reward_info[questID] then LibQuestInfo_SavedVariables.reward_info[questID] = {} end
-        LibQuestInfo_SavedVariables.reward_info[questID] = reward
+        if not LibQuestData_SavedVariables.reward_info then LibQuestData_SavedVariables.reward_info = {} end
+        if not LibQuestData_SavedVariables.reward_info[questID] then LibQuestData_SavedVariables.reward_info[questID] = {} end
+        LibQuestData_SavedVariables.reward_info[questID] = reward
         reward = nil
     end
 end
@@ -724,7 +730,7 @@ end
 EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_PLAYER_DEACTIVATED, OnPlayerDeactivated) -- Verified
 
 local function show_quests()
-    for zone, zone_quests in pairs(LibQuestInfo_SavedVariables.quests) do
+    for zone, zone_quests in pairs(LibQuestData_SavedVariables.quests) do
         d("zone: "..zone)
         for num_entry, quest_from_table in pairs(zone_quests) do
             quest_to_update = quest_from_table
@@ -738,13 +744,13 @@ local function OnPlayerActivated(eventCode)
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     -- Check if leaving subzone (entering base zone)
     if lastZone and zone ~= lastZone and IsBaseZone(zone) and IsSameZone(zone, lastZone) then
-        if LibQuestInfo_SavedVariables.subZones[zone] == nil then LibQuestInfo_SavedVariables.subZones[zone] = {} end
-        if LibQuestInfo_SavedVariables.subZones[zone][lastZone] == nil then
+        if LibQuestData_SavedVariables.subZones[zone] == nil then LibQuestData_SavedVariables.subZones[zone] = {} end
+        if LibQuestData_SavedVariables.subZones[zone][lastZone] == nil then
             -- Save entrance position
             local local_x, local_y = GetMapPlayerPosition("player")
             local global_x, global_y = GPS:LocalToGlobal(x, y)
             local measurement = GPS:GetCurrentMapMeasurements()
-            LibQuestInfo_SavedVariables.subZones[zone][lastZone] = {
+            LibQuestData_SavedVariables.subZones[zone][lastZone] = {
                 ["local_x"] = local_x, -- previously x
                 ["local_y"] = local_y, -- previously y
                 ["global_x"] = global_x, -- previously gpsx

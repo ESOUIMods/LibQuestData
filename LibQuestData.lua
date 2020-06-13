@@ -1,13 +1,13 @@
 --[[
 
-LibQuestInfo
+LibQuestData
 by Sharlikran
 https://sharlikran.github.io/
 
 --]]
 
 -- Init
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
 lib.displayName = libName
 lib.idName = libName
@@ -241,35 +241,35 @@ end
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
-    if LibQuestInfo_SavedVariables.version ~= 4 then
+    if LibQuestData_SavedVariables.version ~= 4 then
         -- d("ding not 4")
         local temp = nil
-        if internal:is_empty_or_nil(LibQuestInfo_SavedVariables.quests) then
+        if internal:is_empty_or_nil(LibQuestData_SavedVariables.quests) then
             --d("it is nil do nothing")
         else
             --d("it is not nil copy stuff")
-            temp = LibQuestInfo_SavedVariables.quests
+            temp = LibQuestData_SavedVariables.quests
         end
 
-        LibQuestInfo_SavedVariables = {}
-        LibQuestInfo_SavedVariables.version = 4
-        LibQuestInfo_SavedVariables.libVersion = lib.libVersion
+        LibQuestData_SavedVariables = {}
+        LibQuestData_SavedVariables.version = 4
+        LibQuestData_SavedVariables.libVersion = lib.libVersion
         if temp == nil then
-            LibQuestInfo_SavedVariables.quests = {}
+            LibQuestData_SavedVariables.quests = {}
         else
-            LibQuestInfo_SavedVariables.quests = temp
+            LibQuestData_SavedVariables.quests = temp
         end
-        LibQuestInfo_SavedVariables.subZones = {}
+        LibQuestData_SavedVariables.subZones = {}
 
-        LibQuestInfo_SavedVariables.quest_info = {}
-        LibQuestInfo_SavedVariables.location_info = {}
-        LibQuestInfo_SavedVariables.quest_names = {}
-        LibQuestInfo_SavedVariables.objective_info = {}
-        LibQuestInfo_SavedVariables.reward_info = {}
-        LibQuestInfo_SavedVariables.map_info = {}
-        LibQuestInfo_SavedVariables.giver_names = {}
+        LibQuestData_SavedVariables.quest_info = {}
+        LibQuestData_SavedVariables.location_info = {}
+        LibQuestData_SavedVariables.quest_names = {}
+        LibQuestData_SavedVariables.objective_info = {}
+        LibQuestData_SavedVariables.reward_info = {}
+        LibQuestData_SavedVariables.map_info = {}
+        LibQuestData_SavedVariables.giver_names = {}
     end
-    LibQuestInfo_SavedVariables.libVersion = lib.libVersion
+    LibQuestData_SavedVariables.libVersion = lib.libVersion
     lib:build_questid_table(lib.client_lang) -- build name lookup table once
     lib:build_npcid_table(lib.client_lang) -- build npc names lookup table once
     lib:build_objectiveid_table(lib.client_lang) -- build objective names lookup table once

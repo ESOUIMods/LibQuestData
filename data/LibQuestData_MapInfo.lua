@@ -1,7 +1,43 @@
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
 lib.map_info_data = {
-        ["Art/maps/auridon/toothmaulgully_base_0.dds"] = 
+        ["Art/maps/stonefalls/bleakrock_base_0.dds"] =
+        {
+            ["zoneId"] = 280,
+            ["mapIndex"] = 22,
+            ["scaleY"] = 0.0189359958,
+            ["offsetX"] = 0.6726179888,
+            ["offsetY"] = 0.2550136062,
+            ["scaleX"] = 0.0189360247,
+        },
+        ["Art/maps/bleakrock/skyshroudbarrow_base_0.dds"] =
+        {
+            ["map_index"] = 22,
+            ["scale_y"] = 0.0015531997,
+            ["scale_x"] = 0.0015532022,
+            ["zone_id"] = 280,
+            ["offset_x"] = 0.6862656084,
+            ["offset_y"] = 0.2620404048,
+        },
+        ["Art/maps/bleakrock/bleakrockvillage_base_0.dds"] =
+        {
+            ["offset_x"] = 0.6782152025,
+            ["zone_id"] = 280,
+            ["scale_y"] = 0.0057323964,
+            ["map_index"] = 22,
+            ["scale_x"] = 0.0057324121,
+            ["offset_y"] = 0.2634583996,
+        },
+        ["Art/maps/Glenumbra/minesofkhuras_base_0.dds"] =
+        {
+            ["scale_x"] = 0.0015156018,
+            ["offset_x"] = 0.1224195996,
+            ["scale_y"] = 0.0015155809,
+            ["map_index"] = 2,
+            ["offset_y"] = 0.3516360063,
+            ["zone_id"] = 311,
+        },
+        ["Art/maps/auridon/toothmaulgully_base_0.dds"] =
         {
             ["zone_id"] = 486,
             ["map_index"] = 15,
@@ -10,7 +46,7 @@ lib.map_info_data = {
             ["scale_y"] = 0.0218363471,
             ["scale_x"] = 0.0218359899,
         },
-        ["Art/maps/auridon/delsclaim_base_0.dds"] = 
+        ["Art/maps/auridon/delsclaim_base_0.dds"] =
         {
             ["zone_id"] = 397,
             ["map_index"] = 15,
@@ -19,7 +55,7 @@ lib.map_info_data = {
             ["scale_y"] = 0.0013556210,
             ["scale_x"] = 0.0013556367,
         },
-        ["Art/maps/auridon/bewan_base_0.dds"] = 
+        ["Art/maps/auridon/bewan_base_0.dds"] =
         {
             ["offset_y"] = 0.6599579859,
             ["scale_x"] = 0.0012980295,
@@ -28,7 +64,7 @@ lib.map_info_data = {
             ["map_index"] = 15,
             ["offset_x"] = 0.2063363932,
         },
-        ["Art/maps/auridon/mehrunesspite_base_0.dds"] = 
+        ["Art/maps/auridon/mehrunesspite_base_0.dds"] =
         {
             ["offset_y"] = 0.6294928413,
             ["map_index"] = 15,
@@ -180,15 +216,6 @@ lib.map_info_data = {
             ["zoneId"] = 1160,
             ["scaleX"] = 0.1586711542,
             ["mapIndex"] = 38,
-        },
-        ["Art/maps/stonefalls/bleakrock_base_0.dds"] =
-        {
-            ["zoneId"] = 280,
-            ["mapIndex"] = 22,
-            ["scaleY"] = 0.0189359958,
-            ["offsetX"] = 0.6726179888,
-            ["offsetY"] = 0.2550136062,
-            ["scaleX"] = 0.0189360247,
         },
         ["Art/maps/vvardenfell/vvardenfell_base_0.dds"] =
         {

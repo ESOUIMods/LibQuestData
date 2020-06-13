@@ -1,4 +1,4 @@
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 --[[
 This is a special table for preventing something
 from being recorded or changed
@@ -28,7 +28,7 @@ quest giver.
 6455 - Bound in Blood, Sarcophagus
 6066 - The Precursor, Bulletin Board
 4526 - Lost Bet, Altmeri Relic
-4220 - The Mallari-Mora, 
+4220 - The Mallari-Mora,
 
 6533 = Kelbarn's Mining Samples
 6534 - Inguya's Mining Samples
@@ -55,6 +55,8 @@ lib.questid_giver_lookup = {
     [6066] = 100040,
     [4526] = 500008,
     [4220] = 54154,
+    [4531] = 29300,
+    [3991] = 24277,
 }
 
 --[[ List of what the numbers mean
@@ -69,19 +71,20 @@ change it
 31327 - Ceborn: Quest ID 4264: "Plague of Phaer"
 30069 - Aninwe: Quest ID 4264: "Plague of Phaer"
 31326 - Anganirne: Quest ID 4264: "Plague of Phaer"
+24316 - Darj the Hunter: Quest ID 3992: "What Waits Beneath"
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
 lib.quest_locations
 --]]
-lib.quest_giver_moves = { 5450, 4220, 5058, 4264, }
+lib.quest_giver_moves = { 5450, 4220, 5058, 4264, 3992, }
 
 --[[
 This is a list of qusts that give skill points
 
 6455 - Bound in Blood
-6476 - Dark Clouds Over Solitude
 6050 - To The Clockwork City
+6476 - Dark Clouds Over Solitude
 6481 - Daughter of the Wolf
 6466 - The Vampire Scholar
 ]]--

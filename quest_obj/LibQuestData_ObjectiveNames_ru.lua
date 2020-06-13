@@ -1,6 +1,6 @@
 --[[
 
-LibQuestInfo
+LibQuestData
 by Sharlikran
 https://sharlikran.github.io/
 
@@ -20,9 +20,9 @@ For renumbering new rebuilt tables
 
 
 --]]
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
-lib.objective_names["fr"] = {
+lib.objective_names["ru"] = {
     [4255] = "Vulkhel Guard",
     [6045] = "Everwound Wellspring",
     [4664] = "Hazak's Hollow",

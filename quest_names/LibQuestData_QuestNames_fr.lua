@@ -1,6 +1,6 @@
 --[[
 
-LibQuestInfo
+LibQuestData
 by Sharlikran
 https://sharlikran.github.io/
 
@@ -13,7 +13,7 @@ https://sharlikran.github.io/
 ^"(.*)", = \{(.*)\},
     \["\1"] = \{\2 },
 --]]
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
 lib.quest_names["fr"] = {
     [105] = "A Family Divided",
