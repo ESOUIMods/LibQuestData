@@ -19,7 +19,7 @@ local GPS = LibGPS2
 -- Default table
 local quest_data_index_default = {
     [lib.quest_data_index.quest_name]   = "",
-    [lib.quest_data_index.quest_giver]  = "",
+    -- [lib.quest_data_index.quest_giver]  = "", Depreciated
     [lib.quest_data_index.quest_type]   = -1, -- Undefined
     [lib.quest_data_index.quest_repeat]  = -1, -- Undefined
     [lib.quest_data_index.game_api]     = 100003, -- 100003 means unverified
@@ -34,6 +34,10 @@ local quest_map_pin_index_default = {
     [lib.quest_map_pin_index.global_x]   = -10, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
     [lib.quest_map_pin_index.global_y]   = -10, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
     [lib.quest_map_pin_index.quest_id]   = -1, -- -1 Unknown, Quest ID i.e. 6404 for "The Dragonguard"
+    [lib.quest_map_pin_index.world_x]     =    -10, -- WorldX 3D Location << -10 = Undefined >>
+    [lib.quest_map_pin_index.world_y]     =    -10, -- WorldY 3D Location << -10 = Undefined >>
+    [lib.quest_map_pin_index.world_z]     =    -10, -- WorldZ 3D Location << -10 = Undefined >>
+    [lib.quest_map_pin_index.quest_giver] =    -1, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
 
 -- Function to check for empty table

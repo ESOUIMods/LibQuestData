@@ -1062,6 +1062,9 @@ lib.quest_givers["en"] = {
 	 [80010] = "Cardea Gallus",
 	 [80011] = "Alvur Baren",
 	 [80012] = "Llonas Givyn",
+	 [80013] = "Relulae",
+     [80014] = "Watchman Yannodil",
+     [80015] = "Watchman Vinenoldil",
     -- Shar Elsweyr
 	 [81000] = "Nisuzi",
 	 [81001] = "Elianna Pevengius",
@@ -1200,6 +1203,7 @@ lib.quest_givers["en"] = {
     [200046] = "Aerolf",
     [200047] = "Captain Hingrid",
     [200048] = "Sarcophagus",
+    [200049] = "Kasura",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",

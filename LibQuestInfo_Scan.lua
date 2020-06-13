@@ -255,20 +255,100 @@ end
 EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestCompleteDialog) -- Verified
 
 local function has_undefined_data(info)
+    --[[
+    This is used for both the main database and the save file
+    ]]--
     local undefined = false
     if info[lib.quest_map_pin_index.global_x] == -10 then
         --d("global_x was -10 so undefined")
         undefined = true
     end
+    --[[
+    The save file might only have 1 to 5
+    ]]--
+    if #info <= 5 then
+        --d("old data format")
+        --[[
+        meaning it's an old format and therefore it is all
+        undefined.
+        ]]--
+        return true
+    end
     if info[lib.quest_map_pin_index.world_x] == -10 then
         --d("world_x was -10 so undefined")
         undefined = true
     end
+    --[[
+    This meant there was no world_x in the database yet.
+    Leaving just in case but may not be needed since the
+    database has been updated.
+    ]]--
     if not info[lib.quest_map_pin_index.world_x] then
         --d("world_x did not exist so undefined")
         undefined = true
     end
+    --[[
+    There were about 10 quests that didn't get a giver
+    and will be nil. Less then or equal to 8 because
+    there are 9 fields.
+    ]]--
+    if #info <= 8 then
+        --d("old data format")
+        --[[
+        meaning it's an old format and therefore it is all
+        undefined.
+        ]]--
+        return true
+    end
+    if info[lib.quest_map_pin_index.quest_giver] == -1 then
+        --d("world_x was -10 so undefined")
+        undefined = true
+    end
     return undefined
+end
+
+local function update_older_quest_info(source_data)
+    if not source_data then return end
+    -- source data is the table of all the quests in the zone
+    --[[
+    build a new table with quest location info that is properly defined
+    discard all quest information that needs updated because the new
+    data is already correct
+    ]]--
+    local result_table = {}
+    for num_entry, quest_entry in ipairs(source_data) do
+        if #quest_entry <= 5 then
+            --d("info is old we might need it so update it")
+            quest_entry[lib.quest_map_pin_index.world_x]     =    -10 -- WorldX 3D Location << -10 = Undefined >>
+            quest_entry[lib.quest_map_pin_index.world_y]     =    -10 -- WorldY 3D Location << -10 = Undefined >>
+            quest_entry[lib.quest_map_pin_index.world_z]     =    -10 -- WorldZ 3D Location << -10 = Undefined >>
+            quest_entry[lib.quest_map_pin_index.quest_giver] =    -1 -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
+            table.insert(result_table, quest_entry)
+        else
+            --d("info is not old we want it")
+            table.insert(result_table, quest_entry)
+        end
+    end
+    return result_table
+end
+
+local function remove_older_quest_info(source_data, quest_info)
+    -- source data is the table of all the quests in the zone
+    --[[
+    build a new table with quest location info that is properly defined
+    discard all quest information that needs updated because the new
+    data is already correct
+    ]]--
+    local result_table = {}
+    for num_entry, quest_entry in ipairs(source_data) do
+        if quest_entry[lib.quest_map_pin_index.quest_id] == quest_info[lib.quest_map_pin_index.quest_id] then
+            local distance = zo_round(GPS:GetLocalDistanceInMeters(quest_entry[lib.quest_map_pin_index.local_x], quest_entry[lib.quest_map_pin_index.local_y], quest_info[lib.quest_map_pin_index.local_x], quest_info[lib.quest_map_pin_index.local_y]))
+            --d("Distance: "..distance)
+            if distance <= 25 then
+                table.remove(source_data, num_entry)
+            end
+        end
+    end
 end
 
 -- Event handler function for EVENT_QUEST_REMOVED
@@ -444,7 +524,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     LibQuestInfo_SavedVariables["quest_info"] = LibQuestInfo_SavedVariables["quest_info"] or {}
     local temp_quest_info = lib.quest_data[quest_to_update.questID]
     if temp_quest_info == nil then
-        --d("quest information is nill")
+        --d("quest information is nil")
         -- meaning I need to create it and save it, no compare
         LibQuestInfo_SavedVariables["quest_info"][quest_to_update.questID] = the_quest_info
     else
@@ -473,6 +553,18 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         -- quest_number is set manually
         -- quest_series is set manually
         --d(temp_quest_info)
+        --[[ Check Saved Vars format ]]--
+        if LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] ~= nil and #LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] > 7 then
+            --d("old format")
+            --[[
+            Not technically a change but the SavedVariables data is the old format
+            so update it. It doesn't matter about what it is the main database has
+            been converted already.
+            ]]--
+            quest_info_changed = true
+        end
+        --[[ Do not need to check main database format because it was updated ]]--
+
         if quest_info_changed then
             --d("save the table")
             LibQuestInfo_SavedVariables.quest_info[quest_to_update.questID] = temp_quest_info
@@ -529,16 +621,18 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 --d("However is it -10?")
                 if has_undefined_data(quest_entry_table) then
                     --d("quest_entry_table had undefined data")
-                    save_quest_location = true
+                    -- save_quest_location = true
                 else
                     --d("quest_entry_table was defined properly")
                     save_quest_location = false
                 end
-            -- not having 3D Pin data means save it regardless
-            elseif has_undefined_data(quest_entry_table) then
-                --d("The quest from the main database was NOT close to the quest to update")
-                --d("quest_entry_table had undefined data")
-                save_quest_location = true
+                if quest_entry_table[lib.quest_map_pin_index.quest_giver] ~= giver_name_result then
+                    --d("The giver name is different so this may need updated")
+                    save_quest_location = true
+                else
+                    --d("The giver name was the same")
+                    -- save_quest_location = false
+                end
             else
                 --d("The quest from the main database was NOT close to the quest to update")
                 --d("Could be set to true for saving to the SV file")
@@ -557,31 +651,31 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --d("save_quest_location: "..tostring(save_quest_location))
     -- the api changed so save the location regardless
     LibQuestInfo_SavedVariables["location_info"] = LibQuestInfo_SavedVariables["location_info"] or {}
+    -- clear all old entries
+    LibQuestInfo_SavedVariables["location_info"][the_zone] = update_older_quest_info(LibQuestInfo_SavedVariables["location_info"][the_zone])
+    -- now look for duplicates
     if save_quest_location then
         saved_vars_quest_list = get_quest_list_sv(the_zone)
         for num_entry, sv_quest_entry in ipairs(saved_vars_quest_list) do
-            --d(num_entry)
+            --d("Num Entry: "..num_entry)
             --d(sv_quest_entry)
             if sv_quest_entry[lib.quest_map_pin_index.quest_id] == quest_to_update.questID then
                 --d("found that the entry 5 was equal to the ID of this quest in the SV file")
                 -- meaning it is in the saved vars file don't duplicate it
                 local distance = zo_round(GPS:GetLocalDistanceInMeters(sv_quest_entry[lib.quest_map_pin_index.local_x], sv_quest_entry[lib.quest_map_pin_index.local_y], quest_to_update.x, quest_to_update.y))
-                --d(distance)
+                --d("Distance: "..distance)
                 if distance <= 25 then
                     --d("The quest to be saved is close to one already in the SV file")
-                    --meaning do not save it, one is there close to the one to be saved
                     save_quest_location = false
-                    --break
                 else
                     --d("The quest to be saved is not close one in the SV file")
-                    -- meaning it should not be where I am standing
-                    -- consider saving the location
-                    -- question, how to avoid duplicates though
-                    --save_quest_location = true
                 end
                 if has_undefined_data(sv_quest_entry) then
-                    table.remove(LibQuestInfo_SavedVariables["location_info"][the_zone], num_entry)
+                    --d("sv_quest_entry had undefined data")
+                    remove_older_quest_info(LibQuestInfo_SavedVariables["location_info"][the_zone], the_quest_loc_info)
                     save_quest_location = true
+                else
+                    --d("sv_quest_entry was defined properly")
                 end
             end
         end
@@ -595,7 +689,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     entry for this quest in the zone so it needs to be saved.
     ]]--
     --save_quest_location = false
-    if save_quest_location then
+    if save_quest_location and not internal:is_in(quest_to_update.questID, lib.quest_giver_moves) then
         --d("save_quest_location is true saving")
         --d(the_zone)
         if LibQuestInfo_SavedVariables["location_info"][the_zone] == nil then LibQuestInfo_SavedVariables["location_info"][the_zone] = {} end
