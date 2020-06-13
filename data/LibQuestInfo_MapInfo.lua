@@ -1,6 +1,69 @@
 local lib = _G["LibQuestInfo"]
 
 lib.map_info_data = {
+        ["Art/maps/auridon/toothmaulgully_base_0.dds"] = 
+        {
+            ["zone_id"] = 486,
+            ["map_index"] = 15,
+            ["offset_x"] = 0.1937200080,
+            ["offset_y"] = 0.7026799430,
+            ["scale_y"] = 0.0218363471,
+            ["scale_x"] = 0.0218359899,
+        },
+        ["Art/maps/auridon/delsclaim_base_0.dds"] = 
+        {
+            ["zone_id"] = 397,
+            ["map_index"] = 15,
+            ["offset_x"] = 0.2284836006,
+            ["offset_y"] = 0.7304343732,
+            ["scale_y"] = 0.0013556210,
+            ["scale_x"] = 0.0013556367,
+        },
+        ["Art/maps/auridon/bewan_base_0.dds"] = 
+        {
+            ["offset_y"] = 0.6599579859,
+            ["scale_x"] = 0.0012980295,
+            ["zone_id"] = 401,
+            ["scale_y"] = 0.0012982963,
+            ["map_index"] = 15,
+            ["offset_x"] = 0.2063363932,
+        },
+        ["Art/maps/auridon/mehrunesspite_base_0.dds"] = 
+        {
+            ["offset_y"] = 0.6294928413,
+            ["map_index"] = 15,
+            ["zone_id"] = 400,
+            ["scale_y"] = 0.0010427440,
+            ["scale_x"] = 0.0010428110,
+            ["offset_x"] = 0.1672199958,
+        },
+        ["Art/maps/grahtwood/haven_base_0.dds"] =
+        {
+            ["offset_x"] = 0.4475780019,
+            ["zone_id"] = 383,
+            ["offset_y"] = 0.7487500181,
+            ["scale_x"] = 0.0282031981,
+            ["scale_y"] = 0.0282032067,
+            ["map_index"] = 7,
+        },
+        ["Art/maps/grahtwood/grahtwood_base_0.dds"] =
+        {
+            ["offset_x"] = 0.3562500479,
+            ["zone_id"] = 726,
+            ["offset_y"] = 0.6620311670,
+            ["scale_x"] = 0.1382811886,
+            ["scale_y"] = 0.1382812644,
+            ["map_index"] = 7,
+        },
+        ["Art/maps/summerset/summerset_base_0.dds"] =
+        {
+            ["offset_x"] = -0.0035352001,
+            ["zone_id"] = 1011,
+            ["offset_y"] = 0.6064644275,
+            ["scale_x"] = 0.2635415947,
+            ["scale_y"] = 0.2635415725,
+            ["map_index"] = 32,
+        },
         ["Art/maps/skyrim/skrtut_deepwoodbarrow_base_0.dds"] =
         {
             ["offsetY"] = 0.2337955941,
