@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestInfo", 188
+local libName, libVersion = "LibQuestData", 188
 lib = {}
 internal = {}
 lib.quest_givers = {}
@@ -32,19 +32,19 @@ lib.name_to_objectiveid_table["fr"] = {}
 lib.name_to_objectiveid_table["jp"] = {}
 lib.name_to_objectiveid_table["ru"] = {}
 
-if LibQuestInfo_SavedVariables == nil then LibQuestInfo_SavedVariables = {} end
+if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
 
-if LibQuestInfo_SavedVariables.version == nil then LibQuestInfo_SavedVariables.version = LibQuestInfo_SavedVariables.version or 1 end
-if LibQuestInfo_SavedVariables.libVersion == nil then LibQuestInfo_SavedVariables.libVersion = LibQuestInfo_SavedVariables.libVersion or lib.libVersion end
-if LibQuestInfo_SavedVariables.quests == nil then LibQuestInfo_SavedVariables.quests = {} end
-if LibQuestInfo_SavedVariables.subZones == nil then LibQuestInfo_SavedVariables.subZones = {} end
-if LibQuestInfo_SavedVariables.quest_info == nil then LibQuestInfo_SavedVariables.quest_info = {} end
-if LibQuestInfo_SavedVariables.location_info == nil then LibQuestInfo_SavedVariables.location_info = {} end
-if LibQuestInfo_SavedVariables.quest_names == nil then LibQuestInfo_SavedVariables.quest_names = {} end
-if LibQuestInfo_SavedVariables.objective_info == nil then LibQuestInfo_SavedVariables.objective_info = {} end
-if LibQuestInfo_SavedVariables.reward_info == nil then LibQuestInfo_SavedVariables.reward_info = {} end
-if LibQuestInfo_SavedVariables.map_info == nil then LibQuestInfo_SavedVariables.map_info = {} end
-if LibQuestInfo_SavedVariables.giver_names == nil then LibQuestInfo_SavedVariables.giver_names = {} end
+if LibQuestData_SavedVariables.version == nil then LibQuestData_SavedVariables.version = LibQuestData_SavedVariables.version or 1 end
+if LibQuestData_SavedVariables.libVersion == nil then LibQuestData_SavedVariables.libVersion = LibQuestData_SavedVariables.libVersion or lib.libVersion end
+if LibQuestData_SavedVariables.quests == nil then LibQuestData_SavedVariables.quests = {} end
+if LibQuestData_SavedVariables.subZones == nil then LibQuestData_SavedVariables.subZones = {} end
+if LibQuestData_SavedVariables.quest_info == nil then LibQuestData_SavedVariables.quest_info = {} end
+if LibQuestData_SavedVariables.location_info == nil then LibQuestData_SavedVariables.location_info = {} end
+if LibQuestData_SavedVariables.quest_names == nil then LibQuestData_SavedVariables.quest_names = {} end
+if LibQuestData_SavedVariables.objective_info == nil then LibQuestData_SavedVariables.objective_info = {} end
+if LibQuestData_SavedVariables.reward_info == nil then LibQuestData_SavedVariables.reward_info = {} end
+if LibQuestData_SavedVariables.map_info == nil then LibQuestData_SavedVariables.map_info = {} end
+if LibQuestData_SavedVariables.giver_names == nil then LibQuestData_SavedVariables.giver_names = {} end
 
 -- note only the "lib.client_lang" will contain data be default
 
@@ -87,7 +87,7 @@ lib.quest_data_type = {
     quest_type_holiday_event = 12, -- None in table
     quest_type_battleground = 13, -- None in table
 
-    -- LibQuestInfo Values
+    -- LibQuestData Values
     quest_type_daily            = 14,
     quest_type_cadwell          = 15,
     quest_type_ad               = 16,
@@ -129,4 +129,4 @@ lib.dest_quest_series_index = {
     quest_series_ep         = 5,
 }
 
-_G["LibQuestInfo"] = lib
+_G["LibQuestData"] = lib

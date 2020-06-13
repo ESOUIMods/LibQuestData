@@ -1,6 +1,6 @@
 --[[
 
-LibQuestInfo
+LibQuestData
 by Sharlikran
 https://sharlikran.github.io/
 
@@ -20,7 +20,7 @@ For renumbering new rebuilt tables
 
 
 --]]
-local lib = _G["LibQuestInfo"]
+local lib = _G["LibQuestData"]
 
 lib.objective_names["en"] = {
     [4255] = "Vulkhel Guard",
@@ -66,4 +66,13 @@ lib.objective_names["en"] = {
     [4293] = "Mathiisen",
     [4264] = "Phaer",
     [4277] = "Shattered Grove",
+    [3999] = "Halmaera's House",
+    [3996] = "Frostedge Camp",
+    [3992] = "Skyshroud Barrow",
+    [4016] = "Bleakrock Village",
+    [4002] = "Bleakrock Village",
+    [3987] = "Hozzin's Folly",
+    [3988] = "Hunter's Camp",
+    [3991] = "Bleakrock Village",
+    [4023] = "Dhalmora",
 }
