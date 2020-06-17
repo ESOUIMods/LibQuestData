@@ -9,9 +9,6 @@ https://sharlikran.github.io/
 -- Init
 local lib = _G["LibQuestData"]
 
-lib.displayName = libName
-lib.idName = libName
-
 -- Libraries
 local LMP = LibMapPins
 local GPS = LibGPS2
@@ -99,6 +96,29 @@ function lib:get_quest_type(id)
         return s, c
     end
 end
+
+function lib:get_subzone_list(zone)
+    if type(zone) == "string" and lib.subzone_list[zone] ~= nil then
+        return lib.subzone_list[zone]
+    else
+        return {}
+    end
+end
+
+-------------------------------------------------
+----- Extended Quest Data                    ----
+-------------------------------------------------
+
+-- returns ID number only for use with lib.quest_givers[lang]
+function lib:get_quest_npc_name(location, lang)
+    if location[lib.quest_map_pin_index.quest_giver] then
+        -- can return -1 if that value is in the table
+        return location[lib.quest_map_pin_index.quest_giver]
+    else
+        return -1 -- undefined
+    end
+end
+
 -------------------------------------------------
 ----- Lookup By ID: returns name             ----
 -------------------------------------------------
@@ -240,7 +260,7 @@ function lib:build_npcid_table(lang)
 end
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
-local function OnPlayerActivated(eventCode)
+local function OnLoad(eventCode, addOnName)
     if LibQuestData_SavedVariables.version ~= 4 then
         -- d("ding not 4")
         local temp = nil
@@ -274,6 +294,6 @@ local function OnPlayerActivated(eventCode)
     lib:build_npcid_table(lib.client_lang) -- build npc names lookup table once
     lib:build_objectiveid_table(lib.client_lang) -- build objective names lookup table once
 
-    EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED)
+    EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_ADD_ON_LOADED)
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED, OnPlayerActivated)
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_ADD_ON_LOADED, OnLoad)

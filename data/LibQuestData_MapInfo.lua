@@ -1,6 +1,15 @@
 local lib = _G["LibQuestData"]
 
 lib.map_info_data = {
+        ["Art/maps/coldharbor/vaultsofmadness1_base_0.dds"] = 
+        {
+            ["scale_y"] = 0.0094000075,
+            ["scale_x"] = 0.0094000354,
+            ["offset_y"] = 0.2184399975,
+            ["map_index"] = 23,
+            ["offset_x"] = 0.1159600017,
+            ["zone_id"] = 11,
+        },
         ["Art/maps/stonefalls/bleakrock_base_0.dds"] =
         {
             ["zoneId"] = 280,

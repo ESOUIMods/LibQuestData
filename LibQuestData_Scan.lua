@@ -3,21 +3,39 @@ local lib = _G["LibQuestData"]
 -- Local variables
 local questGiverName = nil
 local reward
-local lastZone
+local last_map_id
+local last_zone
+--local last_zone_index
+local last_map_zone_index
 -- Init saved variables table
 local GPS = LibGPS3
 local LMP = LibMapPins
 local quest_shared
 local quest_found
 
--- Check if zone is base zone
-local function IsBaseZone(zoneAndSubzone)
-    return (zoneAndSubzone:match("(.*)/") == zoneAndSubzone:match("/(.*)[%._]base"))
+-- return true if map_id is not in the list of main zone maps
+-- replaces IsBaseZone
+function lib:is_zone_subzone()
+    local map_id
+    if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
+        map_id = GetCurrentMapId()
+    end
+    if internal:is_in(map_id, lib.zone_id_list) then
+        -- false because the zone_id was in the list of Main Zones
+        return false
+    else
+        return true
+    end
 end
 
--- Check if both subzones are in the same zone
-local function IsSameZone(zoneAndSubzone1, zoneAndSubzone2)
-    return (zoneAndSubzone1:match("(.*)/") == zoneAndSubzone2:match("(.*)/"))
+-- Check if both map zones to see if they are the same
+local function is_same_zone_index(zone_index_1, zone_index_2)
+    return (zone_index_1 == zone_index_2)
+end
+
+-- Check if both map ids are different
+local function is_different_zone(map_id_1, map_id_2)
+    return (map_id_1 ~= map_id_2)
 end
 
 local function get_giver_when_object(id)
@@ -208,7 +226,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         table.insert(LibQuestData_SavedVariables.quests[zone], quest)
     end
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_ADDED, OnQuestAdded) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_ADDED, OnQuestAdded) -- Verified
 
 -- Event handler function for EVENT_CHATTER_END
 local function OnChatterEnd(eventCode)
@@ -217,15 +235,15 @@ local function OnChatterEnd(eventCode)
     reward = nil
     -- Stop listening for the quest added event because it would only be for shared quests
     -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
-    -- EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_QUEST_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(lib.idName, EVENT_CHATTER_END) -- Verified
+    -- EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_QUEST_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_CHATTER_END) -- Verified
 end
 
 local function OnQuestSharred(eventCode, questID)
     --d("OnQuestSharred")
     quest_shared = true
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_SHARED, OnQuestSharred) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_SHARED, OnQuestSharred) -- Verified
 
 -- Event handler function for EVENT_QUEST_OFFERED
 -- Note runs when you click writ board
@@ -236,10 +254,10 @@ local function OnQuestOffered(eventCode)
     questGiverName = GetUnitName("interact")
     -- Now that the quest has been offered we can start listening for the quest added event
     -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
-    -- EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_ADDED, OnQuestAdded)
-    EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_CHATTER_END, OnChatterEnd) -- Verified
+    -- EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_ADDED, OnQuestAdded)
+    EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_CHATTER_END, OnChatterEnd) -- Verified
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_OFFERED, OnQuestOffered) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_OFFERED, OnQuestOffered) -- Verified
 
 -- Event handler function for EVENT_QUEST_COMPLETE_DIALOG
 local function OnQuestCompleteDialog(eventCode, journalIndex)
@@ -252,7 +270,7 @@ local function OnQuestCompleteDialog(eventCode, journalIndex)
         table.insert(reward, rewardType)
     end
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestCompleteDialog) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestCompleteDialog) -- Verified
 
 local function has_undefined_data(info)
     --[[
@@ -721,13 +739,19 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         reward = nil
     end
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_QUEST_REMOVED, OnQuestRemoved) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_REMOVED, OnQuestRemoved) -- Verified
 
 -- Event handler function for EVENT_PLAYER_DEACTIVATED
 local function OnPlayerDeactivated(eventCode)
-    lastZone = LMP:GetZoneAndSubzone(true, false, true)
+    last_zone = LMP:GetZoneAndSubzone(true, false, true)
+    if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
+        last_map_id = GetCurrentMapId()
+    end
+    if not last_map_id then
+        lib.logger:Debug("Could not get Map ID")
+    end
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_PLAYER_DEACTIVATED, OnPlayerDeactivated) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_DEACTIVATED, OnPlayerDeactivated) -- Verified
 
 local function show_quests()
     for zone, zone_quests in pairs(LibQuestData_SavedVariables.quests) do
@@ -741,27 +765,93 @@ end
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
-    local zone = LMP:GetZoneAndSubzone(true, false, true)
-    -- Check if leaving subzone (entering base zone)
-    if lastZone and zone ~= lastZone and IsBaseZone(zone) and IsSameZone(zone, lastZone) then
-        if LibQuestData_SavedVariables.subZones[zone] == nil then LibQuestData_SavedVariables.subZones[zone] = {} end
-        if LibQuestData_SavedVariables.subZones[zone][lastZone] == nil then
-            -- Save entrance position
-            local local_x, local_y = GetMapPlayerPosition("player")
-            local global_x, global_y = GPS:LocalToGlobal(x, y)
-            local measurement = GPS:GetCurrentMapMeasurements()
-            LibQuestData_SavedVariables.subZones[zone][lastZone] = {
-                ["local_x"] = local_x, -- previously x
-                ["local_y"] = local_y, -- previously y
-                ["global_x"] = global_x, -- previously gpsx
-                ["global_y"] = global_y, -- previously gpsy
-                ["measurement"] = measurement,
-            }
-        end
-    end
-    lastZone = zone
+    -- /script LibQuestData.logger:Debug(GetCurrentMapId())
+    lib.logger:Debug("--------------------")
+    local current_map_id
+    local current_zone
+    --local current_zone_index
+    local current_map_zone_index
 
-    SLASH_COMMANDS["/lqilist"] = function() show_quests() end
+    if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
+        current_map_id = GetCurrentMapId()
+    end
+    if not current_map_id then
+        lib.logger:Debug("Could not get Current Map ID")
+    end
+    current_zone = LMP:GetZoneAndSubzone(true, false, true)
+    --current_zone_index = GetZoneId(GetUnitZoneIndex("player"))
+    current_map_zone_index = GetZoneId(GetCurrentMapZoneIndex())
+
+    lib.logger:Debug("Current Zone: "..current_zone)
+    lib.logger:Debug("Current Map ID: "..current_map_id)
+    --lib.logger:Debug("Current Zone Index Player: "..current_zone_index)
+    lib.logger:Debug("Current Map Zone Index: "..GetZoneId(GetCurrentMapZoneIndex()))
+    
+    if last_map_id then
+        lib.logger:Debug(is_different_zone(current_map_id, last_map_id))
+    end
+    lib.logger:Debug(lib:is_zone_subzone())
+    if last_map_zone_index then
+        lib.logger:Debug(is_same_zone_index(current_map_zone_index, last_map_zone_index))
+    end
+    
+    if last_map_id and is_different_zone(current_map_id, last_map_id) and lib:is_zone_subzone() and is_same_zone_index(current_map_zone_index, last_map_zone_index) then
+        if LibQuestData_SavedVariables.subZones[last_zone] == nil then LibQuestData_SavedVariables.subZones[last_zone] = {} end
+        if lib.subzone_list[last_zone] == nil then lib.subzone_list[last_zone] = {} end
+        if lib.subzone_list[last_zone][current_zone] == nil and LibQuestData_SavedVariables.subZones[last_zone][current_zone] == nil then
+            lib.logger:Debug("All of it was true")
+            local local_x, local_y = GetMapPlayerPosition("player")
+            local global_x, global_y = GPS:LocalToGlobal(local_x, local_y)
+            local measurement = GPS:GetCurrentMapMeasurement()
+            local data_store = {
+                    ["local_x"] = local_x,
+                    ["local_y"] = local_y,
+                    ["global_x"] = global_x,
+                    ["global_y"] = global_y,
+                    ["map_texture"] = measurement.id,
+                    ["map_index"] = measurement.mapIndex,
+                    ["zone_id"]   = measurement.zoneId,
+                    ["offset_x"]  = measurement.offsetX,
+                    ["offset_y"]  = measurement.offsetY,
+                    ["scale_x"]   = measurement.scaleX,
+                    ["scale_y"]   = measurement.scaleY,
+                    ["current_map_id"]  = current_map_id,
+                    ["last_map_id"]   = last_map_id,
+                    ["current_zone"]  = current_zone,
+                    ["last_zone"]   = last_zone,
+                    ["parent_zone_index"]   = last_map_zone_index,
+                }
+            lib.logger:Debug("Saving subzone data")
+            LibQuestData_SavedVariables.subZones[last_zone][current_zone] = data_store
+        end
+    else
+        lib.logger:Debug("Something was false")
+    end
+    
+    if last_map_id then
+        lib.logger:Debug("Previous Map ID: "..last_map_id)
+    end
+    if last_zone then
+        lib.logger:Debug("Previous Zone: "..last_zone)
+    end
+    --[[
+    if last_zone_index then
+        lib.logger:Debug("Previous Zone Index Player: "..last_zone_index)
+    end
+    ]]--
+    if last_map_zone_index then
+        lib.logger:Debug("Previous Map Zone Index: "..last_map_zone_index)
+    end
+
+    if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
+        last_map_id = GetCurrentMapId()
+    end
+    if not last_map_id then
+        lib.logger:Debug("Could not get Map ID")
+    end
+    last_zone = LMP:GetZoneAndSubzone(true, false, true)
+    --last_zone_index = GetZoneId(GetUnitZoneIndex("player"))
+    last_map_zone_index = GetZoneId(GetCurrentMapZoneIndex())
 
 end
-EVENT_MANAGER:RegisterForEvent(lib.idName, EVENT_PLAYER_ACTIVATED, OnPlayerActivated) -- Verified
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_ACTIVATED, OnPlayerActivated) -- Verified
