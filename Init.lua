@@ -1,6 +1,10 @@
-local libName, libVersion = "LibQuestData", 189
+local libName, libVersion = "LibQuestData", 190
 lib = {}
 internal = {}
+
+local logger = LibDebugLogger.Create(libName)
+lib.logger = logger
+
 lib.quest_givers = {}
 lib.quest_names = {}
 lib.objective_names = {}

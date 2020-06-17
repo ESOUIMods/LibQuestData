@@ -1099,6 +1099,7 @@ lib.quest_givers["en"] = {
      [92006] = "Associate Zanon",
      [92007] = "Proctor Sovor Saryoni",
      [92008] = "Provost Varuni Arvel",
+     [92009] = "Journal of a Stranded Mage",
     -- New auto created
     [100001] = "Moon-Bishop Azin-jo",
     [100002] = "Gray-Skies",
