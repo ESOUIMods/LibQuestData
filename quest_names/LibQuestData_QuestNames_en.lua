@@ -1695,6 +1695,7 @@ lib.quest_names["en"] = {
     [6131] = "Storming the Walls",
     [6132] = "Buried Memories",
     [6135] = "Old Wounds",
+    [6136] = "The Vault of Moawita",
     [6137] = "Looting the Light",
     [6138] = "Savage Truths",
     [6140] = "Bantering with Bandits",

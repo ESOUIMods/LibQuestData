@@ -75,4 +75,5 @@ lib.objective_names["en"] = {
     [3988] = "Hunter's Camp",
     [3991] = "Bleakrock Village",
     [4023] = "Dhalmora",
+    [6316] = "Weeping Scar",
 }

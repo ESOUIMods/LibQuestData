@@ -1065,6 +1065,7 @@ lib.quest_givers["en"] = {
 	 [80013] = "Relulae",
      [80014] = "Watchman Yannodil",
      [80015] = "Watchman Vinenoldil",
+     [80016] = "Librarian Bradyn",
     -- Shar Elsweyr
 	 [81000] = "Nisuzi",
 	 [81001] = "Elianna Pevengius",
@@ -1154,6 +1155,8 @@ lib.quest_givers["en"] = {
     [100051] = "Housing Brochure",
     [100052] = "Homes For Sale!",
     [100053] = "Stromgruf the Steady",
+    [100054] = "Andiryewen",
+    [100055] = "Yushiha",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",
