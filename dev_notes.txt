@@ -104,7 +104,7 @@ quest_data_index = {
     QUEST_NAME  =    1, -- Number index of quest name i.e. 6404 for "The Dragonguard"
     QUEST_GIVER =    2, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"
     QUEST_TYPE  =    3, -- MAIN_STORY, DUNGEON
-    QUEST_REPEAT =    4, -- QUEST_REPEAT_DAILY, QUEST_REPEAT_NOT_REPEATABLE = 0, QUEST_REPEAT_REPEATABLE 
+    QUEST_REPEAT =    4, -- QUEST_REPEAT_DAILY, QUEST_REPEAT_NOT_REPEATABLE = 0, QUEST_REPEAT_REPEATABLE
     GAME_API    =    5, -- 100003 means unverified, 100030 means quest data collected from API 100030
     QUEST_LINE   =    6,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
     QUEST_NUMBER =    7,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
@@ -186,34 +186,34 @@ function rebuild_questmap_info()
             local temp_table = {}
             if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
 
-            if pin_info.x ~= nil then 
-                temp_table[quest_map_pin_index.X_LOCATION] = pin_info.x 
-            else 
-                temp_table[quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.X_LOCATION] 
-            end
-            
-            if pin_info.y ~= nil then 
-                temp_table[quest_map_pin_index.Y_LOCATION] = pin_info.y 
-            else 
-                temp_table[quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.Y_LOCATION] 
+            if pin_info.x ~= nil then
+                temp_table[quest_map_pin_index.X_LOCATION] = pin_info.x
+            else
+                temp_table[quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.X_LOCATION]
             end
 
-            if pin_info.xpos ~= nil then 
-                temp_table[quest_map_pin_index.X_LIBGPS] = pin_info.xpos 
-            else 
-                temp_table[quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.X_LIBGPS] 
+            if pin_info.y ~= nil then
+                temp_table[quest_map_pin_index.Y_LOCATION] = pin_info.y
+            else
+                temp_table[quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.Y_LOCATION]
             end
 
-            if pin_info.ypos ~= nil then 
-                temp_table[quest_map_pin_index.Y_LIBGPS] = pin_info.ypos 
-            else 
-                temp_table[quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.Y_LIBGPS] 
+            if pin_info.xpos ~= nil then
+                temp_table[quest_map_pin_index.X_LIBGPS] = pin_info.xpos
+            else
+                temp_table[quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.X_LIBGPS]
             end
 
-            if pin_info.id ~= nil then 
+            if pin_info.ypos ~= nil then
+                temp_table[quest_map_pin_index.Y_LIBGPS] = pin_info.ypos
+            else
+                temp_table[quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.Y_LIBGPS]
+            end
+
+            if pin_info.id ~= nil then
                 temp_table[quest_map_pin_index.QUEST_ID] = pin_info.id
-            else 
-                temp_table[quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[quest_map_pin_index.QUEST_ID] 
+            else
+                temp_table[quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[quest_map_pin_index.QUEST_ID]
             end
 
             -- Debug(temp_table)
@@ -231,25 +231,25 @@ function rebuild_dest_map_info()
             local temp_table = {}
             if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
 
-            if pin_info[dest_quest_data_index.QUEST_X] ~= nil then 
+            if pin_info[dest_quest_data_index.QUEST_X] ~= nil then
                 temp_table[quest_map_pin_index.X_LOCATION] = pin_info[dest_quest_data_index.QUEST_X]
-            else 
-                temp_table[quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.X_LOCATION] 
+            else
+                temp_table[quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.X_LOCATION]
             end
-            
-            if pin_info[dest_quest_data_index.QUEST_Y] ~= nil then 
+
+            if pin_info[dest_quest_data_index.QUEST_Y] ~= nil then
                 temp_table[quest_map_pin_index.Y_LOCATION] = pin_info[dest_quest_data_index.QUEST_Y]
-            else 
-                temp_table[quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.Y_LOCATION] 
+            else
+                temp_table[quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[quest_map_pin_index.Y_LOCATION]
             end
 
-            temp_table[quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.X_LIBGPS] 
-            temp_table[quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.Y_LIBGPS] 
+            temp_table[quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.X_LIBGPS]
+            temp_table[quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[quest_map_pin_index.Y_LIBGPS]
 
-            if pin_info[dest_quest_data_index.QUESTID] ~= nil then 
+            if pin_info[dest_quest_data_index.QUESTID] ~= nil then
                 temp_table[quest_map_pin_index.QUEST_ID] = pin_info[dest_quest_data_index.QUESTID]
-            else 
-                temp_table[quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[quest_map_pin_index.QUEST_ID] 
+            else
+                temp_table[quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[quest_map_pin_index.QUEST_ID]
             end
 
             --Debug("end")
@@ -272,25 +272,25 @@ function build_dest_quest_info()
 
             if quest_info[dest_quest_data_index.QUESTID] ~= nil then -- 1
                 temp_table[quest_data_index.QUEST_NAME] = quest_info[dest_quest_data_index.QUESTID]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_NAME] = quest_data_index_default[quest_data_index.QUEST_NAME]
             end
 
             if quest_info[dest_quest_data_index.QUESTNPC] ~= nil then -- 2
                 temp_table[quest_data_index.QUEST_GIVER] = quest_info[dest_quest_data_index.QUESTNPC]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_GIVER] = quest_data_index_default[quest_data_index.QUEST_GIVER]
             end
-            
+
             if quest_info[dest_quest_data_index.QUESTTYPE] ~= nil then -- 3
                 temp_table[quest_data_index.QUEST_TYPE] = quest_info[dest_quest_data_index.QUESTTYPE]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_TYPE] = quest_data_index_default[quest_data_index.QUEST_TYPE]
             end
-            
+
             if quest_info[dest_quest_data_index.QUESTREPEAT] ~= nil then -- 4
                 temp_table[quest_data_index.QUEST_REPEAT] = quest_info[dest_quest_data_index.QUESTREPEAT]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_REPEAT] = quest_data_index_default[quest_data_index.QUEST_REPEAT]
             end
 
@@ -298,19 +298,19 @@ function build_dest_quest_info()
 
             if quest_info[dest_quest_data_index.QUESTLINE] ~= nil then -- 6
                 temp_table[quest_data_index.QUEST_LINE] = quest_info[dest_quest_data_index.QUESTLINE]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_LINE] = quest_data_index_default[quest_data_index.QUEST_LINE]
             end
 
             if quest_info[dest_quest_data_index.QUESTNUMBER] ~= nil then -- 7
                 temp_table[quest_data_index.QUEST_NUMBER] = quest_info[dest_quest_data_index.QUESTNUMBER]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_NUMBER] = quest_data_index_default[quest_data_index.QUEST_NUMBER]
             end
 
             if quest_info[dest_quest_data_index.QUESTSERIES] ~= nil then -- 8
                 temp_table[quest_data_index.QUEST_SERIES] = quest_info[dest_quest_data_index.QUESTSERIES]
-            else 
+            else
                 temp_table[quest_data_index.QUEST_SERIES] = quest_data_index_default[quest_data_index.QUEST_SERIES]
             end
 
@@ -320,7 +320,7 @@ function build_dest_quest_info()
         end
     end
 end
-    
+
 function build_questmap_quest_info()
     for map_name, map_tables in pairs(QSTM) do
         Debug(map_name)
@@ -328,7 +328,7 @@ function build_questmap_quest_info()
             Debug(quest_info)
             local temp_table = {}
             if result_table_quest_info[quest_info.id] == nil then result_table_quest_info[quest_info.id] = {} end
-            
+
             temp_table[quest_data_index.QUEST_NAME] = quest_data_index_default[quest_data_index.QUEST_NAME] -- 1
 
             temp_table[quest_data_index.QUEST_GIVER] = quest_data_index_default[quest_data_index.QUEST_GIVER] -- 2
@@ -370,34 +370,34 @@ local function rebuild_questmap_info()
             local temp_table = {}
             if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
 
-            if pin_info.x ~= nil then 
-                temp_table[lib.quest_map_pin_index.X_LOCATION] = pin_info.x 
-            else 
-                temp_table[lib.quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LOCATION] 
-            end
-            
-            if pin_info.y ~= nil then 
-                temp_table[lib.quest_map_pin_index.Y_LOCATION] = pin_info.y 
-            else 
-                temp_table[lib.quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LOCATION] 
+            if pin_info.x ~= nil then
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = pin_info.x
+            else
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LOCATION]
             end
 
-            if pin_info.xpos ~= nil then 
-                temp_table[lib.quest_map_pin_index.X_LIBGPS] = pin_info.xpos 
-            else 
-                temp_table[lib.quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LIBGPS] 
+            if pin_info.y ~= nil then
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = pin_info.y
+            else
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LOCATION]
             end
 
-            if pin_info.ypos ~= nil then 
-                temp_table[lib.quest_map_pin_index.Y_LIBGPS] = pin_info.ypos 
-            else 
-                temp_table[lib.quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LIBGPS] 
+            if pin_info.xpos ~= nil then
+                temp_table[lib.quest_map_pin_index.X_LIBGPS] = pin_info.xpos
+            else
+                temp_table[lib.quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LIBGPS]
             end
 
-            if pin_info.id ~= nil then 
+            if pin_info.ypos ~= nil then
+                temp_table[lib.quest_map_pin_index.Y_LIBGPS] = pin_info.ypos
+            else
+                temp_table[lib.quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LIBGPS]
+            end
+
+            if pin_info.id ~= nil then
                 temp_table[lib.quest_map_pin_index.QUEST_ID] = pin_info.id
-            else 
-                temp_table[lib.quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[lib.quest_map_pin_index.QUEST_ID] 
+            else
+                temp_table[lib.quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[lib.quest_map_pin_index.QUEST_ID]
             end
 
             table.insert(result_table_locations[map_name], temp_table)
@@ -411,25 +411,25 @@ local function rebuild_dest_map_info()
             local temp_table = {}
             if result_table_locations[map_name] == nil then result_table_locations[map_name] = {} end
 
-            if pin_info[lib.dest_quest_data_index.QUEST_X] ~= nil then 
+            if pin_info[lib.dest_quest_data_index.QUEST_X] ~= nil then
                 temp_table[lib.quest_map_pin_index.X_LOCATION] = pin_info[lib.dest_quest_data_index.QUEST_X]
-            else 
-                temp_table[lib.quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LOCATION] 
+            else
+                temp_table[lib.quest_map_pin_index.X_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LOCATION]
             end
-            
-            if pin_info[lib.dest_quest_data_index.QUEST_Y] ~= nil then 
+
+            if pin_info[lib.dest_quest_data_index.QUEST_Y] ~= nil then
                 temp_table[lib.quest_map_pin_index.Y_LOCATION] = pin_info[lib.dest_quest_data_index.QUEST_Y]
-            else 
-                temp_table[lib.quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LOCATION] 
+            else
+                temp_table[lib.quest_map_pin_index.Y_LOCATION] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LOCATION]
             end
 
-            temp_table[lib.quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LIBGPS] 
-            temp_table[lib.quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LIBGPS] 
+            temp_table[lib.quest_map_pin_index.X_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.X_LIBGPS]
+            temp_table[lib.quest_map_pin_index.Y_LIBGPS] = quest_map_pin_index_default[lib.quest_map_pin_index.Y_LIBGPS]
 
-            if pin_info[lib.dest_quest_data_index.QUESTID] ~= nil then 
+            if pin_info[lib.dest_quest_data_index.QUESTID] ~= nil then
                 temp_table[lib.quest_map_pin_index.QUEST_ID] = pin_info[lib.dest_quest_data_index.QUESTID]
-            else 
-                temp_table[lib.quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[lib.quest_map_pin_index.QUEST_ID] 
+            else
+                temp_table[lib.quest_map_pin_index.QUEST_ID] = quest_map_pin_index_default[lib.quest_map_pin_index.QUEST_ID]
             end
 
             table.insert(result_table_locations[map_name], temp_table)
@@ -447,25 +447,25 @@ local function build_dest_quest_info()
 
             if quest_info[lib.dest_quest_data_index.QUESTID] ~= nil then -- 1
                 temp_table[lib.quest_data_index.QUEST_NAME] = quest_info[lib.dest_quest_data_index.QUESTID]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_NAME] = quest_data_index_default[lib.quest_data_index.QUEST_NAME]
             end
 
             if quest_info[lib.dest_quest_data_index.QUESTNPC] ~= nil then -- 2
                 temp_table[lib.quest_data_index.QUEST_GIVER] = quest_info[lib.dest_quest_data_index.QUESTNPC]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_GIVER] = quest_data_index_default[lib.quest_data_index.QUEST_GIVER]
             end
-            
+
             if quest_info[lib.dest_quest_data_index.QUESTTYPE] ~= nil then -- 3
                 temp_table[lib.quest_data_index.QUEST_TYPE] = quest_info[lib.dest_quest_data_index.QUESTTYPE]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_TYPE] = quest_data_index_default[lib.quest_data_index.QUEST_TYPE]
             end
-            
+
             if quest_info[lib.dest_quest_data_index.QUESTREPEAT] ~= nil then -- 4
                 temp_table[lib.quest_data_index.QUEST_REPEAT] = quest_info[lib.dest_quest_data_index.QUESTREPEAT]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_REPEAT] = quest_data_index_default[lib.quest_data_index.QUEST_REPEAT]
             end
 
@@ -473,19 +473,19 @@ local function build_dest_quest_info()
 
             if quest_info[lib.dest_quest_data_index.QUESTLINE] ~= nil then -- 6
                 temp_table[lib.quest_data_index.QUEST_LINE] = quest_info[lib.dest_quest_data_index.QUESTLINE]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_LINE] = quest_data_index_default[lib.quest_data_index.QUEST_LINE]
             end
 
             if quest_info[lib.dest_quest_data_index.QUESTNUMBER] ~= nil then -- 7
                 temp_table[lib.quest_data_index.QUEST_NUMBER] = quest_info[lib.dest_quest_data_index.QUESTNUMBER]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_NUMBER] = quest_data_index_default[lib.quest_data_index.QUEST_NUMBER]
             end
 
             if quest_info[lib.dest_quest_data_index.QUESTSERIES] ~= nil then -- 8
                 temp_table[lib.quest_data_index.QUEST_SERIES] = quest_info[lib.dest_quest_data_index.QUESTSERIES]
-            else 
+            else
                 temp_table[lib.quest_data_index.QUEST_SERIES] = quest_data_index_default[lib.quest_data_index.QUEST_SERIES]
             end
 
@@ -495,13 +495,13 @@ local function build_dest_quest_info()
         end
     end
 end
-    
+
 local function build_questmap_quest_info()
     for map_name, map_tables in pairs(QSTM) do
         for data_index, quest_info in pairs(map_tables) do
             local temp_table = {}
             if result_table_quest_info[quest_info.id] == nil then result_table_quest_info[quest_info.id] = {} end
-            
+
             temp_table[lib.quest_data_index.QUEST_NAME] = quest_data_index_default[lib.quest_data_index.QUEST_NAME] -- 1
 
             temp_table[lib.quest_data_index.QUEST_GIVER] = quest_data_index_default[lib.quest_data_index.QUEST_GIVER] -- 2
@@ -530,7 +530,7 @@ local function generate_quest_names()
     -- rebuild_dest_map_info()
     -- build_dest_quest_info()
     -- build_questmap_quest_info()
-    
+
     local result_table_en = {}
     for quest_id, quest_data in pairs(lib.quest_data) do
         if result_table_en[quest_id] == nil then
@@ -569,7 +569,7 @@ local function generate_quest_names()
         end
     end
     LibQuestInfo_SavedVariables["es"] = result_table_es
-    
+
     local result_table_fr = {}
     for quest_id, quest_data in pairs(lib.quest_data) do
         if result_table_fr[quest_id] == nil then
@@ -609,9 +609,23 @@ local function generate_quest_names()
     end
     LibQuestInfo_SavedVariables["ru"] = result_table_ru
 
+    --LibQuestInfo_SavedVariables["ru"] = result_table_pl
+	 local result_table_pl = {}
+    for quest_id, quest_data in pairs(lib.quest_data) do
+        if result_table_pl[quest_id] == nil then
+            result_table_pl[quest_id] = {}
+            if lib.quest_names["pl"][quest_id] == nil then
+                result_table_pl[quest_id] = "Unknown Quest Name"
+            else
+                result_table_pl[quest_id] = lib.quest_names["pl"][quest_id]
+            end
+        end
+    end
+    LibQuestInfo_SavedVariables["pl"] = result_table_pl
+
 end
 
     LibQuestInfo_SavedVariables["data"] = result_table_quest_info
     LibQuestInfo_SavedVariables["loc"] = result_table_locations
-    
+
 

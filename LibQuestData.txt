@@ -13,12 +13,11 @@
 ## APIVersion: 100030 100031
 ## Description: Provides Quest Information
 ## SavedVariables: LibQuestData_SavedVariables
-## DependsOn: LibGPS>=37 LibMapPins-1.0>=10021
-## OptionalDependsOn: LibMapPing>=1200 LibDebugLogger>=196 LibChatMessage>=100
+## DependsOn: LibGPS>=37 LibMapPins-1.0>=10027
+## OptionalDependsOn: LibMapPing>=1200 LibDebugLogger>=196 LibChatMessage>=100 DebugLogViewer
 ## IsLibrary: true
 
 Init.lua
-data/LibQuestData_MapInfo.lua
 data/LibQuestData_QuestData.lua
 data/LibQuestData_QuestLocations.lua
 ;data/LibQuestData_QuestLocations_Outdated.lua
@@ -31,6 +30,7 @@ quest_givers/LibQuestData_Questgivers_es.lua
 quest_givers/LibQuestData_Questgivers_fr.lua
 quest_givers/LibQuestData_Questgivers_jp.lua
 quest_givers/LibQuestData_Questgivers_ru.lua
+quest_givers/LibQuestData_Questgivers_pl.lua
 
 quest_names/LibQuestData_QuestNames_de.lua
 quest_names/LibQuestData_QuestNames_en.lua
@@ -38,6 +38,7 @@ quest_names/LibQuestData_QuestNames_es.lua
 quest_names/LibQuestData_QuestNames_fr.lua
 quest_names/LibQuestData_QuestNames_jp.lua
 quest_names/LibQuestData_QuestNames_ru.lua
+quest_names/LibQuestData_QuestNames_pl.lua
 
 quest_obj/LibQuestData_ObjectiveNames_de.lua
 quest_obj/LibQuestData_ObjectiveNames_en.lua
@@ -45,6 +46,7 @@ quest_obj/LibQuestData_ObjectiveNames_es.lua
 quest_obj/LibQuestData_ObjectiveNames_fr.lua
 quest_obj/LibQuestData_ObjectiveNames_jp.lua
 quest_obj/LibQuestData_ObjectiveNames_ru.lua
+quest_obj/LibQuestData_ObjectiveNames_pl.lua
 
 LibQuestData.lua
 LibQuestData_Scan.lua

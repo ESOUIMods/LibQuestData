@@ -1,6 +1,49 @@
 local lib = _G["LibQuestData"]
-
+--[[
+    ["skyrim/blackreachworld_base_0"] =
+    {
+        ["skyrim/blackreach_teaser_base_0"] =
+        {
+            ["x"] = 0.7863845229,
+            ["y"] = 0.7160837650,
+            ["zoom_factor"] = 0.1371617913,
+        },
+    },
+]]--
 lib.subzone_list = {
+    ["vvardenfell/vvardenfell_base_0"] =
+    {
+        ["vvardenfell/forgottenwastesext_base_0"] =
+        {
+            x = 0.4096796513,
+            y = 0.2132329047,
+            zoom_factor = 0.1298021674,
+        },
+        ["vvardenfell/viviccity_base_0"] =
+        {
+            x = 0.4336621165,
+            y = 0.7998773456,
+            zoom_factor = 0.1763691306,
+        },
+        ["vvardenfell/matusakin_base_0"] =
+        {
+            x = 0.7809687257,
+            y = 0.6924196482,
+            zoom_factor = 0.0050338507,
+        },
+        ["vvardenfell/sadrithmora_base_0"] =
+        {
+            x = 0.7997595072,
+            y = 0.4588002264,
+            zoom_factor = 0.1020060182,
+        },
+        ["vvardenfell/balmora_base_0"] =
+        {
+            x = 0.3420527577,
+            y = 0.6031950116,
+            zoom_factor = 0.0959853530,
+        },
+    },
     ["therift/therift_base_0"] = {
         ["therift/nimalten_base_0"] = {
             x = 0.1542975008,
@@ -325,39 +368,232 @@ lib.subzone_list = {
         },
     },
     ["summerset/summerset_base_0"] = {
-        ["summerset/alinor_base_0"] = {
+        ["summerset/alinor_base_0"] =
+        {
             x = 0.2424361110,
             y = 0.5480698347,
             zoom_factor = 0.1036754847,
         },
-        ["summerset/sunhold_base_0"] = {
+        ["summerset/sunhold_base_0"] =
+        {
             x = 0.3514192700,
             y = 0.6601553559,
             zoom_factor = 0.0585562289,
         },
-        ["summerset/shimmerene_base_0"] = {
+        ["summerset/shimmerene_base_0"] =
+        {
             x = 0.5313938856,
             y = 0.3680678904,
-            zoom_factor = 0.1482407451,
+            zoom_factor = 0.1482392550,
         },
-        ["summerset/lillandrill_base_0"] = {
+        ["summerset/lillandrill_base_0"] =
+        {
             x = 0.1188169122,
             y = 0.3517273962,
             zoom_factor = 0.0896723717,
         },
     },
-    ["clockwork/clockwork_base_0"] = {
-        ["clockwork/brassfortress_base_0"] = {
-            x = 0.3214252889,
-            y = 0.1615778059,
-            zoom_factor = 0.3572255075,
+    ["clockwork/brassfortress_base_0"] =
+    {
+        ["clockwork/clockworkoutlawsrefuge_base_0"] =
+        {
+            x = 0.6428399086,
+            y = 0.4326600134,
+            zoom_factor = 0.0236809850,
+        },
+    },
+    ["clockwork/clockwork_base_0"] =
+    {
+        ["clockwork/brassfortress_base_0"] =
+        {
+            x = 0.3214232922,
+            y = 0.1615758091,
+            zoom_factor = 0.3572235107,
         },
     },
     ["thievesguild/hewsbane_base_0"] = {
-        ["thievesguild/abahslanding_base_0"] = {
+        ["thievesguild/abahslanding_base_0"] =
+        {
             x = 0.4762502909,
             y = 0.2592564523,
             zoom_factor = 0.3547124267,
+        },
+    },
+    ["darkbrotherhood/goldcoast_base_0"] =
+    {
+        ["darkbrotherhood/garlasagea_base_0"] =
+        {
+            x = 0.5685359836,
+            y = 0.4171319902,
+            zoom_factor = 0.0267159939,
+        },
+        ["darkbrotherhood/anvilcity_base_0"] =
+        {
+            x = 0.3026880026,
+            y = 0.4628120065,
+            zoom_factor = 0.2262160182,
+        },
+        ["darkbrotherhood/kvatchcity_base_0"] =
+        {
+            x = 0.7231600285,
+            y = 0.3150199950,
+            zoom_factor = 0.1745839715,
+        },
+        ["darkbrotherhood/goldcoastrefuge_base_0"] =
+        {
+            x = 0.4277040064,
+            y = 0.5008440018,
+            zoom_factor = 0.0148800015,
+        },
+    },
+    ["elsweyr/elsweyr_base_0"] =
+    {
+        ["elsweyr/rimmen_base_0"] =
+        {
+            x = 0.7260292768,
+            y = 0.2186946124,
+            zoom_factor = 0.1351316571,
+        },
+        ["elsweyr/thetangle_base_0"] =
+        {
+            x = 0.6261711121,
+            y = 0.5868451595,
+            zoom_factor = 0.0096617341,
+        },
+        ["elsweyr/predatorrise_base_0"] =
+        {
+            x = 0.2303080112,
+            y = 0.3627565205,
+            zoom_factor = 0.0968050212,
+        },
+        ["elsweyr/riverholdcity_base_0"] =
+        {
+            x = 0.4525940418,
+            y = 0.1134563014,
+            zoom_factor = 0.0872178078,
+        },
+        ["elsweyr/stitches_base_0"] =
+        {
+            x = 0.3335421979,
+            y = 0.4742942750,
+            zoom_factor = 0.0931860209,
+        },
+    },
+    ["southernelsweyr/els_dragonguard_island01_base_0"] =
+    {
+        ["southernelsweyr/els_dg_sanctuary_base_0"] =
+        {
+            x = 0.5098541379,
+            y = 0.0477777570,
+            zoom_factor = 0.4876798987,
+        },
+    },
+    ["southernelsweyr/southernelsweyr_base_0"] =
+    {
+        ["southernelsweyr/els_dragonguard_island01_base_0"] =
+        {
+            x = 0.8222043514,
+            y = 0.6732298732,
+            zoom_factor = 0.1753296852,
+        },
+        ["southernelsweyr/senchal_base_0"] =
+        {
+            x = 0.3993618786,
+            y = 0.4158180356,
+            zoom_factor = 0.1976510584,
+        },
+    },
+    ["skyrim/blackreach_base_0"] =
+    {
+        ["skyrim/darkmoongrottorefuge_base_0"] =
+        {
+            x = 0.1690905988,
+            y = 0.4245984256,
+            zoom_factor = -0.1690905988,
+        },
+        ["skyrim/nchuthnkarst_base_0"] =
+        {
+            x = 0.4038481712,
+            y = 0.4257106781,
+            zoom_factor = 0.2682837248,
+        },
+    },
+    ["summerset/artaeum_base_0"] =
+    {
+        ["summerset/dreamingcave01_base_0"] =
+        {
+            x = 0.6396754384,
+            y = 0.2554838657,
+            zoom_factor = 0.0161294937,
+        },
+        ["summerset/dreamingcave02_base_0"] =
+        {
+            x = 0.6414873004,
+            y = 0.2571611404,
+            zoom_factor = 0.0348578095,
+        },
+        ["summerset/traitorsvault04_base_0"] =
+        {
+            x = 0.3961500227,
+            y = 0.4466728270,
+            zoom_factor = 0.0073818266,
+        },
+    },
+    ["murkmire/murkmire_base_0"] =
+    {
+        ["murkmire/lilmothcity_base_0"] =
+        {
+            x = 0.6658258438,
+            y = 0.6535077691,
+            zoom_factor = 0.2672976255,
+        },
+        ["murkmire/ui_map_tsofeercavern01_0"] =
+        {
+            x = 0.2018765360,
+            y = 0.5213532448,
+            zoom_factor = 0.0085650086,
+        },
+        ["murkmire/deadwatervillage_base_0"] =
+        {
+            x = 0.1447097361,
+            y = 0.3046606779,
+            zoom_factor = 0.1622526646,
+        },
+    },
+    ["skyrim/westernskryim_base_0"] =
+    {
+        ["skyrim/solitudecity_base_0"] =
+        {
+            x = 0.5141172409,
+            y = 0.3356878757,
+            zoom_factor = 0.1158698201,
+        },
+    },
+    ["vvardenfell/viviccity_base_0"] =
+    {
+        ["vvardenfell/vivechow01a_base_0"] = 
+        {
+            x = 0.5171249509,
+            y = 0.5499004722,
+            zoom_factor = 0.0114039779,
+        },
+        ["vvardenfell/vivechoj01a_base_0"] =
+        {
+            x = 0.4713702500,
+            y = 0.5490813851,
+            zoom_factor = 0.0114544034,
+        },
+        ["vvardenfell/vivecthroneroom01_base_0"] =
+        {
+            x = 0.4613019526,
+            y = 0.7062174082,
+            zoom_factor = 0.0812772214,
+        },
+        ["vvardenfell/vivecthroneroom02_base_0"] =
+        {
+            x = 0.4613019526,
+            y = 0.7062174082,
+            zoom_factor = 0.0812772214,
         },
     },
 }
