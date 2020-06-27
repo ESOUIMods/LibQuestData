@@ -1157,6 +1157,13 @@ lib.quest_givers["en"] = {
     [100053] = "Stromgruf the Steady",
     [100054] = "Andiryewen",
     [100055] = "Yushiha",
+    [100056] = "Allanwen",
+    [100057] = "Hanu",
+    [100058] = "Captain Ronag",
+    [100059] = "Nahfahlaar",
+    [100060] = "Battle Mission Board",
+    [100061] = "Bounty Mission Board",
+    [100062] = "Scouting Mission Board",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",
