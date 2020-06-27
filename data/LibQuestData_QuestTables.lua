@@ -32,6 +32,7 @@ quest giver.
 4531 - A Brush With Death, Watch Captain Astanya
 3991 - Escape from Bleakrock,Captain Rana
 6093 - The Mages Dog, Journal of a Stranded Mage
+4146 - A Family Divided, Sela
 
 6533 = Kelbarn's Mining Samples
 6534 - Inguya's Mining Samples
@@ -61,6 +62,7 @@ lib.questid_giver_lookup = {
     [4531] = 29300,
     [3991] = 24277,
     [6093] = 92009,
+    [4146] = 27560,
 }
 
 --[[ List of what the numbers mean
@@ -145,4 +147,209 @@ lib.zone_names_list = {
     [16] = "ava_whole_0",
     [660] = "imperialcity_base_0",
     [108] = "eyevea_base_0",
+}
+
+--[[
+This is a list of quests that when completed, other quests
+are no longer available. The conditional_quest_id is
+considered completed as well.
+
+Format:
+
+    quest_id, the main quest (integer)
+    conditional_quest_id, the starter quest that leads you to
+    the main quest (table of integers)
+    
+    quest_id = {
+        conditional_quest_id,
+    }
+]]--
+lib.conditional_quest_list = {
+    [4453] = { -- A Favor Returned
+        3956, -- Message To Mournhold
+    },
+    [3686] = { -- Three Tender Souls
+        4163, -- Onward To Shadowfen
+    },
+    [3799] = { -- Scales of Retribution
+        3732, -- Overrun
+    },
+    [3978] = { -- Tomb Beneath the Mountain
+        4184, -- To Pinepeak Caverns
+        5035, -- Calling Hakra
+    },
+    [3191] = { -- Reclaiming the Elements
+        3183, -- To The Wyrd Tree
+    },
+    [3060] = { -- Seeking the Guardians
+        3026, -- The Wyrd Sisters
+    },
+    [2251] = { -- Gone Missing
+        2193, -- The Scholar of Bergama
+    },
+    [4712] = { -- The First Step
+        4799, -- To Saifa in Rawl'kha
+        5092, -- The Champions at Rawl'kha
+    },
+    [3632] = { -- Breaking Fort Virak
+        5040, -- Taking Precautions
+    },
+    [974] = { -- A Duke in Exile
+        3283, -- Werewolves To The North
+    },
+    [521] = { -- Azura's Aid
+        5052, -- An Offering To Azura
+    },
+    [1799] = {-- A City in Black
+        3566, -- Kingdom in Mourning
+        4991, -- Dark Wings
+    },
+    [4850] = { -- Shades Of Green
+        4790, -- Breaking the Ward
+    },
+    [4689] = { -- A Door into Moonlight
+        5091, -- Hallowed to Grimwatch
+        5093, -- Moons Over Grimwatch
+    },
+    [4479] = { -- Motes in the Moonlight
+        4802, -- To Moonmont
+    },
+    [4139] = { -- Shattered Hopes
+        5036, -- Honrich Tower
+    },
+    [4364] = { -- A Thorn in Your Side
+        4370, -- A Bargain With Shadows
+        4369, -- The Will of the Worm
+    },
+    [4370] = { -- A Bargain With Shadows
+        4369, -- The Will of the Worm
+        4364, -- A Thorn in Your Side
+    },
+    [4369] = { -- The Will of the Worm
+        4364, -- A Thorn in Your Side
+        4370, -- A Bargain With Shadows
+    },
+    [4833] = { -- Bosmer Insight
+        4974, -- Brackenleaf's Briars
+    },
+    [4712] = { -- The First Step
+        4759, -- Hallowed to Rawl'kha
+    },
+    [3695] = { -- Aggressive Negotiations
+        3635, -- City at the Spire
+    },
+    [3678] = { -- Trials of the Burnished Scales
+        3802, -- What Happened at Murkwater
+    },
+    [3840] = { -- Saving the Relics
+        3982, -- Bound to the Bog
+    },
+    [3615] = { -- Wake the Dead
+        3855, -- Mystery of Othrenis
+    },
+    [4899] = { -- Beyond the Call
+        3281, -- Leading the Stand
+    },
+    [4652] = { -- The Colovian Occupation
+        3981, -- To Taarengrav
+        4710, -- Hallowed To Arenthia
+    },
+    [4147] = { -- The Shackled Guardian
+        5034, -- A Grave Situation
+    },
+    [4293] = { -- Putting the Pieces Together
+        4366, -- To Mathiisen
+    },
+    [4255] = { -- Ensuring Security
+        4818, -- To Auridon
+        5055, -- Missive to the Queen
+        5058, -- All the Fus
+    },
+    [5058] = { -- All the Fus
+        5055, -- Missive to the Queen
+    },
+    [5055] = { -- Missive to the Queen
+        5058, -- All the Fus
+    },
+    [2552] = { -- Army at the Gates
+        4443, -- To Alcaire Castle
+    },
+    [4546] = { -- Retaking the Pass
+        5088, -- Naemon's Return
+    },
+    [5088] = { -- Naemon's Return
+        4821, -- Report to Marbruk
+    },
+    [4574] = { -- Veil of Illusion
+        4853, -- Woodhearth
+    },
+    [2130] = { -- Rise of the Dead
+        4694, -- Word from the Throne
+    },
+
+    [4330] = { -- Lifting the Veil
+        4549, -- Back to Skywatch
+    },
+    --[[
+    [1803] = { -- The Water Stone
+        1804, -- Sunken Knowledge
+    },
+    [1804] = { -- Sunken Knowledge
+        1803, -- The Water Stone
+    },
+    ]]--
+    [1536] = { -- Fire in the Fields
+        5052, -- Offering To Azura
+    },
+    [5052] = { -- Offering To Azura
+        1536, -- Fire in the Fields
+    },
+    [4028] = { -- Breaking The Tide
+        4026, -- Zeren in Peril
+    },
+    [4026] = { -- Zeren in Peril
+        4028, -- Breaking The Tide
+    },
+    [3595] = { -- Wayward Son
+        3598, -- Giving for the Greater Good
+    },
+    [3598] = { -- Giving for the Greater Good
+        3595, -- Wayward Son
+    },
+    [3653] = { -- Ratting Them Out
+        3658, -- A Timely Matter 
+    },
+    [3658] = { -- A Timely Matter
+        3653, -- Ratting Them Out
+    },
+    [4679] = { -- The Shadow's Embrace
+        4654, -- An Unusual Circumstance
+    },
+    [4654] = { -- An Unusual Circumstance
+        4679, -- The Shadow's Embrace
+    },
+    [4364] = { -- A Thorn in Your Side
+        4369, -- A Bargain With Shadows
+        4370, -- The Will of the Worm
+    },
+    [4369] = { -- A Bargain With Shadows
+        4370, -- The Will of the Worm
+        4364, -- A Thorn in Your Side
+    },
+    [4370] = { -- The Will of the Worm
+        4364, -- A Thorn in Your Side
+        4369, -- A Bargain With Shadows
+    },
+    [5072] = { -- Aid for Bramblebreach
+        4735, -- The Staff of Magnus
+    },
+    [4735] = { -- The Staff of Magnus
+        5072, -- Aid for Bramblebreach
+    },
+    --Cyrodiil
+    [4706] = { -- Reporting for Duty
+        4704, -- Welcome to Cyrodiil
+        4705, -- Siege Warfare
+    },
+
 }

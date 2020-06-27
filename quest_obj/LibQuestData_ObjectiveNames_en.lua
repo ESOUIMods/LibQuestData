@@ -23,6 +23,8 @@ For renumbering new rebuilt tables
 local lib = _G["LibQuestData"]
 
 lib.objective_names["en"] = {
+    [3822] = "Mud Tree Village",
+    [3840] = "Bogmother",
     [4255] = "Vulkhel Guard",
     [6045] = "Everwound Wellspring",
     [4664] = "Hazak's Hollow",
@@ -76,4 +78,16 @@ lib.objective_names["en"] = {
     [3991] = "Bleakrock Village",
     [4023] = "Dhalmora",
     [6316] = "Weeping Scar",
+    [3784] = "Bonesnap Ruins",
+    [4893] = "Redfur Trading Post",
+    [3783] = "Bonesnap Ruins",
+    [4406] = "Root Sunder Ruins",
+    [4436] = "Cave of Broken Sails",
+    [4813] = "Dungeon: Wayrest Sewers II",
+    [4246] = "Dungeon: Wayrest Sewers I",
+    [6351] = "Dungeon: Lair of Maarselok",
+    [4738] = "The Vile Manse",
+    [4737] = "The Vile Manse",
+    [4146] = "Forgotten Crypts",
+    [4151] = "Forgotten Crypts",
 }

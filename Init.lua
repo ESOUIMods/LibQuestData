@@ -104,6 +104,7 @@ lib.name_to_objectiveid_table["pl"] = {}
 lib.quest_rewards_skilpoint = {}
 lib.started_quests = {}
 lib.completed_quests = {}
+lib.quest_in_zone_list = {}
 
 if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
 

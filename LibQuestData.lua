@@ -87,34 +87,38 @@ function lib:get_quest_list(zone)
     local all_zone_quests = {}
     local subzone_quests = {}
     local new_element = {}
+    lib.quest_in_zone_list = {}
     if type(zone) == "string" and internal.quest_locations[zone] ~= nil then
         all_zone_quests = internal:get_zone_quests(zone)
+    end
+    for key, quest_info in pairs(all_zone_quests) do
+        lib.quest_in_zone_list[quest_info[lib.quest_map_pin_index.quest_id]] = true
     end
     internal.dm("Debug", "get_quest_list")
     internal.dm("Debug", zone)
     if type(zone) == "string" and lib.subzone_list[zone] ~= nil then
         local subzone_list = lib.subzone_list[zone]
-        internal.dm("Debug", subzone_list)
+        --internal.dm("Debug", subzone_list)
         for subzone, conversion in pairs(subzone_list) do
             local subzone_quests = internal:get_zone_quests(subzone)
-            internal.dm("Debug", subzone)
-            internal.dm("Debug", subzone_quests)
+            --internal.dm("Debug", subzone)
+            --internal.dm("Debug", subzone_quests)
             for i, quest in ipairs(subzone_quests) do
-                internal.dm("Debug", quest)
-                if not internal:is_empty_or_nil(quest) then
+                --internal.dm("Debug", quest)
+                if not internal:is_empty_or_nil(quest) and not lib.quest_in_zone_list[quest[lib.quest_map_pin_index.quest_id]] then
                     local new_element = ZO_DeepTableCopy(quest)
-                    internal.dm("Verbose", quest[lib.quest_map_pin_index.local_x])
-                    internal.dm("Verbose", quest[lib.quest_map_pin_index.local_y])
+                    --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_x])
+                    --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_y])
                     new_element[lib.quest_map_pin_index.local_x] = (quest[lib.quest_map_pin_index.local_x] * conversion.zoom_factor) + conversion.x
                     new_element[lib.quest_map_pin_index.local_y] = (quest[lib.quest_map_pin_index.local_y] * conversion.zoom_factor) + conversion.y
-                    internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_x])
-                    internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_y])
+                    --internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_x])
+                    --internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_y])
                     table.insert(all_zone_quests, new_element)
                 end
             end
         end
     end
-    internal.dm("Debug", all_zone_quests)
+    --internal.dm("Debug", all_zone_quests)
     return all_zone_quests
 end
 
@@ -366,6 +370,14 @@ function lib:build_questlist_skilpoint()
     lib.quest_rewards_skilpoint = built_table
 end
 
+function lib:set_conditional_quests(quest_id)
+    if lib.conditional_quest_list[quest_id] then
+        for key, conditional_quest_id in pairs(lib.conditional_quest_list[quest_id]) do
+            lib.completed_quests[conditional_quest_id] = true
+        end
+    end
+end
+
 local function build_completed_quests()
     -- Set up list of completed quests
     lib.completed_quests = {}
@@ -378,6 +390,7 @@ local function build_completed_quests()
         if id == nil then break end
         -- Add the quest to the list
         lib.completed_quests[id] = true
+        lib:set_conditional_quests(id)
     end
 end
 

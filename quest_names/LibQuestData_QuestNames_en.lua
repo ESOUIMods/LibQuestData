@@ -1820,6 +1820,7 @@ lib.quest_names["en"] = {
     [6344] = "Lamia Demonstration",
     [6345] = "Dragon Lore: Stormcrag Crypt",
     [6348] = "In Defense of Elsweyr",
+    [6351] = "The Azure Blight",
     [6353] = "The Return of Alkosh",
     [6354] = "Sunspire Summons",
     [6355] = "Relatively Speaking",

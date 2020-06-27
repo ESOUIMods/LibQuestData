@@ -140,8 +140,12 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     if journalIndex then
         quest_type = GetJournalQuestType(journalIndex)
         repeat_type = GetJournalQuestRepeatType(journalIndex)
+        zone_name, _, zone_index, poi_index = GetJournalQuestLocationInfo(journalIndex)
     end
     local quest = {
+        ["zone_name"]  = zone_name,
+        ["zone_index"]  = zone_index,
+        ["poi_index"]  = poi_index,
         ["quest_type"]  = quest_type,
         ["repeat_type"] = repeat_type,
         ["name"]        = questName,
@@ -330,7 +334,16 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     for zone, zone_quests in pairs(LibQuestData_SavedVariables.quests) do
         for num_entry, quest_from_table in pairs(zone_quests) do
-            if quest_from_table.name == questName then
+            if quest_from_table.zone_index and quest_from_table.poi_index then
+                if quest_from_table.zone_index == zoneIndex and quest_from_table.poi_index == poiIndex and quest_from_table.name == questName then
+                    internal.dm("Debug", "Detailed quest info was all true")
+                    the_zone = zone
+                    the_entry = num_entry
+                    quest_to_update = quest_from_table
+                    break
+                end
+            elseif quest_from_table.name == questName then
+                internal.dm("Debug", "Quest name was true due to old information")
                 the_zone = zone
                 the_entry = num_entry
                 quest_to_update = quest_from_table
@@ -343,6 +356,19 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         return
     end
 
+    if quest_to_update.zone_name then
+        internal.dm("Debug", "zone_name: "..quest_to_update.zone_name)
+    end
+    if quest_to_update.zone_index then
+        internal.dm("Debug", "zone_index: "..quest_to_update.zone_index)
+        internal.dm("Debug", "zoneIndex: "..tostring(zoneIndex))
+    end
+    if quest_to_update.poi_index then
+        internal.dm("Debug", "poi_index: "..quest_to_update.poi_index)
+        internal.dm("Debug", "poiIndex: "..tostring(poiIndex))
+    end
+
+    internal.dm("Debug", "questID: "..questID)
     if questID >= 1 then
         if quest_to_update.questID == -1 then
             quest_to_update.questID = questID
@@ -686,6 +712,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         if not LibQuestData_SavedVariables.reward_info[questID] then LibQuestData_SavedVariables.reward_info[questID] = {} end
         LibQuestData_SavedVariables.reward_info[questID] = reward
         reward = nil
+        lib:set_conditional_quests(questID)
     end
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_REMOVED, OnQuestRemoved) -- Verified
