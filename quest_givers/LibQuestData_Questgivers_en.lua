@@ -1164,6 +1164,9 @@ lib.quest_givers["en"] = {
     [100060] = "Battle Mission Board",
     [100061] = "Bounty Mission Board",
     [100062] = "Scouting Mission Board",
+    [100063] = "Alamar",
+    [100064] = "Magistrate Sulma",
+    [100065] = "Overseer Jahi",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",
