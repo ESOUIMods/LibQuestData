@@ -80,12 +80,16 @@ change it
 24316 - Darj the Hunter: Quest ID 3992: "What Waits Beneath"
 80016 - Librarian Bradyn: Quest ID 5923: "The Lost Library"
 80016 - Librarian Bradyn: Quest ID 5950: "The Ancestral Tombs"
+10714 - Rajesh : Quest ID 4841: "Trouble at the Rain Catchers"
+11315 - Qadim : Quest ID 2251: "Gone Missing"
+28505 - Bera Moorsmith : Quest ID 3858: "The Dangerous Past"
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
 lib.quest_locations
 --]]
-lib.quest_giver_moves = { 5450, 4220, 5058, 4264, 3992, 5923, 5950, }
+-- 4841 need mor data first for Rajesh
+lib.quest_giver_moves = { 5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, }
 
 --[[
 This is a list of qusts that give skill points
@@ -159,7 +163,7 @@ Format:
     quest_id, the main quest (integer)
     conditional_quest_id, the starter quest that leads you to
     the main quest (table of integers)
-    
+
     quest_id = {
         conditional_quest_id,
     }
@@ -184,12 +188,21 @@ lib.conditional_quest_list = {
     [3060] = { -- Seeking the Guardians
         3026, -- The Wyrd Sisters
     },
+    [2222] = { -- Alasan's Plot
+        4817, -- Tracking the Hand
+    },
+    --[[
+    Double check this, The Scholar of Bergama leads to
+    Gone Missing. Just because you completed it what
+    if you abandon it?
+    ]]--
     [2251] = { -- Gone Missing
         2193, -- The Scholar of Bergama
     },
     [4712] = { -- The First Step
         4799, -- To Saifa in Rawl'kha
         5092, -- The Champions at Rawl'kha
+        4759, -- Hallowed to Rawl'kha
     },
     [3632] = { -- Breaking Fort Virak
         5040, -- Taking Precautions
@@ -231,9 +244,6 @@ lib.conditional_quest_list = {
     },
     [4833] = { -- Bosmer Insight
         4974, -- Brackenleaf's Briars
-    },
-    [4712] = { -- The First Step
-        4759, -- Hallowed to Rawl'kha
     },
     [3695] = { -- Aggressive Negotiations
         3635, -- City at the Spire
@@ -286,7 +296,6 @@ lib.conditional_quest_list = {
     [2130] = { -- Rise of the Dead
         4694, -- Word from the Throne
     },
-
     [4330] = { -- Lifting the Veil
         4549, -- Back to Skywatch
     },
@@ -317,7 +326,7 @@ lib.conditional_quest_list = {
         3595, -- Wayward Son
     },
     [3653] = { -- Ratting Them Out
-        3658, -- A Timely Matter 
+        3658, -- A Timely Matter
     },
     [3658] = { -- A Timely Matter
         3653, -- Ratting Them Out
@@ -327,18 +336,6 @@ lib.conditional_quest_list = {
     },
     [4654] = { -- An Unusual Circumstance
         4679, -- The Shadow's Embrace
-    },
-    [4364] = { -- A Thorn in Your Side
-        4369, -- A Bargain With Shadows
-        4370, -- The Will of the Worm
-    },
-    [4369] = { -- A Bargain With Shadows
-        4370, -- The Will of the Worm
-        4364, -- A Thorn in Your Side
-    },
-    [4370] = { -- The Will of the Worm
-        4364, -- A Thorn in Your Side
-        4369, -- A Bargain With Shadows
     },
     [5072] = { -- Aid for Bramblebreach
         4735, -- The Staff of Magnus

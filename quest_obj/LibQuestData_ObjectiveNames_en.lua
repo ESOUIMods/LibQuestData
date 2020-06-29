@@ -90,4 +90,7 @@ lib.objective_names["en"] = {
     [4737] = "The Vile Manse",
     [4146] = "Forgotten Crypts",
     [4151] = "Forgotten Crypts",
+    [4841] = "Rain Catcher Fields",
+    [2550] = "Soulshriven Tower",
+    [2251] = "Bergama",
 }

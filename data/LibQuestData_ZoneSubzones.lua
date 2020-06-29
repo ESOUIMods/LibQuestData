@@ -30,15 +30,114 @@ local lib = _G["LibQuestData"]
     ["therift/therift_base_0"] =
         ["therift/trolhettasummit_base_0"] =
         ["therift/taarengrav_base_0"] =
+    ["alikr/alikr_base_0"] =
+        ["alikr/smugglerkingtunnel_base_0"] =
 
-/script LibQuestHelper.logger:Debug(GetMapTileTexture())
+/script LibQuestHelper.dm("Debug", GetMapTileTexture())
+/script LibQuestHelper.dm("Debug", GetCompletedQuestInfo(2222))
 /script PingMap(MAP_PIN_TYPE_PLAYER_WAYPOINT, MAP_TYPE_LOCATION_CENTERED, 0.9327000000, 0.2437000000)
+]]--
+--[[ Need to research location
+4922 - The Orrery of Elden Root
 ]]--
 --[[ Current
 
 
+
 ]]--
 lib.subzone_list = {
+    ["alikr/sentinel_base_0"] = 
+    {
+        ["alikr/alkiroutlawrefuge_base_0"] = 
+        {
+            x = 0.5023635626,
+            y = 0.5033065081,
+            zoom_factor = 0.0214833617,
+        },
+        ["alikr/imperviousvault_base_0"] = 
+        {
+            x = 0.6188357472,
+            y = 0.4884603620,
+            zoom_factor = 0.2396663427,
+        },
+    },
+    ["alikr/alikr_base_0"] = {
+        ["alikr/bergama_base_0"] = {
+            x = 0.4657132328,
+            y = 0.5828379393,
+            zoom_factor = 0.1329798400,
+        },
+        ["alikr/kozanset_base_0"] = {
+            x = 0.6922902465,
+            y = 0.3944286704,
+            zoom_factor = 0.1254443526,
+        },
+        ["alikr/sentinel_base_0"] = {
+            x = 0.1676649302,
+            y = 0.3574757278,
+            zoom_factor = 0.2059123665,
+        },
+        ["alikr/coldrockdiggings_base_0"] = 
+        {
+            x = 0.6440528035,
+            y = 0.3475230336,
+            zoom_factor = -0.6440528035,
+        },
+        ["alikr/aldunz_base_0"] = 
+        {
+            x = 0.6373039484,
+            y = 0.6392282844,
+            zoom_factor = 0.0176002383,
+        },
+        ["alikr/salasen_base_0"] = 
+        {
+            x = 0.1869529486,
+            y = 0.6779437661,
+            zoom_factor = 0.0517824292,
+        },
+        ["alikr/shorecave_base_0"] = 
+        {
+            x = 0.2867861688,
+            y = 0.4325964749,
+            zoom_factor = 0.0330619812,
+        },
+        ["alikr/santaki_base_0"] = 
+        {
+            x = 0.2196166366,
+            y = 0.5546602011,
+            zoom_factor = 0.0166293234,
+        },
+        ["alikr/lostcity_base_0"] = 
+        {
+            x = 0.6576101780,
+            y = 0.2374508381,
+            zoom_factor = 0.1767388582,
+        },
+        ["alikr/divadschagrinmine_base_0"] = 
+        {
+            x = 0.3985387087,
+            y = 0.5853124261,
+            zoom_factor = 0.0081926882,
+        },
+        ["alikr/sandblownmine_base_0"] = 
+        {
+            x = 0.8286731243,
+            y = 0.5780507922,
+            zoom_factor = 0.0158501267,
+        },
+        ["alikr/yldzuun_base_0"] = 
+        {
+            x = 0.8902290463,
+            y = 0.5100672245,
+            zoom_factor = 0.0158501267,
+        },
+        ["alikr/volenfell_base_0"] = 
+        {
+            x = 0.8658202887,
+            y = 0.4214861691,
+            zoom_factor = 0.1225267649,
+        },
+    },
     ["therift/riften_base_0"] =
     {
         ["therift/riftoutlaw_base_0"] =
@@ -777,23 +876,6 @@ lib.subzone_list = {
             x = 0.7167208195,
             y = 0.1344073862,
             zoom_factor = 0.1562702656,
-        },
-    },
-    ["alikr/alikr_base_0"] = {
-        ["alikr/bergama_base_0"] = {
-            x = 0.4657132328,
-            y = 0.5828379393,
-            zoom_factor = 0.1329798400,
-        },
-        ["alikr/kozanset_base_0"] = {
-            x = 0.6922902465,
-            y = 0.3944286704,
-            zoom_factor = 0.1254443526,
-        },
-        ["alikr/sentinel_base_0"] = {
-            x = 0.1676649302,
-            y = 0.3574757278,
-            zoom_factor = 0.2059123665,
         },
     },
     ["glenumbra/glenumbra_base_0"] = {
