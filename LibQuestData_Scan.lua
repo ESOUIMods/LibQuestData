@@ -39,7 +39,7 @@ local function is_different_zone(map_id_1, map_id_2)
     return (map_id_1 ~= map_id_2)
 end
 
-local function get_giver_when_object(id)
+function lib:get_giver_when_object(id)
     if internal:is_empty_or_nil(lib.questid_giver_lookup[id]) then
         --d("If giver is an object, one was not found")
         return {}
@@ -68,16 +68,6 @@ local function is_giver_in_sv(id)
         return false
     else
         --d("The Quest ID and name is already in the SV table")
-        return true
-    end
-end
-
-local function is_objective_in_sv(id)
-    if internal:is_empty_or_nil(LibQuestData_SavedVariables["objective_info"][id]) then
-        --d("The objective was not found in the SV table")
-        return false
-    else
-        --d("The objective is already in the SV table")
         return true
     end
 end
@@ -143,9 +133,9 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         zone_name, _, zone_index, poi_index = GetJournalQuestLocationInfo(journalIndex)
     end
     local quest = {
-        ["zone_name"]  = zone_name,
+        ["zone_name"]   = zone_name,
         ["zone_index"]  = zone_index,
-        ["poi_index"]  = poi_index,
+        ["poi_index"]   = poi_index,
         ["quest_type"]  = quest_type,
         ["repeat_type"] = repeat_type,
         ["name"]        = questName,
@@ -157,10 +147,9 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         ["questID"]     = quest_id, -- assign this and get the ID when the quest is removed
         ["api"]         = GetAPIVersion(),
         ["lang"]        = GetCVar("language.2"),
-        ["objective"]   = objectiveName,
-        ["world_x"]        = world_x,
-        ["world_y"]        = world_y,
-        ["world_z"]        = world_z,
+        ["world_x"]     = world_x,
+        ["world_y"]     = world_y,
+        ["world_z"]     = world_z,
     }
 
     quest_found = false
@@ -375,33 +364,10 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         end
     end
 
-    --[[ set objective ]]--
-    --d("objective")
-    --d(quest_to_update.objective)
-    LibQuestData_SavedVariables["objective_info"] = LibQuestData_SavedVariables["objective_info"] or {}
-    local temp_obj = lib:get_objids_table(quest_to_update.objective)
-    --d(temp_obj)
-    if temp_obj == nil then
-        if internal:is_empty_or_nil(quest_to_update.objective) then
-            --d("hey that's a rip off it was empty or nil")
-        else
-            --d("it wasn't empty or nil so lets see what it is")
-            if is_objective_in_sv(quest_to_update.questID) then
-                --d("The objective is in the SV file")
-            else
-                --d("The objective is not in the SV file")
-                LibQuestData_SavedVariables["objective_info"][quest_to_update.questID] = quest_to_update.objective
-            end
-        end
-    else
-        --d("objective lookup table is not nil")
-        -- meaning we found it don't add it
-    end
-
     --[[ set quest giver to it's ID number using the name of the NPC ]]--
     --[[ Check if Quest Giver is an Object, Sign, Note ]]--
     LibQuestData_SavedVariables["giver_names"] = LibQuestData_SavedVariables["giver_names"] or {}
-    local temp_giver = get_giver_when_object(quest_to_update.questID)
+    local temp_giver = lib:get_giver_when_object(quest_to_update.questID)
     --d("temp_giver was:")
     --d(temp_giver)
     if internal:is_empty_or_nil(temp_giver) then
@@ -788,7 +754,8 @@ local function OnPlayerActivated(eventCode)
                     ["parent_zone_index"]   = last_map_zone_index,
                 }
             internal.dm("Debug", "Saving subzone data")
-            LibQuestData_SavedVariables.subZones[last_zone][current_zone] = data_store
+            -- disable for now because only I use it
+            --LibQuestData_SavedVariables.subZones[last_zone][current_zone] = data_store
         end
     else
         internal.dm("Debug", "Something was false")

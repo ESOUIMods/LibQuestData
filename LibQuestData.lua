@@ -94,8 +94,8 @@ function lib:get_quest_list(zone)
     for key, quest_info in pairs(all_zone_quests) do
         lib.quest_in_zone_list[quest_info[lib.quest_map_pin_index.quest_id]] = true
     end
-    internal.dm("Debug", "get_quest_list")
-    internal.dm("Debug", zone)
+    --internal.dm("Debug", "get_quest_list")
+    --internal.dm("Debug", zone)
     if type(zone) == "string" and lib.subzone_list[zone] ~= nil then
         local subzone_list = lib.subzone_list[zone]
         --internal.dm("Debug", subzone_list)
@@ -236,12 +236,6 @@ function lib:get_quest_name(id, lang)
     return lib.quest_names[lib.client_lang][id] or "Unknown Name"
 end
 
--- I want this to be nil rather then unknown objective
-function lib:get_objective_name(id, lang)
-    lang = lang or lib.client_lang
-    return lib.objective_names[lib.client_lang][id]
-end
-
 -------------------------------------------------
 ----- Lookup By Name: returns table of IDs   ----
 -------------------------------------------------
@@ -272,12 +266,6 @@ function lib:get_npcids_table(name, lang)
     end
 end
 
-function lib:get_objids_table(name, lang)
-    local lang = lang or lib.client_lang
-    if type(name) == "string" then
-        return lib.name_to_objectiveid_table[lang][name]
-    end
-end
 -------------------------------------------------
 ----- Generate QuestID Table By Language     ----
 -------------------------------------------------
@@ -318,26 +306,6 @@ function lib:build_questid_table(lang)
     end
 
     lib.name_to_questid_table[lang] = built_table
-
-end
-
-function lib:build_objectiveid_table(lang)
-    local lang = lang or lib.client_lang
-    local built_table = {}
-
-    for var1, var2 in pairs(lib.objective_names[lang]) do
-        -- print(var2)
-        -- print(var2)
-        if built_table[var2] == nil then built_table[var2] = {} end
-        if contains_id(built_table, var1) then
-            -- print("Var 1 is in ids")
-        else
-            -- print("Var 1 is not in ids")
-            table.insert(built_table[var2], var1)
-        end
-    end
-
-    lib.name_to_objectiveid_table[lang] = built_table
 
 end
 
@@ -438,8 +406,138 @@ local function OnPlayerActivatedQuestBuild(eventCode)
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName.."_BuildQuests", EVENT_PLAYER_ACTIVATED, OnPlayerActivatedQuestBuild)
 
--- Event handler function for EVENT_PLAYER_ACTIVATED
+local function update_quest_information()
+    local eight_field_data = {
+        quest_name      = 1, -- Depreciated, use lib:get_quest_name(id, lang)
+        quest_giver     = 2, -- Depreciated, see quest_map_pin_index
+        quest_type      = 3, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
+        quest_repeat    = 4, -- quest_repeat_daily, quest_repeat_not_repeatable = 0, quest_repeat_repeatable << -1 = Undefined >>
+        game_api        = 5, -- 100003 means unverified, 100030 means quest data collected from API 100030
+        quest_line      = 6,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
+        quest_number    = 7,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
+        quest_series    = 8,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
+    }
+    local seven_field_data = {
+        quest_name      = 1, -- Depreciated, use lib:get_quest_name(id, lang)
+        -- quest_giver     =    2,  Depreciated, see quest_map_pin_index
+        quest_type      = 2, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
+        quest_repeat    = 3, -- quest_repeat_daily, quest_repeat_not_repeatable = 0, quest_repeat_repeatable << -1 = Undefined >>
+        game_api        = 4, -- 100003 means unverified, 100030 means quest data collected from API 100030
+        quest_line      = 5,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
+        quest_number    = 6,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
+        quest_series    = 7,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
+    }
+    local five_field_location = {
+        local_x     =    1, -- GetMapPlayerPosition() << -10 = Undefined >>
+        local_y     =    2, -- GetMapPlayerPosition() << -10 = Undefined >>
+        global_x    =    3, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+        global_y    =    4, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+        quest_id    =    5, -- Number index of quest name i.e. 6404 for "The Dragonguard"  << -1 = Undefined >>
+    }
+
+    local all_locations = LibQuestData_SavedVariables["location_info"]
+    local all_quest_data = ZO_DeepTableCopy(LibQuestData_SavedVariables["quest_info"])
+    local all_quest_names = LibQuestData_SavedVariables["quest_names"]
+    local all_objectives = LibQuestData_SavedVariables["objective_info"]
+    local all_quest_givers = LibQuestData_SavedVariables["giver_names"]
+    local rebuilt_data = {}
+    local rebuilt_locations = {}
+    local current_data = {}
+    local givername
+    local npc_id
+
+    for zone, zone_quests in pairs(all_locations) do
+        for index, quest in pairs(zone_quests) do
+            current_data = {}
+            if #quest == 5 then
+                current_data[lib.quest_map_pin_index.local_x] = quest[five_field_location.local_x]
+                current_data[lib.quest_map_pin_index.local_y] = quest[five_field_location.local_y]
+                current_data[lib.quest_map_pin_index.global_x] = quest[five_field_location.global_x]
+                current_data[lib.quest_map_pin_index.global_y] = quest[five_field_location.global_y]
+                current_data[lib.quest_map_pin_index.quest_id] = quest[five_field_location.quest_id]
+                current_data[lib.quest_map_pin_index.world_x] = -10
+                current_data[lib.quest_map_pin_index.world_y] = -10
+                current_data[lib.quest_map_pin_index.world_z] = -10
+                givername = -1
+                --internal.dm("Debug", quest[five_field_location.quest_id])
+                if all_quest_data[quest[five_field_location.quest_id]] then
+                    if #all_quest_data[quest[five_field_location.quest_id]] == 8 then
+                        givername = all_quest_data[quest[five_field_location.quest_id]][eight_field_data.quest_giver]
+                    end
+                end
+                current_data[lib.quest_map_pin_index.quest_giver] = givername
+            end
+            if #quest == 9 then
+                current_data = quest
+                if type(current_data[lib.quest_map_pin_index.quest_giver]) == "string" then
+                    npc_id = lib:get_npcids_table(current_data[lib.quest_map_pin_index.quest_giver])
+                    if npc_id then
+                        current_data[lib.quest_map_pin_index.quest_giver] = npc_id[1]
+                    end
+                end
+                if (type(current_data[lib.quest_map_pin_index.quest_giver]) == "string") or (current_data[lib.quest_map_pin_index.quest_giver] == -1) then
+                    npc_id = lib:get_giver_when_object(current_data[lib.quest_map_pin_index.quest_id])
+                    if not internal:is_empty_or_nil(npc_id) then
+                        current_data[lib.quest_map_pin_index.quest_giver] = npc_id
+                    end
+                end
+            end
+            if rebuilt_locations[zone] == nil then rebuilt_locations[zone] = {} end
+            table.insert(rebuilt_locations[zone], current_data)
+        end
+    end
+
+    for index, data in pairs(all_quest_data) do
+        current_data = {}
+        if #data == 8 then
+            current_data[lib.quest_data_index.quest_type] = data[eight_field_data.quest_type]
+            current_data[lib.quest_data_index.quest_repeat] = data[eight_field_data.quest_repeat]
+            current_data[lib.quest_data_index.game_api] = data[eight_field_data.game_api]
+            current_data[lib.quest_data_index.quest_line] = data[eight_field_data.quest_line]
+            current_data[lib.quest_data_index.quest_number] = data[eight_field_data.quest_number]
+            current_data[lib.quest_data_index.quest_series] = data[eight_field_data.quest_series]
+        end
+        if #data == 7 then
+            current_data[lib.quest_data_index.quest_type] = data[seven_field_data.quest_type]
+            current_data[lib.quest_data_index.quest_repeat] = data[seven_field_data.quest_repeat]
+            current_data[lib.quest_data_index.game_api] = data[seven_field_data.game_api]
+            current_data[lib.quest_data_index.quest_line] = data[seven_field_data.quest_line]
+            current_data[lib.quest_data_index.quest_number] = data[seven_field_data.quest_number]
+            current_data[lib.quest_data_index.quest_series] = data[seven_field_data.quest_series]
+        end
+        if #data == 6 then
+            current_data = data
+        end
+
+        if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+        rebuilt_data[index] = current_data
+    end
+
+    LibQuestData_SavedVariables["location_info"] = rebuilt_locations
+    LibQuestData_SavedVariables["quest_info"] = rebuilt_data
+
+    for index, data in pairs(all_quest_names) do
+        if lib.quest_names[lib.client_lang][index] then
+            if LibQuestData_SavedVariables["quest_names"][index] == lib.quest_names[lib.client_lang][index] then
+                LibQuestData_SavedVariables["quest_names"][index] = nil
+            end
+        end
+    end
+    for index, data in pairs(all_quest_givers) do
+        npc_id = lib:get_npcids_table(data)
+        if npc_id then
+            if lib.quest_givers[lib.client_lang][npc_id[1]] == data then
+                LibQuestData_SavedVariables["giver_names"][index] = nil
+            end
+        end
+    end
+
+end
+
+-- Event handler function for EVENT_ADD_ON_LOADED
 local function OnLoad(eventCode, addOnName)
+    if addOnName ~= lib.libName then return end
+
     if LibQuestData_SavedVariables.version ~= 4 then
         -- d("ding not 4")
         local temp = nil
@@ -458,21 +556,21 @@ local function OnLoad(eventCode, addOnName)
         else
             LibQuestData_SavedVariables.quests = temp
         end
-        LibQuestData_SavedVariables.subZones = {}
 
         LibQuestData_SavedVariables.quest_info = {}
         LibQuestData_SavedVariables.location_info = {}
         LibQuestData_SavedVariables.quest_names = {}
-        LibQuestData_SavedVariables.objective_info = {}
         LibQuestData_SavedVariables.reward_info = {}
         LibQuestData_SavedVariables.giver_names = {}
     end
     if LibQuestData_SavedVariables.map_info ~= nil then LibQuestData_SavedVariables.map_info = nil end
+    if LibQuestData_SavedVariables.objective_info ~= nil then LibQuestData_SavedVariables.objective_info = nil end
+    if LibQuestData_SavedVariables.subZones ~= nil then LibQuestData_SavedVariables.subZones = nil end
     LibQuestData_SavedVariables.libVersion = lib.libVersion
     lib:build_questid_table(lib.client_lang) -- build name lookup table once
     lib:build_npcid_table(lib.client_lang) -- build npc names lookup table once
-    lib:build_objectiveid_table(lib.client_lang) -- build objective names lookup table once
     lib:build_questlist_skilpoint() -- build list of quests that reward a skill point
+    update_quest_information()
 
     EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_ADD_ON_LOADED)
 end
