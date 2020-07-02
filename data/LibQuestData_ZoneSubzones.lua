@@ -32,6 +32,11 @@ local lib = _G["LibQuestData"]
         ["therift/taarengrav_base_0"] =
     ["alikr/alikr_base_0"] =
         ["alikr/smugglerkingtunnel_base_0"] =
+    ["glenumbra/glenumbra_base_0"] =
+        ["glenumbra/badmansstart_base_0"] =
+        ["glenumbra/the_daggerfall_harborage_0"] =
+        ["glenumbra/west_hut_portal_cave_base_0"] = Heart of the Wyrd Tree - "Purifying the Wyrd Tree" needs verified
+        ["glenumbra/goblinminesend_base_0"] = may not be valid as I could not find a goblin mine for strosmkai and quest "Goblin Marq"
 
 /script LibQuestHelper.dm("Debug", GetMapTileTexture())
 /script LibQuestHelper.dm("Debug", GetCompletedQuestInfo(2222))
@@ -41,11 +46,224 @@ local lib = _G["LibQuestData"]
 4922 - The Orrery of Elden Root
 ]]--
 --[[ Current
+    ["rivenspire/shornhelm_base_0"] =
+        ["rivenspire/rivenspireoutlaw_base_0"] =
 
+    ["rivenspire/rivenspire_base_0"] =
+        ["rivenspire/shornhelm_base_0"] =
+        ["rivenspire/northpoint_base_0"] =
+
+
+        ["rivenspire/orcsfingerruins_base_0"] =
+        ["rivenspire/shroudedpass_base_0"] =
+        ["rivenspire/hoarfrost_base_0"] =
+        ["rivenspire/tribulationcrypt_base_0"] =
+        ["rivenspire/erokii_base_0"] =
+        ["rivenspire/flyleafcatacombs_base_0"] =
+        ["rivenspire/obsidianscar_base_0"] =
+        ["rivenspire/hildunessecretrefuge_base_0"] =
+        ["rivenspire/crestshademine_base_0"] =
+        ["rivenspire/cryptofhearts_base_0"] =
 
 
 ]]--
 lib.subzone_list = {
+    ["rivenspire/shornhelm_base_0"] = 
+    {
+        ["rivenspire/rivenspireoutlaw_base_0"] = 
+        {
+            x = 0.4606755972,
+            y = 0.5009347796,
+            zoom_factor = 0.0244741738,
+        },
+    },
+    ["rivenspire/rivenspire_base_0"] = {
+        ["rivenspire/shornhelm_base_0"] = {
+            x = 0.3514492512,
+            y = 0.4778127968,
+            zoom_factor = 0.1549828649,
+        },
+        ["rivenspire/northpoint_base_0"] = {
+            x = 0.7167208195,
+            y = 0.1344073862,
+            zoom_factor = 0.1562702656,
+        },
+    },
+    ["glenumbra/daggerfall_base_0"] = 
+    {
+        ["glenumbra/glenumbraoutlawrefuge_base_0"] = 
+        {
+            x = 0.4819751978,
+            y = 0.4613039196,
+            zoom_factor = 0.0291618109,
+        },
+    },
+    ["glenumbra/betnihk_base_0"] = {
+        ["glenumbra/stonetoothfortress_base_0"] = {
+            x = 0.3742717206,
+            y = 0.3294491172,
+            zoom_factor = 0.3335171044,
+        },
+    },
+    ["glenumbra/strosmkai_base_0"] = {
+        ["glenumbra/thegrave_base_0"] = 
+        {
+            x = 0.7328645587,
+            y = 0.6883273721,
+            zoom_factor = 0.1164454818,
+        },
+        ["glenumbra/porthunding_base_0"] = {
+            x = 0.4483701885,
+            y = 0.2100436538,
+            zoom_factor = 0.4183864892,
+        },
+    },
+    ["glenumbra/glenumbra_base_0"] = {
+        ["glenumbra/dresankeep_base_0"] = 
+        {
+            x = 0.4226853549,
+            y = 0.5240289569,
+            zoom_factor = 0.0534204245,
+        },
+        ["glenumbra/minesofkhuras_base_0"] = 
+        {
+            x = 0.6899842024,
+            y = 0.5231262445,
+            zoom_factor = 0.0102103353,
+        },
+        ["glenumbra/daggerfall_base_0"] = {
+            x = 0.1760335714,
+            y = 0.6615520716,
+            zoom_factor = 0.2057888359,
+        },
+        ["glenumbra/crosswych_base_0"] = {
+            x = 0.7236845493,
+            y = 0.0615800843,
+            zoom_factor = 0.1668418646,
+        },
+        ["glenumbra/aldcroft_base_0"] = {
+            x = 0.5031582117,
+            y = 0.4910534918,
+            zoom_factor = 0.1342113018,
+        },
+        ["glenumbra/ilessantower_base_0"] = 
+        {
+            x = 0.3457210362,
+            y = 0.7135038376,
+            zoom_factor = 0.0149988830,
+        },
+        ["glenumbra/badmanscave_base_0"] = 
+        {
+            x = 0.1985238194,
+            y = 0.7422971129,
+            zoom_factor = 0.0113151968,
+        },
+        ["glenumbra/cryptwatchfort_base_0"] = 
+        {
+            x = 0.7581044436,
+            y = 0.1355343908,
+            zoom_factor = 0.0095258355,
+        },
+        ["glenumbra/cathbedraud_base_0"] = 
+        {
+            x = 0.6692859530,
+            y = 0.1076735258,
+            zoom_factor = 0.0899987817,
+        },
+        ["glenumbra/spindleclutch_base_0"] = 
+        {
+            x = 0.7217794061,
+            y = 0.2978167236,
+            zoom_factor = 0.1052644253,
+        },
+    },
+    ["bangkorai/evermore_base_0"] = 
+    {
+        ["bangkorai/bangkoraioutlawrefuge_base_0"] = 
+        {
+            x = 0.4782624245,
+            y = 0.4739273787,
+            zoom_factor = 0.0238693953,
+        },
+    },
+    ["bangkorai/bangkorai_base_0"] = {
+        ["bangkorai/hallinsstand_base_0"] = {
+            x = 0.1551392376,
+            y = 0.6440171599,
+            zoom_factor = 0.2170779407,
+        },
+        ["bangkorai/evermore_base_0"] = {
+            x = 0.3253151774,
+            y = 0.2724003494,
+            zoom_factor = 0.1725804806,
+        },
+        ["bangkorai/murciensclaim_base_0"] = 
+        {
+            x = 0.3235510588,
+            y = 0.2440387309,
+            zoom_factor = 0.0276904702,
+        },
+        ["bangkorai/blackhearthavenarea1_base_0"] = 
+        {
+            x = -0.3757023513,
+            y = -2.5097396374,
+            zoom_factor = 0.0230907798,
+        },
+        ["bangkorai/ui_map_fanglairext_base_0"] = 
+        {
+            x = 0.7364880443,
+            y = 0.1615646333,
+            zoom_factor = 0.0306337476,
+        },
+        ["bangkorai/trollstoothpick_base_0"] = 
+        {
+            x = 0.7043734193,
+            y = 0.1981958449,
+            zoom_factor = 0.0279582739,
+        },
+        ["bangkorai/sunkenroad_base_0"] = 
+        {
+            x = 0.2291959822,
+            y = 0.5176213384,
+            zoom_factor = 0.1040285826,
+        },
+        ["bangkorai/razakswheel_base_0"] = 
+        {
+            x = 0.2372931391,
+            y = 0.7821400762,
+            zoom_factor = 0.1509305686,
+        },
+        ["bangkorai/cryptoftheexiles_base_0"] = 
+        {
+            x = 0.4314280748,
+            y = 0.4829143584,
+            zoom_factor = 0.0250765979,
+        },
+        ["bangkorai/hallofheroes_base_0"] = 
+        {
+            x = 0.4763473570,
+            y = 0.9260817766,
+            zoom_factor = 0.0395344794,
+        },
+        ["bangkorai/bisnensel_base_0"] = 
+        {
+            x = 0.4686257839,
+            y = 0.0984190479,
+            zoom_factor = 0.0429950356,
+        },
+        ["bangkorai/jaggerjaw_base_0"] = 
+        {
+            x = 0.5544588566,
+            y = 0.7467157245,
+            zoom_factor = 0.0110034943,
+        },
+        ["bangkorai/rubblebutte_base_0"] = 
+        {
+            x = 0.2220101357,
+            y = 0.6513200402,
+            zoom_factor = 0.0287711024,
+        },
+    },
     ["alikr/sentinel_base_0"] = 
     {
         ["alikr/alkiroutlawrefuge_base_0"] = 
@@ -810,18 +1028,6 @@ lib.subzone_list = {
             zoom_factor = 0.0959853530,
         },
     },
-    ["bangkorai/bangkorai_base_0"] = {
-        ["bangkorai/hallinsstand_base_0"] = {
-            x = 0.1551392376,
-            y = 0.6440171599,
-            zoom_factor = 0.2170779407,
-        },
-        ["bangkorai/evermore_base_0"] = {
-            x = 0.3253151774,
-            y = 0.2724003494,
-            zoom_factor = 0.1725804806,
-        },
-    },
     ["craglorn/craglorn_base_0"] = {
         ["craglorn/craglorn_dragonstar_0"] = {
             x = 0.1167204976,
@@ -834,7 +1040,22 @@ lib.subzone_list = {
             zoom_factor = 0.1406832039,
         },
     },
+    ["cyrodiil/imperialcity_base_0"] = 
+    {
+        ["cyrodiil/imperialsewers_aldmeri1_base_0"] = 
+        {
+            x = 0.2490756810,
+            y = 0.4863340557,
+            zoom_factor = 0.3468900621,
+        },
+    },
     ["cyrodiil/ava_whole_0"] = {
+        ["cyrodiil/imperialcity_base_0"] = 
+        {
+            x = 0.4488355517,
+            y = 0.3805555701,
+            zoom_factor = 0.0949644446,
+        },
         ["cyrodiil/southmorrowgate_base_0"] = {
             x = 0.8904289007,
             y = 0.2728511095,
@@ -864,49 +1085,6 @@ lib.subzone_list = {
             x = 0.8035155535,
             y = 0.0765622258,
             zoom_factor = 0.0705088973,
-        },
-    },
-    ["rivenspire/rivenspire_base_0"] = {
-        ["rivenspire/shornhelm_base_0"] = {
-            x = 0.3514492512,
-            y = 0.4778127968,
-            zoom_factor = 0.1549828649,
-        },
-        ["rivenspire/northpoint_base_0"] = {
-            x = 0.7167208195,
-            y = 0.1344073862,
-            zoom_factor = 0.1562702656,
-        },
-    },
-    ["glenumbra/glenumbra_base_0"] = {
-        ["glenumbra/daggerfall_base_0"] = {
-            x = 0.1760335714,
-            y = 0.6615520716,
-            zoom_factor = 0.2057888359,
-        },
-        ["glenumbra/crosswych_base_0"] = {
-            x = 0.7236845493,
-            y = 0.0615800843,
-            zoom_factor = 0.1668418646,
-        },
-        ["glenumbra/aldcroft_base_0"] = {
-            x = 0.5031582117,
-            y = 0.4910534918,
-            zoom_factor = 0.1342113018,
-        },
-    },
-    ["glenumbra/betnihk_base_0"] = {
-        ["glenumbra/stonetoothfortress_base_0"] = {
-            x = 0.3742717206,
-            y = 0.3294491172,
-            zoom_factor = 0.3335171044,
-        },
-    },
-    ["glenumbra/strosmkai_base_0"] = {
-        ["glenumbra/porthunding_base_0"] = {
-            x = 0.4483701885,
-            y = 0.2100436538,
-            zoom_factor = 0.4183864892,
         },
     },
     ["coldharbor/coldharbour_base_0"] = {

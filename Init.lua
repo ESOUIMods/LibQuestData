@@ -1,6 +1,8 @@
 local libName, libVersion = "LibQuestData", 190
-lib = {}
-internal = {}
+local lib = {}
+local internal = {}
+_G["LibQuestData"] = lib
+_G["LibQuestData_Internal"] = internal
 
 -------------------------------------------------
 ----- Logger Function                       -----
@@ -69,7 +71,6 @@ end
 
 lib.quest_givers = {}
 lib.quest_names = {}
-lib.objective_names = {}
 lib.client_lang = GetCVar("language.2")
 lib.libName = libName
 lib.libVersion = libVersion
@@ -92,15 +93,6 @@ lib.name_to_npcid_table["jp"] = {}
 lib.name_to_npcid_table["ru"] = {}
 lib.name_to_npcid_table["pl"] = {}
 
-lib.name_to_objectiveid_table = {}
-lib.name_to_objectiveid_table["de"] = {}
-lib.name_to_objectiveid_table["en"] = {}
-lib.name_to_objectiveid_table["es"] = {}
-lib.name_to_objectiveid_table["fr"] = {}
-lib.name_to_objectiveid_table["jp"] = {}
-lib.name_to_objectiveid_table["ru"] = {}
-lib.name_to_objectiveid_table["pl"] = {}
-
 lib.quest_rewards_skilpoint = {}
 lib.started_quests = {}
 lib.completed_quests = {}
@@ -111,11 +103,9 @@ if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
 if LibQuestData_SavedVariables.version == nil then LibQuestData_SavedVariables.version = LibQuestData_SavedVariables.version or 1 end
 if LibQuestData_SavedVariables.libVersion == nil then LibQuestData_SavedVariables.libVersion = LibQuestData_SavedVariables.libVersion or lib.libVersion end
 if LibQuestData_SavedVariables.quests == nil then LibQuestData_SavedVariables.quests = {} end
-if LibQuestData_SavedVariables.subZones == nil then LibQuestData_SavedVariables.subZones = {} end
 if LibQuestData_SavedVariables.quest_info == nil then LibQuestData_SavedVariables.quest_info = {} end
 if LibQuestData_SavedVariables.location_info == nil then LibQuestData_SavedVariables.location_info = {} end
 if LibQuestData_SavedVariables.quest_names == nil then LibQuestData_SavedVariables.quest_names = {} end
-if LibQuestData_SavedVariables.objective_info == nil then LibQuestData_SavedVariables.objective_info = {} end
 if LibQuestData_SavedVariables.reward_info == nil then LibQuestData_SavedVariables.reward_info = {} end
 if LibQuestData_SavedVariables.giver_names == nil then LibQuestData_SavedVariables.giver_names = {} end
 
@@ -201,6 +191,3 @@ lib.dest_quest_series_index = {
     quest_series_dc         = 4,
     quest_series_ep         = 5,
 }
-
-_G["LibQuestData"] = lib
-_G["LibQuestData_Internal"] = internal

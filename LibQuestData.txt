@@ -13,7 +13,7 @@
 ## APIVersion: 100030 100031
 ## Description: Provides Quest Information
 ## SavedVariables: LibQuestData_SavedVariables
-## DependsOn: LibGPS>=37 LibMapPins-1.0>=10027
+## DependsOn: LibGPS>=37 LibMapPins-1.0>=10029
 ## OptionalDependsOn: LibMapPing>=1200 LibDebugLogger>=196 LibChatMessage>=100 DebugLogViewer
 ## IsLibrary: true
 
