@@ -1101,6 +1101,7 @@ lib.quest_givers["en"] = {
      [92007] = "Proctor Sovor Saryoni",
      [92008] = "Provost Varuni Arvel",
      [92009] = "Journal of a Stranded Mage",
+     [92010] = "Divayth Fyr",
     -- New auto created
     [100001] = "Moon-Bishop Azin-jo",
     [100002] = "Gray-Skies",
@@ -1199,6 +1200,13 @@ lib.quest_givers["en"] = {
     [100095] = "Sister J'Reeza",
     [100096] = "Dulza's Log",
     [100097] = "Zahari",
+    [100098] = "Brihana",
+    [100099] = "General Nedras",
+    [100100] = "Grand Warlord Dortene",
+    [100101] = "Details on the Midyear Mayhem", -- 6014
+    [100102] = "Zelanus Equitius",
+    [100103] = "Captain Sireril",
+    [100104] = "Captain Veranim",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",
