@@ -1853,6 +1853,7 @@ lib.quest_names["en"] = {
     [6343] = "Lurcher Demonstration",
     [6344] = "Lamia Demonstration",
     [6345] = "Dragon Lore: Stormcrag Crypt",
+    [6347] = "Dragon Lore: Shroud Hearth",
     [6348] = "In Defense of Elsweyr",
     [6351] = "The Azure Blight",
     [6353] = "The Return of Alkosh",

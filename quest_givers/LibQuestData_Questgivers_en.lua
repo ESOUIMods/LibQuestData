@@ -1198,6 +1198,7 @@ lib.quest_givers["en"] = {
     [100094] = "Narayun",
     [100095] = "Sister J'Reeza",
     [100096] = "Dulza's Log",
+    [100097] = "Zahari",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",
