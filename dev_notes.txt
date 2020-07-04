@@ -1,3 +1,29 @@
+---
+possible way to loop for conditions
+---
+
+local flag_1 = 10
+local function Condition_1(<args>)
+    -- check args and return true or false?
+end
+
+
+end
+
+local conditions =
+{
+    {flag = flag_1, func = Condition_1},
+}
+
+for _, condition in ipairs(conditions) do
+    if condition.func(<args>) then
+        -- setFlag condition.flag
+        break
+    end
+end
+
+---------------------------------------
+
 writing QuestData[id][QuestDataIndex.QUEST_GIVER] is the same as writing QuestData[6404][6] when id = 6404 and QuestDataIndex.QUEST_GIVER = 6. one uses variables, the other number literals
 
 function QuestMap:GetQuestCoords(id)

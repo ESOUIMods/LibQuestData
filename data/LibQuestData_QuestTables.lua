@@ -37,6 +37,7 @@ quest giver.
 5659 - Contract: Grahtwood, Marked for Death
 6476 - Dark Clouds Over Solitude, Lyris Titanborn
 6092 - The Merchant's Heirloom, Dulza's Log
+6014 - Midyear Mayhem, Details on the Midyear Mayhem
 
 6533 = Kelbarn's Mining Samples
 6534 - Inguya's Mining Samples
@@ -71,6 +72,7 @@ lib.questid_giver_lookup = {
     [5659] = 500120,
     [6476] = 80006,
     [6092] = 100096,
+    [6014] = 100101,
 }
 
 --[[ List of what the numbers mean
