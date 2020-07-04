@@ -108,7 +108,7 @@ end
 
 -- Event handler function for EVENT_QUEST_ADDED
 local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
-    --d("OnQuestAdded")
+    --internal.dm("Debug", "OnQuestAdded")
     if quest_shared then
         quest_shared = false
         return
@@ -151,6 +151,9 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         ["world_y"]     = world_y,
         ["world_z"]     = world_z,
     }
+    if questGiverName == nil then
+        quest["giver"] = lib.last_interaction_target
+    end
 
     quest_found = false
     local quests_in_zone = get_sv_quest_info(zone)
@@ -705,6 +708,15 @@ local function show_quests()
     end
 end
 
+local function OnInteract(event_code, client_interact_result, interact_target_name)
+    internal.dm("Debug", "OnInteract Occured")
+    --d(client_interact_result)
+    local text = zo_strformat(SI_CHAT_MESSAGE_FORMATTER, interact_target_name)
+    internal.dm("Debug", text)
+    lib.last_interaction_target = text
+end
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_CLIENT_INTERACT_RESULT, OnInteract)
+
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function OnPlayerActivated(eventCode)
     -- /script LibQuestData.logger:Debug(GetCurrentMapId())
@@ -729,6 +741,8 @@ local function OnPlayerActivated(eventCode)
     --internal.dm("Debug", "Current Zone Index Player: "..current_zone_index)
     internal.dm("Debug", "Current Map Zone Index: "..GetZoneId(GetCurrentMapZoneIndex()))
 
+    -- disable for now because only I use it
+    --[[
     if last_map_id then
         internal.dm("Debug", is_different_zone(current_map_id, last_map_id))
     end
@@ -754,8 +768,7 @@ local function OnPlayerActivated(eventCode)
                     ["parent_zone_index"]   = last_map_zone_index,
                 }
             internal.dm("Debug", "Saving subzone data")
-            -- disable for now because only I use it
-            --LibQuestData_SavedVariables.subZones[last_zone][current_zone] = data_store
+            LibQuestData_SavedVariables.subZones[last_zone][current_zone] = data_store
         end
     else
         internal.dm("Debug", "Something was false")
@@ -767,14 +780,13 @@ local function OnPlayerActivated(eventCode)
     if last_zone then
         internal.dm("Debug", "Previous Zone: "..last_zone)
     end
-    --[[
     if last_zone_index then
         internal.dm("Debug", "Previous Zone Index Player: "..last_zone_index)
     end
-    ]]--
     if last_map_zone_index then
         internal.dm("Debug", "Previous Map Zone Index: "..last_map_zone_index)
     end
+    ]]--
 
     if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
         last_map_id = GetCurrentMapId()
