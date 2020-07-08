@@ -356,9 +356,26 @@ lib.conditional_quest_list = {
         5072, -- Aid for Bramblebreach
     },
     --Cyrodiil
+    --[4704] = "Welcome to Cyrodiil",
+    --[4722] = "Welcome to Cyrodiil",
+    --[4725] = "Welcome to Cyrodiil", dc
+    --[4706] = "Reporting for Duty",
+    --[4724] = "Reporting for Duty",
+    --[4727] = "Reporting for Duty", dc
+    --[4705] = "Siege Warfare",
+    --[4723] = "Siege Warfare",
+    --[4726] = "Siege Warfare", dc
+    --[5487] = "City on the Brink",
+	--[5493] = "City on the Brink", dc
+	--[5496] = "City on the Brink",
     [4706] = { -- Reporting for Duty
         4704, -- Welcome to Cyrodiil
         4705, -- Siege Warfare
     },
 
 }
+
+--[[
+/script LibQuestData_Internal.dm("Debug", LibQuestData.completed_quests[4726])
+/script LibQuestData_Internal.dm("Debug", LibQuestData.player_alliance)
+]]--

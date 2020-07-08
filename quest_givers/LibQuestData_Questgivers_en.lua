@@ -1207,6 +1207,13 @@ lib.quest_givers["en"] = {
     [100102] = "Zelanus Equitius",
     [100103] = "Captain Sireril",
     [100104] = "Captain Veranim",
+    [100105] = "Zahreh",
+    [100106] = "Captain Alesace",
+    [100107] = "Adventurers Wanted!",
+    [100108] = "Alavesa Arethan",
+    [100109] = "Captain Durida",
+    [100110] = "Grand Warlord Zimmeron",
+    [100111] = "Ri'hirr",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",

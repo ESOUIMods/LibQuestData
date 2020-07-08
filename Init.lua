@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 192
+local libName, libVersion = "LibQuestData", 193
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -72,6 +72,12 @@ end
 lib.quest_givers = {}
 lib.quest_names = {}
 lib.client_lang = GetCVar("language.2")
+--[[
+    ALLIANCE_ALDMERI_DOMINION = 1
+    ALLIANCE_EBONHEART_PACT = 2
+    ALLIANCE_DAGGERFALL_COVENANT = 3
+]]--
+lib.player_alliance = GetUnitAlliance("player")
 lib.libName = libName
 lib.libVersion = libVersion
 
