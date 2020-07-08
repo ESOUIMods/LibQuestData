@@ -67,9 +67,9 @@ local lib = _G["LibQuestData"]
 
 ]]--
 lib.subzone_list = {
-    ["rivenspire/shornhelm_base_0"] =
+    ["rivenspire/shornhelm_base_0"] = 
     {
-        ["rivenspire/rivenspireoutlaw_base_0"] =
+        ["rivenspire/rivenspireoutlaw_base_0"] = 
         {
             x = 0.4606755972,
             y = 0.5009347796,
@@ -88,9 +88,9 @@ lib.subzone_list = {
             zoom_factor = 0.1562702656,
         },
     },
-    ["glenumbra/daggerfall_base_0"] =
+    ["glenumbra/daggerfall_base_0"] = 
     {
-        ["glenumbra/glenumbraoutlawrefuge_base_0"] =
+        ["glenumbra/glenumbraoutlawrefuge_base_0"] = 
         {
             x = 0.4819751978,
             y = 0.4613039196,
@@ -105,7 +105,7 @@ lib.subzone_list = {
         },
     },
     ["glenumbra/strosmkai_base_0"] = {
-        ["glenumbra/thegrave_base_0"] =
+        ["glenumbra/thegrave_base_0"] = 
         {
             x = 0.7328645587,
             y = 0.6883273721,
@@ -118,13 +118,13 @@ lib.subzone_list = {
         },
     },
     ["glenumbra/glenumbra_base_0"] = {
-        ["glenumbra/dresankeep_base_0"] =
+        ["glenumbra/dresankeep_base_0"] = 
         {
             x = 0.4226853549,
             y = 0.5240289569,
             zoom_factor = 0.0534204245,
         },
-        ["glenumbra/minesofkhuras_base_0"] =
+        ["glenumbra/minesofkhuras_base_0"] = 
         {
             x = 0.6899842024,
             y = 0.5231262445,
@@ -145,40 +145,40 @@ lib.subzone_list = {
             y = 0.4910534918,
             zoom_factor = 0.1342113018,
         },
-        ["glenumbra/ilessantower_base_0"] =
+        ["glenumbra/ilessantower_base_0"] = 
         {
             x = 0.3457210362,
             y = 0.7135038376,
             zoom_factor = 0.0149988830,
         },
-        ["glenumbra/badmanscave_base_0"] =
+        ["glenumbra/badmanscave_base_0"] = 
         {
             x = 0.1985238194,
             y = 0.7422971129,
             zoom_factor = 0.0113151968,
         },
-        ["glenumbra/cryptwatchfort_base_0"] =
+        ["glenumbra/cryptwatchfort_base_0"] = 
         {
             x = 0.7581044436,
             y = 0.1355343908,
             zoom_factor = 0.0095258355,
         },
-        ["glenumbra/cathbedraud_base_0"] =
+        ["glenumbra/cathbedraud_base_0"] = 
         {
             x = 0.6692859530,
             y = 0.1076735258,
             zoom_factor = 0.0899987817,
         },
-        ["glenumbra/spindleclutch_base_0"] =
+        ["glenumbra/spindleclutch_base_0"] = 
         {
             x = 0.7217794061,
             y = 0.2978167236,
             zoom_factor = 0.1052644253,
         },
     },
-    ["bangkorai/evermore_base_0"] =
+    ["bangkorai/evermore_base_0"] = 
     {
-        ["bangkorai/bangkoraioutlawrefuge_base_0"] =
+        ["bangkorai/bangkoraioutlawrefuge_base_0"] = 
         {
             x = 0.4782624245,
             y = 0.4739273787,
@@ -196,82 +196,82 @@ lib.subzone_list = {
             y = 0.2724003494,
             zoom_factor = 0.1725804806,
         },
-        ["bangkorai/murciensclaim_base_0"] =
+        ["bangkorai/murciensclaim_base_0"] = 
         {
             x = 0.3235510588,
             y = 0.2440387309,
             zoom_factor = 0.0276904702,
         },
-        ["bangkorai/blackhearthavenarea1_base_0"] =
+        ["bangkorai/blackhearthavenarea1_base_0"] = 
         {
             x = -0.3757023513,
             y = -2.5097396374,
             zoom_factor = 0.0230907798,
         },
-        ["bangkorai/ui_map_fanglairext_base_0"] =
+        ["bangkorai/ui_map_fanglairext_base_0"] = 
         {
             x = 0.7364880443,
             y = 0.1615646333,
             zoom_factor = 0.0306337476,
         },
-        ["bangkorai/trollstoothpick_base_0"] =
+        ["bangkorai/trollstoothpick_base_0"] = 
         {
             x = 0.7043734193,
             y = 0.1981958449,
             zoom_factor = 0.0279582739,
         },
-        ["bangkorai/sunkenroad_base_0"] =
+        ["bangkorai/sunkenroad_base_0"] = 
         {
             x = 0.2291959822,
             y = 0.5176213384,
             zoom_factor = 0.1040285826,
         },
-        ["bangkorai/razakswheel_base_0"] =
+        ["bangkorai/razakswheel_base_0"] = 
         {
             x = 0.2372931391,
             y = 0.7821400762,
             zoom_factor = 0.1509305686,
         },
-        ["bangkorai/cryptoftheexiles_base_0"] =
+        ["bangkorai/cryptoftheexiles_base_0"] = 
         {
             x = 0.4314280748,
             y = 0.4829143584,
             zoom_factor = 0.0250765979,
         },
-        ["bangkorai/hallofheroes_base_0"] =
+        ["bangkorai/hallofheroes_base_0"] = 
         {
             x = 0.4763473570,
             y = 0.9260817766,
             zoom_factor = 0.0395344794,
         },
-        ["bangkorai/bisnensel_base_0"] =
+        ["bangkorai/bisnensel_base_0"] = 
         {
             x = 0.4686257839,
             y = 0.0984190479,
             zoom_factor = 0.0429950356,
         },
-        ["bangkorai/jaggerjaw_base_0"] =
+        ["bangkorai/jaggerjaw_base_0"] = 
         {
             x = 0.5544588566,
             y = 0.7467157245,
             zoom_factor = 0.0110034943,
         },
-        ["bangkorai/rubblebutte_base_0"] =
+        ["bangkorai/rubblebutte_base_0"] = 
         {
             x = 0.2220101357,
             y = 0.6513200402,
             zoom_factor = 0.0287711024,
         },
     },
-    ["alikr/sentinel_base_0"] =
+    ["alikr/sentinel_base_0"] = 
     {
-        ["alikr/alkiroutlawrefuge_base_0"] =
+        ["alikr/alkiroutlawrefuge_base_0"] = 
         {
             x = 0.5023635626,
             y = 0.5033065081,
             zoom_factor = 0.0214833617,
         },
-        ["alikr/imperviousvault_base_0"] =
+        ["alikr/imperviousvault_base_0"] = 
         {
             x = 0.6188357472,
             y = 0.4884603620,
@@ -294,61 +294,61 @@ lib.subzone_list = {
             y = 0.3574757278,
             zoom_factor = 0.2059123665,
         },
-        ["alikr/coldrockdiggings_base_0"] =
+        ["alikr/coldrockdiggings_base_0"] = 
         {
             x = 0.6440528035,
             y = 0.3475230336,
             zoom_factor = -0.6440528035,
         },
-        ["alikr/aldunz_base_0"] =
+        ["alikr/aldunz_base_0"] = 
         {
             x = 0.6373039484,
             y = 0.6392282844,
             zoom_factor = 0.0176002383,
         },
-        ["alikr/salasen_base_0"] =
+        ["alikr/salasen_base_0"] = 
         {
             x = 0.1869529486,
             y = 0.6779437661,
             zoom_factor = 0.0517824292,
         },
-        ["alikr/shorecave_base_0"] =
+        ["alikr/shorecave_base_0"] = 
         {
             x = 0.2867861688,
             y = 0.4325964749,
             zoom_factor = 0.0330619812,
         },
-        ["alikr/santaki_base_0"] =
+        ["alikr/santaki_base_0"] = 
         {
             x = 0.2196166366,
             y = 0.5546602011,
             zoom_factor = 0.0166293234,
         },
-        ["alikr/lostcity_base_0"] =
+        ["alikr/lostcity_base_0"] = 
         {
             x = 0.6576101780,
             y = 0.2374508381,
             zoom_factor = 0.1767388582,
         },
-        ["alikr/divadschagrinmine_base_0"] =
+        ["alikr/divadschagrinmine_base_0"] = 
         {
             x = 0.3985387087,
             y = 0.5853124261,
             zoom_factor = 0.0081926882,
         },
-        ["alikr/sandblownmine_base_0"] =
+        ["alikr/sandblownmine_base_0"] = 
         {
             x = 0.8286731243,
             y = 0.5780507922,
             zoom_factor = 0.0158501267,
         },
-        ["alikr/yldzuun_base_0"] =
+        ["alikr/yldzuun_base_0"] = 
         {
             x = 0.8902290463,
             y = 0.5100672245,
             zoom_factor = 0.0158501267,
         },
-        ["alikr/volenfell_base_0"] =
+        ["alikr/volenfell_base_0"] = 
         {
             x = 0.8658202887,
             y = 0.4214861691,
@@ -1039,9 +1039,9 @@ lib.subzone_list = {
             zoom_factor = 0.1406832039,
         },
     },
-    ["cyrodiil/imperialcity_base_0"] =
+    ["cyrodiil/imperialcity_base_0"] = 
     {
-        ["cyrodiil/imperialsewers_aldmeri1_base_0"] =
+        ["cyrodiil/imperialsewers_aldmeri1_base_0"] = 
         {
             x = 0.2490756810,
             y = 0.4863340557,
@@ -1049,7 +1049,7 @@ lib.subzone_list = {
         },
     },
     ["cyrodiil/ava_whole_0"] = {
-        ["cyrodiil/imperialcity_base_0"] =
+        ["cyrodiil/imperialcity_base_0"] = 
         {
             x = 0.4488355517,
             y = 0.3805555701,
