@@ -449,11 +449,13 @@ local function update_quest_information()
     local all_quest_names = LibQuestData_SavedVariables["quest_names"]
     local all_objectives = LibQuestData_SavedVariables["objective_info"]
     local all_quest_givers = LibQuestData_SavedVariables["giver_names"]
+    local all_reward_info = LibQuestData_SavedVariables["reward_info"]
     local rebuilt_data = {}
     local rebuilt_locations = {}
     local current_data = {}
     local givername
     local npc_id
+    local saved_reward_info
 
     for zone, zone_quests in pairs(all_locations) do
         for index, quest in pairs(zone_quests) do
@@ -541,6 +543,18 @@ local function update_quest_information()
         end
     end
 
+    saved_reward_info = {}
+    for quest_id, rewards in pairs(all_reward_info) do
+        for index, reward_data in pairs(rewards) do
+            npc_id = lib:get_npcids_table(data)
+            if reward_data == 9 then
+                if not lib.quest_rewards_skilpoint[quest_id] then
+                    saved_reward_info[quest_id] = rewards
+                end
+            end
+        end
+    end
+    LibQuestData_SavedVariables["reward_info"] = saved_reward_info
 end
 
 -- Event handler function for EVENT_ADD_ON_LOADED

@@ -1102,6 +1102,8 @@ lib.quest_givers["en"] = {
      [92008] = "Provost Varuni Arvel",
      [92009] = "Journal of a Stranded Mage",
      [92010] = "Divayth Fyr",
+     [92011] = "Bursar of Tributes",
+     [92012] = "Novice Holli",
     -- New auto created
     [100001] = "Moon-Bishop Azin-jo",
     [100002] = "Gray-Skies",
@@ -1214,6 +1216,13 @@ lib.quest_givers["en"] = {
     [100109] = "Captain Durida",
     [100110] = "Grand Warlord Zimmeron",
     [100111] = "Ri'hirr",
+    [100112] = "Battlereeve Tanerline",
+    [100113] = "Order of the Eye Dispatch",
+    [100114] = "Dirge Truptor",
+    [100115] = "Jee-Lar",
+    [100116] = "Terendras Varro",
+    [100117] = "Sir Hadir",
+    [100118] = "Captain Vistra",
     -- Skyrim
     [200000] = "Tyrvera",
     [200001] = "Priest Isonir",
