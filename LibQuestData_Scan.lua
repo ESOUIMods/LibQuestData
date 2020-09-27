@@ -185,6 +185,7 @@ end
 local function OnQuestSharred(eventCode, questID)
     --d("OnQuestSharred")
     quest_shared = true
+    lib.last_interaction_target = ""
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_SHARED, OnQuestSharred) -- Verified
 
