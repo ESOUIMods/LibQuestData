@@ -1044,8 +1044,15 @@ lib.quest_givers["de"] = {
 	 [70459] = "Elam Drals",
 	 [70472] = "Nevusa",
 	 [72001] = "Amelie Kroh",
+    -- Shar Morrowind
+    -- Shar Crown Store
+    -- Shar Misc
     -- Shar Elsweyr
 	 [81000] = "Nisuzi",
+    -- Shar Skyrim
+    -- Summerset
+    -- Clockwork City
+    -- New auto created
     [100026] = "Renzir",
     [100078] = "Sheogorath",
     [100086] = "Sarazi",
