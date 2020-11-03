@@ -1044,13 +1044,46 @@ lib.quest_givers["fr"] = {
 	 [70459] = "Elam Drals",
 	 [70472] = "Nevusa",
 	 [72001] = "Amélie Crowe",
+    -- Shar Morrowind
+    -- Shar Crown Store
+    -- Shar Misc
+    -- Shar Elsweyr
+    -- Shar Skyrim
+	 [90000] = "Le lieutenant Korleva",
+    -- Summerset
+	 [91008] = "La matriarche Helenaerë",
+    -- Clockwork City
+    -- New auto created
+    [100001] = "Moon-Bishop Azin-jo",
+    [100072] = "Gwingeval",
+    [100073] = "Quintia Rullus",
+    [100085] = "Le légat Gallus",
+    [100095] = "Sœur J'Reeza",
+    [100112] = "Le haut commissaire Tanerline",
+    [100120] = "La justiciar Farowël",
+    [100123] = "le justiciar Tanorian",
+    -- Skyrim
+    [200001] = "Le prêtre Isonir",
+    [200004] = "La thane-épée Jylta",
+    [200006] = "Hidaver",
+    [200009] = "Fenrar",
+    [200010] = "Alfgar",
+    [200011] = "Alwyn",
+    [200014] = "La poupée Heiruna",
+    [200015] = "Jolfr",
+    [200018] = "Le surveillant Urlvar",
+    [200021] = "Relmerea Sethandus",
+    [200022] = "Svana",
+    [200030] = "Leiborn",
+    [200046] = "Aerolf",
+    -- Existing
 	[500000] = "Sarcophage ayléide",
 	[500001] = "Heist Board",
 	[500002] = "Reacquisition Board",
 	[500003] = "Tharayya's Journal, Entry 10",
 	[500004] = "Tharayya's Journal, Entry 2",
 	[500005] = "Promissory Note",
-	[500006] = "Tavo (dead)",
+	[500006] = "La lettre à Tavo",
 	[500007] = "Letter to Fadeel",
 	[500008] = "Altmeri Relic",
 	[500009] = "Commandes d'équipement artisanal",
