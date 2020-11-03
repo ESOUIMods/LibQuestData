@@ -44,6 +44,7 @@ quest giver.
 6535 = Reeh-La's Mining Samples
 6536 = Ghamborz's Mining Samples
 6538 = Adanzda's Mining Samples
+6591 = Falkfyr's Notes, Page 1
 --]]
 lib.questid_giver_lookup = {
     [6420] = 100035,
@@ -73,6 +74,7 @@ lib.questid_giver_lookup = {
     [6476] = 80006,
     [6092] = 100096,
     [6014] = 100101,
+    [6591] = 200050,
 }
 
 --[[ List of what the numbers mean
@@ -120,7 +122,7 @@ lib.quest_cadwell = quest_ids { 465, 467, 737, 736, 1341, 1346, 1437, 1529, 1536
 
 -- list of map ID numbers using GetCurrentMapId()
 -- 1552 Norg-Tzel
-lib.zone_id_list = { 75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1747, 1313, 1348, 1354, 255, 1126, 1006, 994, 1484, 1552, 1555, 1654, 1349, 1060, 1719, 667, 16, 660, 108, }
+lib.zone_id_list = { 75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1747, 1313, 1348, 1354, 255, 1126, 1006, 994, 1484, 1552, 1555, 1654, 1349, 1060, 1719, 667, 16, 660, 108, 1207, 1208, }
 
 lib.zone_names_list = {
     [75] = "balfoyen_base_0",
@@ -163,6 +165,8 @@ lib.zone_names_list = {
     [16] = "ava_whole_0",
     [660] = "imperialcity_base_0",
     [108] = "eyevea_base_0",
+    [1207] = "reach_base_0",
+    [1208] = "u28_blackreach_base_0",
 }
 
 --[[

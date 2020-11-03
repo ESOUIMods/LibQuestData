@@ -1283,6 +1283,7 @@ lib.quest_givers["en"] = {
     [200047] = "Captain Hingrid",
     [200048] = "Sarcophagus",
     [200049] = "Kasura",
+    [200050] = "Falkfyr's Notes, Page 1",
     -- Existing
  	[500000] = "Ayleid Sarcophagus",
 	[500001] = "Heist Board",
