@@ -67,6 +67,21 @@ local lib = _G["LibQuestData"]
 
 ]]--
 lib.subzone_list = {
+    ["reach/reach_base_0"] = 
+    {
+        ["reach/markarthcity_base_0"] = 
+        {
+            x = 0.1846692413,
+            zoom_factor = 0.1029908508,
+            y = 0.4651794434,
+        },
+        ["reach/vateshransrites01_0"] = 
+        {
+            y = 0.7900598049,
+            zoom_factor = 0.0078676939,
+            x = 0.4752955735,
+        },
+    },
     ["rivenspire/shornhelm_base_0"] =
     {
         ["rivenspire/rivenspireoutlaw_base_0"] =
