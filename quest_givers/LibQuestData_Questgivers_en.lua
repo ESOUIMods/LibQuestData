@@ -1049,6 +1049,11 @@ lib.quest_givers["en"] = {
   [72004] = "Dayna Imayn",
   [72005] = "Fa-Nuit-Hen",
   [72006] = "Larafil",
+  -- holliday
+  [77001] = "New Life Festival Scroll",
+  [77002] = "Breda",
+  [77003] = "Petronius Galenus",
+  [77004] = "Alvos Orain", -- check might not be holiday
   -- Shar Morrowind
   [78000] = "Vivec",
   [78001] = "Canon Valasa",
@@ -1085,6 +1090,8 @@ lib.quest_givers["en"] = {
   [80015] = "Watchman Vinenoldil",
   [80016] = "Librarian Bradyn",
   [80016] = "Mindil the Untested",
+  [80017] = "House Ravenwatch Contract",
+  [80018] = "Witchmother Olyve",
   -- Shar Elsweyr
   [81000] = "Nisuzi",
   [81001] = "Elianna Pevengius",

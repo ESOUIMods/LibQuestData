@@ -129,6 +129,10 @@ function lib:get_qm_quest_type(id)
     end
 end
 
+function lib:is_holiday_quest(id)
+  local c = lib:get_quest_type(id)
+  if c == lib.quest_data_type.quest_type_holiday_event then return true else return false end
+end
 -------------------------------------------------
 ----- Extended Quest Data                    ----
 -------------------------------------------------
