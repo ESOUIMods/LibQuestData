@@ -30,7 +30,7 @@ quest giver.
 4526 - Lost Bet, Altmeri Relic
 4220 - The Mallari-Mora, Umbarile
 4531 - A Brush With Death, Watch Captain Astanya
-3991 - Escape from Bleakrock,Captain Rana
+3991 - Escape from Bleakrock, Captain Rana
 6093 - The Mages Dog, Journal of a Stranded Mage
 4146 - A Family Divided, Sela
 5630 - Contract: Bangkorai, Marked for Death
@@ -47,6 +47,10 @@ quest giver.
 6591 = Falkfyr's Notes, Page 1
 
 4680 = "To My Friend From the Beach", "Storm on the Horizon"
+6134 = "The New Life Festival", "New Life Festival Scroll"
+6549 = "The Ravenwatch Inquiry", "House Ravenwatch Contract"
+
+ID   = Quest Name, Object for comments
 --]]
 lib.questid_giver_lookup = {
     [6420] = 100035,
@@ -78,10 +82,13 @@ lib.questid_giver_lookup = {
     [6014] = 100101,
     [6591] = 200050,
     [4680] = 72002,
+    [6134] = 77001,
     [6532] = 90012,
     [6553] = 90013,
     [6348] = 100035,
     [6170] = 91012,
+    [6549] = 80017,
+    [5742] = 80018, -- special holliday quest for halloween check if it's in any location
 }
 
 --[[ List of what the numbers mean
@@ -107,8 +114,9 @@ Note: Table is of Quest ID numbers since that
 is part of the XY location information from
 lib.quest_locations
 --]]
--- 4841 need mor data first for Rajesh
-lib.quest_giver_moves = { 5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, }
+-- 4841 need more data first for Rajesh
+-- 5742 needs verified as it is for halloween quest
+lib.quest_giver_moves = { 5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, 5742}
 
 --[[
 This is a list of qusts that give skill points
