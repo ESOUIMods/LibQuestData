@@ -67,15 +67,15 @@ local lib = _G["LibQuestData"]
 
 ]]--
 lib.subzone_list = {
-    ["reach/reach_base_0"] = 
+    ["reach/reach_base_0"] =
     {
-        ["reach/markarthcity_base_0"] = 
+        ["reach/markarthcity_base_0"] =
         {
             x = 0.1846692413,
             zoom_factor = 0.1029908508,
             y = 0.4651794434,
         },
-        ["reach/vateshransrites01_0"] = 
+        ["reach/vateshransrites01_0"] =
         {
             y = 0.7900598049,
             zoom_factor = 0.0078676939,
@@ -678,6 +678,12 @@ lib.subzone_list = {
         },
     },
     ["deshaan/deshaan_base_0"] = {
+        ["deshaan/cauldronmapstart_0"] =
+        {
+            x = 0.0759229586,
+            y = 0.5158454180,
+            zoom_factor = 0.0118184090,
+        },
         ["deshaan/narsis_base_0"] = {
             x = 0.1208704337,
             y = 0.4710605443,
@@ -1365,6 +1371,12 @@ lib.subzone_list = {
     },
     ["darkbrotherhood/goldcoast_base_0"] =
     {
+        ["darkbrotherhood/bdvillamap1ext1_0"] =
+        {
+            x = 0.5271360278,
+            y = 0.2692559958,
+            zoom_factor = 0.0085359812,
+        },
         ["darkbrotherhood/garlasagea_base_0"] =
         {
             x = 0.5685359836,

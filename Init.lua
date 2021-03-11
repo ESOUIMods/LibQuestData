@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 197
+local libName, libVersion = "LibQuestData", 198
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -123,7 +123,7 @@ lib.quest_data_index = {
     -- quest_giver     =    2,  Depreciated, see quest_map_pin_index
     quest_type          = 1, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
     quest_repeat        = 2, -- quest_repeat_daily, quest_repeat_not_repeatable = 0, quest_repeat_repeatable << -1 = Undefined >>
-    game_api            = 3, -- 100003 means unverified, 100030 means quest data collected from API 100030
+    game_api            = 3, -- 100003 means unverified, 100030 or higher means recent quest data
     quest_line          = 4,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
     quest_number        = 5,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
     quest_series        = 6,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.

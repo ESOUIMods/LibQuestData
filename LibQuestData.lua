@@ -425,7 +425,7 @@ local function update_quest_information()
         quest_giver     = 2, -- Depreciated, see quest_map_pin_index
         quest_type      = 3, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
         quest_repeat    = 4, -- quest_repeat_daily, quest_repeat_not_repeatable = 0, quest_repeat_repeatable << -1 = Undefined >>
-        game_api        = 5, -- 100003 means unverified, 100030 means quest data collected from API 100030
+        game_api        = 5, -- 100003 means unverified, 100030 or higher means recent quest data
         quest_line      = 6,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
         quest_number    = 7,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
         quest_series    = 8,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
@@ -435,7 +435,7 @@ local function update_quest_information()
         -- quest_giver     =    2,  Depreciated, see quest_map_pin_index
         quest_type      = 2, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
         quest_repeat    = 3, -- quest_repeat_daily, quest_repeat_not_repeatable = 0, quest_repeat_repeatable << -1 = Undefined >>
-        game_api        = 4, -- 100003 means unverified, 100030 means quest data collected from API 100030
+        game_api        = 4, -- 100003 means unverified, 100030 or higher means recent quest data
         quest_line      = 5,    -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
         quest_number    = 6,    -- Quest Number In QuestLine (10000 = not assigned/not verified)
         quest_series    = 7,    -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
