@@ -52,6 +52,9 @@ quest giver.
 4382 = "Moment of Truth", "Dugroth"
 4585 = "Relative Matters", "Hojard"
 5664 = "The Sweetroll Killer", "A Call to the Worthy",
+6449 = "Lumpy Sack", "Take Your Lumps"
+6445 = "J'saad's Note", "J'saad's Stone"
+
 
 ID   = Quest Name, Object for comments
 --]]
@@ -96,6 +99,8 @@ lib.questid_giver_lookup = {
     [4585] = 39774,
     [5664] = 80023,
     [6442] = 80027,
+    [6449] = 81018,
+    [6445] = 81019,
 }
 
 --[[ List of what the numbers mean

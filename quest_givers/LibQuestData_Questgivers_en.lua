@@ -1116,6 +1116,12 @@ lib.quest_givers["en"] = {
   [81011] = "Chizbari the Chipper",
   [81012] = "Shazar the Sibilant",
   [81013] = "Catina Garrana",
+  [81014] = "Daini",
+  [81015] = "Vigwenn Owl-Watcher",
+  [81016] = "Jansen Nashrith",
+  [81017] = "Zhasim",
+  [81018] = "Lumpy Sack",
+  [81019] = "J'saad's Note",
   -- Shar Skyrim
   [90000] = "Lieutenant Korleva",
   [90001] = "Arana",
@@ -1311,6 +1317,7 @@ lib.quest_givers["en"] = {
   [100125] = "Vanthongar's Letter",
   [100126] = "Tseedasi",
   [100127] = "Relicmaster Glenadir",
+  [100128] = "Nomu",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
