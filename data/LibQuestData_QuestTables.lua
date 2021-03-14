@@ -128,7 +128,30 @@ lib.quest_locations
 --]]
 -- 4841 need more data first for Rajesh
 -- 5742 needs verified as it is for halloween quest
-lib.quest_giver_moves = { 5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, 5742}
+
+--[[
+Another use is that this will prevent a daily or quest from
+a location that is off the map. Southern Elsweyr for example
+and the quests in the Dragonguard place
+]]--
+lib.quest_giver_moves = { 
+-- regular quests
+  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, 5742,
+
+--[[
+[6428] = "Sticks and Bones",
+[6429] = "Digging Up the Garden",
+[6430] = "File Under D",
+[6433] = "Rude Awakening",
+[6434] = "The Dragonguard's Quarry",
+[6435] = "The Dragonguard's Quarry",
+[6405] = "Taking Them to Tusk",
+[6406] = "A Lonely Grave",
+
+]]--
+-- Dragonguard quests
+  6428, 6429, 6430, 6433, 6434, 6435, 6405, 6406,
+}
 
 --[[
 This is a list of qusts that give skill points
