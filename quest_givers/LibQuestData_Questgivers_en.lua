@@ -4,14 +4,25 @@ LibQuestData
 by Sharlikran
 https://sharlikran.github.io/
 
-^(\d{1,4}), "(.*)"
+Convert fireundubh lists
+
+^(\d{1,6}), "(.*)"
     \[\1] = "\2",
+
+Other
 
 (.*) = "(.*)" = "(.*), ",
 "\2", = \{\3\,},
 
 ^"(.*)", = \{(.*)\},
     \["\1"] = \{\2 },
+
+For renumbering new rebuilt tables
+
+(.*)\[(\d{1,6})\] = "(.*)",
+\2, "\3"
+
+
 --]]
 local lib = _G["LibQuestData"]
 

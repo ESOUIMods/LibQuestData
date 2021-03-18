@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 200
+local libName, libVersion = "LibQuestData", 201
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -76,6 +76,9 @@ lib.client_lang = GetCVar("language.2")
     ALLIANCE_ALDMERI_DOMINION = 1
     ALLIANCE_EBONHEART_PACT = 2
     ALLIANCE_DAGGERFALL_COVENANT = 3
+]]--
+--[[ Reward Data from GetJournalQuestRewardInfo
+    REWARD_TYPE_PARTIAL_SKILL_POINTS -- Skill Point
 ]]--
 lib.player_alliance = GetUnitAlliance("player")
 lib.libName = libName
