@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 201
+local libName, libVersion = "LibQuestData", 202
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -22,7 +22,7 @@ local function create_log(log_type, log_content)
             internal.logger:Verbose(log_content)
         end
     else
-        d(log_content)
+        CHAT_ROUTER:AddSystemMessage(log_content)
     end
 end
 

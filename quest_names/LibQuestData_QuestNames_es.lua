@@ -26,7 +26,7 @@ For renumbering new rebuilt tables
 --]]
 local lib = _G["LibQuestData"]
 
-lib.quest_names["en"] = {
+lib.quest_names["es"] = {
     [465] = "The Blood-Splattered Shield",
     [467] = "Sir Hughes' Fate",
     [499] = "Pursuing the Shard",

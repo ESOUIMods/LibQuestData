@@ -1049,15 +1049,28 @@ lib.subzone_list = {
         },
     },
     ["craglorn/craglorn_base_0"] = {
-        ["craglorn/craglorn_dragonstar_0"] = {
-            x = 0.1167204976,
-            y = 0.2383198738,
+        ["craglorn/craglorn_dragonstar_base_0"] = 
+        {
+            x = 0.1213788837,
+            y = 0.2429782599,
             zoom_factor = 0.0979347825,
         },
         ["craglorn/belkarth_base_0"] = {
             x = 0.4866428673,
             y = 0.6149037480,
             zoom_factor = 0.1406832039,
+        },
+        ["craglorn/aetherianarchivebottom_base_0"] = 
+        {
+            x = 0.8901832104,
+            y = 0.6045559049,
+            zoom_factor = 0.0032142997,
+        },
+        ["craglorn/trl_so_map01_base_0"] = 
+        {
+            x = 0.3765558898,
+            y = 0.1907298118,
+            zoom_factor = 0.0467049778,
         },
     },
     ["cyrodiil/imperialcity_base_0"] =

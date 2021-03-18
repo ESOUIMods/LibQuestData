@@ -633,6 +633,12 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 else
                     --d("We did not find a quest giver that moves")
                 end
+                if internal:is_in(quest_to_update.questID, lib.object_quest_starter_list) then
+                    --d("This was a starter quest from an object like a note")
+                    save_quest_location = false
+                else
+                    --d("This was not a starter quest from an object like a note")
+                end
                 if distance <= 25 then
                     --d("The quest to be saved is close to one already in the SV file")
                     save_quest_location = false

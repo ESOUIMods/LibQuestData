@@ -350,6 +350,15 @@ function lib:set_conditional_quests(quest_id)
     end
 end
 
+function lib:set_achievement_quests(quest_id)
+    if lib.achievement_quest_list[quest_id] then
+        local _, _, _, _, completed, _, _ = GetAchievementInfo(lib.achievement_quest_list[quest_id])
+        if not completed then
+          lib.completed_quests[quest_id] = true
+        end
+    end
+end
+
 local function build_completed_quests()
     -- Set up list of completed quests
     lib.completed_quests = {}

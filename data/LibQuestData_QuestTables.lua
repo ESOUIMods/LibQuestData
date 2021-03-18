@@ -55,6 +55,7 @@ quest giver.
 6449 = "Lumpy Sack", "Take Your Lumps"
 6445 = "J'saad's Note", "J'saad's Stone"
 6431 = "Sourcing the Ensorcelled", "Guybert Flaubert"
+4955 = "A Lucky Break", "Nedras' Journal"
 
 
 ID   = Quest Name, Object for comments
@@ -103,6 +104,7 @@ lib.questid_giver_lookup = {
     [6449] = 81018,
     [6445] = 81019,
     [6431] = 100034,
+    [4955] = 500085,
 }
 
 --[[ List of what the numbers mean
@@ -138,7 +140,7 @@ and the quests in the Dragonguard place
 ]]--
 lib.quest_giver_moves = {
 -- regular quests
-  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, 5742,
+  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, 5742, 5102, 
 
 --[[
 [6428] = "Sticks and Bones",
@@ -167,11 +169,12 @@ This is a list of qusts that give skill points
 6057 - In Search of a Sponsor
 6409 - Reformation
 6394 - Uneasy Alliances
+5534 = Cleaning House
 ]]--
 
 lib.quest_has_skill_point = { 465, 467, 575, 1633, 2192, 2222, 2997, 3006, 3235, 3267, 3379, 3634, 3735, 3797, 3817, 3831, 3867, 3868, 3968, 3993, 4054, 4061, 4107, 4115, 4117, 4139, 4143, 4188, 4222, 4261, 4319, 4337, 4345, 4346, 4386, 4432, 4452, 4474, 4479, 4542, 4552, 4590, 4602, 4606, 4607, 4613, 4690, 4712, 4720, 4730, 4733, 4750, 4758, 4764, 4765, 4778, 4832, 4836, 4837, 4847, 4868, 4884, 4885, 4891, 4912, 4960, 4972, 5090, 5433, 6455, 6476, 6050, 6481, 6466, 6057, 6409,
 -- new
-6560, 6547, 6548, 6550, 6551, 6552, 6570, 6554, 6566, 4296, 5540, 6399, 6349, 6394, 6351}
+6560, 6547, 6548, 6550, 6551, 6552, 6570, 6554, 6566, 4296, 5540, 6399, 6349, 6394, 6351, 5534}
 
 lib.quest_cadwell = quest_ids { 465, 467, 737, 736, 1341, 1346, 1437, 1529, 1536, 1541, 1591, 1799, 1834, 2130, 2146, 2184, 2192, 2222, 2495, 2496, 2497, 2552, 2564, 2566, 2567, 2997, 3064, 3082, 3174, 3189, 3191, 3235, 3267, 3277, 3280, 3338, 3379, 3584, 3585, 3587, 3588, 3615, 3616, 3632, 3633, 3634, 3637, 3673, 3686, 3687, 3695, 3696, 3705, 3734, 3735, 3749, 3791, 3797, 3810, 3817, 3818, 3826, 3831, 3837, 3838, 3868, 3909, 3928, 3957, 3968, 3978, 4058, 4059, 4060, 4061, 4069, 4075, 4078, 4086, 4095, 4106, 4115, 4116, 4117, 4123, 4124, 4139, 4143, 4147, 4150, 4158, 4166, 4186, 4188, 4193, 4194, 4217, 4222, 4255, 4256, 4260, 4261, 4293, 4294, 4302, 4330, 4331, 4345, 4385, 4386, 4437, 4452, 4453, 4459, 4461, 4479, 4546, 4550, 4573, 4574, 4580, 4587, 4590, 4593, 4601, 4606, 4608, 4613, 4652, 4653, 4690, 4712, 4719, 4720, 4739, 4750, 4755, 4765, 4857, 4868, 4884, 4885, 4902, 4903, 4912, 4922, 4943, 4958, 4959, 4960, 4972, 5024, }
 
@@ -222,6 +225,25 @@ lib.zone_names_list = {
     [108] = "eyevea_base_0",
     [1207] = "reach_base_0",
     [1208] = "u28_blackreach_base_0",
+}
+
+--[[
+This is a list of quests that can not be completed, until
+you have completed and achievement. Unlike conditional_quest_list
+this is not a table.
+
+
+Example, hide "A Cold Wind From the Mountain" while missing the achievement "Hero of Wrothgar".
+
+Format:
+
+    quest_id, the main quest (integer)
+    achievement_quest_id, the achievement ID
+
+    quest_id = achievement_quest_id
+]]--
+lib.achievement_quest_list = {
+  [5479] = 1248, -- "A Cold Wind From the Mountain", "Hero of Wrothgar"
 }
 
 --[[
@@ -431,6 +453,10 @@ lib.conditional_quest_list = {
         4704, -- Welcome to Cyrodiil
         4705, -- Siege Warfare
     },
+    [1834] = { -- Heart of Evil
+        4992, -- Searching for the Searchers
+        3530, -- Destroying the Dark Witnesses
+    },
 
 }
 
@@ -438,3 +464,14 @@ lib.conditional_quest_list = {
 /script LibQuestData_Internal.dm("Debug", LibQuestData.completed_quests[4726])
 /script LibQuestData_Internal.dm("Debug", LibQuestData.player_alliance)
 ]]--
+
+
+--[[
+This is a list of quests that you get when using an object such
+as Folded Note for Real Marines; ID 4210
+
+[4210] = "Real Marines", "Folded Note"
+]]--
+lib.object_quest_starter_list = {
+  4210, 5312,
+}
