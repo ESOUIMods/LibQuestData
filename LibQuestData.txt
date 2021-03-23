@@ -31,6 +31,7 @@ quest_givers/LibQuestData_Questgivers_fr.lua
 quest_givers/LibQuestData_Questgivers_jp.lua
 quest_givers/LibQuestData_Questgivers_ru.lua
 quest_givers/LibQuestData_Questgivers_pl.lua
+quest_givers/LibQuestData_Questgivers_br.lua
 
 quest_names/LibQuestData_QuestNames_de.lua
 quest_names/LibQuestData_QuestNames_en.lua
@@ -39,6 +40,7 @@ quest_names/LibQuestData_QuestNames_fr.lua
 quest_names/LibQuestData_QuestNames_jp.lua
 quest_names/LibQuestData_QuestNames_ru.lua
 quest_names/LibQuestData_QuestNames_pl.lua
+quest_names/LibQuestData_QuestNames_br.lua
 
 LibQuestData.lua
 LibQuestData_Scan.lua

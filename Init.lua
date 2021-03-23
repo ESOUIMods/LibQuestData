@@ -92,6 +92,7 @@ lib.name_to_questid_table["fr"] = {}
 lib.name_to_questid_table["jp"] = {}
 lib.name_to_questid_table["ru"] = {}
 lib.name_to_questid_table["pl"] = {}
+lib.name_to_questid_table["br"] = {}
 
 lib.name_to_npcid_table = {}
 lib.name_to_npcid_table["de"] = {}
@@ -101,6 +102,7 @@ lib.name_to_npcid_table["fr"] = {}
 lib.name_to_npcid_table["jp"] = {}
 lib.name_to_npcid_table["ru"] = {}
 lib.name_to_npcid_table["pl"] = {}
+lib.name_to_npcid_table["br"] = {}
 
 lib.quest_rewards_skilpoint = {}
 lib.started_quests = {}
