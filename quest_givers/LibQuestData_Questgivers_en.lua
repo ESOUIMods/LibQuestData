@@ -169,6 +169,7 @@ lib.quest_givers["en"] = {
   [16984] = "Jarrod",
   [17131] = "Herald Kixathi",
   [17185] = "Mazrahil the Sly Scarab",
+  [17186] = "Mazrahil the Scarab",
   [17262] = "Basile Fenandre",
   [17269] = "Nemarc",
   [17393] = "Garmeg the Ironfinder",
@@ -176,7 +177,7 @@ lib.quest_givers["en"] = {
   [17439] = "Wyress Rashan",
   [17482] = "Ayma",
   [17508] = "Sir Edgard",
-  [17658] = "Strange Crow^n",
+  [17658] = "Strange Crow",
   [17832] = "Gurhul gra-Khazgur",
   [17887] = "Yarah",
   [18095] = "Count Verandis Ravenwatch",
@@ -1059,6 +1060,8 @@ lib.quest_givers["en"] = {
   [72004] = "Dayna Imayn",
   [72005] = "Fa-Nuit-Hen",
   [72006] = "Larafil",
+  [72007] = "Gnaws-on-Tail",
+  [72008] = "Aide Diina",
   -- holliday
   [77001] = "New Life Festival Scroll",
   [77002] = "Breda",
@@ -1099,7 +1102,6 @@ lib.quest_givers["en"] = {
   [80014] = "Watchman Yannodil",
   [80015] = "Watchman Vinenoldil",
   [80016] = "Librarian Bradyn",
-  [80016] = "Mindil the Untested",
   [80017] = "House Ravenwatch Contract",
   [80018] = "Witchmother Olyve",
   [80019] = "Lamia",
@@ -1132,6 +1134,12 @@ lib.quest_givers["en"] = {
   [81017] = "Zhasim",
   [81018] = "Lumpy Sack",
   [81019] = "J'saad's Note",
+  -- Wrothgar
+  [82000] = "Arvnir",
+  -- Eastmarch
+  [83000] = "Eitaki Snowmead",
+  [83001] = "Adonatus Varian",
+  [83002] = "Chief-of-Chiefs Cannear",
   -- Shar Skyrim
   [90000] = "Lieutenant Korleva",
   [90001] = "Arana",
@@ -1199,6 +1207,13 @@ lib.quest_givers["en"] = {
   [93000] = "Anneke",
   [93001] = "Engariel",
   [93002] = "Thaenaneth",
+  -- Murkmire
+  [94000] = "Nisswo Xode",
+  [94001] = "Hands-That-Heal",
+  [94002] = "Romantic Argonian Poem",
+  [94003] = "Dradeiva",
+  [94004] = "Death-Hunts Await",
+  [94005] = "Nesh-Deeka",
   -- New auto created
   [100001] = "Moon-Bishop Azin-jo",
   [100002] = "Gray-Skies",
@@ -1333,6 +1348,10 @@ lib.quest_givers["en"] = {
   [100131] = "Nuhunza",
   [100132] = "Varo Hosidias",
   [100133] = "Sir Gidric",
+  [100134] = "Cyrodilic Collections Needs You!",
+  [100135] = "Hides-the-Ashes",
+  [100136] = "Kor",
+  [100137] = "Green-Venom-Tongue",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
@@ -1509,4 +1528,5 @@ lib.quest_givers["en"] = {
   [500121] = "Note from Astara",
   [500122] = "Note from Kor",
   [500123] = "Azara's Note",
+  [500124] = "Tharayya Journal Entry: 2",
 }
