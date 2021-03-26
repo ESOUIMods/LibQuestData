@@ -118,6 +118,18 @@ lib.questid_giver_lookup = {
     [4145] = 27743,
     [5599] = 100136,
     [5352] = 60285,
+    [5941] = 100138,
+}
+
+--[[ List of what the numbers mean
+This is a list of special NPCs that run around
+or hunt you down. Once XY location is set, do not
+change it
+
+[5941] = "The Jester's Festival",
+]]--
+lib.prologue_quest_list = {
+  5941,
 }
 
 --[[ List of what the numbers mean

@@ -633,6 +633,12 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 else
                     --d("We did not find a quest giver that moves")
                 end
+                if internal:is_in(quest_to_update.questID, lib.prologue_quest_list) then
+                    --d("We found a prologue quest that can be accepted anywhere")
+                    save_quest_location = false
+                else
+                    --d("We did not find a prologue quest")
+                end
                 if internal:is_in(quest_to_update.questID, lib.object_quest_starter_list) then
                     --d("This was a starter quest from an object like a note")
                     save_quest_location = false

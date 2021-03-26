@@ -1067,6 +1067,9 @@ lib.quest_givers["en"] = {
   [77002] = "Breda",
   [77003] = "Petronius Galenus",
   [77004] = "Alvos Orain", -- check might not be holiday
+  [77005] = "Jester Queen Ayrenn",
+  [77006] = "Jester King Jorunn",
+  [77007] = "Jester King Jorunn",
   -- Shar Morrowind
   [78000] = "Vivec",
   [78001] = "Canon Valasa",
@@ -1082,6 +1085,7 @@ lib.quest_givers["en"] = {
   [78011] = "Canon Llevule",
   [78012] = "Gilan Lerano",
   [78013] = "Councilor Eris",
+  [78014] = "Trilam Rindo",
   -- Shar Crown Store
   [79000] = "Imperial Missive^M", --??
   -- Shar Misc
@@ -1113,6 +1117,7 @@ lib.quest_givers["en"] = {
   [80025] = "Erilthel",
   [80026] = "Serileth",
   [80027] = "Lost Cat Note",
+  [80028] = "Apprentice Harlin",
   -- Shar Elsweyr
   [81000] = "Nisuzi",
   [81001] = "Elianna Pevengius",
@@ -1352,6 +1357,10 @@ lib.quest_givers["en"] = {
   [100135] = "Hides-the-Ashes",
   [100136] = "Kor",
   [100137] = "Green-Venom-Tongue",
+  [100138] = "The Jester's Festival",
+  [100139] = "A Foe Most Porcine",
+  [100140] = "Soars-in-Laughter",
+  [100141] = "Jad'zirri",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
