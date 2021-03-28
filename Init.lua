@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 206
+local libName, libVersion = "LibQuestData", 207
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -66,12 +66,34 @@ function internal.dm(log_type, ...)
 end
 
 -------------------------------------------------
+----- early helper                          -----
+-------------------------------------------------
+
+function internal:is_in(search_value, search_table)
+    for k, v in pairs(search_table) do
+        if search_value == v then return true end
+        if type(search_value) == "string" then
+            if string.find(string.lower(v), string.lower(search_value)) then return true end
+        end
+    end
+    return false
+end
+
+-------------------------------------------------
 ----- lib                                   -----
 -------------------------------------------------
 
 lib.quest_givers = {}
 lib.quest_names = {}
 lib.client_lang = GetCVar("language.2")
+lib.effective_lang = nil
+local supported_lang = { "de", "en", "fr", "jp", "pl", "ru", }
+if internal:is_in(lib.client_lang, supported_lang) then
+  lib.effective_lang = lib.client_lang
+else
+  lib.effective_lang = "en"
+end
+lib.supported_lang = lib.client_lang == lib.effective_lang
 --[[
     ALLIANCE_ALDMERI_DOMINION = 1
     ALLIANCE_EBONHEART_PACT = 2
@@ -87,22 +109,18 @@ lib.libVersion = libVersion
 lib.name_to_questid_table = {}
 lib.name_to_questid_table["de"] = {}
 lib.name_to_questid_table["en"] = {}
-lib.name_to_questid_table["es"] = {}
 lib.name_to_questid_table["fr"] = {}
 lib.name_to_questid_table["jp"] = {}
 lib.name_to_questid_table["ru"] = {}
 lib.name_to_questid_table["pl"] = {}
-lib.name_to_questid_table["br"] = {}
 
 lib.name_to_npcid_table = {}
 lib.name_to_npcid_table["de"] = {}
 lib.name_to_npcid_table["en"] = {}
-lib.name_to_npcid_table["es"] = {}
 lib.name_to_npcid_table["fr"] = {}
 lib.name_to_npcid_table["jp"] = {}
 lib.name_to_npcid_table["ru"] = {}
 lib.name_to_npcid_table["pl"] = {}
-lib.name_to_npcid_table["br"] = {}
 
 lib.quest_rewards_skilpoint = {}
 lib.started_quests = {}

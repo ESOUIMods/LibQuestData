@@ -69,16 +69,6 @@ function internal:is_nil(t)
     end
 end
 
-function internal:is_in(search_value, search_table)
-    for k, v in pairs(search_table) do
-        if search_value == v then return true end
-        if type(search_value) == "string" then
-            if string.find(string.lower(v), string.lower(search_value)) then return true end
-        end
-    end
-    return false
-end
-
 -------------------------------------------------
 ----- General Quest Info                     ----
 -------------------------------------------------
@@ -231,13 +221,13 @@ end
 
 -- I want this to be nil rather then unknown npc
 function lib:get_quest_giver(id, lang)
-    lang = lang or lib.client_lang
-    return lib.quest_givers[lib.client_lang][id]
+    lang = lang or lib.effective_lang
+    return lib.quest_givers[lib.effective_lang][id]
 end
 
 function lib:get_quest_name(id, lang)
-    lang = lang or lib.client_lang
-    return lib.quest_names[lib.client_lang][id] or "Unknown Name"
+    lang = lang or lib.effective_lang
+    return lib.quest_names[lib.effective_lang][id] or "Unknown Name"
 end
 
 -------------------------------------------------
@@ -257,14 +247,14 @@ end
 --]]
 
 function lib:get_questids_table(name, lang)
-    local lang = lang or lib.client_lang
+    local lang = lang or lib.effective_lang
     if type(name) == "string" then
         return lib.name_to_questid_table[lang][name]
     end
 end
 
 function lib:get_npcids_table(name, lang)
-    local lang = lang or lib.client_lang
+    local lang = lang or lib.effective_lang
     if type(name) == "string" then
         return lib.name_to_npcid_table[lang][name]
     end
@@ -294,7 +284,7 @@ local function contains_id(quent_ids, id_to_find)
 end
 
 function lib:build_questid_table(lang)
-    local lang = lang or lib.client_lang
+    local lang = lang or lib.effective_lang
     local built_table = {}
 
     for var1, var2 in pairs(lib.quest_names[lang]) do
@@ -314,7 +304,7 @@ function lib:build_questid_table(lang)
 end
 
 function lib:build_npcid_table(lang)
-    local lang = lang or lib.client_lang
+    local lang = lang or lib.effective_lang
     local built_table = {}
 
     for var1, var2 in pairs(lib.quest_givers[lang]) do
@@ -372,10 +362,10 @@ local function build_completed_quests()
         -- Add the quest to the list
         quest_name, quest_type = GetCompletedQuestInfo(id)
         if not internal:is_empty_or_nil(quest_name) then
-            if lib.quest_names[lib.client_lang][id] ~= quest_name then
+            if lib.quest_names[lib.effective_lang][id] ~= quest_name then
                 LibQuestData_SavedVariables["quest_names"][id] = quest_name
             end
-            if lib.quest_names[lib.client_lang][id] == nil then
+            if lib.quest_names[lib.effective_lang][id] == nil then
                 LibQuestData_SavedVariables["quest_names"][id] = quest_name
             end
         end
@@ -541,8 +531,8 @@ local function update_quest_information()
     LibQuestData_SavedVariables["quest_info"] = rebuilt_data
 
     for index, data in pairs(all_quest_names) do
-        if lib.quest_names[lib.client_lang][index] then
-            if LibQuestData_SavedVariables["quest_names"][index] == lib.quest_names[lib.client_lang][index] then
+        if lib.quest_names[lib.effective_lang][index] then
+            if LibQuestData_SavedVariables["quest_names"][index] == lib.quest_names[lib.effective_lang][index] then
                 LibQuestData_SavedVariables["quest_names"][index] = nil
             end
         end
@@ -550,7 +540,7 @@ local function update_quest_information()
     for index, data in pairs(all_quest_givers) do
         npc_id = lib:get_npcids_table(data)
         if npc_id then
-            if lib.quest_givers[lib.client_lang][npc_id[1]] == data then
+            if lib.quest_givers[lib.effective_lang][npc_id[1]] == data then
                 LibQuestData_SavedVariables["giver_names"][index] = nil
             end
         end
@@ -605,8 +595,8 @@ local function OnLoad(eventCode, addOnName)
     if LibQuestData_SavedVariables.subZones ~= nil then LibQuestData_SavedVariables.subZones = nil end
     if LibQuestData_SavedVariables.client_lang == nil then LibQuestData_SavedVariables.client_lang = lib.client_lang end
     LibQuestData_SavedVariables.libVersion = lib.libVersion
-    lib:build_questid_table(lib.client_lang) -- build name lookup table once
-    lib:build_npcid_table(lib.client_lang) -- build npc names lookup table once
+    lib:build_questid_table(lib.effective_lang) -- build name lookup table once
+    lib:build_npcid_table(lib.effective_lang) -- build npc names lookup table once
     lib:build_questlist_skilpoint() -- build list of quests that reward a skill point
     update_quest_information()
 
