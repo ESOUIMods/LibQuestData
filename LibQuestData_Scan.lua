@@ -670,7 +670,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     entry for this quest in the zone so it needs to be saved.
     ]]--
     --save_quest_location = false
-    if save_quest_location then
+    if save_quest_location and lib.supported_lang then
         --d("save_quest_location is true saving")
         --d(the_zone)
         if LibQuestData_SavedVariables["location_info"][the_zone] == nil then LibQuestData_SavedVariables["location_info"][the_zone] = {} end

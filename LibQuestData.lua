@@ -361,7 +361,7 @@ local function build_completed_quests()
         if id == nil then break end
         -- Add the quest to the list
         quest_name, quest_type = GetCompletedQuestInfo(id)
-        if not internal:is_empty_or_nil(quest_name) then
+        if not internal:is_empty_or_nil(quest_name) and lib.supported_lang then
             if lib.quest_names[lib.effective_lang][id] ~= quest_name then
                 LibQuestData_SavedVariables["quest_names"][id] = quest_name
             end
@@ -576,6 +576,7 @@ local function OnLoad(eventCode, addOnName)
 
         LibQuestData_SavedVariables = {}
         LibQuestData_SavedVariables.client_lang = lib.client_lang
+        LibQuestData_SavedVariables.effective_lang = lib.effective_lang
         LibQuestData_SavedVariables.version = 4
         LibQuestData_SavedVariables.libVersion = lib.libVersion
         if temp == nil then
@@ -594,6 +595,8 @@ local function OnLoad(eventCode, addOnName)
     if LibQuestData_SavedVariables.objective_info ~= nil then LibQuestData_SavedVariables.objective_info = nil end
     if LibQuestData_SavedVariables.subZones ~= nil then LibQuestData_SavedVariables.subZones = nil end
     if LibQuestData_SavedVariables.client_lang == nil then LibQuestData_SavedVariables.client_lang = lib.client_lang end
+    if lib.client_lang ~= LibQuestData_SavedVariables.client_lang then LibQuestData_SavedVariables.client_lang = lib.client_lang end
+    if LibQuestData_SavedVariables.effective_lang == nil then LibQuestData_SavedVariables.effective_lang = lib.effective_lang end
     LibQuestData_SavedVariables.libVersion = lib.libVersion
     lib:build_questid_table(lib.effective_lang) -- build name lookup table once
     lib:build_npcid_table(lib.effective_lang) -- build npc names lookup table once
