@@ -26,7 +26,7 @@ For renumbering new rebuilt tables
 --]]
 local lib = _G["LibQuestData"]
 
-lib.quest_givers["en"] = {
+lib.quest_givers["fx"] = {
     [601] = "Leon Milielle",
     [901] = "Chamberlain Weller",
     [906] = "Duke Sebastien",
@@ -1361,24 +1361,6 @@ lib.quest_givers["en"] = {
   [100139] = "A Foe Most Porcine",
   [100140] = "Soars-in-Laughter",
   [100141] = "Jad'zirri",
-  [100142] = "Amsha",
-  [100143] = "Overseer Shiralas",
-  [100144] = "Chuxu",
-  [100145] = "Nisswo Uaxal",
-  [100146] = "Listens-By-Smell",
-  [100147] = "Ghashugg",
-  [100148] = "Dajaleen",
-  [100149] = "Bond-Guru Topeth",
-  [100150] = "Jester King Emeric",
-  [100151] = "Bolu",
-  [100152] = "Melleron's Journal",
-  [100153] = "Hleseth Dalothran",
-  [100154] = "Beel-Ranu",
-  [100155] = "Aliskeeh",
-  [100156] = "Tarnamir",
-  [100157] = "Kiza",
-  [100158] = "Jekka-Wass Vozei",
-  [100159] = "Help Wanted: Merryvale!",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",

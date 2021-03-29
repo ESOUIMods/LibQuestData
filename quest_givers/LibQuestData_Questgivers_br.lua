@@ -26,7 +26,7 @@ For renumbering new rebuilt tables
 --]]
 local lib = _G["LibQuestData"]
 
-lib.quest_givers["en"] = {
+lib.quest_givers["br"] = {
     [601] = "Leon Milielle",
     [901] = "Chamberlain Weller",
     [906] = "Duke Sebastien",

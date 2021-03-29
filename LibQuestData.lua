@@ -361,7 +361,8 @@ local function build_completed_quests()
         if id == nil then break end
         -- Add the quest to the list
         quest_name, quest_type = GetCompletedQuestInfo(id)
-        if not internal:is_empty_or_nil(quest_name) and lib.supported_lang then
+        -- if not internal:is_empty_or_nil(quest_name) and lib.supported_lang then
+        if not internal:is_empty_or_nil(quest_name) then
             if lib.quest_names[lib.effective_lang][id] ~= quest_name then
                 LibQuestData_SavedVariables["quest_names"][id] = quest_name
             end

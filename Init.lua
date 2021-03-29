@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 208
+local libName, libVersion = "LibQuestData", 209
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -87,7 +87,7 @@ lib.quest_givers = {}
 lib.quest_names = {}
 lib.client_lang = GetCVar("language.2")
 lib.effective_lang = nil
-local supported_lang = { "de", "en", "fr", "jp", "pl", "ru", }
+local supported_lang = { "br", "de", "en", "es", "fr", "fx", "it", "jp", "kb", "kr", "pl", "ru", "tr", }
 if internal:is_in(lib.client_lang, supported_lang) then
   lib.effective_lang = lib.client_lang
 else
