@@ -26,7 +26,7 @@ For renumbering new rebuilt tables
 --]]
 local lib = _G["LibQuestData"]
 
-lib.quest_names["kr"] = {
+lib.quest_names["tr"] = {
 	[57] = "original-journey_0_57_JR_NMSQ1",
 	[465] = "original-journey_0_465_피 묻은 방패",
 	[467] = "original-journey_0_467_휴즈 경의 운명",
