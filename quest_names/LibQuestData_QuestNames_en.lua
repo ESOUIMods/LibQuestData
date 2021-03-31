@@ -2267,4 +2267,7 @@ lib.quest_names["en"] = {
     [6622] = "A Foe Most Porcine",
     [6632] = "The King's Spoils",
     [6640] = "Prankster's Carnival",
+    [5757] = "Gem of the Stars",
+    [5759] = "Message Unknown",
+
 }

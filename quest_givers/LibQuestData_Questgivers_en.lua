@@ -1379,6 +1379,7 @@ lib.quest_givers["en"] = {
   [100157] = "Kiza",
   [100158] = "Jekka-Wass Vozei",
   [100159] = "Help Wanted: Merryvale!",
+  [100160] = "Reward for Stolen Wine",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
