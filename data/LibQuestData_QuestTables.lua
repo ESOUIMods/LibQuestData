@@ -63,6 +63,10 @@ quest giver.
 4145 = "Mine All Mine", Tervur Sadri
 5599 = "Questions of Faith", "Kor"
 5352 = "Into the Maw", "Adara'hai"
+6549 = "The Ravenwatch Inquiry",
+6612 = "A Mortal's Touch",
+5013 = "Hushed Whispers", "Dominion Correspondence"
+6370 = "Ache for Cake", "Jubilee Cake Voucher"
 
 ID   = Quest Name, Object for comments
 --]]
@@ -120,6 +124,10 @@ lib.questid_giver_lookup = {
     [5352] = 60285,
     [5941] = 100138,
     [6375] = 100160,
+    [6549] = 79001,
+    [6612] = 79001,
+    [5013] = 100169,
+    [6370] = 100173,
 }
 
 --[[ List of what the numbers mean
@@ -127,10 +135,21 @@ This is a list of special NPCs that run around
 or hunt you down. Once XY location is set, do not
 change it
 
+[4831] = "The Harborage",
 [5941] = "The Jester's Festival",
+[6370] = "Ache for Cake",
+[5935] = "The Missing Prophecy",
+[6023] = "Of Knives and Long Shadows",
+[6097] = "Through a Veil Darkly",
+[6226] = "Ruthless Competition",
+[6299] = "The Demon Weapon",
+[6395] = "The Dragonguard's Legacy",
+[6454] = "The Coven Conspiracy",
+[6549] = "The Ravenwatch Inquiry",
+[6612] = "A Mortal's Touch",
 ]]--
 lib.prologue_quest_list = {
-  5941,
+  4831, 5941, 6370, 5935, 6023, 6097, 6226, 6299, 6395, 6454, 6549, 6612,
 }
 
 --[[ List of what the numbers mean
@@ -151,6 +170,12 @@ change it
 10714 - Rajesh : Quest ID 4841: "Trouble at the Rain Catchers"
 11315 - Qadim : Quest ID 2251: "Gone Missing"
 28505 - Bera Moorsmith : Quest ID 3858: "The Dangerous Past"
+28505 - Bera Moorsmith : Quest ID 3885: "The Prismatic Core"
+28505 - Bera Moorsmith : Quest ID 3856: "Anchors from the Harbour"
+5897 - Serge Arcole : Quest ID 2451: "A Ransom for Miranda"
+xx - xx : Quest ID 5102: "The Mage's Tower"
+5057 - First Mate Elvira Derre : Quest ID 1637: "Divert and Deliver",
+6624 - Tyree Marence : Quest ID 728: "Repair Koeglin Lighthouse"
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
@@ -159,6 +184,7 @@ lib.quest_locations
 -- 4841 need more data first for Rajesh
 -- 5742 needs verified as it is for halloween quest
 
+
 --[[
 Another use is that this will prevent a daily or quest from
 a location that is off the map. Southern Elsweyr for example
@@ -166,7 +192,7 @@ and the quests in the Dragonguard place
 ]]--
 lib.quest_giver_moves = {
 -- regular quests
-  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 3858, 5742, 5102,
+  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 
 
 --[[
 [6428] = "Sticks and Bones",
@@ -202,7 +228,7 @@ lib.quest_has_skill_point = { 465, 467, 575, 1633, 2192, 2222, 2997, 3006, 3235,
 -- new
 6560, 6547, 6548, 6550, 6551, 6552, 6570, 6554, 6566, 4296, 5540, 6399, 6349, 6394, 6351, 5534,
 --also new
-5889, 3910, 5447, 4555, 4813, 6414, 4303, 6416, 4822, 5595, 5532, 5597, 5598, 5599, 5600, 4641, 5481, 4202, 6507, 6188, 5549, 5545, 6576, 4145, 6578, 5468, 5556, 4469, 5403, 6505,4336, 5113, 5342, 6186, 6249, 5596, 5702, 5567, 4246, 4589, 4675,
+5889, 3910, 5447, 4555, 4813, 6414, 4303, 6416, 4822, 5595, 5532, 5597, 5598, 5599, 5600, 4641, 5481, 4202, 6507, 6188, 5549, 5545, 6576, 4145, 6578, 5468, 5556, 4469, 5403, 6505,4336, 5113, 5342, 6186, 6249, 5596, 5702, 5567, 4246, 4589, 4675, 4831,
 
 }
 
@@ -274,6 +300,7 @@ Format:
 ]]--
 lib.achievement_quest_list = {
   [5479] = 1248, -- "A Cold Wind From the Mountain", "Hero of Wrothgar"
+  [6320] = 2463, -- "The Singing Crystal", Mural
 }
 
 --[[
@@ -493,6 +520,9 @@ lib.conditional_quest_list = {
     [2495] = { -- The Signet Ring
         5050, -- Waiting for Word
     },
+    [1536] = { -- Fire in the Fields"
+        1735, -- Unanswered Questions
+    },
 }
 
 --[[
@@ -509,4 +539,43 @@ as Folded Note for Real Marines; ID 4210
 ]]--
 lib.object_quest_starter_list = {
   4210, 5312,
+}
+
+--[[
+These tables are quests for guilds that are not available
+until you reach a certain rank
+
+Format: [QuestID] = rank
+]]--
+lib.guild_rank_quest_list = {
+  [lib.quest_series_type.quest_type_guild_fighter] = {
+    [3856] = 0,
+    [3858] = 1,
+    [3885] = 2,
+    [3898] = 3,
+    [3973] = 4,
+  },
+  [lib.quest_series_type.quest_type_guild_mage] = {
+    [3916] = 0,
+    [4435] = 1,
+    [3918] = 2,
+    [3953] = 3,
+    [3997] = 4,
+    [4971] = 4,
+  },
+  [lib.quest_series_type.quest_type_guild_thief] = {
+    [5549] = 6,
+    [5545] = 7,
+    [5581] = 8,
+    [5553] = 9,
+  },
+  [lib.quest_series_type.quest_type_guild_dark] = {
+    [5595] = 1,
+    [5599] = 2,
+    [5596] = 3,
+    [5567] = 4,
+    [5597] = 5,
+    [5598] = 6,
+    [5600] = 7,
+  },
 }

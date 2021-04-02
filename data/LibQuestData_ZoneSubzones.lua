@@ -1083,11 +1083,20 @@ lib.subzone_list = {
         },
     },
     ["cyrodiil/ava_whole_0"] = {
-        ["cyrodiil/imperialcity_base_0"] =
-        {
-            x = 0.4488355517,
-            y = 0.3805555701,
-            zoom_factor = 0.0949644446,
+        ["cyrodiil/northhighrockgate_base_0"] = {
+            x = 0.1304666698,
+            y = 0.0673800036,
+            zoom_factor = 0.0539066643,
+        },
+        ["cyrodiil/southhighrockgate_base_0"] = {
+            x = 0.0363266654,
+            y = 0.2605444491,
+            zoom_factor = 0.0498044454,
+        },
+        ["cyrodiil/northmorrowgate_base_0"] = {
+            x = 0.8035155535,
+            y = 0.0765622258,
+            zoom_factor = 0.0705088973,
         },
         ["cyrodiil/southmorrowgate_base_0"] = {
             x = 0.8904289007,
@@ -1104,20 +1113,11 @@ lib.subzone_list = {
             y = 0.8583955765,
             zoom_factor = 0.0609378219,
         },
-        ["cyrodiil/northhighrockgate_base_0"] = {
-            x = 0.1304666698,
-            y = 0.0673800036,
-            zoom_factor = 0.0539066643,
-        },
-        ["cyrodiil/southhighrockgate_base_0"] = {
-            x = 0.0363266654,
-            y = 0.2605444491,
-            zoom_factor = 0.0498044454,
-        },
-        ["cyrodiil/northmorrowgate_base_0"] = {
-            x = 0.8035155535,
-            y = 0.0765622258,
-            zoom_factor = 0.0705088973,
+        ["cyrodiil/imperialcity_base_0"] =
+        {
+            x = 0.4488355517,
+            y = 0.3805555701,
+            zoom_factor = 0.0949644446,
         },
     },
     ["coldharbor/coldharbour_base_0"] = {

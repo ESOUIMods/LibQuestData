@@ -83,7 +83,7 @@ lib.quest_givers["fr"] = {
 	 [11994] = "Phinis Vanne",
 	 [12012] = "dame Sirali at-Tura",
 	 [12025] = "capitaine Albert Marck^md",
-	 [13001] = "prêtresse Piétine^fd",
+   [13001] = "La prêtresse Piétine",
 	 [13020] = "dame Dabienne",
 	 [13123] = "Merthyval Lort",
 	 [13134] = "Margot Oscent",
@@ -1062,6 +1062,7 @@ lib.quest_givers["fr"] = {
     [100112] = "Le haut commissaire Tanerline",
     [100120] = "La justiciar Farowël",
     [100123] = "le justiciar Tanorian",
+    [100140] = "Grimpe-de-Rire",
     -- Skyrim
     [200001] = "Le prêtre Isonir",
     [200004] = "La thane-épée Jylta",

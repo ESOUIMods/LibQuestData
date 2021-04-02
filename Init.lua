@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 212
+local libName, libVersion = "LibQuestData", 213
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -125,7 +125,6 @@ lib.name_to_npcid_table["pl"] = {}
 lib.quest_rewards_skilpoint = {}
 lib.started_quests = {}
 lib.completed_quests = {}
-lib.quest_in_zone_list = {}
 lib.last_interaction_target = ""
 
 if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
@@ -158,47 +157,73 @@ lib.quest_map_pin_index = {
     global_x    =    3, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
     global_y    =    4, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
     quest_id    =    5, -- Number index of quest name i.e. 6404 for "The Dragonguard"  << -1 = Undefined >>
-    world_x     =    6, -- WorldX 3D Location << -10 = Undefined >>
-    world_y     =    7, -- WorldY 3D Location << -10 = Undefined >>
-    world_z     =    8, -- WorldZ 3D Location << -10 = Undefined >>
-    quest_giver =    9, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
+    -- world_x     =    6, Depreciated, WorldX 3D Location << -10 = Undefined >>
+    -- world_y     =    7, Depreciated, WorldY 3D Location << -10 = Undefined >>
+    -- world_z     =    8, Depreciated, WorldZ 3D Location << -10 = Undefined >>
+    -- quest_giver =    9, Updated, was 9 now 6
+    quest_giver =    6, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
 
 lib.quest_data_type = {
     -- ESO Values
     quest_type_none = 0,
-    quest_type_group = 1,
-    quest_type_main_story = 2,
-    quest_type_guild = 3,
-    quest_type_crafting = 4,
-    quest_type_dungeon = 5,
-    quest_type_raid = 6,
-    quest_type_ava = 7, -- None in table, in check
+    quest_type_group = 1, -- Qty 75
+    quest_type_main_story = 2, -- Qty 16
+    quest_type_guild = 3, -- Qty 111, (*) Various Skill Line Guild Quests
+    quest_type_crafting = 4, -- Qty 82, Ignore these they are the crafting certifications
+    quest_type_dungeon = 5, -- Qty 77
+    quest_type_raid = 6, -- Qty 7
+    quest_type_ava = 7, -- Qty 117, unsure if verified
     quest_type_class = 8, -- None in table
     quest_type_ava_group = 10, -- None in table, in check
     quest_type_ava_grand = 11, -- None in table, in check
-    quest_type_holiday_event = 12, -- None in table
-    quest_type_battleground = 13, -- None in table
+    quest_type_holiday_event = 12, -- Qty 7, unsure if verified
+    quest_type_battleground = 13, -- Qty 4, unsure if verified
+}
 
+lib.quest_series_type = {
     -- LibQuestData Values
-    quest_type_daily            = 14,
-    quest_type_cadwell          = 15,
-    quest_type_ad               = 16,
-    quest_type_dc               = 17,
-    quest_type_ep               = 18,
-    quest_type_undefined        = 19,
-    quest_type_guild_mage       = 20,
-    quest_type_guild_fighter    = 21,
-    quest_type_guild_psijic     = 22,
-    quest_type_guild_thief      = 23,
-    quest_type_guild_dark       = 24, -- Dark Brotherhood
-    quest_type_undaunted        = 25,
+    quest_type_none             = 0,
+    quest_type_cadwell          = 1,
+    quest_type_undaunted        = 2,
+    quest_type_ad               = 3,
+    quest_type_dc               = 4,
+    quest_type_ep               = 5,
+    quest_type_guild_mage       = 6,
+    quest_type_guild_fighter    = 7,
+    quest_type_guild_psijic     = 8,
+    quest_type_guild_thief      = 9,
+    quest_type_guild_dark       = 10, -- Dark Brotherhood
+}
+
+lib.playerAlliance = {}
+lib.playerAlliance[ALLIANCE_ALDMERI_DOMINION] = lib.quest_series_type.quest_type_ad
+lib.playerAlliance[ALLIANCE_DAGGERFALL_COVENANT] = lib.quest_series_type.quest_type_dc
+lib.playerAlliance[ALLIANCE_EBONHEART_PACT] = lib.quest_series_type.quest_type_ep
+
+lib.quest_guild_names = {
+    [lib.quest_series_type.quest_type_guild_mage]    = "Mages Guild",
+    [lib.quest_series_type.quest_type_guild_fighter] = "Fighters Guild",
+    [lib.quest_series_type.quest_type_guild_psijic]  = "Psijic Order",
+    [lib.quest_series_type.quest_type_guild_thief]   = "Thieves Guild",
+    [lib.quest_series_type.quest_type_guild_dark]    = "Dark Brotherhood",
+    [lib.quest_series_type.quest_type_undaunted]     = "Undaunted",
+}
+
+lib.quest_guild_rank_data = {
+  [lib.quest_series_type.quest_type_undaunted] = { name = "", rank = 0, },
+  [lib.quest_series_type.quest_type_guild_mage] = { name = "", rank = 0, },
+  [lib.quest_series_type.quest_type_guild_fighter] = { name = "", rank = 0, },
+  [lib.quest_series_type.quest_type_guild_psijic] = { name = "", rank = 0, },
+  [lib.quest_series_type.quest_type_guild_thief] = { name = "", rank = 0, },
+  [lib.quest_series_type.quest_type_guild_dark] = { name = "", rank = 0, },
 }
 
 lib.quest_data_repeat = {
-    quest_repeat_daily = 2,
     quest_repeat_not_repeatable = 0,
     quest_repeat_repeatable = 1,
+    quest_repeat_daily = 2,
+    quest_repeat_repeatable_per_duration = 3,
 }
 
 lib.dest_quest_data_index = {

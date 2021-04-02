@@ -32,9 +32,6 @@ local quest_map_pin_index_default = {
     [lib.quest_map_pin_index.global_x]   = -10, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
     [lib.quest_map_pin_index.global_y]   = -10, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
     [lib.quest_map_pin_index.quest_id]   = -1, -- -1 Unknown, Quest ID i.e. 6404 for "The Dragonguard"
-    [lib.quest_map_pin_index.world_x]     =    -10, -- WorldX 3D Location << -10 = Undefined >>
-    [lib.quest_map_pin_index.world_y]     =    -10, -- WorldY 3D Location << -10 = Undefined >>
-    [lib.quest_map_pin_index.world_z]     =    -10, -- WorldZ 3D Location << -10 = Undefined >>
     [lib.quest_map_pin_index.quest_giver] =    -1, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
 
@@ -77,12 +74,13 @@ function lib:get_quest_list(zone)
     local all_zone_quests = {}
     local subzone_quests = {}
     local new_element = {}
-    lib.quest_in_zone_list = {}
+    local quest_in_zone_list = {}
+    local quest_name_in_zone_list = {}
     if type(zone) == "string" and internal.quest_locations[zone] ~= nil then
         all_zone_quests = internal:get_zone_quests(zone)
     end
     for key, quest_info in pairs(all_zone_quests) do
-        lib.quest_in_zone_list[quest_info[lib.quest_map_pin_index.quest_id]] = true
+        quest_in_zone_list[quest_info[lib.quest_map_pin_index.quest_id]] = true
     end
     --internal.dm("Debug", "get_quest_list")
     --internal.dm("Debug", zone)
@@ -95,7 +93,7 @@ function lib:get_quest_list(zone)
             --internal.dm("Debug", subzone_quests)
             for i, quest in ipairs(subzone_quests) do
                 --internal.dm("Debug", quest)
-                if not internal:is_empty_or_nil(quest) and not lib.quest_in_zone_list[quest[lib.quest_map_pin_index.quest_id]] then
+                if not internal:is_empty_or_nil(quest) and not quest_in_zone_list[quest[lib.quest_map_pin_index.quest_id]] then
                     local new_element = ZO_DeepTableCopy(quest)
                     --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_x])
                     --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_y])
@@ -109,20 +107,71 @@ function lib:get_quest_list(zone)
         end
     end
     --internal.dm("Debug", all_zone_quests)
-    return all_zone_quests
+
+    local new_all_zone_quests = {}
+    for key, quest_info in pairs(all_zone_quests) do
+      local questId = quest_info[lib.quest_map_pin_index.quest_id]
+      local questName = lib:get_quest_name(questId, lib.effective_lang)
+      local questInfo = lib.quest_data[questId]
+      local questSeries = nil
+      if questInfo then
+        questSeries = questInfo[lib.quest_data_index.quest_series]
+      else
+          questSeries = 0
+      end
+      local playerAlliance = GetUnitAlliance("player")
+      local playerGuildRankData = nil
+      local playerGuildQuestLevelRequirement = nil
+      if questSeries >= 6 or questSeries == 2 then
+        playerGuildRankData = lib.quest_guild_rank_data[questSeries].rank
+        if lib.guild_rank_quest_list[questSeries][questId] then
+          playerGuildQuestLevelRequirement = lib.guild_rank_quest_list[questSeries][questId]
+        end
+      end
+      local playerQualifies = true
+      if playerGuildQuestLevelRequirement and playerGuildRankData then
+        playerQualifies = playerGuildQuestLevelRequirement <= playerGuildRankData
+      end
+      --[[
+      Pledges can be obtained from any location. Before this can be used All quests
+      specific to an Alliance have to be manually reviewed. Otherwise Pledges
+      will not show on the map.
+
+      if questSeries >= 3 and questSeries <= 5 then
+        playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
+      end
+      ]]--
+      if not quest_name_in_zone_list[questName] and playerQualifies then
+        -- name didn't exist keep it for sure
+        quest_name_in_zone_list[questName] = questId
+        table.insert(new_all_zone_quests, quest_info)
+      else -- name exists already
+        if questId == quest_name_in_zone_list[questName] and playerQualifies then
+          --[[ the name is in the table, and the ID matches keep it
+          because it is another quest giver in a different place
+
+          Otherwise it is a quest with the same name but a different
+          Quest ID
+          ]]--
+          table.insert(new_all_zone_quests, quest_info)
+        end
+      end
+    end
+
+    --internal.dm("Debug", all_zone_quests)
+    return new_all_zone_quests
 end
 
-function lib:get_qm_quest_type(id)
+--[[ get whether or not it is a cadwell quest
+return true if it is a cadwell quest
+]]--
+function lib:is_cadwell_quest(id)
     if type(id) == "number" then
         local c = lib.quest_cadwell[id] or false
         return c
     end
 end
 
-function lib:is_holiday_quest(id)
-  local c = lib:get_quest_type(id)
-  if c == lib.quest_data_type.quest_type_holiday_event then return true else return false end
-end
 -------------------------------------------------
 ----- Extended Quest Data                    ----
 -------------------------------------------------
@@ -142,7 +191,6 @@ returns number of lib.quest_data_type. ZOS API does not
 specify whether or not it is a Writ or daily. First 13 values are
 ZOS Constant Values https://wiki.esoui.com/Constant_Values
 
-14 through 25 must be manually assigned to lib.quest_data[quest_id].
 ]]--
 function lib:get_quest_type(quest_id)
     if type(quest_id) == "number" and lib.quest_data[quest_id] then
@@ -375,6 +423,7 @@ local function build_completed_quests()
     end
 end
 
+-- updates completed quest list without loop
 local function update_completed_quests(quest_id)
     lib.completed_quests[quest_id] = true
 end
@@ -396,10 +445,27 @@ local function update_started_quests()
     end
 end
 
+local function update_guild_skillline_data()
+  for i=1, GetNumSkillLines(SKILL_TYPE_GUILD) do
+      local skillLineName, skillLineLevel, _, skillLineId = GetSkillLineInfo(SKILL_TYPE_GUILD, i)
+      for key, guild_name in pairs(lib.quest_guild_names) do
+        if skillLineName == guild_name then
+          lib.quest_guild_rank_data[key].name = skillLineName
+          lib.quest_guild_rank_data[key].rank = skillLineLevel
+        end
+      end
+  end
+end
+
+local function on_skill_rank_update(eventCode, skillType, skillLineIndex, rank)
+    update_guild_skillline_data()
+end
+EVENT_MANAGER:RegisterForEvent(lib.libName.."_skill_rank_updater", EVENT_SKILL_RANK_UPDATE, on_skill_rank_update)
+
 local function on_quest_added(eventCode, journalIndex, questName, objectiveName)
     update_started_quests()
 end
-EVENT_MANAGER:RegisterForEvent(lib.libName.."_updater", EVENT_QUEST_ADDED,      on_quest_added)
+EVENT_MANAGER:RegisterForEvent(lib.libName.."_quest_added_updater", EVENT_QUEST_ADDED,      on_quest_added)
 
 local function on_quest_removed(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
     update_started_quests()
@@ -407,18 +473,10 @@ local function on_quest_removed(eventCode, isCompleted, journalIndex, questName,
         update_completed_quests(questID)
     end
 end
-EVENT_MANAGER:RegisterForEvent(lib.libName.."_updater", EVENT_QUEST_REMOVED,    on_quest_removed)
+EVENT_MANAGER:RegisterForEvent(lib.libName.."_quest_removed_updater", EVENT_QUEST_REMOVED,    on_quest_removed)
 
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
-local function OnPlayerActivatedQuestBuild(eventCode)
-    build_completed_quests()
-    update_started_quests()
-
-    EVENT_MANAGER:UnregisterForEvent(lib.libName.."_BuildQuests", EVENT_PLAYER_ACTIVATED)
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName.."_BuildQuests", EVENT_PLAYER_ACTIVATED, OnPlayerActivatedQuestBuild)
-
 local function update_quest_information()
     local eight_field_data = {
         quest_name      = 1, -- Depreciated, use lib:get_quest_name(id, lang)
@@ -447,6 +505,17 @@ local function update_quest_information()
         global_y    =    4, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
         quest_id    =    5, -- Number index of quest name i.e. 6404 for "The Dragonguard"  << -1 = Undefined >>
     }
+    local nine_field_location = {
+        local_x     = 1, -- GetMapPlayerPosition() << -10 = Undefined >>
+        local_y     = 2, -- GetMapPlayerPosition() << -10 = Undefined >>
+        global_x    = 3, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+        global_y    = 4, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
+        quest_id    = 5, -- Number index of quest name i.e. 6404 for "The Dragonguard"  << -1 = Undefined >>
+        world_x     = 6, -- Depreciated, WorldX 3D Location << -10 = Undefined >>
+        world_y     = 7, -- Depreciated, WorldY 3D Location << -10 = Undefined >>
+        world_z     = 8, -- Depreciated, WorldZ 3D Location << -10 = Undefined >>
+        quest_giver = 9, -- Updated, was 9 now 6, Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
+    }
 
     local all_locations = LibQuestData_SavedVariables["location_info"]
     local all_quest_data = ZO_DeepTableCopy(LibQuestData_SavedVariables["quest_info"])
@@ -470,9 +539,6 @@ local function update_quest_information()
                 current_data[lib.quest_map_pin_index.global_x] = quest[five_field_location.global_x]
                 current_data[lib.quest_map_pin_index.global_y] = quest[five_field_location.global_y]
                 current_data[lib.quest_map_pin_index.quest_id] = quest[five_field_location.quest_id]
-                current_data[lib.quest_map_pin_index.world_x] = -10
-                current_data[lib.quest_map_pin_index.world_y] = -10
-                current_data[lib.quest_map_pin_index.world_z] = -10
                 givername = -1
                 --internal.dm("Debug", quest[five_field_location.quest_id])
                 if all_quest_data[quest[five_field_location.quest_id]] then
@@ -483,6 +549,15 @@ local function update_quest_information()
                 current_data[lib.quest_map_pin_index.quest_giver] = givername
             end
             if #quest == 9 then
+                current_data[lib.quest_map_pin_index.local_x] = quest[nine_field_location.local_x]
+                current_data[lib.quest_map_pin_index.local_y] = quest[nine_field_location.local_y]
+                current_data[lib.quest_map_pin_index.global_x] = quest[nine_field_location.global_x]
+                current_data[lib.quest_map_pin_index.global_y] = quest[nine_field_location.global_y]
+                current_data[lib.quest_map_pin_index.quest_id] = quest[nine_field_location.quest_id]
+                current_data[lib.quest_map_pin_index.quest_giver] = quest[nine_field_location.quest_giver]
+                quest = current_data
+            end
+            if #quest == 6 then
                 current_data = quest
                 if type(current_data[lib.quest_map_pin_index.quest_giver]) == "string" then
                     npc_id = lib:get_npcids_table(current_data[lib.quest_map_pin_index.quest_giver])
@@ -561,6 +636,15 @@ local function update_quest_information()
     LibQuestData_SavedVariables["reward_info"] = saved_reward_info
 end
 
+local function OnPlayerActivatedQuestBuild(eventCode)
+    build_completed_quests()
+    update_started_quests()
+    update_quest_information()
+
+    EVENT_MANAGER:UnregisterForEvent(lib.libName.."_BuildQuests", EVENT_PLAYER_ACTIVATED)
+end
+EVENT_MANAGER:RegisterForEvent(lib.libName.."_BuildQuests", EVENT_PLAYER_ACTIVATED, OnPlayerActivatedQuestBuild)
+
 -- Event handler function for EVENT_ADD_ON_LOADED
 local function OnLoad(eventCode, addOnName)
     if addOnName ~= lib.libName then return end
@@ -595,14 +679,18 @@ local function OnLoad(eventCode, addOnName)
     if LibQuestData_SavedVariables.map_info ~= nil then LibQuestData_SavedVariables.map_info = nil end
     if LibQuestData_SavedVariables.objective_info ~= nil then LibQuestData_SavedVariables.objective_info = nil end
     if LibQuestData_SavedVariables.subZones ~= nil then LibQuestData_SavedVariables.subZones = nil end
+
     if LibQuestData_SavedVariables.client_lang == nil then LibQuestData_SavedVariables.client_lang = lib.client_lang end
-    if lib.client_lang ~= LibQuestData_SavedVariables.client_lang then LibQuestData_SavedVariables.client_lang = lib.client_lang end
     if LibQuestData_SavedVariables.effective_lang == nil then LibQuestData_SavedVariables.effective_lang = lib.effective_lang end
+
+    if lib.client_lang ~= LibQuestData_SavedVariables.client_lang then LibQuestData_SavedVariables.client_lang = lib.client_lang end
+
     LibQuestData_SavedVariables.libVersion = lib.libVersion
     lib:build_questid_table(lib.effective_lang) -- build name lookup table once
     lib:build_npcid_table(lib.effective_lang) -- build npc names lookup table once
     lib:build_questlist_skilpoint() -- build list of quests that reward a skill point
     update_quest_information()
+    update_guild_skillline_data()
 
     EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_ADD_ON_LOADED)
 end

@@ -126,7 +126,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     if LibQuestData_SavedVariables.quests[zone] == nil then LibQuestData_SavedVariables.quests[zone] = {} end
     local local_x, local_y = GetMapPlayerPosition("player")
     local global_x, global_y, zoneMapIndex = GPS:LocalToGlobal(local_x, local_y)
-    local zone_id, world_x, world_y, world_z = GetUnitWorldPosition("player")
+    local zone_id, _, _, _ = GetUnitWorldPosition("player")
     if journalIndex then
         quest_type = GetJournalQuestType(journalIndex)
         repeat_type = GetJournalQuestRepeatType(journalIndex)
@@ -147,9 +147,6 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
         ["questID"]     = quest_id, -- assign this and get the ID when the quest is removed
         ["api"]         = GetAPIVersion(),
         ["lang"]        = GetCVar("language.2"),
-        ["world_x"]     = world_x,
-        ["world_y"]     = world_y,
-        ["world_z"]     = world_z,
     }
     if questGiverName == nil then
         quest["giver"] = lib.last_interaction_target
@@ -226,50 +223,58 @@ local function has_undefined_data(info)
         undefined = true
     end
     --[[
+    No quest Giver so it is undefined
+    ]]--
+    if info[lib.quest_map_pin_index.quest_giver] == -1 then
+        --d("quest_giver was -1 so undefined")
+        undefined = true
+    end
+
+    --[[ Very old format
     The save file might only have 1 to 5
     ]]--
     if #info <= 5 then
-        --d("old data format")
+        --d("#info <= 5 data format")
         --[[
         meaning it's an old format and therefore it is all
         undefined.
         ]]--
         return true
     end
-    if info[lib.quest_map_pin_index.world_x] == -10 then
-        --d("world_x was -10 so undefined")
-        undefined = true
-    end
+
     --[[
-    This meant there was no world_x in the database yet.
-    Leaving just in case but may not be needed since the
-    database has been updated.
+    4/2/2021 New Format
+    There are now exactly 6 fields.
     ]]--
-    if not info[lib.quest_map_pin_index.world_x] then
-        --d("world_x did not exist so undefined")
-        undefined = true
+    if #info == 6 then
+        --d("#info == 6 data format")
+        --[[
+        meaning it's the new format and therefore it is all
+        probably okay, will return true if previous checks
+        failed
+        ]]--
+        return undefined
     end
+
     --[[
     There were about 10 quests that didn't get a giver
     and will be nil. Less then or equal to 8 because
     there are 9 fields.
     ]]--
     if #info <= 8 then
-        --d("old data format")
+        --d("#info <= 8 data format")
         --[[
         meaning it's an old format and therefore it is all
         undefined.
         ]]--
         return true
     end
-    if info[lib.quest_map_pin_index.quest_giver] == -1 then
-        --d("world_x was -10 so undefined")
-        undefined = true
-    end
+
     return undefined
 end
 
 local function update_older_quest_info(source_data)
+    local old_quest_giver_value = 9 -- Updated, was 9 now 6
     if not source_data then return end
     -- source data is the table of all the quests in the zone
     --[[
@@ -281,13 +286,17 @@ local function update_older_quest_info(source_data)
     for num_entry, quest_entry in ipairs(source_data) do
         if #quest_entry <= 5 then
             --d("info is in the old format add new information")
-            quest_entry[lib.quest_map_pin_index.world_x]     =    -10 -- WorldX 3D Location << -10 = Undefined >>
-            quest_entry[lib.quest_map_pin_index.world_y]     =    -10 -- WorldY 3D Location << -10 = Undefined >>
-            quest_entry[lib.quest_map_pin_index.world_z]     =    -10 -- WorldZ 3D Location << -10 = Undefined >>
             quest_entry[lib.quest_map_pin_index.quest_giver] =    -1 -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
             table.insert(result_table, quest_entry)
-        else
+        elseif #quest_entry > 6 then
+            local new_quest_entry
             --d("info is in the new format we do nto need to add new information")
+            new_quest_entry[lib.quest_map_pin_index.local_x] = quest_entry[lib.quest_map_pin_index.local_x]
+            new_quest_entry[lib.quest_map_pin_index.local_y] = quest_entry[lib.quest_map_pin_index.local_y]
+            new_quest_entry[lib.quest_map_pin_index.global_x] = quest_entry[lib.quest_map_pin_index.global_x]
+            new_quest_entry[lib.quest_map_pin_index.global_y] = quest_entry[lib.quest_map_pin_index.global_y]
+            new_quest_entry[lib.quest_map_pin_index.quest_id] = quest_entry[lib.quest_map_pin_index.quest_id]
+            new_quest_entry[lib.quest_map_pin_index.quest_giver] = quest_entry[old_quest_giver_value]
             table.insert(result_table, quest_entry)
         end
     end
@@ -542,9 +551,6 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         [lib.quest_map_pin_index.global_x]  = quest_to_update.gpsx,
         [lib.quest_map_pin_index.global_y]   = quest_to_update.gpsy,
         [lib.quest_map_pin_index.quest_id]   = quest_to_update.questID,
-        [lib.quest_map_pin_index.world_x]   = quest_to_update.world_x or -10,
-        [lib.quest_map_pin_index.world_y]   = quest_to_update.world_y or -10,
-        [lib.quest_map_pin_index.world_z]   = quest_to_update.world_z or -10,
         [lib.quest_map_pin_index.quest_giver] = giver_name_result,
     }
 
@@ -633,6 +639,11 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 else
                     --d("We did not find a quest giver that moves")
                 end
+                --[[
+                This should prevent saving prologue quests however, when the
+                quest has has_undefined_data then it may save anyway to be examined
+                manually and added
+                ]]--
                 if internal:is_in(quest_to_update.questID, lib.prologue_quest_list) then
                     --d("We found a prologue quest that can be accepted anywhere")
                     save_quest_location = false
@@ -651,6 +662,10 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
                 else
                     --d("The quest to be saved is not close one in the SV file")
                 end
+                --[[
+                This may save some quests even though they were set to false and
+                need to be examined manually
+                ]]--
                 if has_undefined_data(sv_quest_entry) then
                     --d("sv_quest_entry had undefined data")
                     remove_older_quest_info(LibQuestData_SavedVariables["location_info"][the_zone], the_quest_loc_info)
