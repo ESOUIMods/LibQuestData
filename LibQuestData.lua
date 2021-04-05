@@ -663,10 +663,13 @@ local function update_quest_information()
     if #data == 6 then
       current_data = data
     end
-
-    if current_data[index][lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
-      if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+    if not lib.quest_data[index] then
       rebuilt_data[index] = current_data
+    else
+      if current_data[lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
+        if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+        rebuilt_data[index] = current_data
+      end
     end
   end
 
