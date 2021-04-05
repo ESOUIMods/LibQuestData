@@ -932,7 +932,7 @@ lib.quest_givers["en"] = {
   [50416] = "Semusa",
   [50525] = "Afwa",
   [50550] = "Kailstig the Axe",
-  [50639] = "Skeleton^n",
+  [50639] = "Skeleton",
   [50684] = "Long-Cast",
   [50765] = "Turuk Redclaws",
   [50990] = "Angamar",
@@ -1397,6 +1397,8 @@ lib.quest_givers["en"] = {
   [100171] = "Religious Fetish Statue",
   [100172] = "Sergeant Banthor",
   [100173] = "Jubilee Cake Voucher",
+  [100174] = "Nimriell",
+  [100175] = "Daifa",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",

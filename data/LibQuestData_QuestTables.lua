@@ -67,6 +67,7 @@ quest giver.
 6612 = "A Mortal's Touch",
 5013 = "Hushed Whispers", "Dominion Correspondence"
 6370 = "Ache for Cake", "Jubilee Cake Voucher"
+4379 = "Lover's Torment", "Shard of Alanwe"
 
 ID   = Quest Name, Object for comments
 --]]
@@ -128,6 +129,7 @@ lib.questid_giver_lookup = {
     [6612] = 79001,
     [5013] = 100169,
     [6370] = 100173,
+    [4379] = 33961,
 }
 
 --[[ List of what the numbers mean
