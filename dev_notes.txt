@@ -1,4 +1,55 @@
 ---
+From OnPlayerActivated in LibQuestData_Scan
+---
+  -- disable for now because only I use it
+  --[[
+  if lib.last_mapid then
+      internal.dm("Debug", is_different_zone(lib.current_mapid, lib.last_mapid))
+  end
+  internal.dm("Debug", lib:is_zone_subzone())
+  if last_map_zone_index then
+      internal.dm("Debug", is_same_zone_index(current_map_zone_index, last_map_zone_index))
+  end
+
+  if lib.last_mapid and is_different_zone(lib.current_mapid, lib.last_mapid) and lib:is_zone_subzone() and is_same_zone_index(current_map_zone_index, last_map_zone_index) then
+      if LibQuestData_SavedVariables.subZones[last_zone] == nil then LibQuestData_SavedVariables.subZones[last_zone] = {} end
+      if lib.subzone_list[last_zone] == nil then lib.subzone_list[last_zone] = {} end
+      if lib.subzone_list[last_zone][lib.current_zone] == nil and LibQuestData_SavedVariables.subZones[last_zone][lib.current_zone] == nil then
+          internal.dm("Debug", "All of it was true")
+          local local_x, local_y = GetMapPlayerPosition("player")
+          local data_store = {
+                  ["local_x"] = local_x,
+                  ["local_y"] = local_y,
+                  ["lib.current_mapid"]  = lib.current_mapid,
+                  ["lib.current_zone"]  = lib.current_zone,
+                  ["lib.last_mapid"]   = lib.last_mapid,
+                  ["last_zone"]   = last_zone,
+                  ["current_map_zone_index"] = current_map_zone_index,
+                  ["parent_zone_index"]   = last_map_zone_index,
+              }
+          internal.dm("Debug", "Saving subzone data")
+          LibQuestData_SavedVariables.subZones[last_zone][lib.current_zone] = data_store
+      end
+  else
+      internal.dm("Debug", "Something was false")
+  end
+
+  if lib.last_mapid then
+      internal.dm("Debug", "Previous Map ID: "..lib.last_mapid)
+  end
+  if last_zone then
+      internal.dm("Debug", "Previous Zone: "..last_zone)
+  end
+  if last_zone_index then
+      internal.dm("Debug", "Previous Zone Index Player: "..last_zone_index)
+  end
+  if last_map_zone_index then
+      internal.dm("Debug", "Previous Map Zone Index: "..last_map_zone_index)
+  end
+  ]]--
+
+
+---
 possible way to loop for conditions
 ---
 
