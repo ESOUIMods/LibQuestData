@@ -701,7 +701,7 @@ local function update_quest_information()
     end
   end
   LibQuestData_SavedVariables["reward_info"] = saved_reward_info
-
+  --[[
   current_data = {}
   local added = false
   local in_range_missing = false
@@ -798,7 +798,7 @@ local function update_quest_information()
   internal.dm("Debug", string.format("Quests added: %s", count_added))
   internal.dm("Debug", string.format("Quests stashed: %s", count_stashed))
   LibQuestData_SavedVariables["strored_data"] = strored_data
-
+  ]]--
 end
 
 local function OnPlayerActivatedQuestBuild(eventCode)
