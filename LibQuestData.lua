@@ -664,10 +664,8 @@ local function update_quest_information()
       current_data = data
     end
 
-    if current_data[index][lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
-      if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
-      rebuilt_data[index] = current_data
-    end
+    if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+    rebuilt_data[index] = current_data
   end
 
   LibQuestData_SavedVariables["location_info"] = rebuilt_locations
@@ -701,104 +699,6 @@ local function update_quest_information()
     end
   end
   LibQuestData_SavedVariables["reward_info"] = saved_reward_info
-  --[[
-  current_data = {}
-  local added = false
-  local in_range_missing = false
-  local in_range_good_data = false
-  local in_range_missing_giver = false
-  local quest_not_found
-  local total_count = 0
-  local count_added = 0
-  local count_stashed = 0
-  local strored_data = {}
-  local the_quest_from_save = nil
-  local the_quest_from_save_id = nil
-  for zone, zone_quests in pairs(rebuilt_locations) do
-    for index, quest_from_save in pairs(zone_quests) do
-      total_count = total_count + 1
-      quests_from_zone = internal:get_zone_quests(zone)
-      in_range_missing = false
-      in_range_good_data = false
-      in_range_missing_giver = false
-      quest_not_found = true
-      the_quest_from_save = quest_from_save
-      the_quest_from_save_id = the_quest_from_save[lib.quest_map_pin_index.quest_id]
-      for quests_from_zone_index, quests_from_zone_data in pairs(quests_from_zone) do
-        local quests_from_zone_data_id = quests_from_zone_data[lib.quest_map_pin_index.quest_id]
-        if the_quest_from_save_id == quests_from_zone_data_id then
-          if internal:quest_in_range(quests_from_zone_data, the_quest_from_save) then
-            if internal:missing_gps_data(quests_from_zone_data) then
-              --internal.dm("Debug", "[Found] Quest in range and missing GPS data")
-              --internal.dm("Debug", quests_from_zone_data)
-              --internal.dm("Debug", the_quest_from_save)
-              in_range_missing = true
-              quest_not_found = false
-            end
-            if not internal:missing_gps_data(quests_from_zone_data) and not internal:missing_quest_giver(quests_from_zone_data) then
-              --internal.dm("Debug", "[Found] Quest in range and zone quest has good data")
-              --internal.dm("Debug", quests_from_zone_data)
-              --internal.dm("Debug", the_quest_from_save)
-              in_range_good_data = true
-              quest_not_found = false
-            end
-            if not internal:missing_gps_data(the_quest_from_save) and internal:missing_quest_giver(the_quest_from_save) then
-              --internal.dm("Debug", "[Found] Quest in range with no giver so that needs to be looked at")
-              --internal.dm("Debug", quests_from_zone_data)
-              --internal.dm("Debug", the_quest_from_save)
-              in_range_good_data = false
-              in_range_missing = false
-              in_range_missing_giver = true
-              quest_not_found = false
-            end
-          end
-        end
-      end
-
-      if in_range_missing then
-        --internal.dm("Debug", "[Save] Flagged as in_range_missing")
-        count_added = count_added + 1
-        -- keep the_quest_from_save
-        if current_data[zone] == nil then current_data[zone] = {} end
-        table.insert(current_data[zone], the_quest_from_save)
-        added = true
-      end
-
-      if in_range_good_data then
-        --internal.dm("Debug", "[Stash] Flagged as in_range_good_data")
-        if strored_data[zone] == nil then strored_data[zone] = {} end
-        table.insert(strored_data[zone], the_quest_from_save)
-        count_stashed = count_stashed + 1
-      end
-
-      if in_range_missing_giver then
-        --internal.dm("Debug", "[Save] Flagged as in_range_missing_giver")
-        count_added = count_added + 1
-        -- keep the_quest_from_save
-        if current_data[zone] == nil then current_data[zone] = {} end
-        table.insert(current_data[zone], the_quest_from_save)
-        added = true
-      end
-
-      if quest_not_found then
-        --internal.dm("Debug", "[Save] Quest may not be in database, flagged as quest_not_found")
-        count_added = count_added + 1
-        -- keep the_quest_from_save
-        if current_data[zone] == nil then current_data[zone] = {} end
-        table.insert(current_data[zone], the_quest_from_save)
-        added = true
-      end
-
-    end
-  end
-  if added then
-    LibQuestData_SavedVariables["location_info"] = current_data
-  end
-  internal.dm("Debug", string.format("Quest total: %s", total_count))
-  internal.dm("Debug", string.format("Quests added: %s", count_added))
-  internal.dm("Debug", string.format("Quests stashed: %s", count_stashed))
-  LibQuestData_SavedVariables["strored_data"] = strored_data
-  ]]--
 end
 
 local function OnPlayerActivatedQuestBuild(eventCode)
