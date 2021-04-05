@@ -85,7 +85,7 @@ function internal:quest_in_range(map_data_quest, quest_data)
             local distance = zo_round(GPS:GetLocalDistanceInMeters(map_data_quest[lib.quest_map_pin_index.local_x],
         map_data_quest[lib.quest_map_pin_index.local_y], quest_data[lib.quest_map_pin_index.local_x],
         quest_data[lib.quest_map_pin_index.local_y]))
-            if distance <= 25 then 
+            if distance <= 25 then
               --internal.dm("Debug", "Distance was within range")
               return true
             else
@@ -190,6 +190,39 @@ function lib:get_quest_list(zone)
   --internal.dm("Debug", all_zone_quests)
   return new_all_zone_quests
 end
+
+--[[4/4/2021 movedget whether or not it is a cadwell quest
+return true if it is a cadwell quest
+]]--
+local function check_map_state()
+    internal.dm("Debug", "LQD Checking map state")
+    if lib.last_mapid and (GetCurrentMapId() ~= lib.last_mapid) then
+        internal.dm("Debug", "changed")
+        internal.dm("Debug", GetCurrentMapId())
+        if GetMapType() > MAPTYPE_ZONE then
+            internal.dm("Debug", "stopped")
+            return
+        end
+        local zone = LMP:GetZoneAndSubzone(true, false, true)
+        internal.dm("Debug", "Refresh QuestsPins")
+        lib.zone_quests = lib:get_quest_list(zone)
+    else
+        internal.dm("Debug", "Did not change or not assigned")
+    end
+    lib.last_mapid = GetCurrentMapId()
+end
+
+CALLBACK_MANAGER:RegisterCallback("OnWorldMapChanged", function()
+    check_map_state()
+end)
+
+WORLD_MAP_SCENE:RegisterCallback("StateChange", function(oldState, newState)
+    if newState == SCENE_SHOWING then
+        check_map_state()
+    elseif newState == SCENE_HIDDEN then
+        check_map_state()
+    end
+end)
 
 --[[ get whether or not it is a cadwell quest
 return true if it is a cadwell quest
@@ -631,8 +664,10 @@ local function update_quest_information()
       current_data = data
     end
 
-    if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
-    rebuilt_data[index] = current_data
+    if current_data[index][lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
+      if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+      rebuilt_data[index] = current_data
+    end
   end
 
   LibQuestData_SavedVariables["location_info"] = rebuilt_locations
@@ -719,7 +754,7 @@ local function update_quest_information()
           end
         end
       end
-      
+
       if in_range_missing then
         --internal.dm("Debug", "[Save] Flagged as in_range_missing")
         count_added = count_added + 1
@@ -756,13 +791,13 @@ local function update_quest_information()
 
     end
   end
-  if added then 
-    LibQuestData_SavedVariables["location_info"] = current_data 
+  if added then
+    LibQuestData_SavedVariables["location_info"] = current_data
   end
   internal.dm("Debug", string.format("Quest total: %s", total_count))
   internal.dm("Debug", string.format("Quests added: %s", count_added))
   internal.dm("Debug", string.format("Quests stashed: %s", count_stashed))
-  LibQuestData_SavedVariables["strored_data"] = strored_data 
+  LibQuestData_SavedVariables["strored_data"] = strored_data
 
 end
 
@@ -779,6 +814,9 @@ EVENT_MANAGER:RegisterForEvent(lib.libName .. "_BuildQuests", EVENT_PLAYER_ACTIV
 -- Event handler function for EVENT_ADD_ON_LOADED
 local function OnLoad(eventCode, addOnName)
   if addOnName ~= lib.libName then return end
+
+  internal.dm("Debug", "LQD Checking Map State")
+  check_map_state()
 
   if LibQuestData_SavedVariables.version ~= 4 then
     -- d("ding not 4")

@@ -4,7 +4,6 @@ local internal       = _G["LibQuestData_Internal"]
 -- Local variables
 local questGiverName = nil
 local reward
-local last_map_id
 local last_zone
 --local last_zone_index
 local last_map_zone_index
@@ -722,9 +721,9 @@ EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_REMOVED, OnQuestRemoved)
 local function OnPlayerDeactivated(eventCode)
   last_zone = LMP:GetZoneAndSubzone(true, false, true)
   if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
-    last_map_id = GetCurrentMapId()
+    lib.last_mapid = GetCurrentMapId()
   end
-  if not last_map_id then
+  if not lib.last_mapid then
     internal.dm("Debug", "Could not get Map ID")
   end
 end
@@ -775,15 +774,15 @@ local function OnPlayerActivated(eventCode)
 
   -- disable for now because only I use it
   --[[
-  if last_map_id then
-      internal.dm("Debug", is_different_zone(current_map_id, last_map_id))
+  if lib.last_mapid then
+      internal.dm("Debug", is_different_zone(current_map_id, lib.last_mapid))
   end
   internal.dm("Debug", lib:is_zone_subzone())
   if last_map_zone_index then
       internal.dm("Debug", is_same_zone_index(current_map_zone_index, last_map_zone_index))
   end
 
-  if last_map_id and is_different_zone(current_map_id, last_map_id) and lib:is_zone_subzone() and is_same_zone_index(current_map_zone_index, last_map_zone_index) then
+  if lib.last_mapid and is_different_zone(current_map_id, lib.last_mapid) and lib:is_zone_subzone() and is_same_zone_index(current_map_zone_index, last_map_zone_index) then
       if LibQuestData_SavedVariables.subZones[last_zone] == nil then LibQuestData_SavedVariables.subZones[last_zone] = {} end
       if lib.subzone_list[last_zone] == nil then lib.subzone_list[last_zone] = {} end
       if lib.subzone_list[last_zone][current_zone] == nil and LibQuestData_SavedVariables.subZones[last_zone][current_zone] == nil then
@@ -794,7 +793,7 @@ local function OnPlayerActivated(eventCode)
                   ["local_y"] = local_y,
                   ["current_map_id"]  = current_map_id,
                   ["current_zone"]  = current_zone,
-                  ["last_map_id"]   = last_map_id,
+                  ["lib.last_mapid"]   = lib.last_mapid,
                   ["last_zone"]   = last_zone,
                   ["current_map_zone_index"] = current_map_zone_index,
                   ["parent_zone_index"]   = last_map_zone_index,
@@ -806,8 +805,8 @@ local function OnPlayerActivated(eventCode)
       internal.dm("Debug", "Something was false")
   end
 
-  if last_map_id then
-      internal.dm("Debug", "Previous Map ID: "..last_map_id)
+  if lib.last_mapid then
+      internal.dm("Debug", "Previous Map ID: "..lib.last_mapid)
   end
   if last_zone then
       internal.dm("Debug", "Previous Zone: "..last_zone)
@@ -821,9 +820,9 @@ local function OnPlayerActivated(eventCode)
   ]]--
 
   if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
-    last_map_id = GetCurrentMapId()
+    lib.last_mapid = GetCurrentMapId()
   end
-  if not last_map_id then
+  if not lib.last_mapid then
     internal.dm("Debug", "Could not get Map ID")
   end
   last_zone           = LMP:GetZoneAndSubzone(true, false, true)
