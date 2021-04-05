@@ -12,7 +12,7 @@ local internal                    = _G["LibQuestData_Internal"]
 
 -- Libraries
 local LMP                         = LibMapPins
-local GPS                         = LibGPS2
+local GPS                         = LibGPS3
 
 -- Default table
 local quest_data_index_default    = {
@@ -35,35 +35,63 @@ local quest_map_pin_index_default = {
   [lib.quest_map_pin_index.quest_giver] = -1, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
 
+-------------------------------------------------
+----- Helpers                                ----
+-------------------------------------------------
+
 -- Function to check for empty table
 function internal:is_empty_or_nil(t)
-  if not t then return true end
-  if type(t) == "table" then
-    if next(t) == nil then
-      return true
-    else
-      return false
-    end
-  elseif type(t) == "string" then
-    if t == nil then
-      return true
-    elseif t == "" then
-      return true
-    else
-      return false
-    end
-  elseif type(t) == "nil" then
-    return true
-  end
+    if t == nil or t == "" then return true end
+    return type(t) == "table" and ZO_IsTableEmpty(t) or false
 end
 
-function internal:is_nil(t)
-  if not t then return true else return false end
-  if t == nil then
-    return true
-  else
+function internal:missing_gps_data(info)
+    if info[lib.quest_map_pin_index.global_x] == -10 then
+        --d("global_x was -10 so undefined")
+        return true
+    end
     return false
-  end
+end
+
+function internal:missing_quest_giver(info)
+    if info[lib.quest_map_pin_index.quest_giver] == -1 then
+        --d("quest_giver was -1 so undefined")
+        return true
+    end
+    if type(info[lib.quest_map_pin_index.quest_giver]) == "string" then
+        --d("Quest Giver was a string")
+        return true
+    end
+    return false
+end
+
+function internal:has_undefined_data(info)
+    if info[lib.quest_map_pin_index.global_x] == -10 then
+        --d("global_x was -10 so undefined")
+        return true
+    end
+    if info[lib.quest_map_pin_index.quest_giver] == -1 then
+        --d("quest_giver was -1 so undefined")
+        return true
+    end
+    if type(info[lib.quest_map_pin_index.quest_giver]) == "string" then
+        --d("Quest Giver was a string")
+        return true
+    end
+    return false
+end
+
+function internal:quest_in_range(map_data_quest, quest_data)
+            local distance = zo_round(GPS:GetLocalDistanceInMeters(map_data_quest[lib.quest_map_pin_index.local_x],
+        map_data_quest[lib.quest_map_pin_index.local_y], quest_data[lib.quest_map_pin_index.local_x],
+        quest_data[lib.quest_map_pin_index.local_y]))
+            if distance <= 25 then 
+              --internal.dm("Debug", "Distance was within range")
+              return true
+            else
+              --internal.dm("Debug", "Distance outside of range")
+              return false
+            end
 end
 
 -------------------------------------------------
@@ -318,6 +346,7 @@ Build ID table is indexed by the quest name, only default language
 is built by default. Author must build other languages as needed.
 --]]
 
+-- contains_id is a helper for building the lookup tables
 local function contains_id(quent_ids, id_to_find)
   local found_id = false
   for questname, quest_ids in pairs(quent_ids) do
@@ -424,7 +453,9 @@ local function build_completed_quests()
   end
 end
 
--- updates completed quest list without loop
+--[[ update the completed quest list without loop
+when the player completes a quest
+]]--
 local function update_completed_quests(quest_id)
   lib.completed_quests[quest_id] = true
 end
@@ -635,9 +666,108 @@ local function update_quest_information()
     end
   end
   LibQuestData_SavedVariables["reward_info"] = saved_reward_info
+
+  current_data = {}
+  local added = false
+  local in_range_missing = false
+  local in_range_good_data = false
+  local in_range_missing_giver = false
+  local quest_not_found
+  local total_count = 0
+  local count_added = 0
+  local count_stashed = 0
+  local strored_data = {}
+  local the_quest_from_save = nil
+  local the_quest_from_save_id = nil
+  for zone, zone_quests in pairs(rebuilt_locations) do
+    for index, quest_from_save in pairs(zone_quests) do
+      total_count = total_count + 1
+      quests_from_zone = internal:get_zone_quests(zone)
+      in_range_missing = false
+      in_range_good_data = false
+      in_range_missing_giver = false
+      quest_not_found = true
+      the_quest_from_save = quest_from_save
+      the_quest_from_save_id = the_quest_from_save[lib.quest_map_pin_index.quest_id]
+      for quests_from_zone_index, quests_from_zone_data in pairs(quests_from_zone) do
+        local quests_from_zone_data_id = quests_from_zone_data[lib.quest_map_pin_index.quest_id]
+        if the_quest_from_save_id == quests_from_zone_data_id then
+          if internal:quest_in_range(quests_from_zone_data, the_quest_from_save) then
+            if internal:missing_gps_data(quests_from_zone_data) then
+              --internal.dm("Debug", "[Found] Quest in range and missing GPS data")
+              --internal.dm("Debug", quests_from_zone_data)
+              --internal.dm("Debug", the_quest_from_save)
+              in_range_missing = true
+              quest_not_found = false
+            end
+            if not internal:missing_gps_data(quests_from_zone_data) and not internal:missing_quest_giver(quests_from_zone_data) then
+              --internal.dm("Debug", "[Found] Quest in range and zone quest has good data")
+              --internal.dm("Debug", quests_from_zone_data)
+              --internal.dm("Debug", the_quest_from_save)
+              in_range_good_data = true
+              quest_not_found = false
+            end
+            if not internal:missing_gps_data(the_quest_from_save) and internal:missing_quest_giver(the_quest_from_save) then
+              --internal.dm("Debug", "[Found] Quest in range with no giver so that needs to be looked at")
+              --internal.dm("Debug", quests_from_zone_data)
+              --internal.dm("Debug", the_quest_from_save)
+              in_range_good_data = false
+              in_range_missing = false
+              in_range_missing_giver = true
+              quest_not_found = false
+            end
+          end
+        end
+      end
+      
+      if in_range_missing then
+        --internal.dm("Debug", "[Save] Flagged as in_range_missing")
+        count_added = count_added + 1
+        -- keep the_quest_from_save
+        if current_data[zone] == nil then current_data[zone] = {} end
+        table.insert(current_data[zone], the_quest_from_save)
+        added = true
+      end
+
+      if in_range_good_data then
+        --internal.dm("Debug", "[Stash] Flagged as in_range_good_data")
+        if strored_data[zone] == nil then strored_data[zone] = {} end
+        table.insert(strored_data[zone], the_quest_from_save)
+        count_stashed = count_stashed + 1
+      end
+
+      if in_range_missing_giver then
+        --internal.dm("Debug", "[Save] Flagged as in_range_missing_giver")
+        count_added = count_added + 1
+        -- keep the_quest_from_save
+        if current_data[zone] == nil then current_data[zone] = {} end
+        table.insert(current_data[zone], the_quest_from_save)
+        added = true
+      end
+
+      if quest_not_found then
+        --internal.dm("Debug", "[Save] Quest may not be in database, flagged as quest_not_found")
+        count_added = count_added + 1
+        -- keep the_quest_from_save
+        if current_data[zone] == nil then current_data[zone] = {} end
+        table.insert(current_data[zone], the_quest_from_save)
+        added = true
+      end
+
+    end
+  end
+  if added then 
+    LibQuestData_SavedVariables["location_info"] = current_data 
+  end
+  internal.dm("Debug", string.format("Quest total: %s", total_count))
+  internal.dm("Debug", string.format("Quests added: %s", count_added))
+  internal.dm("Debug", string.format("Quests stashed: %s", count_stashed))
+  LibQuestData_SavedVariables["strored_data"] = strored_data 
+
 end
 
 local function OnPlayerActivatedQuestBuild(eventCode)
+  internal.dm("Debug", "OnPlayerActivatedQuestBuild")
   build_completed_quests()
   update_started_quests()
   update_quest_information()
@@ -690,7 +820,6 @@ local function OnLoad(eventCode, addOnName)
   lib:build_questid_table(lib.effective_lang) -- build name lookup table once
   lib:build_npcid_table(lib.effective_lang) -- build npc names lookup table once
   lib:build_questlist_skilpoint() -- build list of quests that reward a skill point
-  update_quest_information()
   update_guild_skillline_data()
 
   EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_ADD_ON_LOADED)
