@@ -354,8 +354,9 @@ function lib:get_quest_giver(id, lang)
 end
 
 function lib:get_quest_name(id, lang)
+  local unknown = lib.unknown_quest_name_string[lib.effective_lang]
   lang = lang or lib.effective_lang
-  return lib.quest_names[lib.effective_lang][id] or "Unknown Name"
+  return lib.quest_names[lib.effective_lang][id] or unknown
 end
 
 -------------------------------------------------

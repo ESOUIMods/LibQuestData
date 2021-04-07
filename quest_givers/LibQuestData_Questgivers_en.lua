@@ -1586,5 +1586,4 @@ lib.quest_givers["en"] = {
   [500121] = "Note from Astara",
   [500122] = "Note from Kor",
   [500123] = "Azara's Note",
-  [500124] = "Tharayya Journal Entry: 2",
 }

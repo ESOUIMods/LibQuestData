@@ -1,4 +1,4 @@
-local libName, libVersion   = "LibQuestData", 220
+local libName, libVersion   = "LibQuestData", 221
 local lib                   = {}
 local internal              = {}
 _G["LibQuestData"]          = lib
@@ -107,20 +107,34 @@ lib.libName                     = libName
 lib.libVersion                  = libVersion
 
 lib.name_to_questid_table       = {}
+lib.name_to_questid_table["br"] = {}
 lib.name_to_questid_table["de"] = {}
 lib.name_to_questid_table["en"] = {}
+lib.name_to_questid_table["es"] = {}
 lib.name_to_questid_table["fr"] = {}
+lib.name_to_questid_table["fx"] = {}
+lib.name_to_questid_table["it"] = {}
 lib.name_to_questid_table["jp"] = {}
-lib.name_to_questid_table["ru"] = {}
+lib.name_to_questid_table["kb"] = {}
+lib.name_to_questid_table["kr"] = {}
 lib.name_to_questid_table["pl"] = {}
+lib.name_to_questid_table["ru"] = {}
+lib.name_to_questid_table["tr"] = {}
 
 lib.name_to_npcid_table         = {}
+lib.name_to_npcid_table["br"]   = {}
 lib.name_to_npcid_table["de"]   = {}
 lib.name_to_npcid_table["en"]   = {}
+lib.name_to_npcid_table["es"]   = {}
 lib.name_to_npcid_table["fr"]   = {}
+lib.name_to_npcid_table["fx"]   = {}
+lib.name_to_npcid_table["it"]   = {}
 lib.name_to_npcid_table["jp"]   = {}
-lib.name_to_npcid_table["ru"]   = {}
+lib.name_to_npcid_table["kb"]   = {}
+lib.name_to_npcid_table["kr"]   = {}
 lib.name_to_npcid_table["pl"]   = {}
+lib.name_to_npcid_table["ru"]   = {}
+lib.name_to_npcid_table["tr"]   = {}
 
 lib.quest_rewards_skilpoint     = {}
 lib.started_quests              = {}
@@ -186,7 +200,7 @@ lib.quest_data_type                              = {
   quest_type_ava_group = 10, -- None in table, in check
   quest_type_ava_grand = 11, -- None in table, in check
   quest_type_holiday_event = 12, -- Qty 22
-  quest_type_battleground = 4, -- Qty 4
+  quest_type_battleground = 13, -- Qty 4
   quest_type_prologue = 14, -- Qty 14
   quest_type_undaunted_pledge = 15, -- Qty 42
 }
@@ -256,4 +270,20 @@ lib.dest_quest_series_index                      = {
   quest_series_ad = 3,
   quest_series_dc = 4,
   quest_series_ep = 5,
+}
+
+lib.unknown_quest_name_string = {
+  ["br"] = "Nome Desconhecido",
+  ["de"] = "Unbekannter Name",
+  ["en"] = "Unknown Name",
+  ["es"] = "Nombre desconocido",
+  ["fr"] = "Nom inconnu",
+  ["fx"] = "Nieznane imię",
+  ["it"] = "Nome sconosciuto",
+  ["jp"] = "不明な名前",
+  ["kb"] = "알 수없는 이름",
+  ["kr"] = "알 수없는 이름",
+  ["pl"] = "Nieznane imię",
+  ["ru"] = "Неизвестное имя",
+  ["tr"] = "알 수없는 이름",
 }
