@@ -1,4 +1,4 @@
-local libName, libVersion   = "LibQuestData", 219
+local libName, libVersion   = "LibQuestData", 220
 local lib                   = {}
 local internal              = {}
 _G["LibQuestData"]          = lib
@@ -182,10 +182,13 @@ lib.quest_data_type                              = {
   quest_type_raid = 6, -- Qty 7
   quest_type_ava = 7, -- Qty 117, unsure if verified
   quest_type_class = 8, -- None in table
+  -- quest_type_qa_test = 9, not in game as far as I know
   quest_type_ava_group = 10, -- None in table, in check
   quest_type_ava_grand = 11, -- None in table, in check
-  quest_type_holiday_event = 12, -- Qty 7, unsure if verified
-  quest_type_battleground = 13, -- Qty 4, unsure if verified
+  quest_type_holiday_event = 12, -- Qty 22
+  quest_type_battleground = 4, -- Qty 4
+  quest_type_prologue = 14, -- Qty 14
+  quest_type_undaunted_pledge = 15, -- Qty 42
 }
 
 lib.quest_series_type                            = {
@@ -231,6 +234,7 @@ lib.quest_data_repeat                            = {
   quest_repeat_repeatable = 1,
   quest_repeat_daily = 2,
   quest_repeat_repeatable_per_duration = 3,
+  quest_repeat_event_reset = 4,
 }
 
 lib.dest_quest_data_index                        = {
