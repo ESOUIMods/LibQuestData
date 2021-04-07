@@ -4,9 +4,6 @@ local internal       = _G["LibQuestData_Internal"]
 -- Local variables
 local questGiverName = nil
 local reward
-local last_zone
---local last_zone_index
-local last_map_zone_index
 -- Init saved variables table
 local GPS            = LibGPS3
 local LMP            = LibMapPins
@@ -339,14 +336,14 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     for num_entry, quest_from_table in pairs(zone_quests) do
       if quest_from_table.zone_index and quest_from_table.poi_index then
         if quest_from_table.zone_index == zoneIndex and quest_from_table.poi_index == poiIndex and quest_from_table.name == questName then
-          internal.dm("Debug", "Detailed quest info was all true")
+          --internal.dm("Debug", "Detailed quest info was all true")
           the_zone        = zone
           the_entry       = num_entry
           quest_to_update = quest_from_table
           break
         end
       elseif quest_from_table.name == questName then
-        internal.dm("Debug", "Quest name was true due to old information")
+        --internal.dm("Debug", "Quest name was true due to old information")
         the_zone        = zone
         the_entry       = num_entry
         quest_to_update = quest_from_table
@@ -360,18 +357,18 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   end
 
   if quest_to_update.zone_name then
-    internal.dm("Debug", "zone_name: " .. quest_to_update.zone_name)
+    --internal.dm("Debug", "zone_name: " .. quest_to_update.zone_name)
   end
   if quest_to_update.zone_index then
-    internal.dm("Debug", "zone_index: " .. quest_to_update.zone_index)
-    internal.dm("Debug", "zoneIndex: " .. tostring(zoneIndex))
+    --internal.dm("Debug", "zone_index: " .. quest_to_update.zone_index)
+    --internal.dm("Debug", "zoneIndex: " .. tostring(zoneIndex))
   end
   if quest_to_update.poi_index then
-    internal.dm("Debug", "poi_index: " .. quest_to_update.poi_index)
-    internal.dm("Debug", "poiIndex: " .. tostring(poiIndex))
+    --internal.dm("Debug", "poi_index: " .. quest_to_update.poi_index)
+    --internal.dm("Debug", "poiIndex: " .. tostring(poiIndex))
   end
 
-  internal.dm("Debug", "questID: " .. questID)
+  --internal.dm("Debug", "questID: " .. questID)
   if questID >= 1 then
     if quest_to_update.questID == -1 then
       quest_to_update.questID = questID
@@ -717,18 +714,6 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_REMOVED, OnQuestRemoved) -- Verified
 
--- Event handler function for EVENT_PLAYER_DEACTIVATED
-local function OnPlayerDeactivated(eventCode)
-  last_zone = LMP:GetZoneAndSubzone(true, false, true)
-  if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
-    lib.last_mapid = GetCurrentMapId()
-  end
-  if not lib.last_mapid then
-    internal.dm("Debug", "Could not get Map ID")
-  end
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_DEACTIVATED, OnPlayerDeactivated) -- Verified
-
 local function show_quests()
   for zone, zone_quests in pairs(LibQuestData_SavedVariables.quests) do
     d("zone: " .. zone)
@@ -740,94 +725,103 @@ local function show_quests()
 end
 
 local function OnInteract(event_code, client_interact_result, interact_target_name)
-  internal.dm("Debug", "OnInteract Occured")
+  --internal.dm("Debug", "OnInteract Occured")
   --d(client_interact_result)
   local text = zo_strformat(SI_CHAT_MESSAGE_FORMATTER, interact_target_name)
-  internal.dm("Debug", text)
+  --internal.dm("Debug", text)
   lib.last_interaction_target = text
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_CLIENT_INTERACT_RESULT, OnInteract)
 
--- Event handler function for EVENT_PLAYER_ACTIVATED
-local function OnPlayerActivated(eventCode)
-  -- /script LibQuestData.logger:Debug(GetCurrentMapId())
-  internal.dm("Debug", "--------------------")
-  local current_map_id
-  local current_zone
-  --local current_zone_index
-  local current_map_zone_index
+function lib.on_map_zone_changed()
+  internal.dm("Debug", "[5] on_map_zone_changed")
 
-  if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
-    current_map_id = GetCurrentMapId()
-  end
-  if not current_map_id then
-    internal.dm("Debug", "Could not get Current Map ID")
-  end
-  current_zone           = LMP:GetZoneAndSubzone(true, false, true)
-  --current_zone_index = GetZoneId(GetUnitZoneIndex("player"))
-  current_map_zone_index = GetZoneId(GetCurrentMapZoneIndex())
+  internal.dm("Debug", "[5] Updating last_mapid and current_mapid")
+  lib.last_mapid = lib.current_mapid
+  lib.last_zone = lib.current_zone
+  lib.current_mapid = GetCurrentMapId()
+  lib.current_zone = LMP:GetZoneAndSubzone(true, false, true)
 
-  internal.dm("Debug", "Current Zone: " .. current_zone)
-  internal.dm("Debug", "Current Map ID: " .. current_map_id)
-  --internal.dm("Debug", "Current Zone Index Player: "..current_zone_index)
-  internal.dm("Debug", "Current Map Zone Index: " .. GetZoneId(GetCurrentMapZoneIndex()))
-
-  -- disable for now because only I use it
-  --[[
-  if lib.last_mapid then
-      internal.dm("Debug", is_different_zone(current_map_id, lib.last_mapid))
-  end
-  internal.dm("Debug", lib:is_zone_subzone())
-  if last_map_zone_index then
-      internal.dm("Debug", is_same_zone_index(current_map_zone_index, last_map_zone_index))
-  end
-
-  if lib.last_mapid and is_different_zone(current_map_id, lib.last_mapid) and lib:is_zone_subzone() and is_same_zone_index(current_map_zone_index, last_map_zone_index) then
-      if LibQuestData_SavedVariables.subZones[last_zone] == nil then LibQuestData_SavedVariables.subZones[last_zone] = {} end
-      if lib.subzone_list[last_zone] == nil then lib.subzone_list[last_zone] = {} end
-      if lib.subzone_list[last_zone][current_zone] == nil and LibQuestData_SavedVariables.subZones[last_zone][current_zone] == nil then
-          internal.dm("Debug", "All of it was true")
-          local local_x, local_y = GetMapPlayerPosition("player")
-          local data_store = {
-                  ["local_x"] = local_x,
-                  ["local_y"] = local_y,
-                  ["current_map_id"]  = current_map_id,
-                  ["current_zone"]  = current_zone,
-                  ["lib.last_mapid"]   = lib.last_mapid,
-                  ["last_zone"]   = last_zone,
-                  ["current_map_zone_index"] = current_map_zone_index,
-                  ["parent_zone_index"]   = last_map_zone_index,
-              }
-          internal.dm("Debug", "Saving subzone data")
-          LibQuestData_SavedVariables.subZones[last_zone][current_zone] = data_store
-      end
-  else
-      internal.dm("Debug", "Something was false")
-  end
-
-  if lib.last_mapid then
-      internal.dm("Debug", "Previous Map ID: "..lib.last_mapid)
-  end
-  if last_zone then
-      internal.dm("Debug", "Previous Zone: "..last_zone)
-  end
-  if last_zone_index then
-      internal.dm("Debug", "Previous Zone Index Player: "..last_zone_index)
-  end
-  if last_map_zone_index then
-      internal.dm("Debug", "Previous Map Zone Index: "..last_map_zone_index)
-  end
-  ]]--
-
-  if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
-    lib.last_mapid = GetCurrentMapId()
-  end
   if not lib.last_mapid then
-    internal.dm("Debug", "Could not get Map ID")
+    internal.dm("Debug", "[5] LMP did not set the last_mapid properly")
   end
-  last_zone           = LMP:GetZoneAndSubzone(true, false, true)
-  --last_zone_index = GetZoneId(GetUnitZoneIndex("player"))
-  last_map_zone_index = GetZoneId(GetCurrentMapZoneIndex())
+  if not lib.last_zone then
+    internal.dm("Debug", "[5] LMP did not set the last_zone properly")
+  end
+  if not lib.current_mapid then
+    internal.dm("Debug", "[5] LMP did not set the current_mapid properly")
+  end
+  if not lib.current_zone then
+    internal.dm("Debug", "[5] LMP did not set the current_zone properly")
+  end
 
+  local temp = string.format("[5] Last Mapid: %s", lib.last_mapid) or "[5] NA"
+  internal.dm("Debug", temp)
+  local temp = string.format("[5] Last Zone: %s", lib.last_zone) or "[5] NA"
+  internal.dm("Debug", temp)
+  local temp = string.format("[5] Current Mapid: %s", lib.current_mapid) or "[5] NA"
+  internal.dm("Debug", temp)
+  local temp = string.format("[5] Current Zone: %s", lib.current_zone) or "[5] NA"
+  internal.dm("Debug", temp)
+  lib.check_map_state()
+end
+
+function on_zone_changed(eventCode, zoneName, subZoneName, newSubzone, zoneId, subZoneId)
+  lib.on_map_zone_changed()
+end
+EVENT_MANAGER:RegisterForEvent(lib.libName .. "_zone_changed", EVENT_ZONE_CHANGED, on_zone_changed)
+
+-- Event handler function for EVENT_PLAYER_DEACTIVATED
+local function OnPlayerDeactivated(eventCode)
+  internal.dm("Debug", "[6] EVENT_PLAYER_DEACTIVATED")
+  internal.dm("Debug", "[6] Updating last_mapid")
+  lib.last_mapid = GetCurrentMapId()
+  lib.last_zone = LMP:GetZoneAndSubzone(true, false, true)
+
+  if not lib.last_mapid then
+    internal.dm("Debug", "[6] LMP did not set the last_mapid properly")
+  end
+  if not lib.last_zone then
+    internal.dm("Debug", "[6] LMP did not set the last_zone properly")
+  end
+
+  local temp = string.format("[6] Last Mapid: %s", lib.last_mapid) or "[6] NA"
+  internal.dm("Debug", temp)
+  local temp = string.format("[6] Last Zone: %s", lib.last_zone) or "[6] NA"
+  internal.dm("Debug", temp)
+end
+EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_DEACTIVATED, OnPlayerDeactivated) -- Verified
+
+-- Event handler function for EVENT_PLAYER_ACTIVATED
+local function OnPlayerActivated(eventCode, initial)
+  -- /script LibQuestData.logger:Debug(GetCurrentMapId())
+  internal.dm("Debug", "[1] EVENT_PLAYER_ACTIVATED")
+
+  if initial then
+    internal.dm("Debug", "[1] Initial first load")
+    lib.last_mapid = 0
+    lib.last_zone = ""
+    lib.current_mapid = GetCurrentMapId()
+    lib.current_zone = LMP:GetZoneAndSubzone(true, false, true)
+    lib.check_map_state()
+  end
+
+  internal.dm("Debug", "[1] Updating current_mapid")
+  lib.current_mapid = GetCurrentMapId()
+  lib.current_zone = LMP:GetZoneAndSubzone(true, false, true)
+
+  if not lib.current_mapid then
+    internal.dm("Debug", "[1] LMP did not set the current_mapid properly")
+  end
+  if not lib.current_zone then
+    internal.dm("Debug", "[1] LMP did not set the current_zone properly")
+  end
+
+  local temp = string.format("[1] Current Mapid: %s", lib.current_mapid) or "[1] NA"
+  internal.dm("Debug", temp)
+  local temp = string.format("[1] Current Zone: %s", lib.current_zone) or "[1] NA"
+  internal.dm("Debug", temp)
+  
+  lib.check_map_state()
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_ACTIVATED, OnPlayerActivated) -- Verified
