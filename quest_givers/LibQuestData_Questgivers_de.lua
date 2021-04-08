@@ -727,7 +727,7 @@ lib.quest_givers["de"] = {
 	 [39729] = "Ukatsei",
 	 [39771] = "Uggissar",
 	 [39774] = "Hojard",
-	 [39782] = "gerissener Tom",
+	 [39782] = "Gerissener Tom",
 	 [39790] = "Garnikh",
 	 [39954] = "Wachhauptmann Zafira",
 	 [40105] = "Sind",
@@ -1044,22 +1044,46 @@ lib.quest_givers["de"] = {
 	 [70459] = "Elam Drals",
 	 [70472] = "Nevusa",
 	 [72001] = "Amelie Kroh",
+  -- holliday
+  [77002] = "Breda",
+  [77003] = "Petronius Galenus",
+  [77004] = "Alvos Orain", -- check might not be holiday
     -- Shar Morrowind
+  [78009] = "Halinjirr",
     -- Shar Crown Store
     -- Shar Misc
+  [80004] = "Bolgrul",
+  [80005] = "Beleru Omoril",
     -- Shar Elsweyr
 	 [81000] = "Nisuzi",
+  [81012] = "Shazar der Zischende",
     -- Shar Skyrim
+  [90006] = "Medone",
+  [90014] = "Gwenyfe",
+  [90022] = "Yrsild",
     -- Summerset
+  [91004] = "Sucht-das-Dunkle",
+  [91008] = "Sippenfürstin Helenaere",
+  [91014] = "Esterdel",
     -- Clockwork City
     -- New auto created
+  [100003] = "Tythis Nirith",
     [100026] = "Renzir",
+  [100034] = "Guybert Flaubert",
     [100078] = "Sheogorath",
+  [100081] = "Kiseravi",
+  [100083] = "Mazdurr der Mondsüchtige",
     [100086] = "Sarazi",
+  [100090] = "Saviwa",
     [100092] = "Elhalem",
+  [100107] = "Abenteurer gesucht!",
     [100111] = "Ri'hirr",
+    [100119] = "Ordensritter Renald",
+  [100123] = "Justiziar Tanorian",
+    [100151] = "Bolu",
     -- Skyrim
     [200004] = "Schwertthane Jylta",
+  [200003] = "Hamvir",
     [200005] = "Verita Numida",
     [200006] = "Hidaver",
     [200007] = "Tinzen",
@@ -1067,6 +1091,7 @@ lib.quest_givers["de"] = {
     [200013] = "Evska",
     [200021] = "Relmerea Sethandus",
     [200028] = "Rafilerrion",
+    [200045] = "Urgarlag Häuptlingsfluch",
     -- Existing
 	[500000] = "Ayleïdensarkophag",
 	[500001] = "Heist Board",
@@ -1116,7 +1141,7 @@ lib.quest_givers["de"] = {
 	[500045] = "Forschungsnotizen zur Trollsozialisierung",
 	[500046] = "Gekritzelte Notiz",
 	[500047] = "Fighters Guild Handbill",
-	[500048] = "Bandit Note",
+	[500048] = "Banditennotiz",
 	[500049] = "Verbeulter Schild",
 	[500050] = "Risas Tagebuch",
 	[500051] = "Eine angemessene Warnung",
@@ -1146,7 +1171,7 @@ lib.quest_givers["de"] = {
 	[500075] = "Tagebuch eines Z'en-Priesters",
 	[500076] = "Durchnässtes Tagebuch",
 	[500077] = "Moranda-Edelsteingitter",
-	[500078] = "Graccus' Tagebuch,	Band 2",
+	[500078] = "Graccus' Tagebuch, Band 2",
 	[500079] = "Staubiges Instrument",
 	[500080] = "Macht die Wildnis sicherer und verdient Euch auch noch Gold dabei",
 	[500081] = "Yenadars Tagebuch",
