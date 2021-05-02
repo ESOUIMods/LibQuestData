@@ -298,7 +298,7 @@ local function update_older_quest_info(source_data)
       new_quest_entry[lib.quest_map_pin_index.global_y]    = quest_entry[lib.quest_map_pin_index.global_y]
       new_quest_entry[lib.quest_map_pin_index.quest_id]    = quest_entry[lib.quest_map_pin_index.quest_id]
       new_quest_entry[lib.quest_map_pin_index.quest_giver] = quest_entry[old_quest_giver_value]
-      table.insert(result_table, quest_entry)
+      table.insert(result_table, new_quest_entry)
       found = true
     end
     if #quest_entry == 6 then

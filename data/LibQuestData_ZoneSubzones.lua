@@ -1597,6 +1597,18 @@ lib.subzone_list = {
             y = 0.5008402467,
             zoom_factor = 0.0998815596,
         },
+        ["blackwood/u30_rg_map_outside_001_0"] = 
+        {
+            x = 0.7517191768,
+            y = 0.9257827997,
+            zoom_factor = 0.0093529224,
+        },
+        ["blackwood/u30_gideoncity_base_0"] = 
+        {
+            x = 0.5145700574,
+            y = 0.4940011203,
+            zoom_factor = 0.0822617412,
+        },
     },
     ["blackwood/u30_leyawiincity_base_0"] =
     {
