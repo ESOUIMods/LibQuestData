@@ -72,6 +72,8 @@ quest giver.
 4656 = "Tharayya's Trail", "Tharayya Journal Entry: 19"
 6144 = "Pearls Before Traitors", "To Chief Justiciar Carawen"
 6314 = "Scariest in Show", "Tahara's Traveling Menagerie",
+6596 = "The Symbol of Hrokkibeg", "Letter to Apprentice Gwerina"
+6631 = "Giving Up the Ghost", "Phantasmal Discovery Awaits!"
 
 ID   = Quest Name, Object for comments
 --]]
@@ -138,6 +140,8 @@ lib.questid_giver_lookup = {
     [4656] = 100183,
     [6144] = 100182,
     [6314] = 100181,
+    [6596] = 90004,
+    [6631] = 95012,
 }
 
 --[[ List of what the numbers mean
@@ -202,7 +206,7 @@ and the quests in the Dragonguard place
 ]]--
 lib.quest_giver_moves = {
 -- regular quests
-  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 
+  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728,
 
 --[[
 [6428] = "Sticks and Bones",
@@ -246,7 +250,7 @@ lib.quest_cadwell = quest_ids { 465, 467, 737, 736, 1341, 1346, 1437, 1529, 1536
 
 -- list of map ID numbers using GetCurrentMapId()
 -- 1552 Norg-Tzel
-lib.zone_id_list = { 75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1747, 1313, 1348, 1354, 255, 1126, 1006, 994, 1484, 1552, 1555, 1654, 1349, 1060, 1719, 667, 16, 660, 108, 1207, 1208, }
+lib.zone_id_list = { 75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1747, 1313, 1348, 1354, 255, 1126, 1006, 994, 1484, 1552, 1555, 1654, 1349, 1060, 1719, 667, 16, 660, 108, 1207, 1208, 1261, }
 
 lib.zone_names_list = {
     [75] = "balfoyen_base_0",
@@ -291,6 +295,7 @@ lib.zone_names_list = {
     [108] = "eyevea_base_0",
     [1207] = "reach_base_0",
     [1208] = "u28_blackreach_base_0",
+    [1261] = "blackwood_base_0",
 }
 
 --[[
@@ -533,6 +538,31 @@ lib.conditional_quest_list = {
     [1536] = { -- Fire in the Fields"
         1735, -- Unanswered Questions
     },
+    [5071] = { --Curinure's Invitation
+        5074,
+        5076,
+    },
+    [5074] = { --Rudrasa's Invitation
+        5071,
+        5076,
+    },
+    [5076] = { --Nemarc's Invitation
+        5071,
+        5074,
+    },
+    [5073] = { --Aicessar's Invitation
+        5077,
+        5075,
+    },
+    [5077] = { --Basile's Invitation
+        5073,
+        5075,
+    },
+    [5075] = { --Hilan's Invitation
+        5073,
+        5077,
+    },
+
 }
 
 --[[

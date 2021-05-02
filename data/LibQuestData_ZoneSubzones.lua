@@ -1047,9 +1047,15 @@ lib.subzone_list = {
             y = 0.6031950116,
             zoom_factor = 0.0959853530,
         },
+        ["vvardenfell/ui_map_hofabriccaves_base_0"] =
+        {
+            x = 0.7624357343,
+            y = 0.5685558915,
+            zoom_factor = -0.7624357343,
+        },
     },
     ["craglorn/craglorn_base_0"] = {
-        ["craglorn/craglorn_dragonstar_base_0"] = 
+        ["craglorn/craglorn_dragonstar_base_0"] =
         {
             x = 0.1213788837,
             y = 0.2429782599,
@@ -1060,13 +1066,13 @@ lib.subzone_list = {
             y = 0.6149037480,
             zoom_factor = 0.1406832039,
         },
-        ["craglorn/aetherianarchivebottom_base_0"] = 
+        ["craglorn/aetherianarchivebottom_base_0"] =
         {
             x = 0.8901832104,
             y = 0.6045559049,
             zoom_factor = 0.0032142997,
         },
-        ["craglorn/trl_so_map01_base_0"] = 
+        ["craglorn/trl_so_map01_base_0"] =
         {
             x = 0.3765558898,
             y = 0.1907298118,
@@ -1125,6 +1131,12 @@ lib.subzone_list = {
             x = 0.4355244935,
             y = 0.6221156120,
             zoom_factor = 0.1166611016,
+        },
+        ["coldharbor/villageofthelost_base_0"] =
+        {
+            ["y"] = -0.9731036425,
+            ["x"] = -0.4465477765,
+            ["zoom_factor"] = 0.2680777013,
         },
     },
     ["stormhaven/wayrest_base_0"] =
@@ -1355,6 +1367,12 @@ lib.subzone_list = {
             y = 0.3517273962,
             zoom_factor = 0.0896723717,
         },
+        ["summerset/collegeofpsijicsruins_base_0"] =
+        {
+            x = 0.5573176146,
+            y = 0.4827489555,
+            zoom_factor = 0.0160962939,
+        },
     },
     ["clockwork/brassfortress_base_0"] =
     {
@@ -1528,6 +1546,12 @@ lib.subzone_list = {
             y = 0.3046606779,
             zoom_factor = 0.1622526646,
         },
+        ["murkmire/rootwhisper_base_0"] =
+        {
+            x = 0.6604292989,
+            y = 0.1472322196,
+            zoom_factor = 0.1606786251,
+        },
     },
     ["skyrim/westernskryim_base_0"] =
     {
@@ -1563,6 +1587,24 @@ lib.subzone_list = {
             x = 0.4613019526,
             y = 0.7062174082,
             zoom_factor = 0.0812772214,
+        },
+    },
+    ["blackwood/blackwood_base_0"] =
+    {
+        ["blackwood/u30_leyawiincity_base_0"] =
+        {
+            x = 0.1879221797,
+            y = 0.5008402467,
+            zoom_factor = 0.0998815596,
+        },
+    },
+    ["blackwood/u30_leyawiincity_base_0"] =
+    {
+        ["blackwood/u30leyawiinoutlawsrefugeu_base_0"] =
+        {
+            x = 0.4798940718,
+            y = 0.3045882881,
+            zoom_factor = 0.0300651491,
         },
     },
 }
