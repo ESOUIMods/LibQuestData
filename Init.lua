@@ -1,4 +1,4 @@
-local libName, libVersion   = "LibQuestData", 224
+local libName, libVersion   = "LibQuestData", 225
 local lib                   = {}
 local internal              = {}
 _G["LibQuestData"]          = lib
