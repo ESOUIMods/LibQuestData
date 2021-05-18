@@ -1257,6 +1257,8 @@ lib.quest_givers["en"] = {
   [95029] = "Bastian Hallix",
   [95030] = "Ajim-Ma",
   [95031] = "Yisara",
+  [95032] = "Iulius Averno",
+  [95033] = "Norianwe",
   -- New auto created
   [100001] = "Moon-Bishop Azin-jo",
   [100002] = "Gray-Skies",

@@ -142,6 +142,7 @@ lib.questid_giver_lookup = {
     [6314] = 100181,
     [6596] = 90004,
     [6631] = 95012,
+    [6646] = 95033,
 }
 
 --[[ List of what the numbers mean

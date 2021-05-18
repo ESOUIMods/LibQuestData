@@ -1552,6 +1552,12 @@ lib.subzone_list = {
             y = 0.1472322196,
             zoom_factor = 0.1606786251,
         },
+        ["murkmire/brightthroatvillage_base_0"] = 
+        {
+            x = 0.6763327718,
+            y = 0.5018438101,
+            zoom_factor = 0.1062551141,
+        },
     },
     ["skyrim/westernskryim_base_0"] =
     {

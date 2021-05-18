@@ -7,10 +7,10 @@
 ; https://account.elderscrollsonline.com/add-on-terms
 
 ## Title: LibQuestData
-## Version: 2.23
-## AddOnVersion: 223
+## Version: 2.24
+## AddOnVersion: 224
 ## Author: Sharlikran
-## APIVersion: 100033 100035
+## APIVersion: 100034 100035
 ## Description: Provides Quest Information
 ## SavedVariables: LibQuestData_SavedVariables
 ## DependsOn: LibGPS>=65 LibMapPins-1.0>=10030
