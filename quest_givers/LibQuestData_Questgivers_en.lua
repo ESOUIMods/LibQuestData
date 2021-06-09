@@ -1252,6 +1252,7 @@ lib.quest_givers["en"] = {
   [95025] = "Heem-Jas",
   [95026] = "Dust-On-Scales",
   [95027] = "Duke of Crows",
+  [95034] = "Morgane's Guild Orders",
   -- Companions?
   [95028] = "Mirri Elendis",
   [95029] = "Bastian Hallix",

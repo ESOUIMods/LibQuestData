@@ -74,6 +74,7 @@ quest giver.
 6314 = "Scariest in Show", "Tahara's Traveling Menagerie",
 6596 = "The Symbol of Hrokkibeg", "Letter to Apprentice Gwerina"
 6631 = "Giving Up the Ghost", "Phantasmal Discovery Awaits!"
+6337 = "A Battle of Silk and Flame", "Morgane's Guild Orders"
 
 ID   = Quest Name, Object for comments
 --]]
@@ -143,6 +144,7 @@ lib.questid_giver_lookup = {
     [6596] = 90004,
     [6631] = 95012,
     [6646] = 95033,
+    [6337] = 95034,
 }
 
 --[[ List of what the numbers mean
@@ -244,6 +246,8 @@ lib.quest_has_skill_point = { 465, 467, 575, 1633, 2192, 2222, 2997, 3006, 3235,
 6560, 6547, 6548, 6550, 6551, 6552, 6570, 6554, 6566, 4296, 5540, 6399, 6349, 6394, 6351, 5534,
 --also new
 5889, 3910, 5447, 4555, 4813, 6414, 4303, 6416, 4822, 5595, 5532, 5597, 5598, 5599, 5600, 4641, 5481, 4202, 6507, 6188, 5549, 5545, 6576, 4145, 6578, 5468, 5556, 4469, 5403, 6505, 4336, 5113, 5342, 6186, 6249, 5596, 5702, 5567, 4246, 4589, 4675, 4831, 6304, 6113, 6315, 6126, 6336, 6048, 5922, 4867, 6052, 6025, 6063, 5136, 6003, 6132, 4597, 4379, 4538, 5531, 5948, 5120, 6046, 6047, 6432,
+--blackwood
+6616, 6660, 6619,
 
 }
 
