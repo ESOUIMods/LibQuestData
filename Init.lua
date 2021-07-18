@@ -1,4 +1,4 @@
-local libName, libVersion   = "LibQuestData", 226
+local libName, libVersion   = "LibQuestData", 227
 local lib                   = {}
 local internal              = {}
 _G["LibQuestData"]          = lib
@@ -203,6 +203,7 @@ lib.quest_data_type                              = {
   quest_type_battleground = 13, -- Qty 4
   quest_type_prologue = 14, -- Qty 14
   quest_type_undaunted_pledge = 15, -- Qty 42
+  quest_type_companion = 16,
 }
 
 lib.quest_series_type                            = {

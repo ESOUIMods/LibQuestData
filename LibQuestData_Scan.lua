@@ -534,7 +534,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
       temp_quest_info[lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type
       quest_info_changed                                 = true
     end
-    if temp_quest_info[lib.quest_data_index.game_api] < 100034 then
+    if temp_quest_info[lib.quest_data_index.game_api] < 100035 then
       temp_quest_info[lib.quest_data_index.game_api] = GetAPIVersion()
       quest_info_changed                             = true
     end
