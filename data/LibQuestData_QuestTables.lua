@@ -625,3 +625,7 @@ lib.guild_rank_quest_list = {
     [5600] = 7,
   },
 }
+
+lib.known_removed_quest = {
+    [3442] = true, -- Dawn of the Dragonguard
+}

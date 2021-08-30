@@ -160,6 +160,11 @@ function lib:get_quest_list(zone)
     if playerGuildQuestLevelRequirement and playerGuildRankData then
       playerQualifies = playerGuildQuestLevelRequirement <= playerGuildRankData
     end
+
+    local removedQuest = false
+    if lib.known_removed_quest[questId] then
+      removedQuest = true
+    end
     --[[
     Pledges can be obtained from any location. Before this can be used All quests
     specific to an Alliance have to be manually reviewed. Otherwise Pledges
@@ -169,13 +174,13 @@ function lib:get_quest_list(zone)
       playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
     end
     ]]--
-    if not quest_name_in_zone_list[questName] and playerQualifies then
+    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest then
       -- name didn't exist keep it for sure
       quest_name_in_zone_list[questName] = questId
       table.insert(new_all_zone_quests, quest_info)
     else
       -- name exists already
-      if questId == quest_name_in_zone_list[questName] and playerQualifies then
+      if questId == quest_name_in_zone_list[questName] and playerQualifies and not removedQuest then
         --[[ the name is in the table, and the ID matches keep it
         because it is another quest giver in a different place
 

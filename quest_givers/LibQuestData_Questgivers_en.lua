@@ -1271,6 +1271,7 @@ lib.quest_givers["en"] = {
   [95032] = "Iulius Averno",
   [95033] = "Norianwe",
   -- New auto created
+  [100000] = "Warfront Missions Board",
   [100001] = "Moon-Bishop Azin-jo",
   [100002] = "Gray-Skies",
   [100003] = "Tythis Nirith",
