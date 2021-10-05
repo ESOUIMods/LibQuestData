@@ -1273,6 +1273,15 @@ lib.quest_givers["en"] = {
   [95031] = "Yisara",
   [95032] = "Iulius Averno",
   [95033] = "Norianwe",
+  -- Deadlands
+  [96000] = "Rogatina Cinna",
+  [96001] = "Robhir's Letter",
+  [96002] = "Work for Hire in Fargrave",
+  [96003] = "Noroth",
+  [96004] = "Torn Journal Page",
+  [96005] = "Telofasa's Diary",
+  [96006] = "Note for Khazasha",
+  [96007] = "Tufeh",
   -- New auto created
   [100000] = "Warfront Missions Board",
   [100001] = "Moon-Bishop Azin-jo",
