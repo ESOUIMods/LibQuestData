@@ -180,8 +180,15 @@ function lib:get_quest_list(zone)
       table.insert(new_all_zone_quests, quest_info)
     else
       -- name exists already
-      if questId == quest_name_in_zone_list[questName] and playerQualifies and not removedQuest then
-        --[[ the name is in the table, and the ID matches keep it
+      local questExists = questId == quest_name_in_zone_list[questName]
+      local questUnknown = questName == lib.unknown_quest_name_string[lib.effective_lang]
+      if questUnknown and playerQualifies and not removedQuest then
+        --[[ the name of the quest in unknown because a localization
+        has not been provided
+        ]]--
+        table.insert(new_all_zone_quests, quest_info)
+      elseif questExists and playerQualifies and not removedQuest then
+        --[[ the name is in the table, and the ID matches so keep it
         because it is another quest giver in a different place
 
         Otherwise it is a quest with the same name but a different
@@ -355,13 +362,13 @@ end
 -- I want this to be nil rather then unknown npc
 function lib:get_quest_giver(id, lang)
   lang = lang or lib.effective_lang
-  return lib.quest_givers[lib.effective_lang][id]
+  return lib.quest_givers[lang][id]
 end
 
 function lib:get_quest_name(id, lang)
   local unknown = lib.unknown_quest_name_string[lib.effective_lang]
   lang = lang or lib.effective_lang
-  return lib.quest_names[lib.effective_lang][id] or unknown
+  return lib.quest_names[lang][id] or unknown
 end
 
 -------------------------------------------------
