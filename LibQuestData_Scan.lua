@@ -498,10 +498,11 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
           At first they will all be different for API but check
           anyway.
   ]]--
+  local currentApiVersion = GetAPIVersion()
   the_quest_info                            = {
     [lib.quest_data_index.quest_type] = quest_to_update.quest_type,
     [lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type,
-    [lib.quest_data_index.game_api] = GetAPIVersion(),
+    [lib.quest_data_index.game_api] = currentApiVersion,
     [lib.quest_data_index.quest_line] = 10000,
     [lib.quest_data_index.quest_number] = 10000,
     [lib.quest_data_index.quest_series] = 0,
@@ -534,8 +535,8 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
       temp_quest_info[lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type
       quest_info_changed                                 = true
     end
-    if temp_quest_info[lib.quest_data_index.game_api] < 101031 then
-      temp_quest_info[lib.quest_data_index.game_api] = GetAPIVersion()
+    if temp_quest_info[lib.quest_data_index.game_api] < currentApiVersion then
+      temp_quest_info[lib.quest_data_index.game_api] = currentApiVersion
       quest_info_changed                             = true
     end
     -- quest_line is set manually
