@@ -1,4 +1,4 @@
-local libName, libVersion   = "LibQuestData", 236
+local libName, libVersion   = "LibQuestData", 237
 local lib                   = {}
 local internal              = {}
 _G["LibQuestData"]          = lib
@@ -75,6 +75,17 @@ function internal:is_in(search_value, search_table)
     if type(search_value) == "string" then
       if string.find(string.lower(v), string.lower(search_value)) then return true end
     end
+  end
+  return false
+end
+
+--[[different from is_in such that the table is the search term and the string
+to match is zone_name such as "glenumbra/crosswych_base_0" and the table
+contains cyrodiil or another string to find in the zone_name
+]]--
+function internal:is_map_in(zone_name, name_matches_table)
+  for k, v in pairs(name_matches_table) do
+    if string.match(zone_name, v) then return true end
   end
   return false
 end

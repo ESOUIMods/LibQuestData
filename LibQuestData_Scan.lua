@@ -339,6 +339,17 @@ local function remove_older_quest_info(source_data, quest_info)
   end
 end
 
+-- set alliance
+local function SetQuestSeries(the_zone)
+  local value = 0
+  if string.match(the_zone, "cyrodiil") then
+    if lib.player_alliance == ALLIANCE_ALDMERI_DOMINION then value = lib.quest_series_type.quest_type_ad end
+    if lib.player_alliance == ALLIANCE_EBONHEART_PACT then value = lib.quest_series_type.quest_type_ep end
+    if lib.player_alliance == ALLIANCE_DAGGERFALL_COVENANT then value = lib.quest_series_type.quest_type_dc end
+  end
+  return value
+end
+
 -- Event handler function for EVENT_QUEST_REMOVED
 local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
   --internal.dm("Debug", "OnQuestRemoved")
@@ -505,7 +516,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     [lib.quest_data_index.game_api] = currentApiVersion,
     [lib.quest_data_index.quest_line] = 10000,
     [lib.quest_data_index.quest_number] = 10000,
-    [lib.quest_data_index.quest_series] = 0,
+    [lib.quest_data_index.quest_series] = SetQuestSeries(the_zone),
   }
 
   LibQuestData_SavedVariables["quest_info"] = LibQuestData_SavedVariables["quest_info"] or {}
@@ -527,6 +538,13 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     -- quest_giver_is_object lib.quest_data_index.quest_giver, depreciated
 
+    -- update alliance
+    if string.match(the_zone, "cyrodiil") then
+      if lib.player_alliance == ALLIANCE_ALDMERI_DOMINION then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ad end
+      if lib.player_alliance == ALLIANCE_EBONHEART_PACT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ep end
+      if lib.player_alliance == ALLIANCE_DAGGERFALL_COVENANT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_dc end
+      quest_info_changed                               = true
+    end
     if temp_quest_info[lib.quest_data_index.quest_type] ~= quest_to_update.quest_type then
       temp_quest_info[lib.quest_data_index.quest_type] = quest_to_update.quest_type
       quest_info_changed                               = true
