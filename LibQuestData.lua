@@ -174,6 +174,14 @@ function lib:get_quest_list(zone)
       playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
     end
     ]]--
+    if string.find(zone, "cyrodiil") then
+      --internal.dm("Debug", "The word cyrodiil was found.")
+      if questSeries >= 3 and questSeries <= 5 then
+        playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
+      end
+    else
+      --internal.dm("Debug", "The word cyrodiil was not found.")
+    end
     if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest then
       -- name didn't exist keep it for sure
       quest_name_in_zone_list[questName] = questId
