@@ -1,12 +1,12 @@
-local lib            = _G["LibQuestData"]
-local internal       = _G["LibQuestData_Internal"]
+local lib = _G["LibQuestData"]
+local internal = _G["LibQuestData_Internal"]
 
 -- Local variables
 local questGiverName = nil
 local reward
 -- Init saved variables table
-local GPS            = LibGPS3
-local LMP            = LibMapPins
+local GPS = LibGPS3
+local LMP = LibMapPins
 local quest_shared
 local quest_found
 
@@ -109,30 +109,39 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     quest_shared = false
     return
   end
+  --internal.dm("Debug", journalIndex)
   -- -1 for these means it is undefined since 0 is a valid value
-  local quest_type  = -1
+  local quest_type = -1
+  local quest_display_type = -1
   local repeat_type = -1
-  local quest_id    = -1
-  -- -1 means it has not been completed. Once complete set it to the time stamp
+  local zone_name = ""
+  local zone_index = -1
+  local poi_index = -1
+  local quest_id = -1
+  -- "-1" means it has not been completed. Once complete set it to the time stamp
   -- I am considering using this to see if I can calculate order for Zone quests
 
   -- Add quest to saved variables table in correct zone element
 
-  local zone        = LMP:GetZoneAndSubzone(true, false, true)
+  local zone = LMP:GetZoneAndSubzone(true, false, true)
   if LibQuestData_SavedVariables.quests[zone] == nil then LibQuestData_SavedVariables.quests[zone] = {} end
-  local local_x, local_y                 = GetMapPlayerPosition("player")
+  local local_x, local_y = GetMapPlayerPosition("player")
   local global_x, global_y, zoneMapIndex = GPS:LocalToGlobal(local_x, local_y)
-  local zone_id, _, _, _                 = GetUnitWorldPosition("player")
+  local zone_id, _, _, _ = GetUnitWorldPosition("player")
   if journalIndex then
-    quest_type                          = GetJournalQuestType(journalIndex)
-    repeat_type                         = GetJournalQuestRepeatType(journalIndex)
+    quest_type = GetJournalQuestType(journalIndex)
+    quest_display_type = GetJournalQuestInstanceDisplayType(journalIndex)
+    repeat_type = GetJournalQuestRepeatType(journalIndex)
     zone_name, _, zone_index, poi_index = GetJournalQuestLocationInfo(journalIndex)
+    --internal.dm("Debug", quest_type)
+    --internal.dm("Debug", quest_display_type)
   end
   local quest = {
     ["zone_name"] = zone_name,
     ["zone_index"] = zone_index,
     ["poi_index"] = poi_index,
     ["quest_type"] = quest_type,
+    ["quest_display_type"] = quest_display_type,
     ["repeat_type"] = repeat_type,
     ["name"] = questName,
     ["x"] = local_x,
@@ -148,7 +157,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     quest["giver"] = lib.last_interaction_target
   end
 
-  quest_found          = false
+  quest_found = false
   local quests_in_zone = get_sv_quest_info(zone)
   for num_entry, quest_from_table in pairs(quests_in_zone) do
     if quest_from_table.name == questName then
@@ -168,7 +177,7 @@ EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_ADDED, OnQuestAdded) -- 
 local function OnChatterEnd(eventCode)
   --d("OnChatterEnd")
   questGiverName = nil
-  reward         = nil
+  reward = nil
   -- Stop listening for the quest added event because it would only be for shared quests
   -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
   -- EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_QUEST_ADDED)
@@ -177,7 +186,7 @@ end
 
 local function OnQuestSharred(eventCode, questID)
   --d("OnQuestSharred")
-  quest_shared                = true
+  quest_shared = true
   lib.last_interaction_target = ""
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_SHARED, OnQuestSharred) -- Verified
@@ -292,11 +301,11 @@ local function update_older_quest_info(source_data)
     if #quest_entry > 6 then
       local new_quest_entry
       --internal.dm("Debug", "info is not in the old format so we need to convert it")
-      new_quest_entry[lib.quest_map_pin_index.local_x]     = quest_entry[lib.quest_map_pin_index.local_x]
-      new_quest_entry[lib.quest_map_pin_index.local_y]     = quest_entry[lib.quest_map_pin_index.local_y]
-      new_quest_entry[lib.quest_map_pin_index.global_x]    = quest_entry[lib.quest_map_pin_index.global_x]
-      new_quest_entry[lib.quest_map_pin_index.global_y]    = quest_entry[lib.quest_map_pin_index.global_y]
-      new_quest_entry[lib.quest_map_pin_index.quest_id]    = quest_entry[lib.quest_map_pin_index.quest_id]
+      new_quest_entry[lib.quest_map_pin_index.local_x] = quest_entry[lib.quest_map_pin_index.local_x]
+      new_quest_entry[lib.quest_map_pin_index.local_y] = quest_entry[lib.quest_map_pin_index.local_y]
+      new_quest_entry[lib.quest_map_pin_index.global_x] = quest_entry[lib.quest_map_pin_index.global_x]
+      new_quest_entry[lib.quest_map_pin_index.global_y] = quest_entry[lib.quest_map_pin_index.global_y]
+      new_quest_entry[lib.quest_map_pin_index.quest_id] = quest_entry[lib.quest_map_pin_index.quest_id]
       new_quest_entry[lib.quest_map_pin_index.quest_giver] = quest_entry[old_quest_giver_value]
       table.insert(result_table, new_quest_entry)
       found = true
@@ -354,11 +363,11 @@ end
 local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
   --internal.dm("Debug", "OnQuestRemoved")
   --internal.dm("Debug", questName)
-  local quest_to_update     = nil
+  local quest_to_update = nil
   local the_zone
   local the_entry
   local giver_name_result
-  local quest_info_changed  = false
+  local quest_info_changed = false
   local save_quest_location = true
   --local my_pos_x, my_pos_y = GetMapPlayerPosition("player")
 
@@ -367,15 +376,15 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
       if quest_from_table.zone_index and quest_from_table.poi_index then
         if quest_from_table.zone_index == zoneIndex and quest_from_table.poi_index == poiIndex and quest_from_table.name == questName then
           --internal.dm("Debug", "Detailed quest info was all true")
-          the_zone        = zone
-          the_entry       = num_entry
+          the_zone = zone
+          the_entry = num_entry
           quest_to_update = quest_from_table
           break
         end
       elseif quest_from_table.name == questName then
         --internal.dm("Debug", "Quest name was true due to old information")
-        the_zone        = zone
-        the_entry       = num_entry
+        the_zone = zone
+        the_entry = num_entry
         quest_to_update = quest_from_table
         break
       end
@@ -397,6 +406,10 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --internal.dm("Debug", "poi_index: " .. quest_to_update.poi_index)
     --internal.dm("Debug", "poiIndex: " .. tostring(poiIndex))
   end
+  if not quest_to_update.quest_display_type then
+    --internal.dm("Debug", "quest_display_type did not exist, set to 0")
+    quest_to_update.quest_display_type = INSTANCE_DISPLAY_TYPE_NONE
+  end
 
   --internal.dm("Debug", "questID: " .. questID)
   if questID >= 1 then
@@ -408,7 +421,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   --[[ set quest giver to it's ID number using the name of the NPC ]]--
   --[[ Check if Quest Giver is an Object, Sign, Note ]]--
   LibQuestData_SavedVariables["giver_names"] = LibQuestData_SavedVariables["giver_names"] or {}
-  local temp_giver                           = lib:get_giver_when_object(quest_to_update.questID)
+  local temp_giver = lib:get_giver_when_object(quest_to_update.questID)
   --internal.dm("Debug", "temp_giver was:")
   --internal.dm("Debug", temp_giver)
   if internal:is_empty_or_nil(temp_giver) then
@@ -477,7 +490,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   --d("Quest Name Please")
   --d(lib:get_quest_name(quest_to_update.questID))
   LibQuestData_SavedVariables["quest_names"] = LibQuestData_SavedVariables["quest_names"] or {}
-  local temp_quest_name                      = lib:get_quest_name(quest_to_update.questID)
+  local temp_quest_name = lib:get_quest_name(quest_to_update.questID)
   if temp_quest_name == "Unknown Name" then
     --d("quest name is Unknown Name - So not found")
     if is_questname_in_sv(quest_to_update.questID) then
@@ -510,17 +523,18 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
           anyway.
   ]]--
   local currentApiVersion = GetAPIVersion()
-  the_quest_info                            = {
+  the_quest_info = {
     [lib.quest_data_index.quest_type] = quest_to_update.quest_type,
     [lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type,
     [lib.quest_data_index.game_api] = currentApiVersion,
     [lib.quest_data_index.quest_line] = 10000,
     [lib.quest_data_index.quest_number] = 10000,
     [lib.quest_data_index.quest_series] = SetQuestSeries(the_zone),
+    [lib.quest_data_index.quest_display_type] = quest_to_update.quest_display_type,
   }
 
   LibQuestData_SavedVariables["quest_info"] = LibQuestData_SavedVariables["quest_info"] or {}
-  local temp_quest_info                     = lib.quest_data[quest_to_update.questID]
+  local temp_quest_info = lib.quest_data[quest_to_update.questID]
   if temp_quest_info == nil then
     --d("quest information is nil")
     -- meaning I need to create it and save it, no compare
@@ -543,19 +557,24 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
       if lib.player_alliance == ALLIANCE_ALDMERI_DOMINION then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ad end
       if lib.player_alliance == ALLIANCE_EBONHEART_PACT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ep end
       if lib.player_alliance == ALLIANCE_DAGGERFALL_COVENANT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_dc end
-      quest_info_changed                               = true
+      quest_info_changed = true
+    end
+    if not temp_quest_info[lib.quest_data_index.quest_display_type] then temp_quest_info[lib.quest_data_index.quest_display_type] = INSTANCE_DISPLAY_TYPE_NONE end
+    if temp_quest_info[lib.quest_data_index.quest_display_type] ~= quest_to_update.quest_display_type then
+      temp_quest_info[lib.quest_data_index.quest_display_type] = quest_to_update.quest_display_type
+      quest_info_changed = true
     end
     if temp_quest_info[lib.quest_data_index.quest_type] ~= quest_to_update.quest_type then
       temp_quest_info[lib.quest_data_index.quest_type] = quest_to_update.quest_type
-      quest_info_changed                               = true
+      quest_info_changed = true
     end
     if temp_quest_info[lib.quest_data_index.quest_repeat] ~= quest_to_update.repeat_type then
       temp_quest_info[lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type
-      quest_info_changed                                 = true
+      quest_info_changed = true
     end
     if temp_quest_info[lib.quest_data_index.game_api] < currentApiVersion then
       temp_quest_info[lib.quest_data_index.game_api] = currentApiVersion
-      quest_info_changed                             = true
+      quest_info_changed = true
     end
     -- quest_line is set manually
     -- quest_number is set manually
@@ -563,7 +582,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --d(temp_quest_info)
     --[[ Check Saved Vars format ]]--
     if LibQuestData_SavedVariables.quest_info[quest_to_update.questID] ~= nil and #LibQuestData_SavedVariables.quest_info[quest_to_update.questID] > 7 then
-      --d("old format")
+      --internal.dm("Debug", "old format")
       --[[
       Not technically a change but the SavedVariables data is the old format
       so update it. It doesn't matter about what it is the main database has
@@ -574,10 +593,11 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     --[[ Do not need to check main database format because it was updated ]]--
 
     if quest_info_changed then
-      --d("save the table")
+      --internal.dm("Debug", "save the table")
+      --internal.dm("Debug", temp_quest_info)
       LibQuestData_SavedVariables.quest_info[quest_to_update.questID] = temp_quest_info
     else
-      --d("do not save the table")
+      --internal.dm("Debug", "do not save the table")
     end
   end
 
@@ -758,7 +778,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     if not LibQuestData_SavedVariables.reward_info then LibQuestData_SavedVariables.reward_info = {} end
     if not LibQuestData_SavedVariables.reward_info[questID] then LibQuestData_SavedVariables.reward_info[questID] = {} end
     LibQuestData_SavedVariables.reward_info[questID] = reward
-    reward                                           = nil
+    reward = nil
     lib:set_conditional_quests(questID)
   end
 end

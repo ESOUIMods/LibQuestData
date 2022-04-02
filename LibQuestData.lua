@@ -7,15 +7,15 @@ https://sharlikran.github.io/
 --]]
 
 -- Init
-local lib                         = _G["LibQuestData"]
-local internal                    = _G["LibQuestData_Internal"]
+local lib = _G["LibQuestData"]
+local internal = _G["LibQuestData_Internal"]
 
 -- Libraries
-local LMP                         = LibMapPins
-local GPS                         = LibGPS3
+local LMP = LibMapPins
+local GPS = LibGPS3
 
 -- Default table
-local quest_data_index_default    = {
+local quest_data_index_default = {
   -- [lib.quest_data_index.quest_name]   = "", Depreciated
   -- [lib.quest_data_index.quest_giver]  = "", Depreciated
   [lib.quest_data_index.quest_type] = -1, -- Undefined
@@ -41,57 +41,57 @@ local quest_map_pin_index_default = {
 
 -- Function to check for empty table
 function internal:is_empty_or_nil(t)
-    if t == nil or t == "" then return true end
-    return type(t) == "table" and ZO_IsTableEmpty(t) or false
+  if t == nil or t == "" then return true end
+  return type(t) == "table" and ZO_IsTableEmpty(t) or false
 end
 
 function internal:missing_gps_data(info)
-    if info[lib.quest_map_pin_index.global_x] == -10 then
-        --d("global_x was -10 so undefined")
-        return true
-    end
-    return false
+  if info[lib.quest_map_pin_index.global_x] == -10 then
+    --d("global_x was -10 so undefined")
+    return true
+  end
+  return false
 end
 
 function internal:missing_quest_giver(info)
-    if info[lib.quest_map_pin_index.quest_giver] == -1 then
-        --d("quest_giver was -1 so undefined")
-        return true
-    end
-    if type(info[lib.quest_map_pin_index.quest_giver]) == "string" then
-        --d("Quest Giver was a string")
-        return true
-    end
-    return false
+  if info[lib.quest_map_pin_index.quest_giver] == -1 then
+    --d("quest_giver was -1 so undefined")
+    return true
+  end
+  if type(info[lib.quest_map_pin_index.quest_giver]) == "string" then
+    --d("Quest Giver was a string")
+    return true
+  end
+  return false
 end
 
 function internal:has_undefined_data(info)
-    if info[lib.quest_map_pin_index.global_x] == -10 then
-        --d("global_x was -10 so undefined")
-        return true
-    end
-    if info[lib.quest_map_pin_index.quest_giver] == -1 then
-        --d("quest_giver was -1 so undefined")
-        return true
-    end
-    if type(info[lib.quest_map_pin_index.quest_giver]) == "string" then
-        --d("Quest Giver was a string")
-        return true
-    end
-    return false
+  if info[lib.quest_map_pin_index.global_x] == -10 then
+    --d("global_x was -10 so undefined")
+    return true
+  end
+  if info[lib.quest_map_pin_index.quest_giver] == -1 then
+    --d("quest_giver was -1 so undefined")
+    return true
+  end
+  if type(info[lib.quest_map_pin_index.quest_giver]) == "string" then
+    --d("Quest Giver was a string")
+    return true
+  end
+  return false
 end
 
 function internal:quest_in_range(map_data_quest, quest_data)
-            local distance = zo_round(GPS:GetLocalDistanceInMeters(map_data_quest[lib.quest_map_pin_index.local_x],
-        map_data_quest[lib.quest_map_pin_index.local_y], quest_data[lib.quest_map_pin_index.local_x],
-        quest_data[lib.quest_map_pin_index.local_y]))
-            if distance <= 25 then
-              --internal.dm("Debug", "Distance was within range")
-              return true
-            else
-              --internal.dm("Debug", "Distance outside of range")
-              return false
-            end
+  local distance = zo_round(GPS:GetLocalDistanceInMeters(map_data_quest[lib.quest_map_pin_index.local_x],
+    map_data_quest[lib.quest_map_pin_index.local_y], quest_data[lib.quest_map_pin_index.local_x],
+    quest_data[lib.quest_map_pin_index.local_y]))
+  if distance <= 25 then
+    --internal.dm("Debug", "Distance was within range")
+    return true
+  else
+    --internal.dm("Debug", "Distance outside of range")
+    return false
+  end
 end
 
 -------------------------------------------------
@@ -99,10 +99,10 @@ end
 -------------------------------------------------
 
 function lib:get_quest_list(zone)
-  local all_zone_quests         = {}
-  local subzone_quests          = {}
-  local new_element             = {}
-  local quest_in_zone_list      = {}
+  local all_zone_quests = {}
+  local subzone_quests = {}
+  local new_element = {}
+  local quest_in_zone_list = {}
   local quest_name_in_zone_list = {}
   if type(zone) == "string" and internal.quest_locations[zone] ~= nil then
     all_zone_quests = internal:get_zone_quests(zone)
@@ -122,7 +122,7 @@ function lib:get_quest_list(zone)
       for i, quest in ipairs(subzone_quests) do
         --internal.dm("Debug", quest)
         if not internal:is_empty_or_nil(quest) and not quest_in_zone_list[quest[lib.quest_map_pin_index.quest_id]] then
-          local new_element                            = ZO_DeepTableCopy(quest)
+          local new_element = ZO_DeepTableCopy(quest)
           --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_x])
           --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_y])
           new_element[lib.quest_map_pin_index.local_x] = (quest[lib.quest_map_pin_index.local_x] * conversion.zoom_factor) + conversion.x
@@ -138,17 +138,17 @@ function lib:get_quest_list(zone)
 
   local new_all_zone_quests = {}
   for key, quest_info in pairs(all_zone_quests) do
-    local questId     = quest_info[lib.quest_map_pin_index.quest_id]
-    local questName   = lib:get_quest_name(questId, lib.effective_lang)
-    local questInfo   = lib.quest_data[questId]
+    local questId = quest_info[lib.quest_map_pin_index.quest_id]
+    local questName = lib:get_quest_name(questId, lib.effective_lang)
+    local questInfo = lib.quest_data[questId]
     local questSeries = nil
     if questInfo then
       questSeries = questInfo[lib.quest_data_index.quest_series]
     else
       questSeries = 0
     end
-    local playerAlliance                   = GetUnitAlliance("player")
-    local playerGuildRankData              = nil
+    local playerAlliance = GetUnitAlliance("player")
+    local playerGuildRankData = nil
     local playerGuildQuestLevelRequirement = nil
     if questSeries >= 6 or questSeries == 2 then
       playerGuildRankData = lib.quest_guild_rank_data[questSeries].rank
@@ -215,47 +215,46 @@ end
 return true if it is a cadwell quest
 ]]--
 function lib.check_map_state()
-    internal.dm("Debug", "[7] LQD Checking map state")
-    if not lib.last_mapid and lib.current_mapid then
-        internal.dm("Debug", "[7] last_mapid and current_mapid not assigned")
-        return
-    end
+  internal.dm("Debug", "[7] LQD Checking map state")
+  if not lib.last_mapid and lib.current_mapid then
+    internal.dm("Debug", "[7] last_mapid and current_mapid not assigned")
+    return
+  end
 
-    if lib.current_mapid ~= lib.last_mapid then
-        internal.dm("Debug", "[7] last_mapid was different")
-        local temp = string.format("[7] Last Mapid: %s", lib.last_mapid) or "[7] NA"
-        internal.dm("Debug", temp)
-        local temp = string.format("[7] Current Mapid: %s", lib.current_mapid) or "[7] NA"
-        internal.dm("Debug", temp)
-        if GetMapType() > MAPTYPE_ZONE then
-            internal.dm("Debug", "[7] MAPTYPE_ZONE reached")
-            return
-        end
-        internal.dm("Debug", "[7] Get zone and update zone data")
-        local zone = LMP:GetZoneAndSubzone(true, false, true)
-        lib.zone_quests = lib:get_quest_list(zone)
-    else
-      internal.dm("Debug", "[7] Map unchanged")
+  if lib.current_mapid ~= lib.last_mapid then
+    internal.dm("Debug", "[7] last_mapid was different")
+    local temp = string.format("[7] Last Mapid: %s", lib.last_mapid) or "[7] NA"
+    internal.dm("Debug", temp)
+    local temp = string.format("[7] Current Mapid: %s", lib.current_mapid) or "[7] NA"
+    internal.dm("Debug", temp)
+    if GetMapType() > MAPTYPE_ZONE then
+      internal.dm("Debug", "[7] MAPTYPE_ZONE reached")
+      return
     end
+    internal.dm("Debug", "[7] Get zone and update zone data")
+    local zone = LMP:GetZoneAndSubzone(true, false, true)
+    lib.zone_quests = lib:get_quest_list(zone)
+  else
+    internal.dm("Debug", "[7] Map unchanged")
+  end
 end
 
 CALLBACK_MANAGER:RegisterCallback("OnWorldMapChanged", function()
-    internal.dm("Debug", "[2] OnWorldMapChanged")
-    lib.on_map_zone_changed()
+  internal.dm("Debug", "[2] OnWorldMapChanged")
+  lib.on_map_zone_changed()
 end)
 
 WORLD_MAP_SCENE:RegisterCallback("StateChange", function(oldState, newState)
-    internal.dm("Debug", "[3] StateChange")
-    if newState == SCENE_SHOWING then
-        internal.dm("Debug", "[3] SCENE_SHOWING")
-        lib.on_map_zone_changed()
-    end
-    if newState == SCENE_HIDDEN then
-        internal.dm("Debug", "[3] SCENE_HIDDEN")
-        lib.on_map_zone_changed()
-    end
+  internal.dm("Debug", "[3] StateChange")
+  if newState == SCENE_SHOWING then
+    internal.dm("Debug", "[3] SCENE_SHOWING")
+    lib.on_map_zone_changed()
+  end
+  if newState == SCENE_HIDDEN then
+    internal.dm("Debug", "[3] SCENE_HIDDEN")
+    lib.on_map_zone_changed()
+  end
 end)
-
 
 local function on_prepare_for_jump(eventCode, zoneName, zoneDescription, loadingTexture, instanceDisplayType)
   internal.dm("Debug", "[4] EVENT_PREPARE_FOR_JUMP")
@@ -434,7 +433,7 @@ local function contains_id(quent_ids, id_to_find)
 end
 
 function lib:build_questid_table(lang)
-  local lang        = lang or lib.effective_lang
+  local lang = lang or lib.effective_lang
   local built_table = {}
 
   for var1, var2 in pairs(lib.quest_names[lang]) do
@@ -454,7 +453,7 @@ function lib:build_questid_table(lang)
 end
 
 function lib:build_npcid_table(lang)
-  local lang        = lang or lib.effective_lang
+  local lang = lang or lib.effective_lang
   local built_table = {}
 
   for var1, var2 in pairs(lib.quest_givers[lang]) do
@@ -538,7 +537,7 @@ local function update_started_quests()
   for i = 1, MAX_JOURNAL_QUESTS do
     if IsValidQuestIndex(i) then
       local name = GetJournalQuestName(i)
-      local ids  = lib:get_questids_table(name)
+      local ids = lib:get_questids_table(name)
       if ids ~= nil then
         -- Add all IDs for that quest name to list
         for _, id in ipairs(ids) do
@@ -582,7 +581,8 @@ EVENT_MANAGER:RegisterForEvent(lib.libName .. "_quest_removed_updater", EVENT_QU
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function update_quest_information()
-  local eight_field_data    = {
+  --internal.dm("Debug", "update_quest_information")
+  local eight_field_data = {
     quest_name = 1, -- Depreciated, use lib:get_quest_name(id, lang)
     quest_giver = 2, -- Depreciated, see quest_map_pin_index
     quest_type = 3, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
@@ -592,7 +592,7 @@ local function update_quest_information()
     quest_number = 7, -- Quest Number In QuestLine (10000 = not assigned/not verified)
     quest_series = 8, -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
   }
-  local seven_field_data    = {
+  local seven_field_data = {
     quest_name = 1, -- Depreciated, use lib:get_quest_name(id, lang)
     -- quest_giver     =    2,  Depreciated, see quest_map_pin_index
     quest_type = 2, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
@@ -621,29 +621,30 @@ local function update_quest_information()
     quest_giver = 9, -- Updated, was 9 now 6, Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
   }
 
-  local all_locations       = LibQuestData_SavedVariables["location_info"]
-  local all_quest_data      = ZO_DeepTableCopy(LibQuestData_SavedVariables["quest_info"])
-  local all_quest_names     = LibQuestData_SavedVariables["quest_names"]
-  local all_objectives      = LibQuestData_SavedVariables["objective_info"]
-  local all_quest_givers    = LibQuestData_SavedVariables["giver_names"]
-  local all_reward_info     = LibQuestData_SavedVariables["reward_info"]
-  local rebuilt_data        = {}
-  local rebuilt_locations   = {}
-  local current_data        = {}
+  local all_locations = LibQuestData_SavedVariables["location_info"]
+  local all_quest_data = ZO_DeepTableCopy(LibQuestData_SavedVariables["quest_info"])
+  local all_quest_names = LibQuestData_SavedVariables["quest_names"]
+  local all_objectives = LibQuestData_SavedVariables["objective_info"]
+  local all_quest_givers = LibQuestData_SavedVariables["giver_names"]
+  local all_reward_info = LibQuestData_SavedVariables["reward_info"]
+  local rebuilt_data = {}
+  local rebuilt_locations = {}
+  local current_data = {}
   local givername
   local npc_id
   local saved_reward_info
+  local currentQuestInfoFormat = false
 
   for zone, zone_quests in pairs(all_locations) do
     for index, quest in pairs(zone_quests) do
       current_data = {}
       if #quest == 5 then
-        current_data[lib.quest_map_pin_index.local_x]  = quest[five_field_location.local_x]
-        current_data[lib.quest_map_pin_index.local_y]  = quest[five_field_location.local_y]
+        current_data[lib.quest_map_pin_index.local_x] = quest[five_field_location.local_x]
+        current_data[lib.quest_map_pin_index.local_y] = quest[five_field_location.local_y]
         current_data[lib.quest_map_pin_index.global_x] = quest[five_field_location.global_x]
         current_data[lib.quest_map_pin_index.global_y] = quest[five_field_location.global_y]
         current_data[lib.quest_map_pin_index.quest_id] = quest[five_field_location.quest_id]
-        givername                                      = -1
+        givername = -1
         --internal.dm("Debug", quest[five_field_location.quest_id])
         if all_quest_data[quest[five_field_location.quest_id]] then
           if #all_quest_data[quest[five_field_location.quest_id]] == 8 then
@@ -653,13 +654,13 @@ local function update_quest_information()
         current_data[lib.quest_map_pin_index.quest_giver] = givername
       end
       if #quest == 9 then
-        current_data[lib.quest_map_pin_index.local_x]     = quest[nine_field_location.local_x]
-        current_data[lib.quest_map_pin_index.local_y]     = quest[nine_field_location.local_y]
-        current_data[lib.quest_map_pin_index.global_x]    = quest[nine_field_location.global_x]
-        current_data[lib.quest_map_pin_index.global_y]    = quest[nine_field_location.global_y]
-        current_data[lib.quest_map_pin_index.quest_id]    = quest[nine_field_location.quest_id]
+        current_data[lib.quest_map_pin_index.local_x] = quest[nine_field_location.local_x]
+        current_data[lib.quest_map_pin_index.local_y] = quest[nine_field_location.local_y]
+        current_data[lib.quest_map_pin_index.global_x] = quest[nine_field_location.global_x]
+        current_data[lib.quest_map_pin_index.global_y] = quest[nine_field_location.global_y]
+        current_data[lib.quest_map_pin_index.quest_id] = quest[nine_field_location.quest_id]
         current_data[lib.quest_map_pin_index.quest_giver] = quest[nine_field_location.quest_giver]
-        quest                                             = current_data
+        quest = current_data
       end
       if #quest == 6 then
         current_data = quest
@@ -684,28 +685,36 @@ local function update_quest_information()
   for index, data in pairs(all_quest_data) do
     current_data = {}
     if #data == 8 then
-      current_data[lib.quest_data_index.quest_type]   = data[eight_field_data.quest_type]
+      current_data[lib.quest_data_index.quest_type] = data[eight_field_data.quest_type]
       current_data[lib.quest_data_index.quest_repeat] = data[eight_field_data.quest_repeat]
-      current_data[lib.quest_data_index.game_api]     = data[eight_field_data.game_api]
-      current_data[lib.quest_data_index.quest_line]   = data[eight_field_data.quest_line]
+      current_data[lib.quest_data_index.game_api] = data[eight_field_data.game_api]
+      current_data[lib.quest_data_index.quest_line] = data[eight_field_data.quest_line]
       current_data[lib.quest_data_index.quest_number] = data[eight_field_data.quest_number]
       current_data[lib.quest_data_index.quest_series] = data[eight_field_data.quest_series]
     end
-    if #data == 7 then
-      current_data[lib.quest_data_index.quest_type]   = data[seven_field_data.quest_type]
+    -- old data when the name was part of the data
+    local oldSevenFieldData = type(data[seven_field_data.quest_name]) == "string"
+    if #data == 7 and oldSevenFieldData then
+      --internal.dm("Debug", "Old 7 field data")
+      current_data[lib.quest_data_index.quest_type] = data[seven_field_data.quest_type]
       current_data[lib.quest_data_index.quest_repeat] = data[seven_field_data.quest_repeat]
-      current_data[lib.quest_data_index.game_api]     = data[seven_field_data.game_api]
-      current_data[lib.quest_data_index.quest_line]   = data[seven_field_data.quest_line]
+      current_data[lib.quest_data_index.game_api] = data[seven_field_data.game_api]
+      current_data[lib.quest_data_index.quest_line] = data[seven_field_data.quest_line]
       current_data[lib.quest_data_index.quest_number] = data[seven_field_data.quest_number]
       current_data[lib.quest_data_index.quest_series] = data[seven_field_data.quest_series]
     end
-    if #data == 6 then
+    if (#data == 6) or (#data == 7 and not oldSevenFieldData) then
+      --internal.dm("Debug", "Previous 6 field data or New 7 field data")
       current_data = data
+      currentQuestInfoFormat = true
     end
 
     if not lib.quest_data[index] then
       if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
       rebuilt_data[index] = current_data
+    elseif lib.quest_data[index] and not lib.quest_data[index][lib.quest_data_index.quest_display_type] and currentQuestInfoFormat then
+        if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+        rebuilt_data[index] = current_data
     else
       if current_data[lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
         if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
@@ -715,7 +724,7 @@ local function update_quest_information()
   end
 
   LibQuestData_SavedVariables["location_info"] = rebuilt_locations
-  LibQuestData_SavedVariables["quest_info"]    = rebuilt_data
+  LibQuestData_SavedVariables["quest_info"] = rebuilt_data
 
   for index, data in pairs(all_quest_names) do
     if lib.quest_names[lib.effective_lang][index] then
@@ -864,22 +873,22 @@ local function OnLoad(eventCode, addOnName)
       temp = LibQuestData_SavedVariables.quests
     end
 
-    LibQuestData_SavedVariables                = {}
-    LibQuestData_SavedVariables.client_lang    = lib.client_lang
+    LibQuestData_SavedVariables = {}
+    LibQuestData_SavedVariables.client_lang = lib.client_lang
     LibQuestData_SavedVariables.effective_lang = lib.effective_lang
-    LibQuestData_SavedVariables.version        = 4
-    LibQuestData_SavedVariables.libVersion     = lib.libVersion
+    LibQuestData_SavedVariables.version = 4
+    LibQuestData_SavedVariables.libVersion = lib.libVersion
     if temp == nil then
       LibQuestData_SavedVariables.quests = {}
     else
       LibQuestData_SavedVariables.quests = temp
     end
 
-    LibQuestData_SavedVariables.quest_info    = {}
+    LibQuestData_SavedVariables.quest_info = {}
     LibQuestData_SavedVariables.location_info = {}
-    LibQuestData_SavedVariables.quest_names   = {}
-    LibQuestData_SavedVariables.reward_info   = {}
-    LibQuestData_SavedVariables.giver_names   = {}
+    LibQuestData_SavedVariables.quest_names = {}
+    LibQuestData_SavedVariables.reward_info = {}
+    LibQuestData_SavedVariables.giver_names = {}
   end
   if LibQuestData_SavedVariables.map_info ~= nil then LibQuestData_SavedVariables.map_info = nil end
   if LibQuestData_SavedVariables.objective_info ~= nil then LibQuestData_SavedVariables.objective_info = nil end

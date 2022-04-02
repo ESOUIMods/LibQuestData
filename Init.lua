@@ -1,17 +1,17 @@
-local libName, libVersion   = "LibQuestData", 238
-local lib                   = {}
-local internal              = {}
-_G["LibQuestData"]          = lib
+local libName, libVersion = "LibQuestData", 239
+local lib = {}
+local internal = {}
+_G["LibQuestData"] = lib
 _G["LibQuestData_Internal"] = internal
 
 -------------------------------------------------
 ----- Logger Function                       -----
 -------------------------------------------------
 
-local logger                = LibDebugLogger.Create(libName)
-internal.logger             = logger
+local logger = LibDebugLogger.Create(libName)
+internal.logger = logger
 internal.show_log           = false
-local SDLV                  = DebugLogViewer
+local SDLV = DebugLogViewer
 
 local function create_log(log_type, log_content)
   if internal.logger and SDLV then
@@ -34,7 +34,7 @@ local function emit_message(log_type, text)
 end
 
 local function emit_table(log_type, t, indent, table_history)
-  indent        = indent or "."
+  indent = indent or "."
   table_history = table_history or {}
 
   for k, v in pairs(t) do
@@ -94,17 +94,17 @@ end
 ----- lib                                   -----
 -------------------------------------------------
 
-lib.quest_givers     = {}
-lib.quest_names      = {}
-lib.client_lang      = GetCVar("Language.2")
-lib.effective_lang   = nil
+lib.quest_givers = {}
+lib.quest_names = {}
+lib.client_lang = GetCVar("Language.2")
+lib.effective_lang = nil
 local supported_lang = { "br", "de", "en", "es", "fr", "fx", "it", "jp", "kb", "kr", "pl", "ru", "tr", }
 if internal:is_in(lib.client_lang, supported_lang) then
   lib.effective_lang = lib.client_lang
 else
   lib.effective_lang = "en"
 end
-lib.supported_lang              = lib.client_lang == lib.effective_lang
+lib.supported_lang = lib.client_lang == lib.effective_lang
 --[[
     ALLIANCE_ALDMERI_DOMINION = 1
     ALLIANCE_EBONHEART_PACT = 2
@@ -113,11 +113,11 @@ lib.supported_lang              = lib.client_lang == lib.effective_lang
 --[[ Reward Data from GetJournalQuestRewardInfo
     REWARD_TYPE_PARTIAL_SKILL_POINTS -- Skill Point
 ]]--
-lib.player_alliance             = GetUnitAlliance("player")
-lib.libName                     = libName
-lib.libVersion                  = libVersion
+lib.player_alliance = GetUnitAlliance("player")
+lib.libName = libName
+lib.libVersion = libVersion
 
-lib.name_to_questid_table       = {}
+lib.name_to_questid_table = {}
 lib.name_to_questid_table["br"] = {}
 lib.name_to_questid_table["de"] = {}
 lib.name_to_questid_table["en"] = {}
@@ -132,32 +132,32 @@ lib.name_to_questid_table["pl"] = {}
 lib.name_to_questid_table["ru"] = {}
 lib.name_to_questid_table["tr"] = {}
 
-lib.name_to_npcid_table         = {}
-lib.name_to_npcid_table["br"]   = {}
-lib.name_to_npcid_table["de"]   = {}
-lib.name_to_npcid_table["en"]   = {}
-lib.name_to_npcid_table["es"]   = {}
-lib.name_to_npcid_table["fr"]   = {}
-lib.name_to_npcid_table["fx"]   = {}
-lib.name_to_npcid_table["it"]   = {}
-lib.name_to_npcid_table["jp"]   = {}
-lib.name_to_npcid_table["kb"]   = {}
-lib.name_to_npcid_table["kr"]   = {}
-lib.name_to_npcid_table["pl"]   = {}
-lib.name_to_npcid_table["ru"]   = {}
-lib.name_to_npcid_table["tr"]   = {}
+lib.name_to_npcid_table = {}
+lib.name_to_npcid_table["br"] = {}
+lib.name_to_npcid_table["de"] = {}
+lib.name_to_npcid_table["en"] = {}
+lib.name_to_npcid_table["es"] = {}
+lib.name_to_npcid_table["fr"] = {}
+lib.name_to_npcid_table["fx"] = {}
+lib.name_to_npcid_table["it"] = {}
+lib.name_to_npcid_table["jp"] = {}
+lib.name_to_npcid_table["kb"] = {}
+lib.name_to_npcid_table["kr"] = {}
+lib.name_to_npcid_table["pl"] = {}
+lib.name_to_npcid_table["ru"] = {}
+lib.name_to_npcid_table["tr"] = {}
 
-lib.quest_rewards_skilpoint     = {}
-lib.started_quests              = {}
-lib.completed_quests            = {}
-lib.last_interaction_target     = ""
+lib.quest_rewards_skilpoint = {}
+lib.started_quests = {}
+lib.completed_quests = {}
+lib.last_interaction_target = ""
 
 -- added 4/4/2021 to hold map information
-lib.zone_quests                 = {}
-lib.last_mapid                  = 0
-lib.current_mapid               = 0
-lib.last_zone                   = ""
-lib.current_zone                = ""
+lib.zone_quests = {}
+lib.last_mapid = 0
+lib.current_mapid = 0
+lib.last_zone = ""
+lib.current_zone = ""
 
 if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
 
@@ -172,7 +172,7 @@ if LibQuestData_SavedVariables.giver_names == nil then LibQuestData_SavedVariabl
 
 -- note only the "lib.client_lang" will contain data be default
 
-lib.quest_data_index                             = {
+lib.quest_data_index = {
   -- quest_name      =    1, Depreciated, use lib:get_quest_name(id, lang)
   -- quest_giver     =    2,  Depreciated, see quest_map_pin_index
   quest_type = 1, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
@@ -181,9 +181,10 @@ lib.quest_data_index                             = {
   quest_line = 4, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   quest_number = 5, -- Quest Number In QuestLine (10000 = not assigned/not verified)
   quest_series = 6, -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
+  quest_display_type = 7, -- INSTANCE_DISPLAY_TYPE_ZONE_STORY, INSTANCE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 
-lib.quest_map_pin_index                          = {
+lib.quest_map_pin_index = {
   local_x = 1, -- GetMapPlayerPosition() << -10 = Undefined >>
   local_y = 2, -- GetMapPlayerPosition() << -10 = Undefined >>
   global_x = 3, -- LocalToGlobal(GetMapPlayerPosition()) << -10 = Undefined >>
@@ -196,16 +197,16 @@ lib.quest_map_pin_index                          = {
   quest_giver = 6, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
 
-lib.quest_data_type                              = {
+lib.quest_data_type = {
   -- ESO Values
   quest_type_none = 0,
-  quest_type_group = 1, -- Qty 75
-  quest_type_main_story = 2, -- Qty 16
-  quest_type_guild = 3, -- Qty 111, (*) Various Skill Line Guild Quests
+  quest_type_group = 1, -- Qty 96
+  quest_type_main_story = 2, -- Qty 17
+  quest_type_guild = 3, -- Qty 170, (*) Various Skill Line Guild Quests
   quest_type_crafting = 4, -- Qty 82, Ignore these they are the crafting certifications
-  quest_type_dungeon = 5, -- Qty 77
-  quest_type_raid = 6, -- Qty 7
-  quest_type_ava = 7, -- Qty 117, unsure if verified
+  quest_type_dungeon = 5, -- Qty 82
+  quest_type_raid = 6, -- Qty 8
+  quest_type_ava = 7, -- Qty 165, unsure if verified
   quest_type_class = 8, -- None in table
   -- quest_type_qa_test = 9, not in game as far as I know
   quest_type_ava_group = 10, -- None in table, in check
@@ -217,7 +218,22 @@ lib.quest_data_type                              = {
   quest_type_companion = 16,
 }
 
-lib.quest_series_type                            = {
+lib.quest_display_type = {
+  -- ESO Values, ommitted INSTANCE_DISPLAY_TYPE_
+  battleground = 9,
+  delve = 7,
+  dungeon = 2,
+  group_area = 5,
+  group_delve = 4,
+  housing = 8,
+  none = 0,
+  public_dungeon = 6,
+  raid = 3,
+  solo = 1,
+  zone_story = 10,
+}
+
+lib.quest_series_type = {
   -- LibQuestData Values
   quest_type_none = 0,
   quest_type_cadwell = 1,
@@ -232,12 +248,12 @@ lib.quest_series_type                            = {
   quest_type_guild_dark = 10, -- Dark Brotherhood
 }
 
-lib.playerAlliance                               = {}
-lib.playerAlliance[ALLIANCE_ALDMERI_DOMINION]    = lib.quest_series_type.quest_type_ad
+lib.playerAlliance = {}
+lib.playerAlliance[ALLIANCE_ALDMERI_DOMINION] = lib.quest_series_type.quest_type_ad
 lib.playerAlliance[ALLIANCE_DAGGERFALL_COVENANT] = lib.quest_series_type.quest_type_dc
-lib.playerAlliance[ALLIANCE_EBONHEART_PACT]      = lib.quest_series_type.quest_type_ep
+lib.playerAlliance[ALLIANCE_EBONHEART_PACT] = lib.quest_series_type.quest_type_ep
 
-lib.quest_guild_names                            = {
+lib.quest_guild_names = {
   [lib.quest_series_type.quest_type_guild_mage] = "Mages Guild",
   [lib.quest_series_type.quest_type_guild_fighter] = "Fighters Guild",
   [lib.quest_series_type.quest_type_guild_psijic] = "Psijic Order",
@@ -246,7 +262,7 @@ lib.quest_guild_names                            = {
   [lib.quest_series_type.quest_type_undaunted] = "Undaunted",
 }
 
-lib.quest_guild_rank_data                        = {
+lib.quest_guild_rank_data = {
   [lib.quest_series_type.quest_type_undaunted] = { name = "", rank = 0, },
   [lib.quest_series_type.quest_type_guild_mage] = { name = "", rank = 0, },
   [lib.quest_series_type.quest_type_guild_fighter] = { name = "", rank = 0, },
@@ -255,7 +271,7 @@ lib.quest_guild_rank_data                        = {
   [lib.quest_series_type.quest_type_guild_dark] = { name = "", rank = 0, },
 }
 
-lib.quest_data_repeat                            = {
+lib.quest_data_repeat = {
   quest_repeat_not_repeatable = 0,
   quest_repeat_repeatable = 1,
   quest_repeat_daily = 2,
@@ -263,7 +279,7 @@ lib.quest_data_repeat                            = {
   quest_repeat_event_reset = 4,
 }
 
-lib.dest_quest_data_index                        = {
+lib.dest_quest_data_index = {
   quest_x = 1,
   quest_y = 2,
   questnpc = 3,
@@ -275,7 +291,7 @@ lib.dest_quest_data_index                        = {
   questseries = 9, -- None = 0,	Cadwell's Almanac = 1,	Undaunted = 2, AD = 3, DC = 4, EP = 5.
 }
 
-lib.dest_quest_series_index                      = {
+lib.dest_quest_series_index = {
   quest_series_none = 0,
   quest_series_cadwell = 1,
   quest_series_undaunted = 2,
