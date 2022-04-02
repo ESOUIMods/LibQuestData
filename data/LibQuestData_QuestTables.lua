@@ -370,7 +370,7 @@ Format:
     quest_id = {
         conditional_quest_id,
     }
-    
+
     Essentially if quest_id is complete then conditional_quest_id
     is also marked as complete.
 ]]--
@@ -606,7 +606,9 @@ lib.conditional_quest_list = {
     [4912] = { --Storming the Garrison
         4994,
     },
-
+    [3584] = { --The Coral Heart
+        5043, --A Higher Priority
+    },
 }
 
 --[[
