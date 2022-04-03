@@ -1506,6 +1506,8 @@ lib.quest_givers["en"] = {
   [100218] = "Gilzir",
   [100219] = "Liezl",
   [100220] = "Scout Merton",
+  [100221] = "Samuel Gourone",
+  [100222] = "Iradal",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",

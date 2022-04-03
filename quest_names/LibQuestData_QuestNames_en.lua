@@ -2487,6 +2487,7 @@ lib.quest_names["en"] = {
     [6719] = "Careless Contamination",
     [6720] = "Retrieval Gone Awry",
     [6721] = "A Paralyzing Lesson",
+    [6722] = "Getting the Band Together",
     [6723] = "The Celestial Palanquin",
     [6724] = "Destruction Incarnate",
     [6727] = "Salvaged Plans",
