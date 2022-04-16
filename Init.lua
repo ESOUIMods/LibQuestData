@@ -10,7 +10,7 @@ _G["LibQuestData_Internal"] = internal
 
 local logger = LibDebugLogger.Create(libName)
 internal.logger = logger
-internal.show_log           = false
+internal.show_log = false
 local SDLV = DebugLogViewer
 
 local function create_log(log_type, log_content)

@@ -10,19 +10,36 @@ local LMP = LibMapPins
 local quest_shared
 local quest_found
 
--- return true if map_id is not in the list of main zone maps
--- replaces IsBaseZone
+--[[ return true if map_id is not in the list of main zone maps
+  replaces IsBaseZone
+
+  When I made this for some reason a few places were added that
+  are not necessarily one of the main zone maps. Maybe because of
+  how the map pins are handeled.
+
+  Currently GetMapInfoById() uses the MapId and with that you can
+  get the map name, and whether or not it is considered a Subzone to
+  the game.
+
+  One reason for updating this is that the MapId seems to be the best choice
+  for many things. Although the ZoneIndex, and the ZoneId are also useful.
+  Most of the time when there is no MapIndex then the map is usually
+  not considered to me a main zone and instead it is a subzone.
+
+  TODO determine what to do with this routine. It isn't used currently. 4-22
+  EDIT: 4-22 updated since it's not used anyway
+
+  The other reason this could be inportant is that one part of Quest Map
+  used to check if the map was a subzone in order to now when it should
+  add other pins. It would use the scale from QuestMapTool.
+]]--
 function lib:is_zone_subzone()
   local map_id
   if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
     map_id = GetCurrentMapId()
   end
-  if internal:is_in(map_id, lib.zone_id_list) then
-    -- false because the zone_id was in the list of Main Zones
-    return false
-  else
-    return true
-  end
+  local name, mapType, mapContentType, zoneIndex, description = GetMapInfoById(map_id)
+  return mapType == MAPTYPE_SUBZONE
 end
 
 -- Check if both map zones to see if they are the same

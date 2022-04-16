@@ -713,8 +713,8 @@ local function update_quest_information()
       if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
       rebuilt_data[index] = current_data
     elseif lib.quest_data[index] and not lib.quest_data[index][lib.quest_data_index.quest_display_type] and currentQuestInfoFormat then
-        if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
-        rebuilt_data[index] = current_data
+      if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
+      rebuilt_data[index] = current_data
     else
       if current_data[lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
         if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
