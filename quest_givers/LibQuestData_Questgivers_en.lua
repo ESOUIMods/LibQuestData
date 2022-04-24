@@ -1125,6 +1125,7 @@ lib.quest_givers["en"] = {
   [80026] = "Serileth",
   [80027] = "Lost Cat Note",
   [80028] = "Apprentice Harlin",
+  [80029] = "Elusara-la",
   -- Shar Elsweyr
   [81000] = "Nisuzi",
   [81001] = "Elianna Pevengius",

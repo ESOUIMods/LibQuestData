@@ -1,5 +1,6 @@
 local lib = _G["LibQuestData"]
 local internal = _G["LibQuestData_Internal"]
+local LMD = LibMapData
 
 -- Local variables
 local questGiverName = nil
@@ -7,50 +8,7 @@ local reward
 -- Init saved variables table
 local GPS = LibGPS3
 local LMP = LibMapPins
-local quest_shared
 local quest_found
-
---[[ return true if map_id is not in the list of main zone maps
-  replaces IsBaseZone
-
-  When I made this for some reason a few places were added that
-  are not necessarily one of the main zone maps. Maybe because of
-  how the map pins are handeled.
-
-  Currently GetMapInfoById() uses the MapId and with that you can
-  get the map name, and whether or not it is considered a Subzone to
-  the game.
-
-  One reason for updating this is that the MapId seems to be the best choice
-  for many things. Although the ZoneIndex, and the ZoneId are also useful.
-  Most of the time when there is no MapIndex then the map is usually
-  not considered to me a main zone and instead it is a subzone.
-
-  TODO determine what to do with this routine. It isn't used currently. 4-22
-  EDIT: 4-22 updated since it's not used anyway
-
-  The other reason this could be inportant is that one part of Quest Map
-  used to check if the map was a subzone in order to now when it should
-  add other pins. It would use the scale from QuestMapTool.
-]]--
-function lib:is_zone_subzone()
-  local map_id
-  if SetMapToPlayerLocation() ~= SET_MAP_RESULT_FAILED then
-    map_id = GetCurrentMapId()
-  end
-  local name, mapType, mapContentType, zoneIndex, description = GetMapInfoById(map_id)
-  return mapType == MAPTYPE_SUBZONE
-end
-
--- Check if both map zones to see if they are the same
-local function is_same_zone_index(zone_index_1, zone_index_2)
-  return (zone_index_1 == zone_index_2)
-end
-
--- Check if both map ids are different
-local function is_different_zone(map_id_1, map_id_2)
-  return (map_id_1 ~= map_id_2)
-end
 
 function lib:get_giver_when_object(id)
   if internal:is_empty_or_nil(lib.questid_giver_lookup[id]) then
@@ -122,8 +80,8 @@ end
 -- Event handler function for EVENT_QUEST_ADDED
 local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
   --internal.dm("Debug", "OnQuestAdded")
-  if quest_shared then
-    quest_shared = false
+  if LMD.questShared then
+    LMD.questShared = false
     return
   end
   --internal.dm("Debug", journalIndex)
@@ -144,7 +102,6 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
   if LibQuestData_SavedVariables.quests[zone] == nil then LibQuestData_SavedVariables.quests[zone] = {} end
   local local_x, local_y = GetMapPlayerPosition("player")
   local global_x, global_y, zoneMapIndex = GPS:LocalToGlobal(local_x, local_y)
-  local zone_id, _, _, _ = GetUnitWorldPosition("player")
   if journalIndex then
     quest_type = GetJournalQuestType(journalIndex)
     quest_display_type = GetJournalQuestInstanceDisplayType(journalIndex)
@@ -171,7 +128,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     ["lang"] = GetCVar("language.2"),
   }
   if questGiverName == nil then
-    quest["giver"] = lib.last_interaction_target
+    quest["giver"] = LMD.lastInteractionTarget
   end
 
   quest_found = false
@@ -198,15 +155,9 @@ local function OnChatterEnd(eventCode)
   -- Stop listening for the quest added event because it would only be for shared quests
   -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
   -- EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_QUEST_ADDED)
+  -- using LibMapData for LMD.questShared
   EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_CHATTER_END) -- Verified
 end
-
-local function OnQuestSharred(eventCode, questID)
-  --d("OnQuestSharred")
-  quest_shared = true
-  lib.last_interaction_target = ""
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_SHARED, OnQuestSharred) -- Verified
 
 -- Event handler function for EVENT_QUEST_OFFERED
 -- Note runs when you click writ board
@@ -218,6 +169,7 @@ local function OnQuestOffered(eventCode)
   -- Now that the quest has been offered we can start listening for the quest added event
   -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
   -- EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_ADDED, OnQuestAdded)
+  -- using LibMapData for LMD.questShared
   EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_CHATTER_END, OnChatterEnd) -- Verified
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_OFFERED, OnQuestOffered) -- Verified
@@ -368,7 +320,7 @@ end
 -- set alliance
 local function SetQuestSeries(the_zone)
   local value = 0
-  if string.match(the_zone, "cyrodiil") then
+  if IsInImperialCity() or IsInCyrodiil() then
     if lib.player_alliance == ALLIANCE_ALDMERI_DOMINION then value = lib.quest_series_type.quest_type_ad end
     if lib.player_alliance == ALLIANCE_EBONHEART_PACT then value = lib.quest_series_type.quest_type_ep end
     if lib.player_alliance == ALLIANCE_DAGGERFALL_COVENANT then value = lib.quest_series_type.quest_type_dc end
@@ -810,105 +762,3 @@ local function show_quests()
     end
   end
 end
-
-local function OnInteract(event_code, client_interact_result, interact_target_name)
-  --internal.dm("Debug", "OnInteract Occured")
-  --d(client_interact_result)
-  local text = zo_strformat(SI_CHAT_MESSAGE_FORMATTER, interact_target_name)
-  --internal.dm("Debug", text)
-  lib.last_interaction_target = text
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_CLIENT_INTERACT_RESULT, OnInteract)
-
-function lib.on_map_zone_changed()
-  internal.dm("Debug", "[5] on_map_zone_changed")
-
-  internal.dm("Debug", "[5] Updating last_mapid and current_mapid")
-  lib.last_mapid = lib.current_mapid
-  lib.last_zone = lib.current_zone
-  lib.current_mapid = GetCurrentMapId()
-  lib.current_zone = LMP:GetZoneAndSubzone(true, false, true)
-
-  if not lib.last_mapid then
-    internal.dm("Debug", "[5] LMP did not set the last_mapid properly")
-  end
-  if not lib.last_zone then
-    internal.dm("Debug", "[5] LMP did not set the last_zone properly")
-  end
-  if not lib.current_mapid then
-    internal.dm("Debug", "[5] LMP did not set the current_mapid properly")
-  end
-  if not lib.current_zone then
-    internal.dm("Debug", "[5] LMP did not set the current_zone properly")
-  end
-
-  local temp = string.format("[5] Last Mapid: %s", lib.last_mapid) or "[5] NA"
-  internal.dm("Debug", temp)
-  local temp = string.format("[5] Last Zone: %s", lib.last_zone) or "[5] NA"
-  internal.dm("Debug", temp)
-  local temp = string.format("[5] Current Mapid: %s", lib.current_mapid) or "[5] NA"
-  internal.dm("Debug", temp)
-  local temp = string.format("[5] Current Zone: %s", lib.current_zone) or "[5] NA"
-  internal.dm("Debug", temp)
-  lib.check_map_state()
-end
-
-function on_zone_changed(eventCode, zoneName, subZoneName, newSubzone, zoneId, subZoneId)
-  lib.on_map_zone_changed()
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName .. "_zone_changed", EVENT_ZONE_CHANGED, on_zone_changed)
-
--- Event handler function for EVENT_PLAYER_DEACTIVATED
-local function OnPlayerDeactivated(eventCode)
-  internal.dm("Debug", "[6] EVENT_PLAYER_DEACTIVATED")
-  internal.dm("Debug", "[6] Updating last_mapid")
-  lib.last_mapid = GetCurrentMapId()
-  lib.last_zone = LMP:GetZoneAndSubzone(true, false, true)
-
-  if not lib.last_mapid then
-    internal.dm("Debug", "[6] LMP did not set the last_mapid properly")
-  end
-  if not lib.last_zone then
-    internal.dm("Debug", "[6] LMP did not set the last_zone properly")
-  end
-
-  local temp = string.format("[6] Last Mapid: %s", lib.last_mapid) or "[6] NA"
-  internal.dm("Debug", temp)
-  local temp = string.format("[6] Last Zone: %s", lib.last_zone) or "[6] NA"
-  internal.dm("Debug", temp)
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_DEACTIVATED, OnPlayerDeactivated) -- Verified
-
--- Event handler function for EVENT_PLAYER_ACTIVATED
-local function OnPlayerActivated(eventCode, initial)
-  -- /script LibQuestData.logger:Debug(GetCurrentMapId())
-  internal.dm("Debug", "[1] EVENT_PLAYER_ACTIVATED")
-
-  if initial then
-    internal.dm("Debug", "[1] Initial first load")
-    lib.last_mapid = 0
-    lib.last_zone = ""
-    lib.current_mapid = GetCurrentMapId()
-    lib.current_zone = LMP:GetZoneAndSubzone(true, false, true)
-    lib.check_map_state()
-  end
-
-  internal.dm("Debug", "[1] Updating current_mapid")
-  lib.current_mapid = GetCurrentMapId()
-  lib.current_zone = LMP:GetZoneAndSubzone(true, false, true)
-
-  if not lib.current_mapid then
-    internal.dm("Debug", "[1] LMP did not set the current_mapid properly")
-  end
-  if not lib.current_zone then
-    internal.dm("Debug", "[1] LMP did not set the current_zone properly")
-  end
-
-  local temp = string.format("[1] Current Mapid: %s", lib.current_mapid) or "[1] NA"
-  internal.dm("Debug", temp)
-  local temp = string.format("[1] Current Zone: %s", lib.current_zone) or "[1] NA"
-  internal.dm("Debug", temp)
-
-  lib.check_map_state()
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_PLAYER_ACTIVATED, OnPlayerActivated) -- Verified
