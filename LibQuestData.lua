@@ -40,6 +40,24 @@ local quest_map_pin_index_default = {
 ----- Helpers                                ----
 -------------------------------------------------
 
+function LibQuestData_Internal:has_vampirisum()
+  -- Noxiphilic Sanguivoria 40360
+  for index = 1, GetNumBuffs("player") do
+    local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo("player", index)
+    if abilityId == 40360 then return true end
+  end
+  return false
+end
+
+function LibQuestData_Internal:has_lupinus()
+  -- Sanies Lupinus 40521
+  for index = 1, GetNumBuffs("player") do
+    local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo("player", index)
+    if abilityId == 40521 then return true end
+  end
+  return false
+end
+
 -- Function to check for empty table
 function internal:is_empty_or_nil(t)
   if t == nil or t == "" then return true end
