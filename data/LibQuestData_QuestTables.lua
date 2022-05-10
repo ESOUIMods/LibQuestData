@@ -633,6 +633,12 @@ lib.conditional_quest_list = {
   [3584] = { --The Coral Heart
     5043, --A Higher Priority
   },
+  [4479] = { -- Motes in the Moonlight
+    4709, --The Path to Moonmont
+  },
+   [4461] = { --Grimmer Still
+    4697, --To Rawl'kha
+  },
 }
 
 --[[

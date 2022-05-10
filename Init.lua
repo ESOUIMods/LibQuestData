@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 241
+local libName, libVersion = "LibQuestData", 242
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -154,10 +154,6 @@ lib.last_interaction_target = ""
 
 -- added 4/4/2021 to hold map information
 lib.zone_quests = {}
-lib.last_mapid = 0
-lib.current_mapid = 0
-lib.last_zone = ""
-lib.current_zone = ""
 
 if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
 

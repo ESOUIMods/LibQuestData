@@ -13,6 +13,7 @@ local internal = _G["LibQuestData_Internal"]
 -- Libraries
 local LMP = LibMapPins
 local GPS = LibGPS3
+local LMD = LibMapData
 
 -- Default table
 local quest_data_index_default = {
@@ -211,55 +212,29 @@ function lib:get_quest_list(zone)
   return new_all_zone_quests
 end
 
---[[4/4/2021 movedget whether or not it is a cadwell quest
-return true if it is a cadwell quest
-]]--
-function lib.check_map_state()
-  internal.dm("Debug", "[7] LQD Checking map state")
-  if not lib.last_mapid and lib.current_mapid then
-    internal.dm("Debug", "[7] last_mapid and current_mapid not assigned")
-    return
-  end
-
-  if lib.current_mapid ~= lib.last_mapid then
-    internal.dm("Debug", "[7] last_mapid was different")
-    local temp = string.format("[7] Last Mapid: %s", lib.last_mapid) or "[7] NA"
-    internal.dm("Debug", temp)
-    local temp = string.format("[7] Current Mapid: %s", lib.current_mapid) or "[7] NA"
-    internal.dm("Debug", temp)
-    if GetMapType() > MAPTYPE_ZONE then
-      internal.dm("Debug", "[7] MAPTYPE_ZONE reached")
-      return
-    end
-    internal.dm("Debug", "[7] Get zone and update zone data")
+LMD:RegisterCallback(LMD.callbackType.EVENT_ZONE_CHANGED,
+  function()
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
-  else
-    internal.dm("Debug", "[7] Map unchanged")
-  end
-end
+  end)
 
-CALLBACK_MANAGER:RegisterCallback("OnWorldMapChanged", function()
-  internal.dm("Debug", "[2] OnWorldMapChanged")
-  lib.on_map_zone_changed()
-end)
+LMD:RegisterCallback(LMD.callbackType.EVENT_LINKED_WORLD_POSITION_CHANGED,
+  function()
+    local zone = LMP:GetZoneAndSubzone(true, false, true)
+    lib.zone_quests = lib:get_quest_list(zone)
+  end)
 
-WORLD_MAP_SCENE:RegisterCallback("StateChange", function(oldState, newState)
-  internal.dm("Debug", "[3] StateChange")
-  if newState == SCENE_SHOWING then
-    internal.dm("Debug", "[3] SCENE_SHOWING")
-    lib.on_map_zone_changed()
-  end
-  if newState == SCENE_HIDDEN then
-    internal.dm("Debug", "[3] SCENE_HIDDEN")
-    lib.on_map_zone_changed()
-  end
-end)
+LMD:RegisterCallback(LMD.callbackType.OnWorldMapChanged,
+  function()
+    local zone = LMP:GetZoneAndSubzone(true, false, true)
+    lib.zone_quests = lib:get_quest_list(zone)
+  end)
 
-local function on_prepare_for_jump(eventCode, zoneName, zoneDescription, loadingTexture, instanceDisplayType)
-  internal.dm("Debug", "[4] EVENT_PREPARE_FOR_JUMP")
-end
-EVENT_MANAGER:RegisterForEvent(lib.libName .. "_prepare_for_jump", EVENT_PREPARE_FOR_JUMP, on_prepare_for_jump)
+LMD:RegisterCallback(LMD.callbackType.WorldMapSceneStateChange,
+  function()
+    local zone = LMP:GetZoneAndSubzone(true, false, true)
+    lib.zone_quests = lib:get_quest_list(zone)
+  end)
 
 --[[ get whether or not it is a cadwell quest
 return true if it is a cadwell quest
@@ -496,6 +471,14 @@ function lib:set_achievement_quests(quest_id)
       lib.completed_quests[quest_id] = true
     end
   end
+end
+
+function lib:is_quest_started(quest_id)
+  local started = lib.started_quests
+  for id, state in pairs(started) do
+    if id == quest_id then return true end
+  end
+  return false
 end
 
 local function build_completed_quests()
@@ -847,6 +830,8 @@ local function update_quest_information()
   internal.dm("Debug", string.format("Quests stashed: %s", count_stashed))
   LibQuestData_SavedVariables["strored_data"] = strored_data
 
+  -- set last so we can check this and not update old data
+  LibQuestData_SavedVariables.libVersion = lib.libVersion
 end
 
 local function OnPlayerActivatedQuestBuild(eventCode)
@@ -899,7 +884,6 @@ local function OnLoad(eventCode, addOnName)
 
   if lib.client_lang ~= LibQuestData_SavedVariables.client_lang then LibQuestData_SavedVariables.client_lang = lib.client_lang end
 
-  LibQuestData_SavedVariables.libVersion = lib.libVersion
   lib:build_questid_table(lib.effective_lang) -- build name lookup table once
   lib:build_npcid_table(lib.effective_lang) -- build npc names lookup table once
   lib:build_questlist_skilpoint() -- build list of quests that reward a skill point
