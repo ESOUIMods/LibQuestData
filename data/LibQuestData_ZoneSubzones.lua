@@ -1,4 +1,4 @@
-local lib = _G["LibQuestData"]
+local internal = _G["LibQuestData_Internal"]
 --[[
     ["skyrim/blackreachworld_base_0"] =
     {
@@ -66,7 +66,7 @@ local lib = _G["LibQuestData"]
 
 
 ]]--
-lib.subzone_list = {
+internal.subzone_list = {
     ["reach/reach_base_0"] =
     {
         ["reach/markarthcity_base_0"] =
@@ -678,7 +678,7 @@ lib.subzone_list = {
         },
     },
     ["deshaan/deshaan_base_0"] = {
-        ["deshaan/cauldronmapboss5_0"] = 
+        ["deshaan/cauldronmapboss5_0"] =
         {
             x = 0.0557703860,
             y = 0.5129439831,
@@ -1552,7 +1552,7 @@ lib.subzone_list = {
             y = 0.1472322196,
             zoom_factor = 0.1606786251,
         },
-        ["murkmire/brightthroatvillage_base_0"] = 
+        ["murkmire/brightthroatvillage_base_0"] =
         {
             x = 0.6763327718,
             y = 0.5018438101,
@@ -1603,13 +1603,13 @@ lib.subzone_list = {
             y = 0.5008402467,
             zoom_factor = 0.0998815596,
         },
-        ["blackwood/u30_rg_map_outside_001_0"] = 
+        ["blackwood/u30_rg_map_outside_001_0"] =
         {
             x = 0.7517191768,
             y = 0.9257827997,
             zoom_factor = 0.0093529224,
         },
-        ["blackwood/u30_gideoncity_base_0"] = 
+        ["blackwood/u30_gideoncity_base_0"] =
         {
             x = 0.5145700574,
             y = 0.4940011203,

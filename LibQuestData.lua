@@ -25,6 +25,7 @@ local quest_data_index_default = {
   [lib.quest_data_index.quest_line] = 10000, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   [lib.quest_data_index.quest_number] = 10000, -- Quest Number In QuestLine (10000 = not assigned/not verified)
   [lib.quest_data_index.quest_series] = 0, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5
+  [lib.quest_data_index.quest_display_type] = -1, -- INSTANCE_DISPLAY_TYPE_ZONE_STORY, INSTANCE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 
 local quest_map_pin_index_default = {
@@ -40,7 +41,7 @@ local quest_map_pin_index_default = {
 ----- Helpers                                ----
 -------------------------------------------------
 
-function LibQuestData_Internal:has_vampirisum()
+function internal:has_vampirisum()
   -- Noxiphilic Sanguivoria 40360
   for index = 1, GetNumBuffs("player") do
     local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo("player", index)
@@ -49,7 +50,7 @@ function LibQuestData_Internal:has_vampirisum()
   return false
 end
 
-function LibQuestData_Internal:has_lupinus()
+function internal:has_lupinus()
   -- Sanies Lupinus 40521
   for index = 1, GetNumBuffs("player") do
     local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo("player", index)
@@ -121,26 +122,33 @@ function lib:get_quest_list(zone)
   local all_zone_quests = {}
   local subzone_quests = {}
   local new_element = {}
-  local quest_in_zone_list = {}
   local quest_name_in_zone_list = {}
-  if type(zone) == "string" and internal.quest_locations[zone] ~= nil then
+  -- get all the quetsts in the zone
+  if internal:zone_has_quest_locations(zone) then
     all_zone_quests = internal:get_zone_quests(zone)
   end
+  -- make a table of the questId values as a way to prevent them from duplicating maybe ??
   for key, quest_info in pairs(all_zone_quests) do
-    quest_in_zone_list[quest_info[lib.quest_map_pin_index.quest_id]] = true
+    local questId = quest_info[lib.quest_map_pin_index.quest_id]
+    lib.quest_in_zone_list[questId] = true
   end
   --internal.dm("Debug", "get_quest_list")
   --internal.dm("Debug", zone)
-  if type(zone) == "string" and lib.subzone_list[zone] ~= nil then
-    local subzone_list = lib.subzone_list[zone]
+  if internal:subzone_has_conversions(zone) then
+    -- all_zone_quests = internal:add_subzone_quests(zone)
+    local subzone_list = internal.subzone_list[zone]
     --internal.dm("Debug", subzone_list)
     for subzone, conversion in pairs(subzone_list) do
-      local subzone_quests = internal:get_zone_quests(subzone)
+      -- use the texture name as the zone and get the quests as if subzone = zone
       --internal.dm("Debug", subzone)
-      --internal.dm("Debug", subzone_quests)
+      local subzone_quests = internal:get_zone_quests(subzone)
       for i, quest in ipairs(subzone_quests) do
         --internal.dm("Debug", quest)
-        if not internal:is_empty_or_nil(quest) and not quest_in_zone_list[quest[lib.quest_map_pin_index.quest_id]] then
+        local questId = quest[lib.quest_map_pin_index.quest_id]
+        --[[If the quest info is not nil and the quest info from the subzone is not already in the list of quests
+        then add the quest from the subzone. This will prevent adding a quest from the subzone with
+        the subzone scale information to the map when there is already a fake pin.]]--
+        if not internal:is_empty_or_nil(quest) and not lib.quest_in_zone_list[questId] then
           local new_element = ZO_DeepTableCopy(quest)
           --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_x])
           --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_y])
@@ -149,6 +157,8 @@ function lib:get_quest_list(zone)
           --internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_x])
           --internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_y])
           table.insert(all_zone_quests, new_element)
+          local questId = new_element[lib.quest_map_pin_index.quest_id]
+          lib.quest_in_zone_list[questId] = true
         end
       end
     end
@@ -169,7 +179,8 @@ function lib:get_quest_list(zone)
     local playerAlliance = GetUnitAlliance("player")
     local playerGuildRankData = nil
     local playerGuildQuestLevelRequirement = nil
-    if questSeries >= 6 or questSeries == 2 then
+    if questSeries >= lib.quest_series_type.quest_type_guild_mage or questSeries == lib.quest_series_type.quest_type_undaunted then
+      -- this is set in function update_guild_skillline_data()
       playerGuildRankData = lib.quest_guild_rank_data[questSeries].rank
       if lib.guild_rank_quest_list[questSeries][questId] then
         playerGuildQuestLevelRequirement = lib.guild_rank_quest_list[questSeries][questId]
@@ -193,9 +204,9 @@ function lib:get_quest_list(zone)
       playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
     end
     ]]--
-    if string.find(zone, "cyrodiil") then
+    if IsInImperialCity() or IsInCyrodiil() then
       --internal.dm("Debug", "The word cyrodiil was found.")
-      if questSeries >= 3 and questSeries <= 5 then
+      if questSeries >= lib.quest_series_type.quest_type_ad and questSeries <= lib.quest_series_type.quest_type_ep then
         playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
       end
     else
@@ -226,30 +237,36 @@ function lib:get_quest_list(zone)
     end
   end
 
+  -- clear quest_in_zone_list after everything is built
+  lib.quest_in_zone_list = {}
   --internal.dm("Debug", all_zone_quests)
   return new_all_zone_quests
 end
 
 LMD:RegisterCallback(LMD.callbackType.EVENT_ZONE_CHANGED,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
 
 LMD:RegisterCallback(LMD.callbackType.EVENT_LINKED_WORLD_POSITION_CHANGED,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
 
 LMD:RegisterCallback(LMD.callbackType.OnWorldMapChanged,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
 
 LMD:RegisterCallback(LMD.callbackType.WorldMapSceneStateChange,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
@@ -514,9 +531,11 @@ local function build_completed_quests()
     -- if not internal:is_empty_or_nil(quest_name) and lib.supported_lang then
     if not internal:is_empty_or_nil(quest_name) then
       if lib.quest_names[lib.effective_lang][id] ~= quest_name then
+        --internal.dm("Debug", "~= quest_name")
         LibQuestData_SavedVariables["quest_names"][id] = quest_name
       end
       if lib.quest_names[lib.effective_lang][id] == nil then
+        --internal.dm("Debug", "== nil")
         LibQuestData_SavedVariables["quest_names"][id] = quest_name
       end
     end
@@ -579,10 +598,9 @@ local function on_quest_removed(eventCode, isCompleted, journalIndex, questName,
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName .. "_quest_removed_updater", EVENT_QUEST_REMOVED, on_quest_removed)
 
-
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function update_quest_information()
-  --internal.dm("Debug", "update_quest_information")
+  internal.dm("Debug", "update_quest_information")
   local eight_field_data = {
     quest_name = 1, -- Depreciated, use lib:get_quest_name(id, lang)
     quest_giver = 2, -- Depreciated, see quest_map_pin_index
@@ -730,6 +748,7 @@ local function update_quest_information()
   for index, data in pairs(all_quest_names) do
     if lib.quest_names[lib.effective_lang][index] then
       if LibQuestData_SavedVariables["quest_names"][index] == lib.quest_names[lib.effective_lang][index] then
+        --internal.dm("Debug", "quest_name matched")
         LibQuestData_SavedVariables["quest_names"][index] = nil
       end
     end
@@ -852,11 +871,13 @@ local function update_quest_information()
   LibQuestData_SavedVariables.libVersion = lib.libVersion
 end
 
-local function OnPlayerActivatedQuestBuild(eventCode)
+local function OnPlayerActivatedQuestBuild(eventCode, initial)
   --internal.dm("Debug", "OnPlayerActivatedQuestBuild")
   build_completed_quests()
   update_started_quests()
-  update_quest_information()
+  if initial then
+    update_quest_information()
+  end
 
   EVENT_MANAGER:UnregisterForEvent(lib.libName .. "_BuildQuests", EVENT_PLAYER_ACTIVATED)
 end

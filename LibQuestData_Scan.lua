@@ -3,7 +3,6 @@ local internal = _G["LibQuestData_Internal"]
 local LMD = LibMapData
 
 -- Local variables
-local questGiverName = nil
 local reward
 -- Init saved variables table
 local GPS = LibGPS3
@@ -122,12 +121,12 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     ["y"] = local_y,
     ["gpsx"] = global_x,
     ["gpsy"] = global_y,
-    ["giver"] = questGiverName,
+    ["giver"] = lib.questGiverName,
     ["questID"] = quest_id, -- assign this and get the ID when the quest is removed
     ["api"] = GetAPIVersion(),
     ["lang"] = GetCVar("language.2"),
   }
-  if questGiverName == nil then
+  if lib.questGiverName == nil then
     quest["giver"] = LMD.lastInteractionTarget
   end
 
@@ -150,7 +149,7 @@ EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_ADDED, OnQuestAdded) -- 
 -- Event handler function for EVENT_CHATTER_END
 local function OnChatterEnd(eventCode)
   --d("OnChatterEnd")
-  questGiverName = nil
+  lib.questGiverName = nil
   reward = nil
   -- Stop listening for the quest added event because it would only be for shared quests
   -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
@@ -165,7 +164,7 @@ local function OnQuestOffered(eventCode)
   --d("OnQuestOffered")
   -- Get the name of the NPC or intractable object
   -- (This could also be done in OnQuestAdded directly, but it's saver here because we are sure the dialogue is open)
-  questGiverName = GetUnitName("interact")
+  lib.questGiverName = GetUnitName("interact")
   -- Now that the quest has been offered we can start listening for the quest added event
   -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
   -- EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_ADDED, OnQuestAdded)
@@ -247,6 +246,7 @@ local function has_undefined_data(info)
   return undefined
 end
 
+-- map pins not Quest Data table with zone store entries
 local function update_older_quest_info(source_data)
   --internal.dm("Debug", "update_older_quest_info")
   local old_quest_giver_value = 9 -- Updated, was 9 now 6
@@ -521,8 +521,8 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     -- quest_giver_is_object lib.quest_data_index.quest_giver, depreciated
 
-    -- update alliance
-    if string.match(the_zone, "cyrodiil") then
+    -- update alliance, just set it with checking if it changed for now
+    if IsInImperialCity() or IsInCyrodiil() then
       if lib.player_alliance == ALLIANCE_ALDMERI_DOMINION then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ad end
       if lib.player_alliance == ALLIANCE_EBONHEART_PACT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ep end
       if lib.player_alliance == ALLIANCE_DAGGERFALL_COVENANT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_dc end
@@ -581,7 +581,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
   --[[
   At this point save_quest_location is false and will not be set to false in this
-  loop. It will only be true if there is the potentiol it is a secondary location
+  loop. It will only be true if there is the potential it is a secondary location
   for the same quest.
 
   Not sure I want to do this twice but later on in another loop I will look at the
@@ -720,7 +720,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   ]]--
   --save_quest_location = false
   --internal.dm("Debug", "About To Save")
-  if save_quest_location and lib.supported_lang then
+  if (save_quest_location and lib.supported_lang) or internal:is_master_player() then
     --internal.dm("Debug", "save_quest_location is true saving")
     --internal.dm("Debug", the_zone)
     if LibQuestData_SavedVariables["location_info"][the_zone] == nil then
