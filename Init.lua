@@ -311,5 +311,5 @@ lib.unknown_quest_name_string = {
   ["kr"] = "알 수없는 이름",
   ["pl"] = "Nieznane imię",
   ["ru"] = "Неизвестное имя",
-  ["tr"] = "알 수없는 이름",
+  ["tr"] = "Bilinmeyen isim",
 }
