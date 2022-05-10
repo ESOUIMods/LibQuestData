@@ -678,11 +678,11 @@ lib.subzone_list = {
         },
     },
     ["deshaan/deshaan_base_0"] = {
-        ["deshaan/cauldronmapstart_0"] =
+        ["deshaan/cauldronmapboss5_0"] = 
         {
-            x = 0.0759229586,
-            y = 0.5158454180,
-            zoom_factor = 0.0118184090,
+            x = 0.0557703860,
+            y = 0.5129439831,
+            zoom_factor = 0.0160155036,
         },
         ["deshaan/narsis_base_0"] = {
             x = 0.1208704337,

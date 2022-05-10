@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 243
+local libName, libVersion = "LibQuestData", 244
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -311,3 +311,5 @@ lib.unknown_quest_name_string = {
   ["ru"] = "Неизвестное имя",
   ["tr"] = "알 수없는 이름",
 }
+
+lib.questGiverName = nil -- Added 5-2-22 in place of local var so I can clear it with LMD callbacks

@@ -25,6 +25,7 @@ local quest_data_index_default = {
   [lib.quest_data_index.quest_line] = 10000, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   [lib.quest_data_index.quest_number] = 10000, -- Quest Number In QuestLine (10000 = not assigned/not verified)
   [lib.quest_data_index.quest_series] = 0, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5
+  [lib.quest_data_index.quest_display_type] = -1, -- INSTANCE_DISPLAY_TYPE_ZONE_STORY, INSTANCE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 
 local quest_map_pin_index_default = {
@@ -39,6 +40,24 @@ local quest_map_pin_index_default = {
 -------------------------------------------------
 ----- Helpers                                ----
 -------------------------------------------------
+
+function LibQuestData_Internal:has_vampirisum()
+  -- Noxiphilic Sanguivoria 40360
+  for index = 1, GetNumBuffs("player") do
+    local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo("player", index)
+    if abilityId == 40360 then return true end
+  end
+  return false
+end
+
+function LibQuestData_Internal:has_lupinus()
+  -- Sanies Lupinus 40521
+  for index = 1, GetNumBuffs("player") do
+    local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo("player", index)
+    if abilityId == 40521 then return true end
+  end
+  return false
+end
 
 -- Function to check for empty table
 function internal:is_empty_or_nil(t)
@@ -214,24 +233,28 @@ end
 
 LMD:RegisterCallback(LMD.callbackType.EVENT_ZONE_CHANGED,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
 
 LMD:RegisterCallback(LMD.callbackType.EVENT_LINKED_WORLD_POSITION_CHANGED,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
 
 LMD:RegisterCallback(LMD.callbackType.OnWorldMapChanged,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
 
 LMD:RegisterCallback(LMD.callbackType.WorldMapSceneStateChange,
   function()
+    lib.questGiverName = nil
     local zone = LMP:GetZoneAndSubzone(true, false, true)
     lib.zone_quests = lib:get_quest_list(zone)
   end)
@@ -496,9 +519,11 @@ local function build_completed_quests()
     -- if not internal:is_empty_or_nil(quest_name) and lib.supported_lang then
     if not internal:is_empty_or_nil(quest_name) then
       if lib.quest_names[lib.effective_lang][id] ~= quest_name then
+        internal.dm("Debug", "~= quest_name")
         LibQuestData_SavedVariables["quest_names"][id] = quest_name
       end
       if lib.quest_names[lib.effective_lang][id] == nil then
+        internal.dm("Debug", "== nil")
         LibQuestData_SavedVariables["quest_names"][id] = quest_name
       end
     end
@@ -564,7 +589,7 @@ EVENT_MANAGER:RegisterForEvent(lib.libName .. "_quest_removed_updater", EVENT_QU
 
 -- Event handler function for EVENT_PLAYER_ACTIVATED
 local function update_quest_information()
-  --internal.dm("Debug", "update_quest_information")
+  internal.dm("Debug", "update_quest_information")
   local eight_field_data = {
     quest_name = 1, -- Depreciated, use lib:get_quest_name(id, lang)
     quest_giver = 2, -- Depreciated, see quest_map_pin_index
@@ -712,6 +737,7 @@ local function update_quest_information()
   for index, data in pairs(all_quest_names) do
     if lib.quest_names[lib.effective_lang][index] then
       if LibQuestData_SavedVariables["quest_names"][index] == lib.quest_names[lib.effective_lang][index] then
+        internal.dm("Debug", "quest_name matched")
         LibQuestData_SavedVariables["quest_names"][index] = nil
       end
     end
