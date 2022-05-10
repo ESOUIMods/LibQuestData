@@ -154,6 +154,8 @@ lib.last_interaction_target = ""
 
 -- added 4/4/2021 to hold map information
 lib.zone_quests = {}
+lib.quest_in_zone_list = {} -- Added 5-2-22 in place of local var so I can clear it once lib.zone_quests is built
+lib.questGiverName = nil -- Added 5-2-22 in place of local var so I can clear it with LMD callbacks
 
 if LibQuestData_SavedVariables == nil then LibQuestData_SavedVariables = {} end
 
@@ -311,5 +313,3 @@ lib.unknown_quest_name_string = {
   ["ru"] = "Неизвестное имя",
   ["tr"] = "알 수없는 이름",
 }
-
-lib.questGiverName = nil -- Added 5-2-22 in place of local var so I can clear it with LMD callbacks

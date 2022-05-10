@@ -720,7 +720,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   ]]--
   --save_quest_location = false
   --internal.dm("Debug", "About To Save")
-  if save_quest_location and lib.supported_lang then
+  if (save_quest_location and lib.supported_lang) or internal:is_master_player() then
     --internal.dm("Debug", "save_quest_location is true saving")
     --internal.dm("Debug", the_zone)
     if LibQuestData_SavedVariables["location_info"][the_zone] == nil then

@@ -52,5 +52,6 @@ quest_names/LibQuestData_QuestNames_pl.lua
 quest_names/LibQuestData_QuestNames_ru.lua
 quest_names/LibQuestData_QuestNames_tr.lua
 
+LibQuestData_Filters.lua
 LibQuestData.lua
 LibQuestData_Scan.lua
