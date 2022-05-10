@@ -288,8 +288,9 @@ in anything and a routine I made uses the game API.
 ]]--
 -- list of map ID numbers using GetCurrentMapId()
 -- 1552 Norg-Tzel
+-- 2114 High Isle
 lib.map_id_list = {
-  75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1850, 1747, 1887, 1348, 1313, 255, 1126, 2119, 2035, 2082, 1006, 994, 1484, 1552, 1555, 1654, 1349, 2021, 1814, 1060, 1719, 667, 16, 660, 108,
+  75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1850, 1747, 1887, 1348, 1313, 255, 1126, 2119, 2035, 2082, 1006, 994, 2114, 1484, 1552, 1555, 1654, 1349, 2021, 1814, 1060, 1719, 667, 16, 660, 108,
   -- 1354, -- Slag Town Outlaws Refuge
   -- 1207, Veloth Ancestral Tomb
   -- 1208, Dreloth Ancestral Tomb
@@ -338,6 +339,7 @@ lib.zone_names_list = {
   [1283] = "u32_theshambles_base_0", -- The Shambles
   [823] = "goldcoast_base_0",
   [816] = "hewsbane_base_0",
+  [1318] = "u34_systreszone_base_0",
   [726] = "murkmire_base_0",
   [1086] = "elsweyr_base_0",
   [1133] = "southernelsweyr_base_0",
