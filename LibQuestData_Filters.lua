@@ -1753,8 +1753,8 @@ local prerequisite_table = {
     3799, -- Scales of Retribution
   },
   [3806] = { -- Undermined
-    3794, -- Divine Favo
-    r },
+    3794, -- Divine Favor
+  },
   [3815] = { -- Cracking the Egg
     4590, -- The Skin-Stealer's Lair
   },
@@ -2827,8 +2827,8 @@ local prerequisite_table = {
     5602, -- City on the Brink
   },
   [5494] = { -- Long Live the King
-    5481, -- Blood on a King's Hand
-    s },
+    5481, -- Blood on a King's Hands
+  },
   [5505] = { -- Fire in the Hold
     5317, -- Broken Promises
   },
@@ -2882,8 +2882,8 @@ local prerequisite_table = {
     5531, -- Partners in Crime
   },
   [5535] = { -- A Double Life
-    5534, -- Cleaning Hous
-    e },
+    5534, -- Cleaning House
+  },
   [5536] = { -- Heist: Deadhollow Halls
     5582, -- Master of Heists
   },
@@ -4158,7 +4158,12 @@ end
 returns true/false
 intent: check if the quest requires other quests to be completed first
 ]]--
-function internal:check_prerequisite_quest(quest)
+function internal:prerequisites_completed(quest)
+  if not prerequisite_table[quest] then return true end
+  for _, value in pairs(prerequisite_table[quest]) do
+    if not lib.completed_quests[value] then return false end
+  end
+  return true
 end
 
 --[[given: table

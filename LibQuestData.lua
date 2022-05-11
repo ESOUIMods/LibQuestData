@@ -212,7 +212,8 @@ function lib:get_quest_list(zone)
     else
       --internal.dm("Debug", "The word cyrodiil was not found.")
     end
-    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest then
+    local prerequisiteCompleted = internal:prerequisites_completed(questId)
+    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted then
       -- name didn't exist keep it for sure
       quest_name_in_zone_list[questName] = questId
       table.insert(new_all_zone_quests, quest_info)
@@ -220,12 +221,12 @@ function lib:get_quest_list(zone)
       -- name exists already
       local questExists = questId == quest_name_in_zone_list[questName]
       local questUnknown = questName == lib.unknown_quest_name_string[lib.effective_lang]
-      if questUnknown and playerQualifies and not removedQuest then
+      if questUnknown and playerQualifies and not removedQuest and prerequisiteCompleted then
         --[[ the name of the quest in unknown because a localization
         has not been provided
         ]]--
         table.insert(new_all_zone_quests, quest_info)
-      elseif questExists and playerQualifies and not removedQuest then
+      elseif questExists and playerQualifies and not removedQuest and prerequisiteCompleted then
         --[[ the name is in the table, and the ID matches so keep it
         because it is another quest giver in a different place
 

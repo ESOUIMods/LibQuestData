@@ -397,6 +397,10 @@ Format:
 
     Essentially if quest_id is complete then conditional_quest_id
     is also marked as complete.
+
+    This should be only breadcrumb quests and not set Cyrodiil quests
+    that are not of your faction true so quests will not be added incorrectly
+    because of prerequisite list
 ]]--
 lib.conditional_quest_list = {
   [4453] = { -- A Favor Returned
@@ -586,10 +590,14 @@ lib.conditional_quest_list = {
   --[5487] = "City on the Brink",
   --[5493] = "City on the Brink", dc
   --[5496] = "City on the Brink",
+  --[[ need to research what to do when building completed quest list
+  because with the prerequisite list you don't want to mark other quests
+  for Cyrodiil completed if not for your faction.
   [4706] = { -- Reporting for Duty
     4704, -- Welcome to Cyrodiil
     4705, -- Siege Warfare
   },
+  ]]--
   [1834] = { -- Heart of Evil
     4992, -- Searching for the Searchers
     3530, -- Destroying the Dark Witnesses
