@@ -876,9 +876,7 @@ local function OnPlayerActivatedQuestBuild(eventCode, initial)
   --internal.dm("Debug", "OnPlayerActivatedQuestBuild")
   build_completed_quests()
   update_started_quests()
-  if initial then
-    update_quest_information()
-  end
+  update_quest_information()
 
   EVENT_MANAGER:UnregisterForEvent(lib.libName .. "_BuildQuests", EVENT_PLAYER_ACTIVATED)
 end

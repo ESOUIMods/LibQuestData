@@ -67,19 +67,34 @@ local internal = _G["LibQuestData_Internal"]
 
 ]]--
 internal.subzone_list = {
+    ["systres/u34_systreszone_base_0"] =
+    {
+        ["systres/u34_amenosstation_city_base_0"] =
+        {
+            x = 0.6273370385,
+            y = 0.4255915880,
+            zoom_factor = 0.0910472870,
+        },
+        ["systres/u34_gonfalonbaycity_base_0"] =
+        {
+            x = 0.4710096419,
+            y = 0.7790938616,
+            zoom_factor = 0.1412555873,
+        },
+    },
     ["reach/reach_base_0"] =
     {
         ["reach/markarthcity_base_0"] =
         {
             x = 0.1846692413,
-            zoom_factor = 0.1029908508,
             y = 0.4651794434,
+            zoom_factor = 0.1029908508,
         },
         ["reach/vateshransrites01_0"] =
         {
+            x = 0.4752955735,
             y = 0.7900598049,
             zoom_factor = 0.0078676939,
-            x = 0.4752955735,
         },
     },
     ["rivenspire/shornhelm_base_0"] =

@@ -222,6 +222,8 @@ xx - xx : Quest ID 5102: "The Mage's Tower"
 xxxx - Josajeh: Quest ID 6181: "Breaches On the Bay"
 xxxx - Gathwen: Quest ID 4625: "Tears of the Two Moons"
 xxxx - "Initiate Delighre" ? : Quest ID 4552: "Chasing Shadows"
+100238 - Marcelle Dantaine: Quest ID 6780: "The Long Game"
+36599 - Jakarn: Quest ID 6752: "Of Knights and Knaves
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
@@ -238,7 +240,7 @@ and the quests in the Dragonguard place
 ]]--
 lib.quest_giver_moves = {
   -- regular quests
-  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552,
+  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752,
 
   --[[
   [6428] = "Sticks and Bones",
@@ -378,6 +380,7 @@ Format:
 lib.achievement_quest_list = {
   [5479] = 1248, -- "A Cold Wind From the Mountain", "Hero of Wrothgar"
   [6320] = 2463, -- "The Singing Crystal", Mural
+  [6482] = 2669, -- A Salskap to Remember, An Instrumental Triumph
 }
 
 --[[
