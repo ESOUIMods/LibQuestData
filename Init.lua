@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 246
+local libName, libVersion = "LibQuestData", 247
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -98,7 +98,7 @@ lib.quest_givers = {}
 lib.quest_names = {}
 lib.client_lang = GetCVar("Language.2")
 lib.effective_lang = nil
-local supported_lang = { "br", "de", "en", "es", "fr", "fx", "it", "jp", "kb", "kr", "pl", "ru", "tr", }
+local supported_lang = { "br", "de", "en", "es", "fr", "fx", "it", "jp", "kb", "kr", "pl", "ru", "tr", "zh", }
 if internal:is_in(lib.client_lang, supported_lang) then
   lib.effective_lang = lib.client_lang
 else
@@ -131,6 +131,7 @@ lib.name_to_questid_table["kr"] = {}
 lib.name_to_questid_table["pl"] = {}
 lib.name_to_questid_table["ru"] = {}
 lib.name_to_questid_table["tr"] = {}
+lib.name_to_questid_table["zh"] = {}
 
 lib.name_to_npcid_table = {}
 lib.name_to_npcid_table["br"] = {}
@@ -146,6 +147,7 @@ lib.name_to_npcid_table["kr"] = {}
 lib.name_to_npcid_table["pl"] = {}
 lib.name_to_npcid_table["ru"] = {}
 lib.name_to_npcid_table["tr"] = {}
+lib.name_to_npcid_table["zh"] = {}
 
 lib.quest_rewards_skilpoint = {}
 lib.started_quests = {}
@@ -312,4 +314,5 @@ lib.unknown_quest_name_string = {
   ["pl"] = "Nieznane imię",
   ["ru"] = "Неизвестное имя",
   ["tr"] = "Bilinmeyen isim",
+  ["zh"] = "未知名称",
 }

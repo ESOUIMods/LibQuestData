@@ -270,6 +270,9 @@ This is a list of qusts that give skill points
 6409 - Reformation
 6394 - Uneasy Alliances
 5534 = Cleaning House
+
+The reward values from turning in a quest are stored in reward_info
+and when the value is 9 that means a skill point
 ]]--
 
 lib.quest_has_skill_point = { 465, 467, 575, 1633, 2192, 2222, 2997, 3006, 3235, 3267, 3379, 3634, 3735, 3797, 3817, 3831, 3867, 3868, 3968, 3993, 4054, 4061, 4107, 4115, 4117, 4139, 4143, 4188, 4222, 4261, 4319, 4337, 4345, 4346, 4386, 4432, 4452, 4474, 4479, 4542, 4552, 4590, 4602, 4606, 4607, 4613, 4690, 4712, 4720, 4730, 4733, 4750, 4758, 4764, 4765, 4778, 4832, 4836, 4837, 4847, 4868, 4884, 4885, 4891, 4912, 4960, 4972, 5090, 5433, 6455, 6476, 6050, 6481, 6466, 6057, 6409, 5891,
