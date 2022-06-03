@@ -1544,6 +1544,8 @@ lib.quest_givers["en"] = {
   [100255] = "Marunji the Broker",
   [100256] = "Kishka the Broker",
   [100257] = "Brahgas",
+  [100258] = "Llivas Gadar",
+  [100259] = "Head Overseer's Orders",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
