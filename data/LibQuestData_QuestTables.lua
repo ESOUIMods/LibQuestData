@@ -187,12 +187,15 @@ accepted anywhere
 [6701] = "An Apocalyptic Situation",
 [6687] = "Bounties of Blackwood",
 [6729] = "Guidance for Guides",
+[6751] = "Ascending Doubt",
 ]]--
 lib.prologue_quest_list = {
   4831, 5941, 6370, 5935, 6023, 6097, 6226, 6299, 6395, 6454, 6549, 6612, 6629, 6701, 6687, 6729,
   --[[Jan 2022: Added for Companion Quests that can be accepted anywhere
   ]]--
   6662, 6664, 6666, 6667,
+  -- High Isle
+  6751,
 }
 
 --[[ List of what the numbers mean

@@ -2450,5 +2450,10 @@ lib.quest_names["en"] = {
   [6800] = "Cards Across the Continent",
   [6801] = "Dueling Tributes",
   [6804] = "A New Venture",
+  [6812] = "Venting the Threat",
   [6814] = "The Intoxicating Mix",
+  [6821] = "Ascendant Shadows",
+  [6825] = "Pirate Problems",
+  [6831] = "Cards Across the Continent",
+  [6832] = "Dueling Tributes",
 }

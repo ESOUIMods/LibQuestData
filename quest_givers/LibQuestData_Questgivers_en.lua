@@ -1546,6 +1546,11 @@ lib.quest_givers["en"] = {
   [100257] = "Brahgas",
   [100258] = "Llivas Gadar",
   [100259] = "Head Overseer's Orders",
+  [100260] = "Wayllod",
+  [100261] = "Druid Peeska",
+  [100262] = "Parisse Plouff",
+  [100263] = "Lady Arabelle",
+  [100264] = "Ember",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
