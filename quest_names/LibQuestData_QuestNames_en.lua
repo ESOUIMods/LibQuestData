@@ -2458,4 +2458,13 @@ lib.quest_names["en"] = {
   [6832] = "Dueling Tributes",
   [6843] = "Sojourn of the Druid King",
   [6849] = "A Sea of Troubles",
+  [6904] = "Dragon Frog Dilemma",
+  [6905] = "Spice of Life",
+  [6883] = "Radiant Souvenirs",
+  [6854] = "Cursed and Coniferous",
+  [6862] = "Fauns in Peril",
+  [6860] = "The Freebooters",
+  [6857] = "The Sea Runs Restless",
+  [6846] = "Shaky Job Prospects",
+  [6858] = "A Heart Turned Black",
 }

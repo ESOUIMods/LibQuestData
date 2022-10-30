@@ -82,6 +82,15 @@ internal.subzone_list = {
             zoom_factor = 0.1412555873,
         },
     },
+    ["galen/u36_galenisland_base_0"] = 
+    {
+        ["galen/u36_vastyrcity_base_0"] = 
+        {
+            x = 0.0747952014,
+            y = 0.5591602325,
+            zoom_factor = 0.2687704414,
+        },
+    },
     ["reach/reach_base_0"] =
     {
         ["reach/markarthcity_base_0"] =
