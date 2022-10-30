@@ -88,6 +88,9 @@ quest giver.
 6730 =  "Courier's Folly", "Telofasa's Diary",
 6705 =  "Death Stalks the Weak", "Note for Khazasha",
 6728 =  "A Gem of a Mystery", "Mikget's To-Do List",
+6638 =  "Sand, Snow, and Blood", "A Quest of Sand, Snow, and Blood",
+100161 - Hooded Figure: Quest ID 4296: "Soul Shriven in Coldharbour"
+100161 - Hooded Figure: Quest ID 4831: "The Harborage"
 
 ID   = Quest Name, Object for comments
 --]]
@@ -166,6 +169,16 @@ lib.questid_giver_lookup = {
   [6730] = 96005,
   [6705] = 96006,
   [6728] = 100209,
+  [6638] = 100282,
+  [6629] = 100284,
+  [6246] = 100285,
+  [6319] = 100286,
+  [4296] = 100161,
+  [4831] = 100161,
+  [4346] = 100295,
+  [6505] = 47631,
+  [4303] = 31746,
+  [6414] = 82000,
 }
 
 --[[ This list contains Prologue quests that can be
@@ -189,9 +202,10 @@ accepted anywhere
 [6729] = "Guidance for Guides",
 [6751] = "Ascending Doubt",
 [6843] = "Sojourn of the Druid King",
+[6564] = "Glory of the Undaunted",
 ]]--
 lib.prologue_quest_list = {
-  4831, 5941, 6370, 5935, 6023, 6097, 6226, 6299, 6395, 6454, 6549, 6612, 6629, 6701, 6687, 6729,
+  4831, 5941, 6370, 5935, 6023, 6097, 6226, 6299, 6395, 6454, 6549, 6612, 6629, 6701, 6687, 6729, 6564,
   --[[Jan 2022: Added for Companion Quests that can be accepted anywhere
   ]]--
   6662, 6664, 6666, 6667,
@@ -228,24 +242,26 @@ xxxx - Josajeh: Quest ID 6181: "Breaches On the Bay"
 xxxx - Gathwen: Quest ID 4625: "Tears of the Two Moons"
 xxxx - "Initiate Delighre" ? : Quest ID 4552: "Chasing Shadows"
 100238 - Marcelle Dantaine: Quest ID 6780: "The Long Game"
-36599 - Jakarn: Quest ID 6752: "Of Knights and Knaves
+36599 - Jakarn: Quest ID 6752: "Of Knights and Knaves"
+100161 - Hooded Figure: Quest ID 4296: "Soul Shriven in Coldharbour"
+95001, 95005 - Captain Rian Liore, Brigadine Antonius: Quest ID 6615: "A Deadly Secret"
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
 lib.quest_locations
 --]]
 -- 4841 need more data first for Rajesh
--- 5742 needs verified as it is for halloween quest
-
 
 --[[
 Another use is that this will prevent a daily or quest from
 a location that is off the map. Southern Elsweyr for example
 and the quests in the Dragonguard place
 ]]--
+-- [5742] = "The Witchmother's Bargain", Witchmother Festival
+-- [6695] = "Plucking the Crow", Witchmother Festival
 lib.quest_giver_moves = {
   -- regular quests
-  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752,
+  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752, 4296, 6615,
 
   --[[
   [6428] = "Sticks and Bones",
@@ -260,7 +276,10 @@ lib.quest_giver_moves = {
 
   ]]--
   -- Dragonguard quests
-  6428, 6429, 6430, 6433, 6434, 6435, 6405, 6406, 3924
+  6428, 6429, 6430, 6433, 6434, 6435, 6405, 6406, 3924,
+
+  -- Holliday Quests
+  6695,
 }
 
 --[[
