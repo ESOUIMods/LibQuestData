@@ -1551,6 +1551,12 @@ lib.quest_givers["en"] = {
   [100262] = "Parisse Plouff",
   [100263] = "Lady Arabelle",
   [100264] = "Ember",
+  [100265] = "Fasaria",
+  [100266] = "Initiate Gine",
+  [100267] = "Thalmor Adept",
+  [100268] = "Dhulef",
+  [100269] = "Druid Laurel",
+  [100270] = "Druid Edaen",
   -- Skyrim
   [200000] = "Tyrvera",
   [200001] = "Priest Isonir",
