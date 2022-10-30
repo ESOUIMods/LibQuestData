@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 251
+local libName, libVersion = "LibQuestData", 252
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -180,7 +180,7 @@ lib.quest_data_index = {
   game_api = 3, -- 100003 means unverified, 100030 or higher means recent quest data
   quest_line = 4, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   quest_number = 5, -- Quest Number In QuestLine (10000 = not assigned/not verified)
-  quest_series = 6, -- None = 0,    Cadwell's Almanac = 1,    Undaunted = 2, AD = 3, DC = 4, EP = 5.
+  quest_series = 6, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5.
   quest_display_type = 7, -- INSTANCE_DISPLAY_TYPE_ZONE_STORY, INSTANCE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 

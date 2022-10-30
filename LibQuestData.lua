@@ -736,7 +736,14 @@ local function update_quest_information()
       if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
       rebuilt_data[index] = current_data
     else
-      if current_data[lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then
+      local newerAPI = false
+      if current_data[lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then newerAPI = true end
+      local hasAva = false
+      if current_data[lib.quest_data_index.quest_series] >= lib.quest_series_type.quest_type_ad and current_data[lib.quest_data_index.quest_series] <= lib.quest_series_type.quest_type_ep then
+        hasAva = true
+      end
+
+      if newerAPI or hasAva then
         if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
         rebuilt_data[index] = current_data
       end
