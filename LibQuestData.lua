@@ -132,7 +132,7 @@ function lib:get_quest_list(zone)
     local questId = quest_info[lib.quest_map_pin_index.quest_id]
     lib.quest_in_zone_list[questId] = true
   end
-  --internal.dm("Debug", "get_quest_list")
+  internal.dm("Debug", "get_quest_list")
   --internal.dm("Debug", zone)
   if internal:subzone_has_conversions(zone) then
     -- all_zone_quests = internal:add_subzone_quests(zone)
@@ -213,7 +213,11 @@ function lib:get_quest_list(zone)
       --internal.dm("Debug", "The word cyrodiil was not found.")
     end
     local prerequisiteCompleted = internal:prerequisites_completed(questId)
-    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted then
+    local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
+    --HasQuest(pinData.q)
+    -- /script d(HasCompletedQuest(3686))
+    --internal.dm("Debug", string.format("[%s] %s : Completed(%s), preq (%s), bread(%s)", questId, GetQuestName(questId), tostring(HasCompletedQuest(questId)), tostring(prerequisiteCompleted), tostring(showBreadcrumbQuest)))
+    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest then
       -- name didn't exist keep it for sure
       quest_name_in_zone_list[questName] = questId
       table.insert(new_all_zone_quests, quest_info)
@@ -221,12 +225,12 @@ function lib:get_quest_list(zone)
       -- name exists already
       local questExists = questId == quest_name_in_zone_list[questName]
       local questUnknown = questName == lib.unknown_quest_name_string[lib.effective_lang]
-      if questUnknown and playerQualifies and not removedQuest and prerequisiteCompleted then
+      if questUnknown and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest then
         --[[ the name of the quest in unknown because a localization
         has not been provided
         ]]--
         table.insert(new_all_zone_quests, quest_info)
-      elseif questExists and playerQualifies and not removedQuest and prerequisiteCompleted then
+      elseif questExists and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest then
         --[[ the name is in the table, and the ID matches so keep it
         because it is another quest giver in a different place
 
@@ -518,30 +522,26 @@ function lib:is_quest_started(quest_id)
 end
 
 local function build_completed_quests()
-  -- Set up list of completed quests
   lib.completed_quests = {}
-  local id
-  -- There currently are < 6000 quests, but some can be completed multiple times.
-  -- 10000 should be more than enough to get all completed quests and still avoid an endless loop.
-  for i = 0, 10000 do
-    -- Get next completed quest. If it was the last, break loop
-    id = GetNextCompletedQuestId(i)
-    if id == nil then break end
-    -- Add the quest to the list
-    quest_name, quest_type = GetCompletedQuestInfo(id)
-    -- if not internal:is_empty_or_nil(quest_name) and lib.supported_lang then
-    if not internal:is_empty_or_nil(quest_name) then
-      if lib.quest_names[lib.effective_lang][id] ~= quest_name then
+  local fakeQuestId
+  local apiQuestname
+  for i = 0, 7500 do
+    fakeQuestId = i
+    apiQuestname = GetQuestName(fakeQuestId)
+    if apiQuestname ~= "" then
+      if lib.quest_names[lib.effective_lang][fakeQuestId] ~= apiQuestname then
         --internal.dm("Debug", "~= quest_name")
-        LibQuestData_SavedVariables["quest_names"][id] = quest_name
+        LibQuestData_SavedVariables["quest_names"][fakeQuestId] = apiQuestname
       end
-      if lib.quest_names[lib.effective_lang][id] == nil then
+      if lib.quest_names[lib.effective_lang][fakeQuestId] == nil then
         --internal.dm("Debug", "== nil")
-        LibQuestData_SavedVariables["quest_names"][id] = quest_name
+        LibQuestData_SavedVariables["quest_names"][fakeQuestId] = apiQuestname
+      end
+      if HasCompletedQuest(fakeQuestId) then
+        lib.completed_quests[fakeQuestId] = true
+        lib:set_conditional_quests(fakeQuestId)
       end
     end
-    lib.completed_quests[id] = true
-    lib:set_conditional_quests(id)
   end
 end
 
@@ -881,7 +881,7 @@ local function update_quest_information()
 end
 
 local function OnPlayerActivatedQuestBuild(eventCode, initial)
-  --internal.dm("Debug", "OnPlayerActivatedQuestBuild")
+  internal.dm("Debug", "OnPlayerActivatedQuestBuild")
   build_completed_quests()
   update_started_quests()
   update_quest_information()
@@ -893,6 +893,7 @@ EVENT_MANAGER:RegisterForEvent(lib.libName .. "_BuildQuests", EVENT_PLAYER_ACTIV
 -- Event handler function for EVENT_ADD_ON_LOADED
 local function OnLoad(eventCode, addOnName)
   if addOnName ~= lib.libName then return end
+  internal.dm("Debug", "OnLoad")
 
   if LibQuestData_SavedVariables.version ~= 4 then
     -- d("ding not 4")
@@ -934,6 +935,7 @@ local function OnLoad(eventCode, addOnName)
   lib:build_npcid_table(lib.effective_lang) -- build npc names lookup table once
   lib:build_questlist_skilpoint() -- build list of quests that reward a skill point
   update_guild_skillline_data()
+  build_completed_quests()
 
   EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_ADD_ON_LOADED)
 end

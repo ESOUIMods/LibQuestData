@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 252
+local libName, libVersion = "LibQuestData", 253
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -7,22 +7,32 @@ _G["LibQuestData_Internal"] = internal
 -------------------------------------------------
 ----- Logger Function                       -----
 -------------------------------------------------
-
-local logger = LibDebugLogger.Create(libName)
-internal.logger = logger
 internal.show_log = false
-local SDLV = DebugLogViewer
+
+if LibDebugLogger then
+  internal.logger = LibDebugLogger.Create(libName)
+end
+local logger
+local viewer
+if DebugLogViewer then viewer = true else viewer = false end
+if LibDebugLogger then logger = true else logger = false end
 
 local function create_log(log_type, log_content)
-  if internal.logger and SDLV then
-    if log_type == "Debug" then
-      internal.logger:Debug(log_content)
-    end
-    if log_type == "Verbose" then
-      internal.logger:Verbose(log_content)
-    end
-  else
+  if not viewer and log_type == "Info" then
     CHAT_ROUTER:AddSystemMessage(log_content)
+    return
+  end
+  if logger and log_type == "Debug" then
+    internal.logger:Debug(log_content)
+  end
+  if logger and log_type == "Info" then
+    internal.logger:Info(log_content)
+  end
+  if logger and log_type == "Verbose" then
+    internal.logger:Verbose(log_content)
+  end
+  if logger and log_type == "Warn" then
+    internal.logger:Warn(log_content)
   end
 end
 

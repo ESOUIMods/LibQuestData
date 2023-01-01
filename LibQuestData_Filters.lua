@@ -4144,23 +4144,505 @@ local prerequisite_table = {
   [6832] = { -- Dueling Tributes
     6804, -- A New Venture
   },
+  [6847] = { -- The Hidden Lord
+    6853, -- Guardian of Y'ffelon
+    6766, -- The Ascendant Storm
+  },
+  [6848] = { -- The Ivy Throne
+    6847, -- The Hidden Lord
+  },
+  [6850] = { -- Tides of Ruin
+    6849, -- A Sea of Troubles
+  },
+  [6852] = { -- The Dream of Kasorayn
+    6859, -- City Under Siege
+  },
+  [6853] = { -- Guardian of Y'ffelon
+    6852, -- The Dream of Kasorayn
+  },
+  [6855] = { -- Seeds of Destruction
+    6850, -- Tides of Ruin
+  },
+  [6859] = { -- City Under Siege
+    6855, -- Seeds of Destruction
+  },
+  [6894] = { -- And Now, Perhaps, Peace
+    6848, -- The Ivy Throne
+  },
+}
+
+local breadcrumb_table = {
+  [701] = { -- Queen's Emissary - Isque
+    702, -- Queen's Emissary - Orrery
+    703, -- Queen's Emissary - Dusk
+  },
+  [702] = { -- Queen's Emissary - Orrery
+    701, -- Queen's Emissary - Isque
+    703, -- Queen's Emissary - Dusk
+  },
+  [703] = { -- Queen's Emissary - Dusk
+    701, -- Queen's Emissary - Isque
+    702, -- Queen's Emissary - Orrery
+  },
+  [1735] = { -- Unanswered Questions
+    1536, -- Fire in the Fields
+  },
+  [2193] = { -- The Scholar of Bergama
+    2251, -- Gone Missing
+    2222, -- Alasan's Plot
+  },
+  [2240] = { -- Shiri's Research
+    2997, -- Amputating the Hand
+  },
+  [2403] = { -- The Search for Shiri
+    2997, -- Amputating the Hand
+  },
+  [3026] = { -- The Wyrd Sisters
+    3060, -- Seeking the Guardians
+  },
+  [3183] = { -- To the Wyrd Tree
+    3191, -- Reclaiming the Elements
+  },
+  [3184] = { -- The Glenumbra Moors
+    3027, -- Ripple Effect
+  },
+  [3281] = { -- Leading the Stand
+    4899, -- Beyond the Call
+  },
+  [3283] = { -- Werewolves to the North
+    974, -- A Duke in Exile
+  },
+  [3330] = { -- Retaking Camlorn
+    3064, -- Rally Cry
+  },
+  [3345] = { -- The End of Extortion
+    3302, -- The Miners' Lament
+  },
+  [3530] = { -- Destroying the Dark Witnesses
+    1834, -- Heart of Evil
+  },
+  [3566] = { -- Kingdom in Mourning
+    1799, -- A City in Black
+  },
+  [3589] = { -- Quiet the Ringing Bell
+    3734, -- Restoring the Guardians
+  },
+  [3618] = { -- To Ash Mountain
+    3734, -- Restoring the Guardians
+  },
+  [3635] = { -- City at the Spire
+    3642, -- The Curse of Heimlyn Keep
+  },
+  [3698] = { -- To the Tormented Spire
+    3826, -- Climbing the Spire
+  },
+  [3732] = { -- Overrun
+    3799, -- Scales of Retribution
+  },
+  [3802] = { -- What Happened at Murkwater
+    3678, -- Trials of the Burnished Scales
+  },
+  [3815] = { -- Cracking the Egg
+    4606, -- Keepers of the Shell
+  },
+  [3855] = { -- Mystery of Othrenis
+    3615, -- Wake the Dead
+  },
+  [3955] = { -- Tracking the Plague
+    3673, -- Death Trap
+  },
+  [3956] = { -- Message to Mournhold
+    4453, -- A Favor Returned
+  },
+  [3958] = { -- The Llodos Plague
+    3659, -- Unwanted Guests
+  },
+  [3966] = { -- Chasing the Magistrix
+    3820, -- Restless Spirits
+    3831, -- The Judgment of Veloth
+  },
+  [3981] = { -- To Taarengrav
+    4147, -- The Shackled Guardian
+  },
+  [3982] = { -- Bound to the Bog
+    3840, -- Saving the Relics
+  },
+  [3990] = { -- A Beginning at Bleakrock
+    3992, -- What Waits Beneath
+    3995, -- The Frozen Man
+    3987, -- Hozzin's Folly
+    4016, -- The Missing of Bleakrock
+  },
+  [4026] = { -- Zeren in Peril
+    4028, -- Breaking the Tide
+  },
+  [4028] = { -- Breaking the Tide
+    4026, -- Zeren in Peril
+  },
+  [4051] = { -- Warning Davon's Watch
+    3585, -- Legacy of the Ancestors
+  },
+  [4087] = { -- Sneak Peak
+    4116, -- Snow and Flame
+    4117, -- Songs of Sovngarde
+  },
+  [4163] = { -- Onward to Shadowfen
+    3686, -- Three Tender Souls
+  },
+  [4169] = { -- Of Councils and Kings
+    4069, -- Making Amends
+  },
+  [4177] = { -- Victory at Morvunskar
+    4166, -- The War Council
+  },
+  [4184] = { -- To Pinepeak Caverns
+    3978, -- Tomb Beneath the Mountain
+  },
+  [4197] = { -- Sounds of Alarm
+    4062, -- Blindsided
+  },
+  [4210] = { -- Real Marines
+    4209, -- Teldur's End
+  },
+  [4211] = { -- To Tanzelwil
+    4217, -- In the Name of the Queen
+  },
+  [4273] = { -- To the King
+    4186, -- Securing the Pass
+  },
+  [4357] = { -- To Firsthold
+    4260, -- Breaking the Barrier
+  },
+  [4365] = { -- To Dawnbreak
+    4355, -- Through the Ashes
+  },
+  [4366] = { -- To Mathiisen
+    4293, -- Putting the Pieces Together
+  },
+  [4443] = { -- To Alcaire Castle
+    2552, -- Army at the Gates
+  },
+  [4466] = { -- The Broken Spearhead
+    4510, -- The Spearhead's Captain
+    4344, -- Like Moths to a Candle
+    4454, -- Innocent Scoundrel
+    4431, -- Buried Secrets
+  },
+  [4510] = { -- The Spearhead's Captain
+    4466, -- The Broken Spearhead
+  },
+  [4514] = { -- The Spearhead's Crew
+    4510, -- The Spearhead's Captain
+  },
+  [4549] = { -- Back to Skywatch
+    4330, -- Lifting the Veil
+  },
+  [4558] = { -- Taking the Fight to the Enemy
+    3082, -- The Lion Guard's Stand
+  },
+  [4646] = { -- The Mnemic Egg
+    3909, -- The Dominion's Alchemist
+  },
+  [4656] = { -- Tharayya's Trail
+    4432, -- Blood and Sand
+  },
+  [4657] = { -- The Spinner's Tale
+    4586, -- The Witch of Silatar
+  },
+  [4689] = { -- A Door Into Moonlight
+    4689, -- A Door Into Moonlight
+  },
+  [4694] = { -- Word from the Throne
+    2146, -- The Impervious Vault
+  },
+  [4697] = { -- To Rawl'kha
+    4479, -- Motes in the Moonlight
+    4759, -- Hallowed to Rawl'kha
+    4712, -- The First Step
+  },
+  [4709] = { -- The Path to Moonmont
+    4802, -- To Moonmont
+  },
+  [4710] = { -- Hallowed To Arenthia
+    4652, -- The Colovian Occupation
+    4653, -- Stonefire Machinations
+  },
+  [4711] = { -- To Dune
+    4550, -- The Fires of Dune
+  },
+  [4744] = { -- Before the Storm
+    4739, -- A Storm Upon the Shore
+  },
+  [4759] = { -- Hallowed to Rawl'kha
+    4697, -- To Rawl'kha
+    4712, -- The First Step
+  },
+  [4761] = { -- Trouble at Tava's Blessing
+    2222, -- Alasan's Plot
+  },
+  [4767] = { -- One of the Undaunted
+    4967, -- One of the Undaunted
+    4997, -- One of the Undaunted
+  },
+  [4790] = { -- Breaking the Ward
+    4546, -- Retaking the Pass
+    4601, -- Right of Theft
+    4608, -- The Blight of the Bosmer
+  },
+  [4798] = { -- Eye on Arenthia
+    4652, -- The Colovian Occupation
+  },
+  [4799] = { -- To Saifa in Rawl'kha
+    4712, -- The First Step
+  },
+  [4802] = { -- To Moonmont
+    4479, -- Motes in the Moonlight
+  },
+  [4809] = { -- Nirnroot Wine
+    4810, -- Nirnroot Wine
+    4811, -- Nirnroot Wine
+  },
+  [4810] = { -- Nirnroot Wine
+    4809, -- Nirnroot Wine
+    4811, -- Nirnroot Wine
+  },
+  [4811] = { -- Nirnroot Wine
+    4809, -- Nirnroot Wine
+    4810, -- Nirnroot Wine
+  },
+  [4817] = { -- Tracking the Hand
+    2222, -- Alasan's Plot
+  },
+  [4818] = { -- To Auridon
+    4255, -- Ensuring Security
+  },
+  [4821] = { -- Report to Marbruk
+    4690, -- Striking at the Heart
+  },
+  [4850] = { -- Shades of Green
+    4690, -- Striking at the Heart
+  },
+  [4853] = { -- Woodhearth
+    4574, -- Veil of Illusion
+  },
+  [4901] = { -- The Road to Rivenspire
+    4902, -- Shornhelm Divided
+  },
+  [4949] = { -- Favor for the Queen
+    3333, -- Risen From the Depths
+    2130, -- Rise of the Dead
+  },
+  [4951] = { -- Fit to Rule
+    4922, -- The Orrery of Elden Root
+  },
+  [4967] = { -- One of the Undaunted
+    4767, -- One of the Undaunted
+    4997, -- One of the Undaunted
+  },
+  [4974] = { -- Brackenleaf's Briars
+    4833, -- Bosmer Insight
+  },
+  [4978] = { -- Striking Back
+    4959, -- Trials and Tribulations
+    4960, -- To Walk on Far Shores
+  },
+  [4988] = { -- Rendezvous at the Pass
+    4912, -- Storming the Garrison
+  },
+  [4991] = { -- Dark Wings
+    3280, -- Imperial Infiltration
+  },
+  [4992] = { -- Searching for the Searchers
+    1834, -- Heart of Evil
+  },
+  [4993] = { -- Report to Evermore
+    4891, -- The Parley
+  },
+  [4994] = { -- Imperial Curiosity
+    4912, -- Storming the Garrison
+  },
+  [4997] = { -- One of the Undaunted
+    4767, -- One of the Undaunted
+    4967, -- One of the Undaunted
+  },
+  [5006] = { -- To Velyn Harbor
+    4193, -- House and Home
+  },
+  [5009] = { -- The Siege of Velyn Harbor
+    4193, -- House and Home
+    4194, -- One Fell Swoop
+  },
+  [5013] = { -- Hushed Whispers
+    3687, -- Getting to the Truth
+    3686, -- Three Tender Souls
+  },
+  [5015] = { -- Eyes of the Enemy
+    4587, -- Trail of the Skin-Stealer
+  },
+  [5016] = { -- Children of the Hist
+    4606, -- Keepers of the Shell
+  },
+  [5034] = { -- A Grave Situation
+    4147, -- The Shackled Guardian
+    4139, -- Shattered Hopes
+  },
+  [5035] = { -- Calling Hakra
+    3978, -- Tomb Beneath the Mountain
+    4139, -- Shattered Hopes
+  },
+  [5040] = { -- Taking Precautions
+    3634, -- The General's Demise
+  },
+  [5041] = { -- To Aid Davon's Watch
+    3585, -- Legacy of the Ancestors
+    5042, -- Assisting Davon's Watch
+  },
+  [5042] = { -- Assisting Davon's Watch
+    3585, -- Legacy of the Ancestors
+    5041, -- To Aid Davon's Watch
+  },
+  [5043] = { -- A Higher Priority
+    3584, -- The Coral Heart
+  },
+  [5044] = { -- To the Mountain
+    3735, -- The Death of Balreth
+  },
+  [5050] = { -- Waiting for Word
+    1639, -- Another Omen
+  },
+  [5052] = { -- An Offering to Azura
+    1541, -- A Prison of Sleep
+  },
+  [5053] = { -- The Lost Patrol
+    3082, -- The Lion Guard's Stand
+  },
+  [5055] = { -- Missive to the Queen
+    4256, -- A Hostile Situation
+    5058, -- All the Fuss
+  },
+  [5058] = { -- All the Fuss
+    4256, -- A Hostile Situation
+    5055, -- Missive to the Queen
+  },
+  [5071] = { -- Curinure's Invitation
+    3997, -- The Mad God's Bargain
+    3953, -- Chateau of the Ravenous Rodent
+    3916, -- Long Lost Lore
+    4435, -- Simply Misplaced
+    3918, -- Circus of Cheerful Slaughter
+  },
+  [5072] = { -- Aid for Bramblebreach
+    4593, -- Audience with the Wilderking
+  },
+  [5073] = { -- Aicessar's Invitation
+    3973, -- Will of the Council
+    3898, -- Proving the Deed
+    3885, -- The Prismatic Core
+    3858, -- The Dangerous Past
+    3856, -- Anchors from the Harbour
+  },
+  [5074] = { -- Rudrasa's Invitation
+    5071, -- Curinure's Invitation
+  },
+  [5076] = { -- Nemarc's Invitation
+    5071, -- Curinure's Invitation
+  },
+  [5091] = { -- Hallowed To Grimwatch
+    4461, -- Grimmer Still
+    4460, -- Grim Situation
+  },
+  [5092] = { -- The Champions at Rawl'kha
+    4479, -- Motes in the Moonlight
+  },
+  [5093] = { -- Moons Over Grimwatch
+    4460, -- Grim Situation
+    5091, -- Hallowed To Grimwatch
+  },
+  [5103] = { -- Mournhold Market Misery
+    3817, -- The Seal of Three
+  },
+  [5104] = { -- The Shards of Wuuthrad
+    4139, -- Shattered Hopes
+  },
+  [5243] = { -- A Leaf in the Wind
+    5203, -- The Serpent's Fang
+  },
+  [5245] = { -- Holding Court
+    5194, -- Slithering Brood
+  },
+  [5487] = { -- City on the Brink
+    5602, -- City on the Brink
+    5493, -- City on the Brink
+    5496, -- City on the Brink
+  },
+  [5493] = { -- City on the Brink
+    5602, -- City on the Brink
+    5487, -- City on the Brink
+    5496, -- City on the Brink
+  },
+  [5496] = { -- City on the Brink
+    5602, -- City on the Brink
+    5487, -- City on the Brink
+    5493, -- City on the Brink
+  },
+  [5506] = { -- Scouting the Memorial District
+    5473, -- Of Brands and Bones
+  },
+  [5508] = { -- Scouting the Arboretum
+    5490, -- Knowledge is Power
+  },
+  [5510] = { -- Scouting the Arena District
+    5477, -- The Watcher in the Walls
+  },
+  [5511] = { -- Scouting the Elven Gardens
+    5489, -- The Lock and the Legion
+  },
+  [5512] = { -- Scouting the Nobles District
+    5483, -- The Imperial Standard
+  },
+  [5513] = { -- Scouting the Temple District
+    5480, -- The Bleeding Temple
+  },
+  [5602] = { -- City on the Brink
+    5496, -- City on the Brink
+    5487, -- City on the Brink
+    5493, -- City on the Brink
+  },
+  [5774] = { -- A Leaf in the Wind
+    5769, -- The Serpent's Fang
+  },
+  [5775] = { -- Holding Court
+    5768, -- Slithering Brood
+  },
+  [5920] = { -- Breaking Through the Fog
+    5804, -- Broken Bonds
+  },
 }
 
 --[[given: table
 returns true/false
 intent: if the breadcrumb quest is not marked as completed,
 mark it completed because the main quest is complete
+
+Take the questId and loop over quests. If completed then
+the breadcrumb quest is no longer available.
 ]]--
-function internal:check_breadcrumb_quest(quest)
+function internal:show_breadcrumb_quest(questId)
+  local showBreadcrumb = true
+  if not breadcrumb_table[questId] then return showBreadcrumb end
+  for _, value in pairs(breadcrumb_table[questId]) do
+    if lib.completed_quests[value] then showBreadcrumb = false end
+  end
+  return showBreadcrumb
 end
 
 --[[given: table
 returns true/false
 intent: check if the quest requires other quests to be completed first
 ]]--
-function internal:prerequisites_completed(quest)
-  if not prerequisite_table[quest] then return true end
-  for _, value in pairs(prerequisite_table[quest]) do
+function internal:prerequisites_completed(questId)
+  if not prerequisite_table[questId] then return true end
+  for _, value in pairs(prerequisite_table[questId]) do
     if not lib.completed_quests[value] then return false end
   end
   return true
