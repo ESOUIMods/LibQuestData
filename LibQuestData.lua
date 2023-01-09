@@ -529,15 +529,15 @@ local function build_completed_quests()
     fakeQuestId = i
     apiQuestname = GetQuestName(fakeQuestId)
     if apiQuestname ~= "" then
-      if lib.quest_names[lib.effective_lang][fakeQuestId] ~= apiQuestname then
-        --internal.dm("Debug", "~= quest_name")
-        LibQuestData_SavedVariables["quest_names"][fakeQuestId] = apiQuestname
-      end
-      if lib.quest_names[lib.effective_lang][fakeQuestId] == nil then
-        --internal.dm("Debug", "== nil")
-        LibQuestData_SavedVariables["quest_names"][fakeQuestId] = apiQuestname
-      end
       if HasCompletedQuest(fakeQuestId) then
+        if lib.quest_names[lib.effective_lang][fakeQuestId] ~= apiQuestname then
+          --internal.dm("Debug", "~= quest_name")
+          LibQuestData_SavedVariables["quest_names"][fakeQuestId] = apiQuestname
+        end
+        if lib.quest_names[lib.effective_lang][fakeQuestId] == nil then
+          --internal.dm("Debug", "== nil")
+          LibQuestData_SavedVariables["quest_names"][fakeQuestId] = apiQuestname
+        end
         lib.completed_quests[fakeQuestId] = true
         lib:set_conditional_quests(fakeQuestId)
       end
