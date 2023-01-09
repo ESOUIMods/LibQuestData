@@ -214,10 +214,12 @@ function lib:get_quest_list(zone)
     end
     local prerequisiteCompleted = internal:prerequisites_completed(questId)
     local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
+    local showCompanionQuest = true
+    if lib:is_companion_quest(questId) then showCompanionQuest = internal:check_companion_rapport_requirements(questId) end
     --HasQuest(pinData.q)
     -- /script d(HasCompletedQuest(3686))
     --internal.dm("Debug", string.format("[%s] %s : Completed(%s), preq (%s), bread(%s)", questId, GetQuestName(questId), tostring(HasCompletedQuest(questId)), tostring(prerequisiteCompleted), tostring(showBreadcrumbQuest)))
-    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest then
+    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
       -- name didn't exist keep it for sure
       quest_name_in_zone_list[questName] = questId
       table.insert(new_all_zone_quests, quest_info)
@@ -225,12 +227,12 @@ function lib:get_quest_list(zone)
       -- name exists already
       local questExists = questId == quest_name_in_zone_list[questName]
       local questUnknown = questName == lib.unknown_quest_name_string[lib.effective_lang]
-      if questUnknown and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest then
+      if questUnknown and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
         --[[ the name of the quest in unknown because a localization
         has not been provided
         ]]--
         table.insert(new_all_zone_quests, quest_info)
-      elseif questExists and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest then
+      elseif questExists and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
         --[[ the name is in the table, and the ID matches so keep it
         because it is another quest giver in a different place
 
@@ -284,6 +286,178 @@ function lib:is_cadwell_quest(id)
     local c = lib.quest_cadwell[id] or false
     return c
   end
+end
+
+--[[ get whether or not it is a cadwell quest
+return true if it is a cadwell quest
+]]--
+function lib:is_companion_quest(id)
+  if type(id) == "number" then
+    local c = lib.quest_companion[id] or false
+    return c
+  end
+end
+
+-------------------------------------------------
+----- Assign Quest Flag                    ----
+-------------------------------------------------
+function lib:assign_quest_flag(questId, hidden_quest)
+  local completed_quest = lib.completed_quests[questId] or false
+  local started_quest = lib.started_quests[questId] or false
+  local repeatable_type = lib:get_quest_repeat(questId)
+  local skill_quest = lib.quest_rewards_skilpoint[questId] or false
+  local cadwell_quest = lib:is_cadwell_quest(questId) or false
+  local companion_quest = lib:is_companion_quest(questId) or false
+  local quest_type_data = lib:get_quest_data(questId)
+  local quest_type = quest_type_data[lib.quest_data_index.quest_type]
+  local quest_display_type
+  if quest_type_data[lib.quest_data_index.quest_display_type] then
+    quest_display_type = quest_type_data[lib.quest_data_index.quest_display_type]
+  else
+    quest_display_type = INSTANCE_DISPLAY_TYPE_NONE
+  end
+
+  --internal.dm("Debug", completed_quest)
+  --internal.dm("Debug", started_quest)
+  --internal.dm("Debug", repeatable_type)
+  --internal.dm("Debug", skill_quest)
+  --internal.dm("Debug", cadwell_quest)
+  --internal.dm("Debug", quest_type)
+  --internal.dm("Debug", quest_display_type)
+
+  local fcpq = false -- flag_completed_quest
+  local fucq = false -- flag_uncompleted_quest
+  local fhdq = false -- flag_hidden_quest
+  local fstq = false -- flag_started_quest
+  local fguq = false -- flag_guild_quest
+  local fdaq = false -- flag_daily_quest
+  local fskq = false -- flag_skill_quest
+  local fcwq = false -- flag_cadwell_quest
+  local fcaq = false -- flag_companion_quest
+  local fduq = false -- flag_dungeon_quest
+  local fhoq = false -- flag_holiday_quest
+  local fwkq = false -- flag_weekly_quest
+  local fzsq = false -- flag_zone_story_quest
+  local fbgq = false -- flag_type_battleground
+  local fprq = false -- flag_type_prologue
+  local fpgq = false -- flag_type_pledge
+
+  if completed_quest then fcpq = true end
+  if not completed_quest then fucq = true end
+  if hidden_quest then fhdq = true end
+  if started_quest then fstq = true end
+  if quest_type == lib.quest_data_type.quest_type_guild then fguq = true end
+  if repeatable_type == lib.quest_data_repeat.quest_repeat_daily then fdaq = true end
+  if skill_quest then fskq = true end
+  if cadwell_quest then fcwq = true end
+  if companion_quest then fcaq = true end
+  if quest_type == lib.quest_data_type.quest_type_dungeon then fduq = true end
+  if quest_type == lib.quest_data_type.quest_type_holiday_event then fhoq = true end
+  if repeatable_type == lib.quest_data_repeat.quest_repeat_repeatable then fwkq = true end
+  if quest_type == lib.quest_data_type.quest_type_battleground then fbgq = true end
+  if quest_type == lib.quest_data_type.quest_type_prologue then fprq = true end
+  if quest_type == lib.quest_data_type.quest_type_undaunted_pledge then fpgq = true end
+
+  if quest_display_type == lib.quest_display_type.zone_story then fzsq = true end
+  --[[ there needs to be a way to hide quests you can't repeat that are marked as
+  battleground or some other uncommon type
+
+  unsure if I want a global flag type and just use this to keep a battleground quest
+  like For Glory from showing up if you did it already
+  ]]--
+  local fnrq = false
+  if repeatable_type == lib.quest_data_repeat.quest_repeat_not_repeatable then fnrq = true end
+
+  --[[
+  holliday, daily, and WEEKLY quests are unique
+
+  holliday happens only durring the event
+  Weekly can be done once per week, like a trial quest
+  daily can be done once per day
+  ]]--
+  if fhoq then
+    return lib.flag_holiday_quest
+  end
+  if fwkq then
+    return lib.flag_weekly_quest
+  end
+  if fpgq then
+    return lib.flag_type_pledge
+  end
+  if fdaq and (not fhoq or not fwkq or not fpgq) then
+    return lib.flag_daily_quest
+  end
+  -- battleground
+  if fbgq and fnrq and not completed_quest then
+    return lib.flag_daily_quest
+  end
+  --[[
+  Completed takes precedence over other states
+  ]]--
+  if fcpq and (not fdaq or not fwkq or not fhoq) then
+    return lib.flag_completed_quest
+  end
+
+  --[[
+  Only Uncompleted quests can be hidden so check for
+  hidden first since you can click them to unhide them.
+  Hidden should take precedence over uncompleted.
+  ]]--
+  if fhdq then
+    return lib.flag_hidden_quest
+  end
+
+  --[[
+  Started quests should not be hidden and started
+  at the same time. The event for on_quest_added
+  should take care of this.
+  ]]--
+  if fstq then
+    return lib.flag_started_quest
+  end
+
+  --[[
+  Cadwell and Skill quests are sort of unique. Completed
+  should take precedence and if uncompleted these should
+  take precedence over uncompleted.
+  ]]--
+  if fskq then
+    return lib.flag_skill_quest
+  end
+  if fcaq then
+    return lib.flag_companion_quest
+  end
+  if fcwq then
+    return lib.flag_cadwell_quest
+  end
+
+  --[[
+  new quest types
+  ]]--
+  if fguq then
+    return lib.flag_guild_quest
+  end
+  if fduq then
+    return lib.flag_dungeon_quest
+  end
+  if fzsq then
+    return lib.flag_zone_story_quest
+  end
+  if fprq then
+    return lib.flag_type_prologue
+  end
+  --[[
+  Hopefully this is last
+  ]]--
+  if (fucq) then
+    return lib.flag_uncompleted_quest
+  end
+
+  --[[
+  Only one flag per quest and I hope it never
+  gets here and is set to 0
+  ]]--
+  return 0
 end
 
 -------------------------------------------------
@@ -396,19 +570,6 @@ end
 -------------------------------------------------
 ----- Lookup By Name: returns table of IDs   ----
 -------------------------------------------------
---[[
-
-Get a table of quest IDs when given a quest name
-
-Use: Drawing a pin with a different color if the player has started the
-quest and has not finished it yet. Loop over the table
-
-example:
-for _, id in ipairs(ids) do
-    started_quests[id] = true
-end
---]]
-
 function lib:get_questids_table(name, lang)
   local lang = lang or lib.effective_lang
   if type(name) == "string" then
@@ -513,6 +674,19 @@ function lib:set_achievement_quests(quest_id)
   end
 end
 
+--[[
+
+Get a table of quest IDs when given a quest name
+
+Use: Drawing a pin with a different color if the player has started the
+quest and has not finished it yet. Loop over the table
+
+example:
+for _, id in ipairs(ids) do
+    started_quests[id] = true
+end
+--]]
+
 function lib:is_quest_started(quest_id)
   local started = lib.started_quests
   for id, state in pairs(started) do
@@ -555,7 +729,7 @@ end
 local function update_started_quests()
   -- Get names of started quests from quest journal, get quest ID from lookup table
   lib.started_quests = {}
-  for i = 1, MAX_JOURNAL_QUESTS do
+  for i = 1, GetNumJournalQuests() do
     if IsValidQuestIndex(i) then
       local name = GetJournalQuestName(i)
       local ids = lib:get_questids_table(name)
@@ -654,6 +828,7 @@ local function update_quest_information()
   local npc_id
   local saved_reward_info
   local currentQuestInfoFormat = false
+  local quests_from_zone = {}
 
   for zone, zone_quests in pairs(all_locations) do
     for index, quest in pairs(zone_quests) do

@@ -4651,9 +4651,10 @@ end
 --[[given: table
 returns true/false
 intent: check if the quest requires a specific guild rank for the player to qualify for the quest
+Summary: This is not needed since they are covered by prerequisite_table or breadcrumb_table
+
+internal:check_guild_quest(questId)
 ]]--
-function internal:check_guild_quest(quest)
-end
 
 --[[given: table
 returns true/false
@@ -4662,6 +4663,25 @@ intent: check the players alliance for the specified quest
 Alliance was not added until version 237
 ]]--
 function internal:check_quest_alliance(quest)
+end
+
+--[[given: table
+returns true/false
+intent: check the players companion rapport against the questId
+]]--
+function internal:check_companion_rapport_requirements(questId)
+  local rapportLevel = GetActiveCompanionRapportLevel()
+  if questId == 6662 and rapportLevel >= 4 then return true end -- Things Lost, Things Found
+  if questId == 6664 and rapportLevel >= 5 then return true end -- Family Secrets
+  if questId == 6666 and rapportLevel >= 4 then return true end -- A Mother's Obsession
+  if questId == 6667 and rapportLevel >= 5 then return true end -- Dead Weight
+  if questId == 6785 and rapportLevel >= 4 then return true end -- Cold Trail
+  if questId == 6786 and rapportLevel >= 5 then return true end -- Cold Blood, Old Pain
+  if questId == 6787 and rapportLevel >= 6 then return true end -- Green with Envy
+  if questId == 6789 and rapportLevel >= 4 then return true end -- The Lost Symbol
+  if questId == 6790 and rapportLevel >= 5 then return true end -- A Mother's Request
+  if questId == 6791 and rapportLevel >= 6 then return true end -- The Princess Detective
+  return false
 end
 
 --[[given: table

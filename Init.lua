@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 254
+local libName, libVersion = "LibQuestData", 255
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -181,6 +181,25 @@ if LibQuestData_SavedVariables.reward_info == nil then LibQuestData_SavedVariabl
 if LibQuestData_SavedVariables.giver_names == nil then LibQuestData_SavedVariables.giver_names = {} end
 
 -- note only the "lib.client_lang" will contain data be default
+
+-- quest flags
+lib.flag_completed_quest = 1
+lib.flag_uncompleted_quest = 2
+lib.flag_hidden_quest = 3
+lib.flag_started_quest = 4
+lib.flag_guild_quest = 5
+lib.flag_daily_quest = 6
+lib.flag_skill_quest = 7
+lib.flag_cadwell_quest = 8
+lib.flag_dungeon_quest = 9
+lib.flag_holiday_quest = 10
+lib.flag_weekly_quest = 11
+lib.flag_main_story = 12
+lib.flag_type_battleground = 13
+lib.flag_type_prologue = 14
+lib.flag_type_pledge = 15
+lib.flag_zone_story_quest = 16
+lib.flag_companion_quest = 17
 
 lib.quest_data_index = {
   -- quest_name      =    1, Depreciated, use lib:get_quest_name(id, lang)

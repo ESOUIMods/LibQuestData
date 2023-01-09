@@ -89,6 +89,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
   local quest_display_type = -1
   local repeat_type = -1
   local zone_name = ""
+  local objective_name = ""
   local zone_index = -1
   local poi_index = -1
   local quest_id = -1
@@ -105,7 +106,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
     quest_type = GetJournalQuestType(journalIndex)
     quest_display_type = GetJournalQuestInstanceDisplayType(journalIndex)
     repeat_type = GetJournalQuestRepeatType(journalIndex)
-    zone_name, _, zone_index, poi_index = GetJournalQuestLocationInfo(journalIndex)
+    zone_name, objective_name, zone_index, poi_index = GetJournalQuestLocationInfo(journalIndex)
     --internal.dm("Debug", quest_type)
     --internal.dm("Debug", quest_display_type)
   end
@@ -492,7 +493,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
           anyway.
   ]]--
   local currentApiVersion = GetAPIVersion()
-  the_quest_info = {
+  local the_quest_info = {
     [lib.quest_data_index.quest_type] = quest_to_update.quest_type,
     [lib.quest_data_index.quest_repeat] = quest_to_update.repeat_type,
     [lib.quest_data_index.game_api] = currentApiVersion,
@@ -570,7 +571,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     end
   end
 
-  the_quest_loc_info = {
+  local the_quest_loc_info = {
     [lib.quest_map_pin_index.local_x] = quest_to_update.x,
     [lib.quest_map_pin_index.local_y] = quest_to_update.y,
     [lib.quest_map_pin_index.global_x] = quest_to_update.gpsx,
@@ -599,7 +600,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   and then determine that there are pins that already exist so don't save the
   information.
   ]]--
-  regular_quest_list = internal:get_zone_quests(the_zone)
+  local regular_quest_list = internal:get_zone_quests(the_zone)
   --d(quest_to_update.questID)
   for num_entry, quest_entry_table in ipairs(regular_quest_list) do
     --d(num_entry)
@@ -657,7 +658,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   LibQuestData_SavedVariables["location_info"][the_zone] = update_older_quest_info(LibQuestData_SavedVariables["location_info"][the_zone])
   -- now look for duplicates
   if save_quest_location then
-    saved_vars_quest_list = get_quest_list_sv(the_zone)
+    local saved_vars_quest_list = get_quest_list_sv(the_zone)
     for num_entry, sv_quest_entry in ipairs(saved_vars_quest_list) do
       --internal.dm("Debug", "Num Entry: "..num_entry)
       --internal.dm("Debug", sv_quest_entry)
@@ -757,7 +758,7 @@ local function show_quests()
   for zone, zone_quests in pairs(LibQuestData_SavedVariables.quests) do
     d("zone: " .. zone)
     for num_entry, quest_from_table in pairs(zone_quests) do
-      quest_to_update = quest_from_table
+      local quest_to_update = quest_from_table
       d("Quest Name: " .. quest_to_update.name)
     end
   end
