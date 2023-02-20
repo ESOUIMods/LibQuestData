@@ -119,10 +119,10 @@ end
 -------------------------------------------------
 
 function lib:get_quest_list(zone)
+  local playerAlliance = GetUnitAlliance("player")
   local all_zone_quests = {}
   local subzone_quests = {}
   local new_element = {}
-  local quest_name_in_zone_list = {}
   -- get all the quetsts in the zone
   if internal:zone_has_quest_locations(zone) then
     all_zone_quests = internal:get_zone_quests(zone)
@@ -141,7 +141,7 @@ function lib:get_quest_list(zone)
     for subzone, conversion in pairs(subzone_list) do
       -- use the texture name as the zone and get the quests as if subzone = zone
       --internal.dm("Debug", subzone)
-      local subzone_quests = internal:get_zone_quests(subzone)
+      subzone_quests = internal:get_zone_quests(subzone)
       for i, quest in ipairs(subzone_quests) do
         --internal.dm("Debug", quest)
         local questId = quest[lib.quest_map_pin_index.quest_id]
@@ -149,7 +149,7 @@ function lib:get_quest_list(zone)
         then add the quest from the subzone. This will prevent adding a quest from the subzone with
         the subzone scale information to the map when there is already a fake pin.]]--
         if not internal:is_empty_or_nil(quest) and not lib.quest_in_zone_list[questId] then
-          local new_element = ZO_DeepTableCopy(quest)
+          new_element = ZO_DeepTableCopy(quest)
           --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_x])
           --internal.dm("Verbose", quest[lib.quest_map_pin_index.local_y])
           new_element[lib.quest_map_pin_index.local_x] = (quest[lib.quest_map_pin_index.local_x] * conversion.zoom_factor) + conversion.x
@@ -157,7 +157,7 @@ function lib:get_quest_list(zone)
           --internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_x])
           --internal.dm("Verbose", new_element[lib.quest_map_pin_index.local_y])
           table.insert(all_zone_quests, new_element)
-          local questId = new_element[lib.quest_map_pin_index.quest_id]
+          questId = new_element[lib.quest_map_pin_index.quest_id]
           lib.quest_in_zone_list[questId] = true
         end
       end
@@ -167,18 +167,15 @@ function lib:get_quest_list(zone)
 
   local new_all_zone_quests = {}
   for key, quest_info in pairs(all_zone_quests) do
+    local addQuest = false
     local questId = quest_info[lib.quest_map_pin_index.quest_id]
-    local questName = lib:get_quest_name(questId, lib.effective_lang)
     local questInfo = lib.quest_data[questId]
-    local questSeries = nil
-    if questInfo then
-      questSeries = questInfo[lib.quest_data_index.quest_series]
-    else
-      questSeries = 0
-    end
-    local playerAlliance = GetUnitAlliance("player")
+    local prerequisiteCompleted = internal:prerequisites_completed(questId)
+    local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
+    local questSeries = questInfo[lib.quest_data_index.quest_series] or 0
     local playerGuildRankData = nil
     local playerGuildQuestLevelRequirement = nil
+    if lib:is_companion_quest(questId) then addQuest = internal:check_companion_rapport_requirements(questId) end
     if questSeries >= lib.quest_series_type.quest_type_guild_mage or questSeries == lib.quest_series_type.quest_type_undaunted then
       -- this is set in function update_guild_skillline_data()
       playerGuildRankData = lib.quest_guild_rank_data[questSeries].rank
@@ -186,14 +183,8 @@ function lib:get_quest_list(zone)
         playerGuildQuestLevelRequirement = lib.guild_rank_quest_list[questSeries][questId]
       end
     end
-    local playerQualifies = true
     if playerGuildQuestLevelRequirement and playerGuildRankData then
-      playerQualifies = playerGuildQuestLevelRequirement <= playerGuildRankData
-    end
-
-    local removedQuest = false
-    if lib.known_removed_quest[questId] then
-      removedQuest = true
+      addQuest = playerGuildQuestLevelRequirement <= playerGuildRankData
     end
     --[[
     Pledges can be obtained from any location. Before this can be used All quests
@@ -204,43 +195,25 @@ function lib:get_quest_list(zone)
       playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
     end
     ]]--
-    if IsInImperialCity() or IsInCyrodiil() then
-      --internal.dm("Debug", "The word cyrodiil was found.")
-      if questSeries >= lib.quest_series_type.quest_type_ad and questSeries <= lib.quest_series_type.quest_type_ep then
-        playerQualifies = lib.playerAlliance[playerAlliance] == questSeries
-      end
-    else
-      --internal.dm("Debug", "The word cyrodiil was not found.")
-    end
-    local prerequisiteCompleted = internal:prerequisites_completed(questId)
-    local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
-    local showCompanionQuest = true
-    if lib:is_companion_quest(questId) then showCompanionQuest = internal:check_companion_rapport_requirements(questId) end
-    --HasQuest(pinData.q)
+
+    -- /script d(HasQuest(3686))
     -- /script d(HasCompletedQuest(3686))
     --internal.dm("Debug", string.format("[%s] %s : Completed(%s), preq (%s), bread(%s)", questId, GetQuestName(questId), tostring(HasCompletedQuest(questId)), tostring(prerequisiteCompleted), tostring(showBreadcrumbQuest)))
-    if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
-      -- name didn't exist keep it for sure
-      quest_name_in_zone_list[questName] = questId
-      table.insert(new_all_zone_quests, quest_info)
-    else
-      -- name exists already
-      local questExists = questId == quest_name_in_zone_list[questName]
-      local questUnknown = questName == lib.unknown_quest_name_string[lib.effective_lang]
-      if questUnknown and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
-        --[[ the name of the quest in unknown because a localization
-        has not been provided
-        ]]--
-        table.insert(new_all_zone_quests, quest_info)
-      elseif questExists and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
-        --[[ the name is in the table, and the ID matches so keep it
-        because it is another quest giver in a different place
+    if showBreadcrumbQuest then
+      addQuest = true
+    end
 
-        Otherwise it is a quest with the same name but a different
-        Quest ID
-        ]]--
-        table.insert(new_all_zone_quests, quest_info)
-      end
+    local questInfoHasAvaType = (questSeries >= lib.quest_series_type.quest_type_ad and questSeries <= lib.quest_series_type.quest_type_ep)
+    local playerAllianceSameAsRequirement = questSeries == lib.playerAlliance[playerAlliance]
+    local pvpZone = IsInImperialCity() or IsInCyrodiil()
+    if pvpZone and questInfoHasAvaType and not playerAllianceSameAsRequirement then
+      addQuest = false
+    end
+    if lib.known_removed_quest[questId] or not prerequisiteCompleted then
+      addQuest = false
+    end
+    if addQuest then
+      table.insert(new_all_zone_quests, quest_info)
     end
   end
 

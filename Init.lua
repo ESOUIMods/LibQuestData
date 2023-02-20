@@ -7,7 +7,7 @@ _G["LibQuestData_Internal"] = internal
 -------------------------------------------------
 ----- Logger Function                       -----
 -------------------------------------------------
-internal.show_log = false
+internal.show_log = true
 
 if LibDebugLogger then
   internal.logger = LibDebugLogger.Create(libName)
@@ -278,6 +278,7 @@ lib.quest_series_type = {
 }
 
 lib.playerAlliance = {}
+-- AD = 3, DC = 4, EP = 5.
 lib.playerAlliance[ALLIANCE_ALDMERI_DOMINION] = lib.quest_series_type.quest_type_ad
 lib.playerAlliance[ALLIANCE_DAGGERFALL_COVENANT] = lib.quest_series_type.quest_type_dc
 lib.playerAlliance[ALLIANCE_EBONHEART_PACT] = lib.quest_series_type.quest_type_ep
