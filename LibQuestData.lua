@@ -166,6 +166,8 @@ function lib:get_quest_list(zone)
   --internal.dm("Debug", all_zone_quests)
 
   local new_all_zone_quests = {}
+  local displayName = GetDisplayName()
+  local masterPlayer = displayName == "@Sharlikran"
   for key, quest_info in pairs(all_zone_quests) do
     local questId = quest_info[lib.quest_map_pin_index.quest_id]
     local questName = lib:get_quest_name(questId, lib.effective_lang)
@@ -216,9 +218,13 @@ function lib:get_quest_list(zone)
     local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
     local showCompanionQuest = true
     if lib:is_companion_quest(questId) then showCompanionQuest = internal:check_companion_rapport_requirements(questId) end
+
     --HasQuest(pinData.q)
     -- /script d(HasCompletedQuest(3686))
-    --internal.dm("Debug", string.format("[%s] %s : Completed(%s), preq (%s), bread(%s)", questId, GetQuestName(questId), tostring(HasCompletedQuest(questId)), tostring(prerequisiteCompleted), tostring(showBreadcrumbQuest)))
+    if questSeries == lib.playerAlliance[playerAlliance] then
+      internal.dm("Debug", string.format("[%s] %s : Completed(%s), Prerequisite (%s), Breadcrumb(%s), Companion(%s)", questId, GetQuestName(questId), tostring(HasCompletedQuest(questId)), tostring(prerequisiteCompleted), tostring(showBreadcrumbQuest), tostring(showCompanionQuest)))
+    end
+
     if not quest_name_in_zone_list[questName] and playerQualifies and not removedQuest and prerequisiteCompleted and showBreadcrumbQuest and showCompanionQuest then
       -- name didn't exist keep it for sure
       quest_name_in_zone_list[questName] = questId
