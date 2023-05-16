@@ -1637,6 +1637,13 @@ lib.quest_givers["en"] = {
   [200048] = "Sarcophagus",
   [200049] = "Kasura",
   [200050] = "Falkfyr's Notes, Page 1",
+  -- Necrom
+  [210000] = "Adventurers, Take Heed!",
+  [210001] = "Ordinator Tandasea",
+  [210002] = "Leramil the Wise",
+  [210003] = "Ordinator Tilena",
+  [210004] = "Researcher An'Xeh",
+  [210005] = "Ordinator Nelyn",
   -- Existing
   [500000] = "Ayleid Sarcophagus",
   [500001] = "Heist Board",

@@ -2590,4 +2590,13 @@ lib.quest_names["en"] = {
   [6904] = "Dragon Frog Dilemma",
   [6905] = "Spice of Life",
   [6906] = "A Gulf of Time",
+          [7000] = "Call of the High Ordinator",
+        [7017] = "The Double Edge",
+        [7032] = "Approaching a Nightmare",
+        [6971] = "Fate's Proxy",
+        [7037] = "Secret Protection",
+        [7021] = "The Fateweaver Key",
+        [7043] = "Knowledge is Power",
+        [7057] = "Bastion Nymic",
+
 }

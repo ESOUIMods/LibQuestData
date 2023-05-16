@@ -7,8 +7,8 @@
 ; https://account.elderscrollsonline.com/add-on-terms
 
 ## Title: LibQuestData
-## Version: 2.57
-## AddOnVersion: 257
+## Version: 2.58
+## AddOnVersion: 258
 ## Author: Sharlikran
 ## APIVersion: 101037 101038
 ## Description: Provides Quest Information
