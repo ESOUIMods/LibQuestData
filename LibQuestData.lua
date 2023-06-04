@@ -294,8 +294,8 @@ function lib:is_cadwell_quest(id)
   end
 end
 
---[[ get whether or not it is a cadwell quest
-return true if it is a cadwell quest
+--[[ get whether or not it is a companion quest
+return true if it is a companion quest
 ]]--
 function lib:is_companion_quest(id)
   if type(id) == "number" then
