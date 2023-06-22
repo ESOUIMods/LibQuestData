@@ -4163,12 +4163,59 @@ local prerequisite_table = {
   [6855] = { -- Seeds of Destruction
     6850, -- Tides of Ruin
   },
-  [6859] = { -- City Under Siege
+  [6859] = { -- The Siege of Vastyr
     6855, -- Seeds of Destruction
   },
   [6894] = { -- And Now, Perhaps, Peace
     6848, -- The Ivy Throne
   },
+  [6975] = { -- A Hidden Fate
+    6971, -- Fate's Proxy
+  },
+  [6976] = { -- Conclave of Fate
+    6975, -- A Hidden Fate
+  },
+  [6977] = { -- Chronicle of Fate
+    6991, -- An Unhealthy Fate
+  },
+  [6991] = { -- An Unhealthy Fate
+    7025, -- A Calamity of Fate
+  },
+  [7018] = { -- Between a Rock and a Whetstone
+    7017, -- The Double Edge
+  },
+  [7019] = { -- Dim and Distant Pasts
+    7017, -- The Double Edge
+    7018, -- Between a Rock and a Whetstone
+  },
+  [7020] = { -- Light the Way to Freedom
+    7019, -- Dim and Distant Pasts
+    7018, -- Between a Rock and a Whetstone
+    7017, -- The Double Edge
+  },
+  [7022] = { -- Paths Unwalked
+    7021, -- The Fateweaver Key
+  },
+  [7023] = { -- Adversarial Adventures
+    7022, -- Paths Unwalked
+    7021, -- The Fateweaver Key
+  },
+  [7024] = { -- Tempting Fates
+    7023, -- Adversarial Adventures
+    7022, -- Paths Unwalked
+    7021, -- The Fateweaver Key
+  },
+  [7025] = { -- A Calamity of Fate
+    6976, -- Conclave of Fate
+  },
+  [7051] = { -- Akacirn the Deathless
+    7048, -- Numinous Grimoire, Volume 1
+    7049, -- Numinous Grimoire, Volume 2
+    7050, -- Numinous Grimoire, Volume 3
+  },
+  -- [7066] = { -- Kill Enemy Arcanists 4706, -- Reporting for Duty },
+  -- [7067] = { -- Kill Enemy Arcanists 4727, -- Reporting for Duty },
+  -- [7068] = { -- Kill Enemy Arcanists 4724, -- Reporting for Duty },
 }
 
 local breadcrumb_table = {
@@ -4681,6 +4728,12 @@ function internal:check_companion_rapport_requirements(questId)
   if questId == 6789 and rapportLevel >= 4 then return true end -- The Lost Symbol
   if questId == 6790 and rapportLevel >= 5 then return true end -- A Mother's Request
   if questId == 6791 and rapportLevel >= 6 then return true end -- The Princess Detective
+  if questId == 7018 and rapportLevel >= 4 then return true end -- Between a Rock and a Whetstone
+  if questId == 7019 and rapportLevel >= 5 then return true end -- Dim and Distant Pasts
+  if questId == 7020 and rapportLevel >= 6 then return true end -- Light the Way to Freedom
+  if questId == 7022 and rapportLevel >= 4 then return true end -- Paths Unwalked
+  if questId == 7023 and rapportLevel >= 5 then return true end -- Adversarial Adventures
+  if questId == 7024 and rapportLevel >= 6 then return true end -- Tempting Fates
   return false
 end
 

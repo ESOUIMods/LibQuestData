@@ -217,6 +217,7 @@ function lib:get_quest_list(zone)
     local prerequisiteCompleted = internal:prerequisites_completed(questId)
     local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
     local showCompanionQuest = true
+    local showCertificationQuest = GetUnitLevel("player") >= 6 and lib.quest_certifications[questId]
     if lib:is_companion_quest(questId) then showCompanionQuest = internal:check_companion_rapport_requirements(questId) end
 
     --HasQuest(pinData.q)
