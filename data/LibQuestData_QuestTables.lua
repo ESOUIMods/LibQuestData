@@ -91,6 +91,7 @@ quest giver.
 6638 =  "Sand, Snow, and Blood", "A Quest of Sand, Snow, and Blood",
 100161 - Hooded Figure: Quest ID 4296: "Soul Shriven in Coldharbour"
 100161 - Hooded Figure: Quest ID 4831: "The Harborage"
+500081 = "Yenadar's Journal: Quest ID 4808 = Test of Faith
 
 ID   = Quest Name, Object for comments
 --]]
@@ -179,47 +180,46 @@ lib.questid_giver_lookup = {
   [6505] = 47631,
   [4303] = 31746,
   [6414] = 82000,
+  [4808] = 500081,
 }
 
 --[[ This list contains Prologue quests that can be
 accepted anywhere
 
 [4831] = "The Harborage",
+[4296] = "Soul Shriven in Coldharbour", -- Can not abbandon, you will get this whether you want it or not
+
+-- No longer available or only during an event
 [5941] = "The Jester's Festival",
+[5936] = "Ache for Cake",
 [6370] = "Ache for Cake",
-[5935] = "The Missing Prophecy",
 [6023] = "Of Knives and Long Shadows",
-[6097] = "Through a Veil Darkly",
-[6226] = "Ruthless Competition",
-[6299] = "The Demon Weapon",
-[6395] = "The Dragonguard's Legacy",
-[6454] = "The Coven Conspiracy",
-[6549] = "The Ravenwatch Inquiry",
-[6612] = "A Mortal's Touch",
 [6629] = "A Visit to Elsweyr",
-[6701] = "An Apocalyptic Situation",
 [6687] = "Bounties of Blackwood",
 [6729] = "Guidance for Guides",
-[6751] = "Ascending Doubt",
-[6843] = "Sojourn of the Druid King",
 [6564] = "Glory of the Undaunted",
-]]--
-lib.prologue_quest_list = {
-  4831, 5941, 6370, 5935, 6023, 6097, 6226, 6299, 6395, 6454, 6549, 6612, 6629, 6701, 6687, 6729, 6564,
-  --[[Jan 2022: Added for Companion Quests that can be accepted anywhere
-  ]]--
-  6662, 6664, 6666, 6667,
-  -- High Isle
-  6751, 6843,
+[5312] = "Taking the Undaunted Pledge",
 
-}
+[6612] = "A Mortal's Touch",
+[6701] = "An Apocalyptic Situation",
+[6751] = "Ascending Doubt",
+[6967] = "Eye of Fate",
+[6226] = "Ruthless Competition",
+[6843] = "Sojourn of the Druid King",
+[6454] = "The Coven Conspiracy",
+[6299] = "The Demon Weapon",
+[6395] = "The Dragonguard's Legacy",
+[5935] = "The Missing Prophecy",
+[6549] = "The Ravenwatch Inquiry",
+[6097] = "Through a Veil Darkly",
+]]--
+lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, }
 
 --[[ List of what the numbers mean
 This is a list of special NPCs that run around
 or hunt you down. Once XY location is set, do not
 change it
 
-68884 - Stuga: Quest ID 5450: "Invitation to Orsinium"
 54154 - Umbarile: Quest ID 4220: "The Mallari-Mora"
 52751 - Firtorel: Quest ID 5058: "All the Fuss"
 32298 - Endaraste: Quest ID 4264: "Plague of Phaer"
@@ -245,6 +245,7 @@ xxxx - "Initiate Delighre" ? : Quest ID 4552: "Chasing Shadows"
 36599 - Jakarn: Quest ID 6752: "Of Knights and Knaves"
 100161 - Hooded Figure: Quest ID 4296: "Soul Shriven in Coldharbour"
 95001, 95005 - Captain Rian Liore, Brigadine Antonius: Quest ID 6615: "A Deadly Secret"
+91004 - Seeks-the-Dark: Quest ID 6137: Looting the Light
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
@@ -261,7 +262,7 @@ and the quests in the Dragonguard place
 -- [6695] = "Plucking the Crow", Witchmother Festival
 lib.quest_giver_moves = {
   -- regular quests
-  5450, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752, 4296, 6615,
+  4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752, 4296, 6615, 6137,
 
   --[[
   [6428] = "Sticks and Bones",
@@ -309,6 +310,8 @@ lib.quest_has_skill_point = {
   6616, 6660, 6619, 6404, 6402, 6403,
   --Deadlands
   6646,
+  --Necrom
+  6976, 7025, 7051, 7048, 6975, 6977, 6971, 6972, 6973, 6974, 6991,
 }
 
 --[[
@@ -321,7 +324,9 @@ lib.quest_certifications = quest_ids {
 
 lib.quest_cadwell = quest_ids { 465, 467, 737, 736, 1341, 1346, 1437, 1529, 1536, 1541, 1591, 1799, 1834, 2130, 2146, 2184, 2192, 2222, 2495, 2496, 2497, 2552, 2564, 2566, 2567, 2997, 3064, 3082, 3174, 3189, 3191, 3235, 3267, 3277, 3280, 3338, 3379, 3584, 3585, 3587, 3588, 3615, 3616, 3632, 3633, 3634, 3637, 3673, 3686, 3687, 3695, 3696, 3705, 3734, 3735, 3749, 3791, 3797, 3810, 3817, 3818, 3826, 3831, 3837, 3838, 3868, 3909, 3928, 3957, 3968, 3978, 4058, 4059, 4060, 4061, 4069, 4075, 4078, 4086, 4095, 4106, 4115, 4116, 4117, 4123, 4124, 4139, 4143, 4147, 4150, 4158, 4166, 4186, 4188, 4193, 4194, 4217, 4222, 4255, 4256, 4260, 4261, 4293, 4294, 4302, 4330, 4331, 4345, 4385, 4386, 4437, 4452, 4453, 4459, 4461, 4479, 4546, 4550, 4573, 4574, 4580, 4587, 4590, 4593, 4601, 4606, 4608, 4613, 4652, 4653, 4690, 4712, 4719, 4720, 4739, 4750, 4755, 4765, 4857, 4868, 4884, 4885, 4902, 4903, 4912, 4922, 4943, 4958, 4959, 4960, 4972, 5024, }
 
-lib.quest_companion = quest_ids { 6648, 6626, 6771, 6760, 6662, 6664, 6666, 6667, 6785, 6786, 6787, 6789, 6790, 6791 }
+lib.quest_companion = quest_ids { 6626, 6648, 6771, 6760, 7021, 7017, } -- only companion starter quests
+
+lib.quest_companion_rapport = quest_ids { 6666, 6667, 6662, 6664, 6785, 6786, 6787, 6789, 6790, 6791, 7022, 7023, 7024, 7018, 7019, 7020, } -- only companion rapport quests
 
 --[[ TODO map_id_list and zone_names_list are not used
 in anything and a routine I made uses the game API.
@@ -620,24 +625,35 @@ lib.conditional_quest_list = {
     5072, -- Aid for Bramblebreach
   },
   --Cyrodiil
-  --[4704] = "Welcome to Cyrodiil",
-  --[4722] = "Welcome to Cyrodiil",
+  --[4704] = "Welcome to Cyrodiil", ad
+  --[4722] = "Welcome to Cyrodiil", ep
   --[4725] = "Welcome to Cyrodiil", dc
-  --[4706] = "Reporting for Duty",
-  --[4724] = "Reporting for Duty",
+  --[4706] = "Reporting for Duty", ad
+  --[4724] = "Reporting for Duty", ep
   --[4727] = "Reporting for Duty", dc
-  --[4705] = "Siege Warfare",
-  --[4723] = "Siege Warfare",
+  --[4705] = "Siege Warfare", ad
+  --[4723] = "Siege Warfare", ep
   --[4726] = "Siege Warfare", dc
-  --[5487] = "City on the Brink",
+  --[5487] = "City on the Brink", ep
   --[5493] = "City on the Brink", dc
-  --[5496] = "City on the Brink",
+  --[5496] = "City on the Brink", ad
   --[[ need to research what to do when building completed quest list
   because with the prerequisite list you don't want to mark other quests
   for Cyrodiil completed if not for your faction.
+  
+  also the order is Welcome to Cyrodiil, Siege Warfare, Reporting for Duty and if you skipped
+  the tutorial then Siege Warfare and Reporting for Duty will be false
   [4706] = { -- Reporting for Duty
     4704, -- Welcome to Cyrodiil
     4705, -- Siege Warfare
+  },
+  [4724] = { -- Reporting for Duty
+    4722, -- Welcome to Cyrodiil
+    4723, -- Siege Warfare
+  },
+  [4727] = { -- Reporting for Duty
+    4725, -- Welcome to Cyrodiil
+    4726, -- Siege Warfare
   },
   ]]--
   [1834] = { -- Heart of Evil
@@ -703,11 +719,10 @@ as Folded Note for Real Marines; ID 4210. It can also be for
 quest starters from the crown store
 
 [4210] = "Real Marines", "Folded Note"
+[4808] = "Test of Faith",
 [5312] = "Taking the Undaunted Pledge"
 ]]--
-lib.object_quest_starter_list = {
-  4210, 5312
-}
+lib.object_quest_starter_list = quest_ids { 4210, 4808, 5312, }
 
 --[[
 These tables are quests for guilds that are not available

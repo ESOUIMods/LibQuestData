@@ -166,8 +166,6 @@ function lib:get_quest_list(zone)
   --internal.dm("Debug", all_zone_quests)
 
   local new_all_zone_quests = {}
-  local displayName = GetDisplayName()
-  local masterPlayer = displayName == "@Sharlikran"
   for key, quest_info in pairs(all_zone_quests) do
     local questId = quest_info[lib.quest_map_pin_index.quest_id]
     local questName = lib:get_quest_name(questId, lib.effective_lang)
@@ -217,8 +215,8 @@ function lib:get_quest_list(zone)
     local prerequisiteCompleted = internal:prerequisites_completed(questId)
     local showBreadcrumbQuest = internal:show_breadcrumb_quest(questId)
     local showCompanionQuest = true
+    if lib:is_companion_rapport_quest(questId) then showCompanionQuest = internal:check_companion_rapport_requirements(questId) end
     local showCertificationQuest = GetUnitLevel("player") >= 6 and lib.quest_certifications[questId]
-    if lib:is_companion_quest(questId) then showCompanionQuest = internal:check_companion_rapport_requirements(questId) end
 
     --HasQuest(pinData.q)
     -- /script d(HasCompletedQuest(3686))
@@ -301,6 +299,36 @@ return true if it is a companion quest
 function lib:is_companion_quest(id)
   if type(id) == "number" then
     local c = lib.quest_companion[id] or false
+    return c
+  end
+end
+
+--[[ get whether or not it is a companion quest
+return true if it is a companion quest
+]]--
+function lib:is_companion_rapport_quest(id)
+  if type(id) == "number" then
+    local c = lib.quest_companion_rapport[id] or false
+    return c
+  end
+end
+
+--[[ get whether or not it is a prologue quest
+return true if it is a companion quest
+]]--
+function lib:is_prologue_quest(id)
+  if type(id) == "number" then
+    local c = lib.prologue_quest_list[id] or false
+    return c
+  end
+end
+
+--[[ get whether or not it is a quest started with a quest object
+return true if it is
+]]--
+function lib:is_object_quest_starter(id)
+  if type(id) == "number" then
+    local c = lib.object_quest_starter_list[id] or false
     return c
   end
 end
@@ -428,6 +456,9 @@ function lib:assign_quest_flag(questId, hidden_quest)
   should take precedence and if uncompleted these should
   take precedence over uncompleted.
   ]]--
+  if fzsq then
+    return lib.flag_zone_story_quest
+  end
   if fskq then
     return lib.flag_skill_quest
   end
@@ -446,9 +477,6 @@ function lib:assign_quest_flag(questId, hidden_quest)
   end
   if fduq then
     return lib.flag_dungeon_quest
-  end
-  if fzsq then
-    return lib.flag_zone_story_quest
   end
   if fprq then
     return lib.flag_type_prologue
@@ -920,12 +948,14 @@ local function update_quest_information()
     else
       local newerAPI = false
       if current_data[lib.quest_data_index.game_api] > lib.quest_data[index][lib.quest_data_index.game_api] then newerAPI = true end
+      --[[ Disabled for now to prevent adding Alliance data to PVP quests since that was manually updated 7/17/23
       local hasAva = false
       if current_data[lib.quest_data_index.quest_series] >= lib.quest_series_type.quest_type_ad and current_data[lib.quest_data_index.quest_series] <= lib.quest_series_type.quest_type_ep then
         hasAva = true
       end
+      ]]--
 
-      if newerAPI or hasAva then
+      if newerAPI then
         if rebuilt_data[index] == nil then rebuilt_data[index] = {} end
         rebuilt_data[index] = current_data
       end

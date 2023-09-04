@@ -318,7 +318,15 @@ local function remove_older_quest_info(source_data, quest_info)
   end
 end
 
--- set alliance
+--[[TODO is this needed at all? This has not added Alliance data to the quest info table that may not be needed.
+
+Previously this was to try and mark quests with an aliance but it seems meaningless for the most part.
+
+There are very few PVP quests that are alliance specific and some have a prerequisite of doing the
+basic intro tutorial quest for Cyrodiil. Any Imperial City that also have a prerequisite of doing the intro
+probably have a similar prerequisite and therefore will not display if the player has not completed the intro
+quest.
+
 local function SetQuestSeries(the_zone)
   local value = 0
   if IsInImperialCity() or IsInCyrodiil() then
@@ -328,6 +336,7 @@ local function SetQuestSeries(the_zone)
   end
   return value
 end
+]]--
 
 -- Event handler function for EVENT_QUEST_REMOVED
 local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
@@ -499,7 +508,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     [lib.quest_data_index.game_api] = currentApiVersion,
     [lib.quest_data_index.quest_line] = 10000,
     [lib.quest_data_index.quest_number] = 10000,
-    [lib.quest_data_index.quest_series] = SetQuestSeries(the_zone),
+    [lib.quest_data_index.quest_series] = 0,
     [lib.quest_data_index.quest_display_type] = quest_to_update.quest_display_type,
   }
 
@@ -522,13 +531,18 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
 
     -- quest_giver_is_object lib.quest_data_index.quest_giver, depreciated
 
-    -- update alliance, just set it with checking if it changed for now
+    --[[TODO previously this would update the alliance when in a PVP zone overriding the alliance data and set as changed
+    
+    This is not a good idea any longer because the PVP quests for ImperialCity and Cyrodiil do not really have many aliance specific quests as previously though
+    ]]--
+    --[[As mentioned above, disable this
     if IsInImperialCity() or IsInCyrodiil() then
       if lib.player_alliance == ALLIANCE_ALDMERI_DOMINION then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ad end
       if lib.player_alliance == ALLIANCE_EBONHEART_PACT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_ep end
       if lib.player_alliance == ALLIANCE_DAGGERFALL_COVENANT then temp_quest_info[lib.quest_data_index.quest_series] = lib.quest_series_type.quest_type_dc end
       quest_info_changed = true
     end
+    ]]--
     if not temp_quest_info[lib.quest_data_index.quest_display_type] then temp_quest_info[lib.quest_data_index.quest_display_type] = INSTANCE_DISPLAY_TYPE_NONE end
     if temp_quest_info[lib.quest_data_index.quest_display_type] ~= quest_to_update.quest_display_type then
       temp_quest_info[lib.quest_data_index.quest_display_type] = quest_to_update.quest_display_type
@@ -679,17 +693,29 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
         quest has has_undefined_data then it may save anyway to be examined
         manually and added
         ]]--
-        if internal:is_in(quest_to_update.questID, lib.prologue_quest_list) then
+        if lib:is_prologue_quest(quest_to_update.questID) then
           --internal.dm("Debug", "We found a prologue quest that can be accepted anywhere")
           save_quest_location = false
         else
           --internal.dm("Debug", "We did not find a prologue quest")
         end
-        if internal:is_in(quest_to_update.questID, lib.object_quest_starter_list) then
+        if lib:is_object_quest_starter(quest_to_update.questID) then
           --internal.dm("Debug", "This was a starter quest from an object like a note")
           save_quest_location = false
         else
           --internal.dm("Debug", "This was not a starter quest from an object like a note")
+        end
+        if lib:is_companion_quest(quest_to_update.questID) then
+          --internal.dm("Debug", "This was a companion quest that can be accepted by trying to summon a companion")
+          save_quest_location = false
+        else
+          --internal.dm("Debug", "This was not a companion quest")
+        end
+        if lib:is_companion_rapport_quest(quest_to_update.questID) then
+          --internal.dm("Debug", "This was a companion rapport quest that can be accepted anywhere once you qualify")
+          save_quest_location = false
+        else
+          --internal.dm("Debug", "This was not a companion rapport quest")
         end
         if distance <= 25 then
           --internal.dm("Debug", "The quest to be saved is close to one already in the SV file")

@@ -4799,8 +4799,7 @@ end
 function internal:is_master_player()
   local displayName = GetDisplayName()
   local masterPlayer = displayName == "@Sharlikran"
-  local masterModeActive = false
-  if masterPlayer and masterModeActive then
+  if masterPlayer and internal.masterModeActive then
     return true
   end
   return false

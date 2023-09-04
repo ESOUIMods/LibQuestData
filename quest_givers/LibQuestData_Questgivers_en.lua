@@ -1671,6 +1671,13 @@ lib.quest_givers["en"] = {
   [210025] = "Morian Zenas",
   [210026] = "Call to the Cloisters",
   [210027] = "Sharp-as-Night",
+  [210028] = "Cipher Plautis",
+  [210029] = "Scruut",
+  [210030] = "Hezehk",
+  [210031] = "Zenkif",
+  [210032] = "Tyss",
+  [210033] = "A Plea for Aid",
+  [210034] = "Garalo Givyn",
   -- Existing
   [500000] = "Ayleid Sarcophagus",
   [500001] = "Heist Board",
