@@ -778,7 +778,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     if not LibQuestData_SavedVariables.reward_info then LibQuestData_SavedVariables.reward_info = {} end
     if not LibQuestData_SavedVariables.reward_info[questID] then LibQuestData_SavedVariables.reward_info[questID] = {} end
     LibQuestData_SavedVariables.reward_info[questID] = reward
-    LibQuestData_SavedVariables.reward_details[questID] = rewardTable
+    if internal.masterModeActive then LibQuestData_SavedVariables.reward_details[questID] = rewardTable end
     reward = nil
     rewardTable = nil
     lib:set_conditional_quests(questID)
