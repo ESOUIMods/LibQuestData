@@ -25,7 +25,7 @@ local quest_data_index_default = {
   [lib.quest_data_index.quest_line] = 10000, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   [lib.quest_data_index.quest_number] = 10000, -- Quest Number In QuestLine (10000 = not assigned/not verified)
   [lib.quest_data_index.quest_series] = 0, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5
-  [lib.quest_data_index.quest_display_type] = -1, -- INSTANCE_DISPLAY_TYPE_ZONE_STORY, INSTANCE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
+  [lib.quest_data_index.quest_display_type] = -1, -- ZONE_DISPLAY_TYPE_ZONE_STORY, ZONE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 
 local quest_map_pin_index_default = {
@@ -349,7 +349,7 @@ function lib:assign_quest_flag(questId, hidden_quest)
   if quest_type_data[lib.quest_data_index.quest_display_type] then
     quest_display_type = quest_type_data[lib.quest_data_index.quest_display_type]
   else
-    quest_display_type = INSTANCE_DISPLAY_TYPE_NONE
+    quest_display_type = ZONE_DISPLAY_TYPE_NONE
   end
 
   --internal.dm("Debug", completed_quest)

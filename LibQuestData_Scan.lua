@@ -104,7 +104,7 @@ local function OnQuestAdded(eventCode, journalIndex, questName, objectiveName)
   local global_x, global_y, zoneMapIndex = GPS:LocalToGlobal(local_x, local_y)
   if journalIndex then
     quest_type = GetJournalQuestType(journalIndex)
-    quest_display_type = GetJournalQuestInstanceDisplayType(journalIndex)
+    quest_display_type = GetJournalQuestZoneDisplayType(journalIndex)
     repeat_type = GetJournalQuestRepeatType(journalIndex)
     zone_name, objective_name, zone_index, poi_index = GetJournalQuestLocationInfo(journalIndex)
     --internal.dm("Debug", quest_type)
@@ -387,7 +387,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
   end
   if not quest_to_update.quest_display_type then
     --internal.dm("Debug", "quest_display_type did not exist, set to 0")
-    quest_to_update.quest_display_type = INSTANCE_DISPLAY_TYPE_NONE
+    quest_to_update.quest_display_type = ZONE_DISPLAY_TYPE_NONE
   end
 
   --internal.dm("Debug", "questID: " .. questID)
@@ -543,7 +543,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
       quest_info_changed = true
     end
     ]]--
-    if not temp_quest_info[lib.quest_data_index.quest_display_type] then temp_quest_info[lib.quest_data_index.quest_display_type] = INSTANCE_DISPLAY_TYPE_NONE end
+    if not temp_quest_info[lib.quest_data_index.quest_display_type] then temp_quest_info[lib.quest_data_index.quest_display_type] = ZONE_DISPLAY_TYPE_NONE end
     if temp_quest_info[lib.quest_data_index.quest_display_type] ~= quest_to_update.quest_display_type then
       temp_quest_info[lib.quest_data_index.quest_display_type] = quest_to_update.quest_display_type
       quest_info_changed = true

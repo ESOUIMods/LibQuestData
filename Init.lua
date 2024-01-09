@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 261
+local libName, libVersion = "LibQuestData", 262
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -211,7 +211,7 @@ lib.quest_data_index = {
   quest_line = 4, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   quest_number = 5, -- Quest Number In QuestLine (10000 = not assigned/not verified)
   quest_series = 6, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5.
-  quest_display_type = 7, -- INSTANCE_DISPLAY_TYPE_ZONE_STORY, INSTANCE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
+  quest_display_type = 7, -- ZONE_DISPLAY_TYPE_ZONE_STORY, ZONE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 
 lib.quest_map_pin_index = {
@@ -249,10 +249,12 @@ lib.quest_data_type = {
 }
 
 lib.quest_display_type = {
-  -- ESO Values, ommitted INSTANCE_DISPLAY_TYPE_
+  -- ESO Values, ommitted prifix of ZONE_DISPLAY_TYPE_
   battleground = 9,
+  companion = 11,
   delve = 7,
   dungeon = 2,
+  endless_dungeon = 12,
   group_area = 5,
   group_delve = 4,
   housing = 8,

@@ -212,8 +212,9 @@ accepted anywhere
 [5935] = "The Missing Prophecy",
 [6549] = "The Ravenwatch Inquiry",
 [6097] = "Through a Veil Darkly",
+[7029] = "Burdensome Beasts", -- event quest from crown store
 ]]--
-lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, }
+lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, 7029}
 
 --[[ List of what the numbers mean
 This is a list of special NPCs that run around
