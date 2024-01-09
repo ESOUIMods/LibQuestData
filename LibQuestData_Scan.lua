@@ -4,6 +4,7 @@ local LMD = LibMapData
 
 -- Local variables
 local reward
+local rewardTable
 -- Init saved variables table
 local GPS = LibGPS3
 local LMP = LibMapPins
@@ -152,6 +153,7 @@ local function OnChatterEnd(eventCode)
   --d("OnChatterEnd")
   lib.questGiverName = nil
   reward = nil
+  rewardTable = nil
   -- Stop listening for the quest added event because it would only be for shared quests
   -- Shar I added if EVENT_QUEST_SHARED to OnQuestAdded UnregisterForEvent EVENT_QUEST_ADDED
   -- EVENT_MANAGER:UnregisterForEvent(lib.libName, EVENT_QUEST_ADDED)
@@ -180,9 +182,11 @@ local function OnQuestCompleteDialog(eventCode, journalIndex)
   local numRewards = GetJournalQuestNumRewards(journalIndex)
   if numRewards <= 0 then return end
   reward = {}
+  rewardTable = {}
   for i = 1, numRewards do
-    local rewardType = GetJournalQuestRewardInfo(journalIndex, i)
+    local rewardType, rewardName, amount = GetJournalQuestRewardInfo(journalIndex, i)
     table.insert(reward, rewardType)
+    table.insert(rewardTable, { rewardType = rewardType, rewardName = rewardName, amount = amount })
   end
 end
 EVENT_MANAGER:RegisterForEvent(lib.libName, EVENT_QUEST_COMPLETE_DIALOG, OnQuestCompleteDialog) -- Verified
@@ -532,7 +536,7 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     -- quest_giver_is_object lib.quest_data_index.quest_giver, depreciated
 
     --[[TODO previously this would update the alliance when in a PVP zone overriding the alliance data and set as changed
-    
+
     This is not a good idea any longer because the PVP quests for ImperialCity and Cyrodiil do not really have many aliance specific quests as previously though
     ]]--
     --[[As mentioned above, disable this
@@ -774,7 +778,9 @@ local function OnQuestRemoved(eventCode, isCompleted, journalIndex, questName, z
     if not LibQuestData_SavedVariables.reward_info then LibQuestData_SavedVariables.reward_info = {} end
     if not LibQuestData_SavedVariables.reward_info[questID] then LibQuestData_SavedVariables.reward_info[questID] = {} end
     LibQuestData_SavedVariables.reward_info[questID] = reward
+    LibQuestData_SavedVariables.reward_details[questID] = rewardTable
     reward = nil
+    rewardTable = nil
     lib:set_conditional_quests(questID)
   end
 end

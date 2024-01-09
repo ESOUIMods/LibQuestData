@@ -339,18 +339,13 @@ end
 function lib:assign_quest_flag(questId, hidden_quest)
   local completed_quest = lib.completed_quests[questId] or false
   local started_quest = lib.started_quests[questId] or false
-  local repeatable_type = lib:get_quest_repeat(questId)
   local skill_quest = lib.quest_rewards_skilpoint[questId] or false
   local cadwell_quest = lib:is_cadwell_quest(questId) or false
   local companion_quest = lib:is_companion_quest(questId) or false
   local quest_type_data = lib:get_quest_data(questId)
   local quest_type = quest_type_data[lib.quest_data_index.quest_type]
-  local quest_display_type
-  if quest_type_data[lib.quest_data_index.quest_display_type] then
-    quest_display_type = quest_type_data[lib.quest_data_index.quest_display_type]
-  else
-    quest_display_type = ZONE_DISPLAY_TYPE_NONE
-  end
+  local repeatable_type = quest_type_data[lib.quest_data_index.quest_repeat]
+  local quest_display_type = quest_type_data[lib.quest_data_index.quest_display_type]
 
   --internal.dm("Debug", completed_quest)
   --internal.dm("Debug", started_quest)
@@ -371,38 +366,38 @@ function lib:assign_quest_flag(questId, hidden_quest)
   local fcaq = false -- flag_companion_quest
   local fduq = false -- flag_dungeon_quest
   local fhoq = false -- flag_holiday_quest
-  local fwkq = false -- flag_weekly_quest
+  local fzrq = false -- flag_zone_raid_quest
   local fzsq = false -- flag_zone_story_quest
-  local fbgq = false -- flag_type_battleground
   local fprq = false -- flag_type_prologue
   local fpgq = false -- flag_type_pledge
 
   if completed_quest then fcpq = true end
   if not completed_quest then fucq = true end
-  if hidden_quest then fhdq = true end
   if started_quest then fstq = true end
-  if quest_type == lib.quest_data_type.quest_type_guild then fguq = true end
-  if repeatable_type == lib.quest_data_repeat.quest_repeat_daily then fdaq = true end
   if skill_quest then fskq = true end
   if cadwell_quest then fcwq = true end
   if companion_quest then fcaq = true end
-  if quest_type == lib.quest_data_type.quest_type_dungeon then fduq = true end
-  if quest_type == lib.quest_data_type.quest_type_holiday_event then fhoq = true end
-  if repeatable_type == lib.quest_data_repeat.quest_repeat_repeatable then fwkq = true end
-  if quest_type == lib.quest_data_type.quest_type_battleground then fbgq = true end
-  if quest_type == lib.quest_data_type.quest_type_prologue then fprq = true end
-  if quest_type == lib.quest_data_type.quest_type_undaunted_pledge then fpgq = true end
+  if hidden_quest then fhdq = true end
 
-  if quest_display_type == lib.quest_display_type.zone_story then fzsq = true end
-  --[[ there needs to be a way to hide quests you can't repeat that are marked as
-  battleground or some other uncommon type
+  if quest_type == QUEST_TYPE_DUNGEON then fduq = true end
+  if quest_type == QUEST_TYPE_HOLIDAY_EVENT then fhoq = true end
+  if quest_type == QUEST_TYPE_PROLOGUE then fprq = true end
+  if quest_type == QUEST_TYPE_UNDAUNTED_PLEDGE then fpgq = true end
+  local repeatableType = repeatable_type == QUEST_REPEAT_REPEATABLE or repeatable_type == QUEST_REPEAT_DAILY
+  local pvpQuest = quest_type == QUEST_TYPE_AVA or quest_type == QUEST_TYPE_AVA_GROUP
 
-  unsure if I want a global flag type and just use this to keep a battleground quest
-  like For Glory from showing up if you did it already
-  ]]--
-  local fnrq = false
-  if repeatable_type == lib.quest_data_repeat.quest_repeat_not_repeatable then fnrq = true end
+  if quest_type == QUEST_TYPE_GUILD then fguq = true end
+  local repeatableGuildQuest = repeatableType and fguq
+  local nonRepeatableGuildQuest = repeatable_type == QUEST_REPEAT_NOT_REPEATABLE and fguq
 
+  if repeatableType then fdaq = true end
+  if pvpQuest and repeatableType then fdaq = true end
+
+  if quest_display_type == ZONE_DISPLAY_TYPE_ZONE_STORY then fzsq = true end
+  if quest_display_type == ZONE_DISPLAY_TYPE_RAID then
+    fzrq = true
+    fdaq = false
+  end
   --[[
   holliday, daily, and WEEKLY quests are unique
 
@@ -413,23 +408,27 @@ function lib:assign_quest_flag(questId, hidden_quest)
   if fhoq then
     return lib.flag_holiday_quest
   end
-  if fwkq then
-    return lib.flag_weekly_quest
-  end
   if fpgq then
     return lib.flag_type_pledge
   end
-  if fdaq and (not fhoq or not fwkq or not fpgq) then
-    return lib.flag_daily_quest
+  if repeatableGuildQuest or (not fcpq and nonRepeatableGuildQuest) then
+    return lib.flag_guild_quest
   end
-  -- battleground
-  if fbgq and fnrq and not completed_quest then
+  if fdaq and (not fhoq or not fpgq or not repeatableGuildQuest) then
     return lib.flag_daily_quest
   end
   --[[
-  Completed takes precedence over other states
+    Completed takes precedence over other states
+
+    isCompletedQuest: if not holiday, pledge, or daily and not repeatable guild quest
+
+    isCompletedNonRepeatableGuildQuest: when it is completed and it is a
+    non-repeatable guild quest
   ]]--
-  if fcpq and (not fdaq or not fwkq or not fhoq) then
+  local isCompletedQuest = fcpq and (not fhoq or not fpgq or not fdaq or not repeatableGuildQuest)
+  local isCompletedNonRepeatableGuildQuest = fcpq and nonRepeatableGuildQuest
+
+  if isCompletedQuest or isCompletedNonRepeatableGuildQuest then
     return lib.flag_completed_quest
   end
 
@@ -472,8 +471,8 @@ function lib:assign_quest_flag(questId, hidden_quest)
   --[[
   new quest types
   ]]--
-  if fguq then
-    return lib.flag_guild_quest
+  if fzrq then
+    return lib.flag_zone_raid_quest
   end
   if fduq then
     return lib.flag_dungeon_quest
@@ -484,7 +483,7 @@ function lib:assign_quest_flag(questId, hidden_quest)
   --[[
   Hopefully this is last
   ]]--
-  if (fucq) then
+  if fucq then
     return lib.flag_uncompleted_quest
   end
 
@@ -510,10 +509,7 @@ function lib:get_quest_npc_id(location)
 end
 
 --[[
-returns number of lib.quest_data_type. ZOS API does not
-specify whether or not it is a Writ or daily. First 13 values are
-ZOS Constant Values https://wiki.esoui.com/Constant_Values
-
+returns QuestType. ZOS API does not specify whether or not it is a Writ or daily.
 ]]--
 function lib:get_quest_type(quest_id)
   if type(quest_id) == "number" and lib.quest_data[quest_id] then
@@ -525,8 +521,7 @@ function lib:get_quest_type(quest_id)
 end
 
 --[[
-returns number of lib.quest_data_repeat. ZOS API does not
-specify whether or not it is a Writ or daily.
+returns QuestRepeatableType. ZOS API does not specify whether or not it is a Writ or daily.
 ]]--
 function lib:get_quest_repeat(quest_id)
   if type(quest_id) == "number" and lib.quest_data[quest_id] then

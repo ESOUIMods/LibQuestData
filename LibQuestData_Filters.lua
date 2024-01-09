@@ -4213,9 +4213,24 @@ local prerequisite_table = {
     7049, -- Numinous Grimoire, Volume 2
     7050, -- Numinous Grimoire, Volume 3
   },
+  [7062] = { -- The Cost of Knowledge 
+    7060, -- The Telvanni Secret
+  },
+  [7063] = { -- Turn the Page 
+    7060, -- The Telvanni Secret
+  },
+  [7065] = { -- Replication Elimination 
+    7061, -- The Margins of Ire
+  },
   -- [7066] = { -- Kill Enemy Arcanists 4706, -- Reporting for Duty },
   -- [7067] = { -- Kill Enemy Arcanists 4727, -- Reporting for Duty },
   -- [7068] = { -- Kill Enemy Arcanists 4724, -- Reporting for Duty },
+  [7091] = { -- Restorer of Theories 
+    7102, -- Restoring the Resurrected
+  },
+  [7102] = { -- Restoring the Resurrected 
+    7101, -- A Bookbinder's Bind
+  },
 }
 
 local breadcrumb_table = {

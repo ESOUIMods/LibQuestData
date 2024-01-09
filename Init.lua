@@ -1,4 +1,4 @@
-local libName, libVersion = "LibQuestData", 262
+local libName, libVersion = "LibQuestData", 263
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -179,6 +179,7 @@ if LibQuestData_SavedVariables.quest_info == nil then LibQuestData_SavedVariable
 if LibQuestData_SavedVariables.location_info == nil then LibQuestData_SavedVariables.location_info = {} end
 if LibQuestData_SavedVariables.quest_names == nil then LibQuestData_SavedVariables.quest_names = {} end
 if LibQuestData_SavedVariables.reward_info == nil then LibQuestData_SavedVariables.reward_info = {} end
+if LibQuestData_SavedVariables.reward_details == nil then LibQuestData_SavedVariables.reward_details = {} end
 if LibQuestData_SavedVariables.giver_names == nil then LibQuestData_SavedVariables.giver_names = {} end
 
 -- note only the "lib.client_lang" will contain data be default
@@ -194,24 +195,22 @@ lib.flag_skill_quest = 7
 lib.flag_cadwell_quest = 8
 lib.flag_dungeon_quest = 9
 lib.flag_holiday_quest = 10
-lib.flag_weekly_quest = 11
-lib.flag_main_story = 12
-lib.flag_type_battleground = 13
-lib.flag_type_prologue = 14
-lib.flag_type_pledge = 15
-lib.flag_zone_story_quest = 16
-lib.flag_companion_quest = 17
+lib.flag_zone_raid_quest = 11
+lib.flag_zone_story_quest = 12
+lib.flag_type_prologue = 13
+lib.flag_type_pledge = 14
+lib.flag_companion_quest = 15
 
 lib.quest_data_index = {
   -- quest_name      =    1, Depreciated, use lib:get_quest_name(id, lang)
   -- quest_giver     =    2,  Depreciated, see quest_map_pin_index
-  quest_type = 1, -- MAIN_STORY, DUNGEON << -1 = Undefined >>
-  quest_repeat = 2, -- quest_repeat_daily, quest_repeat_not_repeatable = 0, quest_repeat_repeatable << -1 = Undefined >>
+  quest_type = 1, -- Is type QuestType; QUEST_TYPE_MAIN_STORY, QUEST_TYPE_DUNGEON << -1 = Undefined >>
+  quest_repeat = 2, -- Is type QuestRepeatableType; QUEST_REPEAT_DAILY, QUEST_REPEAT_NOT_REPEATABLE, QUEST_REPEAT_REPEATABLE << -1 = Undefined >>
   game_api = 3, -- 100003 means unverified, 100030 or higher means recent quest data
   quest_line = 4, -- QuestLine (10000 = not assigned/not verified. 10001 = not part of a quest line/verified)
   quest_number = 5, -- Quest Number In QuestLine (10000 = not assigned/not verified)
   quest_series = 6, -- None = 0, Cadwell's Almanac = 1, Undaunted = 2, AD = 3, DC = 4, EP = 5.
-  quest_display_type = 7, -- ZONE_DISPLAY_TYPE_ZONE_STORY, ZONE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
+  quest_display_type = 7, -- Is type ZoneDisplayType; ZONE_DISPLAY_TYPE_ZONE_STORY, ZONE_DISPLAY_TYPE_DUNGEON << -1 = Undefined >>
 }
 
 lib.quest_map_pin_index = {
@@ -227,43 +226,28 @@ lib.quest_map_pin_index = {
   quest_giver = 6, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
 
+--[[
 lib.quest_data_type = {
-  -- ESO Values
-  quest_type_none = 0,
-  quest_type_group = 1, -- Qty 96
-  quest_type_main_story = 2, -- Qty 17
-  quest_type_guild = 3, -- Qty 170, (*) Various Skill Line Guild Quests
-  quest_type_crafting = 4, -- Qty 82, Ignore these they are the crafting certifications
-  quest_type_dungeon = 5, -- Qty 82
-  quest_type_raid = 6, -- Qty 8
-  quest_type_ava = 7, -- Qty 165, unsure if verified
-  quest_type_class = 8, -- None in table
+  -- ESO Values for QUEST_TYPE_
+  QUEST_TYPE_NONE = 0,
+  QUEST_TYPE_GROUP = 1, -- Qty 96
+  QUEST_TYPE_MAIN_STORY = 2, -- Qty 17
+  QUEST_TYPE_GUILD = 3, -- Qty 170, (*) Various Skill Line Guild Quests
+  QUEST_TYPE_CRAFTING = 4, -- Qty 82, Ignore these they are the crafting certifications
+  QUEST_TYPE_DUNGEON = 5, -- Qty 82
+  QUEST_TYPE_RAID = 6, -- Qty 8
+  QUEST_TYPE_AVA = 7, -- Qty 165, unsure if verified
+  QUEST_TYPE_CLASS = 8, -- None in table
   -- quest_type_qa_test = 9, not in game as far as I know
-  quest_type_ava_group = 10, -- None in table, in check
-  quest_type_ava_grand = 11, -- None in table, in check
-  quest_type_holiday_event = 12, -- Qty 22
-  quest_type_battleground = 13, -- Qty 4
-  quest_type_prologue = 14, -- Qty 14
-  quest_type_undaunted_pledge = 15, -- Qty 42
-  quest_type_companion = 16,
+  QUEST_TYPE_AVA_GROUP = 10, -- None in table, in check
+  QUEST_TYPE_AVA_GRAND = 11, -- None in table, in check
+  QUEST_TYPE_HOLIDAY_EVENT = 12, -- Qty 22
+  QUEST_TYPE_BATTLEGROUND = 13, -- Qty 4
+  QUEST_TYPE_PROLOGUE = 14, -- Qty 14
+  QUEST_TYPE_UNDAUNTED_PLEDGE = 15, -- Qty 42
+  QUEST_TYPE_COMPANION = 16,
 }
-
-lib.quest_display_type = {
-  -- ESO Values, ommitted prifix of ZONE_DISPLAY_TYPE_
-  battleground = 9,
-  companion = 11,
-  delve = 7,
-  dungeon = 2,
-  endless_dungeon = 12,
-  group_area = 5,
-  group_delve = 4,
-  housing = 8,
-  none = 0,
-  public_dungeon = 6,
-  raid = 3,
-  solo = 1,
-  zone_story = 10,
-}
+]]--
 
 lib.quest_series_type = {
   -- LibQuestData Values
@@ -301,14 +285,6 @@ lib.quest_guild_rank_data = {
   [lib.quest_series_type.quest_type_guild_psijic] = { name = "", rank = 0, },
   [lib.quest_series_type.quest_type_guild_thief] = { name = "", rank = 0, },
   [lib.quest_series_type.quest_type_guild_dark] = { name = "", rank = 0, },
-}
-
-lib.quest_data_repeat = {
-  quest_repeat_not_repeatable = 0,
-  quest_repeat_repeatable = 1,
-  quest_repeat_daily = 2,
-  quest_repeat_repeatable_per_duration = 3,
-  quest_repeat_event_reset = 4,
 }
 
 lib.dest_quest_data_index = {

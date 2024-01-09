@@ -213,8 +213,9 @@ accepted anywhere
 [6549] = "The Ravenwatch Inquiry",
 [6097] = "Through a Veil Darkly",
 [7029] = "Burdensome Beasts", -- event quest from crown store
+[7060] = "The Telvanni Secret", -- event quest from crown store
 ]]--
-lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, 7029}
+lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, 7029, 7060}
 
 --[[ List of what the numbers mean
 This is a list of special NPCs that run around
@@ -247,6 +248,7 @@ xxxx - "Initiate Delighre" ? : Quest ID 4552: "Chasing Shadows"
 100161 - Hooded Figure: Quest ID 4296: "Soul Shriven in Coldharbour"
 95001, 95005 - Captain Rian Liore, Brigadine Antonius: Quest ID 6615: "A Deadly Secret"
 91004 - Seeks-the-Dark: Quest ID 6137: Looting the Light
+25800 - Sena Aralor: Quest ID 4075: A Right to Live
 
 Note: Table is of Quest ID numbers since that
 is part of the XY location information from
@@ -263,7 +265,7 @@ and the quests in the Dragonguard place
 -- [6695] = "Plucking the Crow", Witchmother Festival
 lib.quest_giver_moves = {
   -- regular quests
-  4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752, 4296, 6615, 6137,
+  4075, 4220, 5058, 4264, 3992, 5923, 5950, 2251, 5742, 5102, 3856, 3858, 3885, 2451, 728, 6181, 4625, 4552, 6780, 6752, 4296, 6615, 6137,
 
   --[[
   [6428] = "Sticks and Bones",
@@ -641,7 +643,7 @@ lib.conditional_quest_list = {
   --[[ need to research what to do when building completed quest list
   because with the prerequisite list you don't want to mark other quests
   for Cyrodiil completed if not for your faction.
-  
+
   also the order is Welcome to Cyrodiil, Siege Warfare, Reporting for Duty and if you skipped
   the tutorial then Siege Warfare and Reporting for Duty will be false
   [4706] = { -- Reporting for Duty

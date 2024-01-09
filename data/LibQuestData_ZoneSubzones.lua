@@ -63,13 +63,13 @@ local internal = _G["LibQuestData_Internal"]
         ["rivenspire/hildunessecretrefuge_base_0"] =
         ["rivenspire/crestshademine_base_0"] =
         ["rivenspire/cryptofhearts_base_0"] =
-
+        ["rivenspire/lostshipyard_map001_0"] =
 
 ]]--
 internal.subzone_list = {
-    ["telvanni/u38_telvannipeninsula_base_0"] = 
+    ["telvanni/u38_telvannipeninsula_base_0"] =
     {
-        ["telvanni/u38_necrom_base_0"] = 
+        ["telvanni/u38_necrom_base_0"] =
         {
             x = 0.7006488442,
             y = 0.2178246081,
@@ -91,9 +91,9 @@ internal.subzone_list = {
             zoom_factor = 0.1412555873,
         },
     },
-    ["galen/u36_galenisland_base_0"] = 
+    ["galen/u36_galenisland_base_0"] =
     {
-        ["galen/u36_vastyrcity_base_0"] = 
+        ["galen/u36_vastyrcity_base_0"] =
         {
             x = 0.0747952014,
             y = 0.5591602325,

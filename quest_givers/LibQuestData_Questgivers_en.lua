@@ -1092,6 +1092,7 @@ lib.quest_givers["en"] = {
   [78012] = "Gilan Lerano",
   [78013] = "Councilor Eris",
   [78014] = "Trilam Rindo",
+  [78015] = "Captain Naros",
   -- Shar Crown Store
   [79000] = "Imperial Missive^M", --??
   [79001] = "Crown Store", --??
