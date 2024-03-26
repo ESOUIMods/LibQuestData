@@ -215,7 +215,7 @@ accepted anywhere
 [7029] = "Burdensome Beasts", -- event quest from crown store
 [7060] = "The Telvanni Secret", -- event quest from crown store
 ]]--
-lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, 7029, 7060}
+lib.prologue_quest_list = quest_ids { 4296, 4831, 5941, 5936, 6370, 6023, 6629, 6687, 6729, 6564, 6612, 6701, 6751, 6967, 6226, 6843, 6454, 6299, 6395, 5935, 6549, 6097, 7029, 7060 }
 
 --[[ List of what the numbers mean
 This is a list of special NPCs that run around
@@ -768,4 +768,37 @@ lib.guild_rank_quest_list = {
 
 lib.known_removed_quest = {
   [3442] = true, -- Dawn of the Dragonguard
+  -- Old Craglorn Quests
+  [5025] = true, -- The Corrupted Stone
+  [5033] = true, -- The Star-Gazers
+  [5069] = true, -- The Warrior's Call
+  [5079] = true, -- The Seeker's Archive
+  [5081] = true, -- The Fallen City of Shada
+  [5085] = true, -- The Trials of Rahni'Za
+  [5099] = true, -- Trial of Martial Knowledge
+  [5100] = true, -- Trial of the True Path
+  [5106] = true, -- Waters Run Foul
+  [5107] = true, -- Supreme Power
+  [5108] = true, -- Critical Mass
+  [5110] = true, -- Gem of the Stars
+  [5111] = true, -- Strange Lexicon
+  [5112] = true, -- Message Unknown
+  [5115] = true, -- The Missing Guardian
+  [5116] = true, -- Elemental Army
+  [5118] = true, -- The Reason We Fight
+  [5130] = true, -- The Shattered and the Lost
+  [5151] = true, -- The Truer Fangs
+  [5743] = true, -- The Oldest Ghost
+  [5174] = true, -- Taken Alive
+  [5175] = true, -- Iron and Scales
+  [5186] = true, -- The Blood of Nirn
+  [5194] = true, -- Slithering Brood
+  [5203] = true, -- The Serpent's Fang
+  [5236] = true, -- Souls of the Betrayed
+  [5239] = true, -- Dawn of the Exalted Viper
+  [5240] = true, -- Uncaged
+  [5243] = true, -- A Leaf in the Wind
+  [5245] = true, -- Holding Court
+  [5258] = true, -- The Time-Lost Warrior
+  [5313] = true -- The Gray Passage
 }
