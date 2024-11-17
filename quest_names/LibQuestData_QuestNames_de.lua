@@ -3168,7 +3168,13 @@ lib.quest_names["de"] = {
   [7067] = "Tötet feindliche Arkanisten",
   [7068] = "Tötet feindliche Arkanisten",
   [7069] = "Hilfe für das Endlose Archiv",
+  [7079] = "Gefangene des Schicksals",
   [7091] = "Wiederhersteller der Theorien",
   [7101] = "Eine Buchbinderin in der Klemme",
   [7102] = "Den Wiederbelebten wiederherstellen",
+  [7105] = "Sieg durch Unfrieden",
+  [7106] = "Grube der Eidgeschworenen",
+  [7155] = "Das vergessene Gewölbe",
+  [7156] = "Schleier des Aufruhrs",
+  [7191] = "Um Kuchens Willen",
 }

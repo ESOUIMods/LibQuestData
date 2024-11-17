@@ -337,8 +337,9 @@ in anything and a routine I made uses the game API.
 -- list of map ID numbers using GetCurrentMapId()
 -- 1552 Norg-Tzel
 -- 2114 High Isle
+-- Changed Order for Update 42
 lib.map_id_list = {
-  75, 74, 13, 61, 26, 7, 125, 30, 20, 227, 1, 10, 12, 201, 143, 9, 300, 258, 22, 256, 1429, 1850, 1747, 1887, 1348, 1313, 255, 1126, 2119, 2035, 2082, 2212, 1006, 994, 2114, 1484, 1552, 1555, 1654, 1349, 2021, 1814, 1060, 1719, 667, 16, 660, 108,
+  27, 1, 10, 12, 30, 20, 9, 22, 26, 13, 7, 125, 61, 16, 143, 300, 256, 75, 201, 227, 258, 74, 255, 439, 1126, 660, 667, 994, 1006, 1060, 1313, 1349, 1429, 1484, 1552, 1555, 1654, 1719, 1747, 1782, 1850, 1814, 1887, 2119, 2021, 2114, 2035, 2212, 2274, 2275, 2427,
   -- 1354, -- Slag Town Outlaws Refuge
   -- 1207, Veloth Ancestral Tomb
   -- 1208, Dreloth Ancestral Tomb
@@ -389,6 +390,9 @@ lib.zone_names_list = {
   [816] = "hewsbane_base_0",
   [1318] = "u34_systreszone_base_0",
   [1383] = "u36_galenisland_base_0", -- Galen
+  [1413] = "u38_apocrypha_base_0", -- Apocrypha
+  [2274] = "u38_telvannipeninsula_base_0", -- Telvanni Peninsula, 1414
+  [2343] = "u38_necrom_base_0", -- Necrom, 1414
   [726] = "murkmire_base_0",
   [1086] = "elsweyr_base_0",
   [1133] = "southernelsweyr_base_0",
@@ -396,6 +400,7 @@ lib.zone_names_list = {
   [1286] = "u32deadlandszone_base_0",
   [1207] = "reach_base_0",
   [849] = "vvardenfell_base_0",
+  [1443] = "westwealdoverland_base_0",
   [1160] = "westernskryim_base_0",
   [684] = "wrothgar_base_0",
   [181] = "ava_whole_0",

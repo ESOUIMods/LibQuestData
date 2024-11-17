@@ -67,6 +67,15 @@ local internal = _G["LibQuestData_Internal"]
 
 ]]--
 internal.subzone_list = {
+  ["westweald/westwealdoverland_base_0"] =
+  {
+      ["westweald/u42_skingrad_base_0"] =
+      {
+          x = 0.6298293471,
+          y = 0.5159680247,
+          zoom_factor = 0.1512402296,
+      },
+  },
   ["telvanni/u38_telvannipeninsula_base_0"] = {
     ["telvanni/u38_necrom_base_0"] = {
       x = 0.7006488442,

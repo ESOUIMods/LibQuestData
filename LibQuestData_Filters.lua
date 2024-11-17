@@ -4213,23 +4213,75 @@ local prerequisite_table = {
     7049, -- Numinous Grimoire, Volume 2
     7050, -- Numinous Grimoire, Volume 3
   },
-  [7062] = { -- The Cost of Knowledge 
+  [7062] = { -- The Cost of Knowledge
     7060, -- The Telvanni Secret
   },
-  [7063] = { -- Turn the Page 
+  [7063] = { -- Turn the Page
     7060, -- The Telvanni Secret
   },
-  [7065] = { -- Replication Elimination 
+  [7065] = { -- Replication Elimination
     7061, -- The Margins of Ire
   },
-  -- [7066] = { -- Kill Enemy Arcanists 4706, -- Reporting for Duty },
-  -- [7067] = { -- Kill Enemy Arcanists 4727, -- Reporting for Duty },
-  -- [7068] = { -- Kill Enemy Arcanists 4724, -- Reporting for Duty },
-  [7091] = { -- Restorer of Theories 
+  [7066] = { -- Kill Enemy Arcanists
+    4706, -- Reporting for Duty
+  },
+  [7067] = { -- Kill Enemy Arcanists
+    4727, -- Reporting for Duty
+  },
+  [7068] = { -- Kill Enemy Arcanists
+    4724, -- Reporting for Duty
+  },
+  [7072] = { -- Seeds of Suspicion
+    7071, -- Paths of Chaos
+  },
+  [7073] = { -- Relics of the Three Princes
+    7072, -- Seeds of Suspicion
+  },
+  [7074] = { -- King Nantharion's Gambit
+    7073, -- Relics of the Three Princes
+  },
+  [7075] = { -- The Untraveled Road
+    7074, -- King Nantharion's Gambit
+  },
+  [7076] = { -- Ithelia's Fury
+    7075, -- The Untraveled Road
+    6977, -- Chronicle of Fate
+  },
+  [7077] = { -- Fate of the Forgotten Prince
+    7076, -- Ithelia's Fury
+  },
+  [7078] = { -- In Memory Of
+    7077, -- Fate of the Forgotten Prince
+  },
+  [7091] = { -- Restorer of Theories
     7102, -- Restoring the Resurrected
   },
-  [7102] = { -- Restoring the Resurrected 
+  [7102] = { -- Restoring the Resurrected
     7101, -- A Bookbinder's Bind
+  },
+  [7197] = { -- The Wing of the Indrik
+    7104, -- The Second Era of Scribing
+  },
+  [7203] = { -- The Wing of the Dragon
+    7197, -- The Wing of the Indrik
+  },
+  [7204] = { -- The Wing of the Netch
+    7197, -- The Wing of the Indrik
+  },
+  [7211] = { -- Tracking the Trapper
+    7208, -- Mini Menagerie
+    7209, -- Flocking Together
+    7210, -- Found Family
+  },
+  [7217] = { -- The Wing of the Gryphon
+    7197, -- The Wing of the Indrik
+  },
+  [7220] = { -- The Wing of the Crow
+    7104, -- The Second Era of Scribing
+    7197, -- The Wing of the Indrik
+    7203, -- The Wing of the Dragon
+    7204, -- The Wing of the Netch
+    7217, -- The Wing of the Gryphon
   },
 }
 
