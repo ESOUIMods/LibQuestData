@@ -4259,6 +4259,18 @@ local prerequisite_table = {
   [7102] = { -- Restoring the Resurrected
     7101, -- A Bookbinder's Bind
   },
+  [7187] = { -- Thorns and Blossoms
+    7186, -- The Garland Ring
+  },
+  [7188] = { -- Uprooted
+    7186, -- The Garland Ring
+    7187, -- Thorns and Blossoms
+  },
+  [7189] = { -- Of Crown and Flowers
+    7186, -- The Garland Ring
+    7187, -- Thorns and Blossoms
+    7188, -- Uprooted
+  },
   [7197] = { -- The Wing of the Indrik
     7104, -- The Second Era of Scribing
   },
@@ -4267,6 +4279,9 @@ local prerequisite_table = {
   },
   [7204] = { -- The Wing of the Netch
     7197, -- The Wing of the Indrik
+  },
+  [7207] = { -- Beyond a Veil of Twilight
+    7194, -- A Moonlit Shadow
   },
   [7211] = { -- Tracking the Trapper
     7208, -- Mini Menagerie
@@ -4282,6 +4297,9 @@ local prerequisite_table = {
     7203, -- The Wing of the Dragon
     7204, -- The Wing of the Netch
     7217, -- The Wing of the Gryphon
+  },
+  [7221] = { -- The Dark Behind the World
+    7216, -- Paths Out Of Darkness
   },
 }
 
@@ -4801,6 +4819,12 @@ function internal:check_companion_rapport_requirements(questId)
   if questId == 7022 and rapportLevel >= 4 then return true end -- Paths Unwalked
   if questId == 7023 and rapportLevel >= 5 then return true end -- Adversarial Adventures
   if questId == 7024 and rapportLevel >= 6 then return true end -- Tempting Fates
+  if questId == 7187 and rapportLevel >= 4 then return true end -- Thorns and Blossoms
+  if questId == 7188 and rapportLevel >= 5 then return true end -- Uprooted
+  if questId == 7189 and rapportLevel >= 6 then return true end -- Of Crown and Flowers
+  if questId == 7207 and rapportLevel >= 4 then return true end -- Beyond a Veil of Twilight
+  if questId == 7216 and rapportLevel >= 5 then return true end -- Paths Out Of Darkness
+  if questId == 7221 and rapportLevel >= 6 then return true end -- The Dark Behind the World
   return false
 end
 

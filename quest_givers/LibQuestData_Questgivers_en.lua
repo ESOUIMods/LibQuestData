@@ -1701,6 +1701,7 @@ lib.quest_givers["en"] = {
   [220019] = "Mercenaries Required",
   [220020] = "Sergeant Tegula",
   [220021] = "Toutis Mido",
+  [220022] = "Skingrad Seeks Adventurers!",
   -- Existing
   [500000] = "Ayleid Sarcophagus",
   [500001] = "Heist Board",
