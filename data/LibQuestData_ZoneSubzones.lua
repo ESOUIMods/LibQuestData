@@ -67,6 +67,15 @@ local internal = _G["LibQuestData_Internal"]
 
 ]]--
 internal.subzone_list = {
+  ["solstice/u46_overland_base_0"] = 
+  {
+      ["solstice/u46_sunport_base_0"] = 
+      {
+          x = 0.4709847867,
+          y = 0.4501160383,
+          zoom_factor = 0.0913123190,
+      },
+  },
   ["westweald/westwealdoverland_base_0"] =
   {
       ["westweald/u42_skingrad_base_0"] =

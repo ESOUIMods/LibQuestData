@@ -980,7 +980,7 @@ local function update_quest_information()
   saved_reward_info = {}
   for quest_id, rewards in pairs(all_reward_info) do
     for index, reward_data in pairs(rewards) do
-      npc_id = lib:get_npcids_table(data)
+      npc_id = lib:get_npcids_table(reward_data)
       -- when the value is 9
       if reward_data == REWARD_TYPE_PARTIAL_SKILL_POINTS then
         if not lib.quest_rewards_skilpoint[quest_id] then
