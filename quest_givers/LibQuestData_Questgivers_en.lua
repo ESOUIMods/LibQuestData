@@ -1,29 +1,35 @@
 --[[
+-------------------------------------------------------------------------------
+-- LibQuestData
+-------------------------------------------------------------------------------
+-- Original data sources: SnowmanDK (Destinations), CaptainBlagbird (Quest Map)
+-- Initial integration and library creation by Sharlikran
+-- LibQuestInfo created 2020-05-17, renamed to LibQuestData 2020-06-13
+-- Maintained by Sharlikran since 2020-05-17
+--
+-------------------------------------------------------------------------------
+-- License: MIT License
+--   Permission is hereby granted, free of charge, to any person obtaining a copy
+--   of this software and associated documentation files (the "Software"), to deal
+--   in the Software without restriction, including without limitation the rights
+--   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+--   copies of the Software, and to permit persons to whom the Software is
+--   furnished to do so, subject to the conditions in the LICENSE file.
+--
+-------------------------------------------------------------------------------
+-- Data Integrity and Attribution Notice:
+-- While quest information can be collected using the ESO API, the compiled
+-- dataset in LibQuestData is the result of years of effort by multiple addon
+-- projects and contributors. This includes legacy data from Quest Map and
+-- Destinations, merged and maintained with continued contributions since 2020.
+--
+-- Reuse, redistribution, or repackaging of the quest data (in whole or part)
+-- without permission is discouraged. Claiming authorship of derived works
+-- without proper attribution violates the intent of open collaboration and
+-- disrespects the extensive effort by past and present contributors.
+-------------------------------------------------------------------------------
+]]
 
-LibQuestData
-by Sharlikran
-https://sharlikran.github.io/
-
-Convert fireundubh lists
-
-^(\d{1,6}), "(.*)"
-    \[\1] = "\2",
-
-Other
-
-(.*) = "(.*)" = "(.*), ",
-"\2", = \{\3\,},
-
-^"(.*)", = \{(.*)\},
-    \["\1"] = \{\2 },
-
-For renumbering new rebuilt tables
-
-(.*)\[(\d{1,6})\] = "(.*)",
-\2, "\3"
-
-
---]]
 local lib = _G["LibQuestData"]
 
 lib.quest_givers["en"] = {
@@ -1022,7 +1028,7 @@ lib.quest_givers["en"] = {
   [64805] = "Eveli Sharp-Arrow",
   [64864] = "Meram Farr",
   [64891] = "Lord Ethian",
-  [65199] = "Fa-Nuit-Hen^N",
+  [65199] = "Fa-Nuit-Hen",
   [65239] = "Talviah Aliaria",
   [65270] = "Brulak",
   [65296] = "Nashruth",
@@ -1064,7 +1070,6 @@ lib.quest_givers["en"] = {
   [72002] = "To My Friend From the Beach",
   [72003] = "Captain Mulamurr",
   [72004] = "Dayna Imayn",
-  [72005] = "Fa-Nuit-Hen",
   [72006] = "Larafil",
   [72007] = "Gnaws-on-Tail",
   [72008] = "Aide Diina",
@@ -1679,6 +1684,7 @@ lib.quest_givers["en"] = {
   [210032] = "Tyss",
   [210033] = "A Plea for Aid",
   [210034] = "Garalo Givyn",
+  [210035] = "Letter from Leramil the Wise",
   -- West Weald
   [220001] = "Pim",
   [220002] = "Bella Vestum",
@@ -1717,6 +1723,52 @@ lib.quest_givers["en"] = {
   [230011] = "Sunport Seeks Adventurers!",
   [230012] = "Loraviel",
   [230013] = "High Priest Eraamine",
+  [230014] = "Storm Coming In",
+  [230015] = "Healer Keeshka",
+  -- New Misc
+    [240000] = "The Undaunted Need You!",
+    [240001] = "Kishka",
+    [240002] = "Marunji",
+    [240003] = "Druid Gastoc",
+    [240004] = "Druid Aishabeh",
+    [240005] = "Cipher Agrushna",
+    [240006] = "Ysgild",
+    [240007] = "Wizard Twelvane",
+    [240008] = "Tralise",
+    [240009] = "Mouth Gilvas Vedran",
+    [240010] = "Galsa-Baru",
+    [240011] = "Orissa Dellinoi",
+    [240012] = "Haldain's Journal",
+    [240013] = "Grander Nemarcet",
+    [240014] = "Captain Dromius Terrus",
+    [240015] = "Captain Abitius's Orders",
+    [240016] = "On Behalf of the Mages Guild of all Tamriel",
+    [240017] = "Elk",
+    [240018] = "Legionary Jaida",
+    [240019] = "Commandant Salerius",
+    [240020] = "Lieutenant Agrance",
+    [240021] = "Squire Albec",
+    [240022] = "Votary Nahlia",
+    [240023] = "Fable of the Dragon",
+    [240024] = "Nable of the Fetch",
+    [240025] = "Trapper's Offer",
+    [240026] = "Marcien's Message",
+    [240027] = "Star-Gazer Sariyaah",
+    [240028] = "Valaria Calidius",
+    [240029] = "Fable of the Gryphon",
+    [240030] = "Legionary Luther",
+    [240031] = "Belienne",
+    [240032] = "The Crow",
+    [240033] = "Priest Maxien Roudille",
+    [240034] = "Esalinwe",
+    [240035] = "Research Assistant Required!",
+    [240036] = "Sergeant Alydine",
+    [240037] = "The Ship Won't Last",
+    [240038] = "Storm Getting Closer",
+    [240039] = "Captain Genevé Delitian",
+    [240040] = "Captain Lyn Georick",
+    [240041] = "Cirwynia",
+    [240042] = "Teerad",
   -- Existing
   [500000] = "Ayleid Sarcophagus",
   [500001] = "Heist Board",

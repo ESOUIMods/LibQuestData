@@ -1,19 +1,41 @@
 --[[
-
-LibQuestData
-by Sharlikran
-https://sharlikran.github.io/
-
---]]
+-------------------------------------------------------------------------------
+-- LibQuestData
+-------------------------------------------------------------------------------
+-- Original data sources: SnowmanDK (Destinations), CaptainBlagbird (Quest Map)
+-- Initial integration and library creation by Sharlikran
+-- LibQuestInfo created 2020-05-17, renamed to LibQuestData 2020-06-13
+-- Maintained by Sharlikran since 2020-05-17
+--
+-------------------------------------------------------------------------------
+-- License: MIT License
+--   Permission is hereby granted, free of charge, to any person obtaining a copy
+--   of this software and associated documentation files (the "Software"), to deal
+--   in the Software without restriction, including without limitation the rights
+--   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+--   copies of the Software, and to permit persons to whom the Software is
+--   furnished to do so, subject to the conditions in the LICENSE file.
+--
+-------------------------------------------------------------------------------
+-- Data Integrity and Attribution Notice:
+-- While quest information can be collected using the ESO API, the compiled
+-- dataset in LibQuestData is the result of years of effort by multiple addon
+-- projects and contributors. This includes legacy data from Quest Map and
+-- Destinations, merged and maintained with continued contributions since 2020.
+--
+-- Reuse, redistribution, or repackaging of the quest data (in whole or part)
+-- without permission is discouraged. Claiming authorship of derived works
+-- without proper attribution violates the intent of open collaboration and
+-- disrespects the extensive effort by past and present contributors.
+-------------------------------------------------------------------------------
+]]
 
 -- Init
 local lib = _G["LibQuestData"]
 local internal = _G["LibQuestData_Internal"]
 
 -- Libraries
-local LMP = LibMapPins
 local GPS = LibGPS3
-local LMD = LibMapData
 
 -- Default table
 local quest_data_index_default = {
@@ -125,7 +147,7 @@ function lib:get_quest_list(zone)
   local quest_name_in_zone_list = {}
   -- get all the quetsts in the zone
   if internal:zone_has_quest_locations(zone) then
-    all_zone_quests = internal:get_zone_quests(zone)
+    all_zone_quests = LibQuestData_GetZoneQuests(zone)
   end
   -- make a table of the questId values as a way to prevent them from duplicating maybe ??
   for key, quest_info in pairs(all_zone_quests) do
@@ -141,7 +163,7 @@ function lib:get_quest_list(zone)
     for subzone, conversion in pairs(subzone_list) do
       -- use the texture name as the zone and get the quests as if subzone = zone
       --internal.dm("Debug", subzone)
-      local subzone_quests = internal:get_zone_quests(subzone)
+      local subzone_quests = LibQuestData_GetZoneQuests(subzone)
       for i, quest in ipairs(subzone_quests) do
         --internal.dm("Debug", quest)
         local questId = quest[lib.quest_map_pin_index.quest_id]
@@ -254,34 +276,6 @@ function lib:get_quest_list(zone)
   --internal.dm("Debug", all_zone_quests)
   return new_all_zone_quests
 end
-
-LMD:RegisterCallback(LMD.callbackType.EVENT_ZONE_CHANGED,
-  function()
-    lib.questGiverName = nil
-    local zone = LMP:GetZoneAndSubzone(true, false, true)
-    lib.zone_quests = lib:get_quest_list(zone)
-  end)
-
-LMD:RegisterCallback(LMD.callbackType.EVENT_LINKED_WORLD_POSITION_CHANGED,
-  function()
-    lib.questGiverName = nil
-    local zone = LMP:GetZoneAndSubzone(true, false, true)
-    lib.zone_quests = lib:get_quest_list(zone)
-  end)
-
-LMD:RegisterCallback(LMD.callbackType.OnWorldMapChanged,
-  function()
-    lib.questGiverName = nil
-    local zone = LMP:GetZoneAndSubzone(true, false, true)
-    lib.zone_quests = lib:get_quest_list(zone)
-  end)
-
-LMD:RegisterCallback(LMD.callbackType.WorldMapSceneStateChange,
-  function()
-    lib.questGiverName = nil
-    local zone = LMP:GetZoneAndSubzone(true, false, true)
-    lib.zone_quests = lib:get_quest_list(zone)
-  end)
 
 --[[ get whether or not it is a cadwell quest
 return true if it is a cadwell quest
@@ -623,59 +617,33 @@ Build ID table is indexed by the quest name, only default language
 is built by default. Author must build other languages as needed.
 --]]
 
--- contains_id is a helper for building the lookup tables
-local function contains_id(quent_ids, id_to_find)
-  local found_id = false
-  for questname, quest_ids in pairs(quent_ids) do
-    -- print(questname)
-    for _, quest_id in pairs(quest_ids) do
-      -- print(quest_id)
-      if quest_id == id_to_find then
-        found_id = true
-      end
+local function build_id_table(sourceTable)
+  local built_table = {}
+  local id_tracker = {}
+
+  for id, name in pairs(sourceTable) do
+    if not built_table[name] then
+      built_table[name] = {}
+      id_tracker[name] = {}
+    end
+
+    if not id_tracker[name][id] then
+      table.insert(built_table[name], id)
+      id_tracker[name][id] = true
     end
   end
-  return found_id
+
+  return built_table
 end
 
 function lib:build_questid_table(lang)
-  local lang = lang or lib.effective_lang
-  local built_table = {}
-
-  for var1, var2 in pairs(lib.quest_names[lang]) do
-    -- print(var2)
-    -- print(var2)
-    if built_table[var2] == nil then built_table[var2] = {} end
-    if contains_id(built_table, var1) then
-      -- print("Var 1 is in ids")
-    else
-      -- print("Var 1 is not in ids")
-      table.insert(built_table[var2], var1)
-    end
-  end
-
-  lib.name_to_questid_table[lang] = built_table
-
+  lang = lang or lib.effective_lang
+  lib.name_to_questid_table[lang] = build_id_table(lib.quest_names[lang])
 end
 
 function lib:build_npcid_table(lang)
-  local lang = lang or lib.effective_lang
-  local built_table = {}
-
-  for var1, var2 in pairs(lib.quest_givers[lang]) do
-    -- print(var2)
-    -- print(var2)
-    if built_table[var2] == nil then built_table[var2] = {} end
-    if contains_id(built_table, var1) then
-      -- print("Var 1 is in ids")
-    else
-      -- print("Var 1 is not in ids")
-      table.insert(built_table[var2], var1)
-    end
-  end
-
-  lib.name_to_npcid_table[lang] = built_table
-
+  lang = lang or lib.effective_lang
+  lib.name_to_npcid_table[lang] = build_id_table(lib.quest_givers[lang])
 end
 
 function lib:build_questlist_skilpoint()
@@ -723,6 +691,16 @@ function lib:is_quest_started(quest_id)
     if id == quest_id then return true end
   end
   return false
+end
+
+function lib:get_giver_when_object(id)
+  if internal:is_empty_or_nil(lib.questid_giver_lookup[id]) then
+    --d("If giver is an object, one was not found")
+    return {}
+  else
+    --d("Giver is an object, found one")
+    return lib.questid_giver_lookup[id]
+  end
 end
 
 local function build_completed_quests()
@@ -775,7 +753,7 @@ end
 
 local function update_guild_skillline_data()
   for i = 1, GetNumSkillLines(SKILL_TYPE_GUILD) do
-    local skillLineName, skillLineLevel, _, skillLineId = GetSkillLineInfo(SKILL_TYPE_GUILD, i)
+    local skillLineName, skillLineLevel, _, skillLineId = SKILLS_DATA_MANAGER:GetSkillLineDataByIndices(SKILL_TYPE_GUILD, i)
     for key, guild_name in pairs(lib.quest_guild_names) do
       if skillLineName == guild_name then
         lib.quest_guild_rank_data[key].name = skillLineName
@@ -1006,7 +984,7 @@ local function update_quest_information()
   for zone, zone_quests in pairs(rebuilt_locations) do
     for index, quest_from_save in pairs(zone_quests) do
       total_count = total_count + 1
-      quests_from_zone = internal:get_zone_quests(zone)
+      quests_from_zone = LibQuestData_GetZoneQuests(zone)
       in_range_missing = false
       in_range_good_data = false
       in_range_missing_giver = false

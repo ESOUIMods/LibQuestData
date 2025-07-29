@@ -7,20 +7,21 @@
 ; https://account.elderscrollsonline.com/add-on-terms
 
 ## Title: LibQuestData
-## Version: 2.71
-## AddOnVersion: 271
+## Version: 2.72
+## AddOnVersion: 272
 ## Author: Sharlikran
 ## APIVersion: 101045 101046
 ## Description: Provides Quest Information
 ## SavedVariables: LibQuestData_SavedVariables
-## DependsOn: LibGPS>=73 LibMapPins-1.0>=10043 LibMapData>=117
-## OptionalDependsOn: LibMapPing>=1240 LibDebugLogger>=268 LibChatMessage>=105 DebugLogViewer
+## PCDependsOn: LibGPS>=73 LibMapPins-1.0>=10045 LibMapData>=117
+## ConsoleDependsOn: LibGPS>=73
+## OptionalDependsOn: LibMapPing LibDebugLogger LibChatMessage DebugLogViewer
 ## IsLibrary: true
 
 Init.lua
 data/LibQuestData_QuestData.lua
 data/LibQuestData_QuestLocations.lua
-;data/LibQuestData_QuestLocations_Outdated.lua
+data/LibQuestData_QuestLocationFunctions.lua
 data/LibQuestData_QuestTables.lua
 data/LibQuestData_ZoneSubzones.lua
 
@@ -56,4 +57,4 @@ quest_names/LibQuestData_QuestNames_zh.lua
 
 LibQuestData_Filters.lua
 LibQuestData.lua
-LibQuestData_Scan.lua
+PC/LibQuestData_Scan.lua

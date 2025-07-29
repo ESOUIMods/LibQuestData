@@ -1,11 +1,37 @@
+--[[
+-------------------------------------------------------------------------------
+-- LibQuestData
+-------------------------------------------------------------------------------
+-- Original data sources: SnowmanDK (Destinations), CaptainBlagbird (Quest Map)
+-- Initial integration and library creation by Sharlikran
+-- LibQuestInfo created 2020-05-17, renamed to LibQuestData 2020-06-13
+-- Maintained by Sharlikran since 2020-05-17
+--
+-------------------------------------------------------------------------------
+-- License: MIT License
+--   Permission is hereby granted, free of charge, to any person obtaining a copy
+--   of this software and associated documentation files (the "Software"), to deal
+--   in the Software without restriction, including without limitation the rights
+--   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+--   copies of the Software, and to permit persons to whom the Software is
+--   furnished to do so, subject to the conditions in the LICENSE file.
+--
+-------------------------------------------------------------------------------
+-- Data Integrity and Attribution Notice:
+-- While quest information can be collected using the ESO API, the compiled
+-- dataset in LibQuestData is the result of years of effort by multiple addon
+-- projects and contributors. This includes legacy data from Quest Map and
+-- Destinations, merged and maintained with continued contributions since 2020.
+--
+-- Reuse, redistribution, or repackaging of the quest data (in whole or part)
+-- without permission is discouraged. Claiming authorship of derived works
+-- without proper attribution violates the intent of open collaboration and
+-- disrespects the extensive effort by past and present contributors.
+-------------------------------------------------------------------------------
+]]
 -- Init
 local lib = _G["LibQuestData"]
 local internal = _G["LibQuestData_Internal"]
-
--- Libraries
-local LMP = LibMapPins
-local GPS = LibGPS3
-local LMD = LibMapData
 
 local prerequisite_table = {
   [143] = { -- Embracing the Darkness
@@ -4301,6 +4327,29 @@ local prerequisite_table = {
   [7221] = { -- The Dark Behind the World
     7216, -- Paths Out Of Darkness
   },
+  [7294] = { -- The Regent of Sunport 
+    7314, -- The Stirk Fellowship
+  },
+  [7295] = { -- The Writhing Wall 
+    7314, -- The Stirk Fellowship
+    7294, -- The Regent of Sunport
+    7318, -- The Passages Beneath
+  },
+  [7296] = { -- The Gift of Death 
+    7295, -- The Writhing Wall
+  },
+  [7305] = { -- Striking the Deal 
+    7302, -- Wealth from the Sea
+    7303, -- Slime Pickings
+    7304, -- The Roughest Pearl
+  },
+  [7310] = { -- Justice for the Fallen 
+    7290, -- A Guild in Crisis
+  },
+  [7318] = { -- The Passages Beneath 
+    7294, -- The Regent of Sunport
+    7314, -- The Stirk Fellowship
+  },
 }
 
 local breadcrumb_table = {
@@ -4849,14 +4898,14 @@ intent: check if the texture map is a string and if there are quests in the zone
 function internal:zone_has_quest_locations(zone)
 
   local function quest_locations_nil(zone)
-    return internal.quest_locations[zone] == nil
+    return LibQuestData_QuestLocationData[zone] == nil
   end
 
   local function zone_has_quests(zone)
     if quest_locations_nil(zone) then
       return false
     end
-    return NonContiguousCount(internal.quest_locations[zone]) > 0
+    return NonContiguousCount(LibQuestData_QuestLocationData[zone]) > 0
   end
 
   if type(zone) == "string" and zone_has_quests(zone) then
