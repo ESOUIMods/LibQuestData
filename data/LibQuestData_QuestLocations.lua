@@ -264,7 +264,7 @@ internal.quest_locations = {
             [6] = 100067,
         },
     },
-    ["temporarymaps/u42_skingrad_or_base_0"] =
+    ["westweald/u42_skingrad_or_base_0"] =
     {
         [1] =
         {
@@ -285,7 +285,7 @@ internal.quest_locations = {
             [6] = 68328,
         },
     },
-    ["temporarymaps/u42_vashabar_base_0"] =
+    ["westweald/u42_vashabar_base_0"] =
     {
             [1] =
             {
@@ -306,7 +306,7 @@ internal.quest_locations = {
                 [6] = 220016,
             },
     },
-    ["temporarymaps/u42_ontus_city_base_0"] =
+    ["westweald/u42_ontus_city_base_0"] =
     {
         [1] =
         {
