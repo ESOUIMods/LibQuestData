@@ -29,7 +29,7 @@
 -- disrespects the extensive effort by past and present contributors.
 -------------------------------------------------------------------------------
 ]]
-local libName, libVersion = "LibQuestData", 272
+local libName, libVersion = "LibQuestData", 273
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
@@ -217,6 +217,30 @@ if LibQuestData_SavedVariables.giver_names == nil then LibQuestData_SavedVariabl
 
 -- note only the "lib.client_lang" will contain data be default
 
+--[[ TODO Depreciated, refer to quest flags below
+
+lib.quest_data_index.quest_type = {
+  -- ESO Values for QUEST_TYPE_
+  QUEST_TYPE_NONE = 0,
+  QUEST_TYPE_GROUP = 1, -- Qty 96
+  QUEST_TYPE_MAIN_STORY = 2, -- Qty 17
+  QUEST_TYPE_GUILD = 3, -- Qty 170, (*) Various Skill Line Guild Quests
+  QUEST_TYPE_CRAFTING = 4, -- Qty 82, Ignore these they are the crafting certifications
+  QUEST_TYPE_DUNGEON = 5, -- Qty 82
+  QUEST_TYPE_RAID = 6, -- Qty 8
+  QUEST_TYPE_AVA = 7, -- Qty 165, unsure if verified
+  QUEST_TYPE_CLASS = 8, -- None in table
+  -- quest_type_qa_test = 9, not in game as far as I know
+  QUEST_TYPE_AVA_GROUP = 10, -- None in table, in check
+  QUEST_TYPE_AVA_GRAND = 11, -- None in table, in check
+  QUEST_TYPE_HOLIDAY_EVENT = 12, -- Qty 22
+  QUEST_TYPE_BATTLEGROUND = 13, -- Qty 4
+  QUEST_TYPE_PROLOGUE = 14, -- Qty 14
+  QUEST_TYPE_UNDAUNTED_PLEDGE = 15, -- Qty 42
+  QUEST_TYPE_COMPANION = 16,
+}
+]]--
+
 -- quest flags
 lib.flag_completed_quest = 1
 lib.flag_uncompleted_quest = 2
@@ -258,29 +282,6 @@ lib.quest_map_pin_index = {
   -- quest_giver =    9, Updated, was 9 now 6
   quest_giver = 6, -- Arbitrary number pointing to an NPC Name 81004, "Abnur Tharn"  << -1 = Undefined >>
 }
-
---[[
-lib.quest_data_type = {
-  -- ESO Values for QUEST_TYPE_
-  QUEST_TYPE_NONE = 0,
-  QUEST_TYPE_GROUP = 1, -- Qty 96
-  QUEST_TYPE_MAIN_STORY = 2, -- Qty 17
-  QUEST_TYPE_GUILD = 3, -- Qty 170, (*) Various Skill Line Guild Quests
-  QUEST_TYPE_CRAFTING = 4, -- Qty 82, Ignore these they are the crafting certifications
-  QUEST_TYPE_DUNGEON = 5, -- Qty 82
-  QUEST_TYPE_RAID = 6, -- Qty 8
-  QUEST_TYPE_AVA = 7, -- Qty 165, unsure if verified
-  QUEST_TYPE_CLASS = 8, -- None in table
-  -- quest_type_qa_test = 9, not in game as far as I know
-  QUEST_TYPE_AVA_GROUP = 10, -- None in table, in check
-  QUEST_TYPE_AVA_GRAND = 11, -- None in table, in check
-  QUEST_TYPE_HOLIDAY_EVENT = 12, -- Qty 22
-  QUEST_TYPE_BATTLEGROUND = 13, -- Qty 4
-  QUEST_TYPE_PROLOGUE = 14, -- Qty 14
-  QUEST_TYPE_UNDAUNTED_PLEDGE = 15, -- Qty 42
-  QUEST_TYPE_COMPANION = 16,
-}
-]]--
 
 lib.quest_series_type = {
   -- LibQuestData Values

@@ -378,7 +378,7 @@ function lib:assign_quest_flag(questId, hidden_quest)
   if quest_type == QUEST_TYPE_PROLOGUE then fprq = true end
   if quest_type == QUEST_TYPE_UNDAUNTED_PLEDGE then fpgq = true end
   local repeatableType = repeatable_type == QUEST_REPEAT_REPEATABLE or repeatable_type == QUEST_REPEAT_DAILY
-  local pvpQuest = quest_type == QUEST_TYPE_AVA or quest_type == QUEST_TYPE_AVA_GROUP
+  local pvpQuest = quest_type == QUEST_TYPE_AVA or quest_type == QUEST_TYPE_AVA_GROUP or quest_type == QUEST_TYPE_BATTLEGROUND
 
   if quest_type == QUEST_TYPE_GUILD then fguq = true end
   local repeatableGuildQuest = repeatableType and fguq

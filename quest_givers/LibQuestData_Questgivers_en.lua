@@ -1769,6 +1769,7 @@ lib.quest_givers["en"] = {
     [240040] = "Captain Lyn Georick",
     [240041] = "Cirwynia",
     [240042] = "Teerad",
+    [240043] = "Reward for Missing Steed!",
   -- Existing
   [500000] = "Ayleid Sarcophagus",
   [500001] = "Heist Board",
