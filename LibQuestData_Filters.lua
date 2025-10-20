@@ -4350,6 +4350,9 @@ local prerequisite_table = {
     7294, -- The Regent of Sunport
     7314, -- The Stirk Fellowship
   },
+  [7322] = { -- Crossing the Wall 
+    7296, -- The Gift of Death 
+  },
 }
 
 local breadcrumb_table = {

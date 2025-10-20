@@ -29,7 +29,7 @@
 -- disrespects the extensive effort by past and present contributors.
 -------------------------------------------------------------------------------
 ]]
-local libName, libVersion = "LibQuestData", 273
+local libName, libVersion = "LibQuestData", 274
 local lib = {}
 local internal = {}
 _G["LibQuestData"] = lib
