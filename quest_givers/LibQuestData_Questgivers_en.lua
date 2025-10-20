@@ -1770,6 +1770,11 @@ lib.quest_givers["en"] = {
     [240041] = "Cirwynia",
     [240042] = "Teerad",
     [240043] = "Reward for Missing Steed!",
+  -- Solstice
+    [250000] = "Armorer Reistaff",
+	[250001] = "General Zasimba",
+	[250002] = "Quartermaster Nurwalne",
+	[250003] = "Orinde Glenuvon",
   -- Existing
   [500000] = "Ayleid Sarcophagus",
   [500001] = "Heist Board",
